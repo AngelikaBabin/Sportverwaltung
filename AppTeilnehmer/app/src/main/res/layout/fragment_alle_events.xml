@@ -1,0 +1,44 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.cora.sportverwaltung.AlleEventsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="HEADER"
+            android:textAlignment="center"
+            android:textSize="40sp" />
+
+        <EditText
+            android:id="@+id/txtEventInfo"
+            android:layout_width="match_parent"
+            android:layout_height="186dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Infos" />
+
+        <EditText
+            android:id="@+id/txtEventDesc"
+            android:layout_width="match_parent"
+            android:layout_height="159dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Description" />
+
+        <Button
+            android:id="@+id/btnTeilnehmen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Teilnehmen" />
+
+    </LinearLayout>
+</FrameLayout>
