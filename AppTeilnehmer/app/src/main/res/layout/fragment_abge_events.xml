@@ -1,0 +1,178 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.cora.sportverwaltung.AbgeEventsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="HEADER"
+            android:textAlignment="center"
+            android:textSize="40sp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@android:color/background_light"
+            android:textAlignment="center">
+
+            <TableRow
+                android:id="@+id/tbDatum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/datum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Datum:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/tvDatum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="53dp"
+                    android:hint="04.10.2018"
+                    android:textSize="25sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tbOrt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/ort"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ort:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/tvOrt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="53dp"
+                    android:hint="Oslo"
+                    android:textSize="25sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tbTeilnehmer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/teilnehmer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Teilnehmer:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/tvTeilnehmer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="53dp"
+                    android:hint="25/50"
+                    android:textSize="25sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tbVeranstalter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/Veranstalter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Veranstalter:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/tvVeranstalter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="53dp"
+                    android:hint="Kristian"
+                    android:textSize="25sp" />
+            </TableRow>
+
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@android:color/background_light"
+            android:textAlignment="center">
+
+            <TableRow
+                android:id="@+id/tbDatum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/rang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dein Rang:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/tvRang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="53dp"
+                    android:hint="3"
+                    android:textSize="25sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tbOrt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/punkte"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ort:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/tvPunkte"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="53dp"
+                    android:hint="100"
+                    android:textSize="25sp" />
+            </TableRow>
+
+        </TableLayout>
+
+        <ListView
+            android:id="@+id/lvRangliste"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp" />
+
+    </LinearLayout>
+
+</FrameLayout>
