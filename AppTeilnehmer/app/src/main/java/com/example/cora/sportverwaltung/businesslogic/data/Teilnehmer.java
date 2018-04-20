@@ -25,6 +25,10 @@ public class Teilnehmer extends Account{
 
     public Teilnehmer(){}
 
+    public Teilnehmer(String email, String name, String password) {
+        this(0,email,name,password,0);
+    }
+
     public int getScore() {
         return score;
     }

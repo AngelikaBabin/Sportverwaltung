@@ -7,26 +7,66 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
+import com.example.cora.sportverwaltung.businesslogic.data.Teilnehmer;
+
 public class RegistrateActivity extends AppCompatActivity {
 
-    Button registrieren;
-    EditText benutzer, email, password, passwordBest;
+    Button button_register;
+    EditText editText_email, editText_name, editText_password, editText_passwordConfirm;
+
+    DatabaseConnection connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrate);
 
-        registrieren = (Button) findViewById(R.id.btnRegistrieren);
-        benutzer = (EditText) findViewById(R.id.txtBenutzer);
-        email = (EditText) findViewById(R.id.txtEmail);
-        password = (EditText) findViewById(R.id.txtPassword);
-        passwordBest = (EditText) findViewById(R.id.txtPassBes);
+        // create database connection
+        connection = new DatabaseConnection();
 
-        registrieren.setOnClickListener(new View.OnClickListener() {
+        // get view elements
+        getViewElements();
+
+        // register eventhandlers
+        registerEventhandlers();
+    }
+
+    private void getViewElements(){
+        button_register = findViewById(R.id.btnRegistrieren);
+        editText_email = findViewById(R.id.txtEmail);
+        editText_name = findViewById(R.id.txtBenutzer);
+        editText_password = findViewById(R.id.txtPassword);
+        editText_passwordConfirm = findViewById(R.id.txtPassBes);
+    }
+
+    private void registerEventhandlers() {
+        button_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(RegistrateActivity.this, MenuActivity.class));
+                try {
+                    // get view contents
+                    String email = editText_email.getText().toString();
+                    String name = editText_name.getText().toString();
+                    String password = editText_password.getText().toString();
+                    String passwordConfirm = editText_passwordConfirm.getText().toString();
+
+                    // check password
+                    if (password.equals(passwordConfirm)) {
+                        // create Teilnehmer
+                        Teilnehmer t = new Teilnehmer(email, name, password);
+
+                        // register in database
+                        String token = connection.registerTeilnehmer(t);
+
+                        // open menu activity
+                        startActivity(new Intent(RegistrateActivity.this, MenuActivity.class));
+                    } else {
+                        // TODO Password wrong
+                    }
+                } catch (Exception ex) {
+                    // TODO Exception handling
+                }
             }
         });
     }
