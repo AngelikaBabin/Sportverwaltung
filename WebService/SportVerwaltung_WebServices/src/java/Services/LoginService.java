@@ -5,7 +5,6 @@
  */
 package Services;
 
-import Data.Account;
 import Data.Authentification;
 import Data.Database;
 import Data.Crypt;
@@ -13,20 +12,14 @@ import Data.Login;
 import Exceptions.AccountNotFoundException;
 import com.google.gson.Gson;
 import java.io.IOException;
-import javax.crypto.Cipher;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 /**
  * REST Web Service
@@ -65,7 +58,7 @@ public class LoginService {
             db.login(l);
             token = crypt.encrypt(l.toString());
             Authentification.loginToken(token);
-            r = Response.accepted(token).build();
+            r = Response.accepted().header("Token", token).build();
         }
         catch(AccountNotFoundException ex){
             r = Response.status(Response.Status.UNAUTHORIZED).entity(ex).type(MediaType.APPLICATION_JSON).build();
