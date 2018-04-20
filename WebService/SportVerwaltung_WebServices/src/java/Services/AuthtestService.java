@@ -35,13 +35,6 @@ public class AuthtestService {
     public AuthtestService() {
     }
 
-    @GET
-    @Produces("application/xml")
-    public String getXml() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
-    }
-
     @POST
     @Consumes(MediaType.TEXT_PLAIN)
     public boolean putXml(String content) throws Exception {
