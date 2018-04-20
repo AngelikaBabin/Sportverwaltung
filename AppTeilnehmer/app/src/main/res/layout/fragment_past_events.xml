@@ -1,19 +1,15 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.cora.sportverwaltung.AbgeEventsFragment">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.example.cora.sportverwaltung.PastEventsFragment">
 
         <TextView
-            android:id="@+id/txtHeader"
+            android:id="@+id/textView_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="HEADER"
+            android:text="@string/example_header"
             android:textAlignment="center"
             android:textSize="40sp" />
 
@@ -27,86 +23,78 @@
             android:textAlignment="center">
 
             <TableRow
-                android:id="@+id/tbDatum"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/datum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Datum:"
+                    android:text="@string/label_date"
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/tvDatum"
+                    android:id="@+id/textView_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="53dp"
-                    android:hint="04.10.2018"
+                    android:layout_marginStart="53dp"
+                    android:hint="@string/example_date"
                     android:textSize="25sp" />
             </TableRow>
 
             <TableRow
-                android:id="@+id/tbOrt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/ort"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ort:"
+                    android:text="@string/example_location"
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/tvOrt"
+                    android:id="@+id/textView_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="53dp"
-                    android:hint="Oslo"
+                    android:layout_marginStart="53dp"
+                    android:hint="@string/example_location"
                     android:textSize="25sp" />
             </TableRow>
 
             <TableRow
-                android:id="@+id/tbTeilnehmer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/teilnehmer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Teilnehmer:"
+                    android:text="@string/label_teilnehmerCount"
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/tvTeilnehmer"
+                    android:id="@+id/textView_teilnehmerCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="53dp"
-                    android:hint="25/50"
+                    android:layout_marginStart="53dp"
+                    android:hint="@string/example_teilnehmerCount"
                     android:textSize="25sp" />
             </TableRow>
 
             <TableRow
-                android:id="@+id/tbVeranstalter"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/Veranstalter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Veranstalter:"
+                    android:text="@string/label_veranstalter"
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/tvVeranstalter"
+                    android:id="@+id/textView_veranstalter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="53dp"
-                    android:hint="Kristian"
+                    android:layout_marginStart="53dp"
+                    android:hint="@string/example_veranstalter"
                     android:textSize="25sp" />
             </TableRow>
 
@@ -122,57 +110,51 @@
             android:textAlignment="center">
 
             <TableRow
-                android:id="@+id/tbDatum"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/rang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dein Rang:"
+                    android:text="@string/label_yourRank"
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/tvRang"
+                    android:id="@+id/textView_rank"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="53dp"
-                    android:hint="3"
+                    android:layout_marginStart="53dp"
+                    android:hint="@string/example_rank"
                     android:textSize="25sp" />
             </TableRow>
 
             <TableRow
-                android:id="@+id/tbOrt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/punkte"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ort:"
+                    android:text="@string/label_points"
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/tvPunkte"
+                    android:id="@+id/textView_points"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="53dp"
-                    android:hint="100"
+                    android:layout_marginStart="53dp"
+                    android:hint="@string/example_points"
                     android:textSize="25sp" />
             </TableRow>
 
         </TableLayout>
 
         <ListView
-            android:id="@+id/lvRangliste"
+            android:id="@+id/listView_ranking"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp" />
 
-    </LinearLayout>
-
-</FrameLayout>
+</LinearLayout>

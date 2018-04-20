@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
 import com.example.cora.sportverwaltung.businesslogic.data.Teilnehmer;
 
-public class RegistrateActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     Button button_register;
     EditText editText_email, editText_name, editText_password, editText_passwordConfirm;
@@ -20,7 +21,7 @@ public class RegistrateActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registrate);
+        setContentView(R.layout.activity_register);
 
         // create database connection
         connection = new DatabaseConnection();
@@ -60,12 +61,13 @@ public class RegistrateActivity extends AppCompatActivity {
                         String token = connection.registerTeilnehmer(t);
 
                         // open menu activity
-                        startActivity(new Intent(RegistrateActivity.this, MenuActivity.class));
+                        startActivity(new Intent(RegisterActivity.this, MenuActivity.class));
                     } else {
-                        // TODO Password wrong
+                        Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_SHORT);
                     }
                 } catch (Exception ex) {
-                    // TODO Exception handling
+                    Toast.makeText(RegisterActivity.this, ex.getMessage(), Toast.LENGTH_SHORT);
+                    ex.printStackTrace();
                 }
             }
         });

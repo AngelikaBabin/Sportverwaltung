@@ -1,6 +1,5 @@
 package com.example.cora.sportverwaltung;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -95,23 +94,23 @@ public class EventsFragment extends Fragment {
     }
 
     private void swapFragmentAlleEvents(){
-        AlleEventsFragment alleEventsFragment = new AlleEventsFragment();
+        AllEventsFragment allEventsFragment = new AllEventsFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.ConstraintLayout_for_fragment, alleEventsFragment);
+        fragmentTransaction.replace(R.id.ConstraintLayout_for_fragment, allEventsFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
     private void swapFragmentMeineEvents(){
-        MeineEventsFragment meineEventsFragment = new MeineEventsFragment();
+        MyEventsFragment myEventsFragment = new MyEventsFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.ConstraintLayout_for_fragment, meineEventsFragment);
+        fragmentTransaction.replace(R.id.ConstraintLayout_for_fragment, myEventsFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
     private void swapFragmentAbgEvents(){
-        AbgeEventsFragment abgeEventsFragment = new AbgeEventsFragment();
+        PastEventsFragment pastEventsFragment = new PastEventsFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.ConstraintLayout_for_fragment, abgeEventsFragment);
+        fragmentTransaction.replace(R.id.ConstraintLayout_for_fragment, pastEventsFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
