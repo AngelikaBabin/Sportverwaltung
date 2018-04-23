@@ -7,43 +7,63 @@
     tools:context="com.example.cora.sportverwaltung.LoginActivity">
 
     <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="495dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent"
         android:orientation="vertical"
+        android:weightSum="1"
         tools:layout_editor_absoluteX="6dp"
-        tools:layout_editor_absoluteY="8dp"
-        android:weightSum="1">
+        tools:layout_editor_absoluteY="8dp">
 
         <EditText
             android:id="@+id/txtBenutzer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:layout_marginTop="100dp"
             android:layout_weight="0.08"
+            android:drawableLeft="@drawable/ic_account_circle_black_24dp"
             android:editable="true"
             android:ems="10"
-            android:hint="Benutzername"
+            android:hint=" Username"
             android:inputType="textPersonName"
+            android:textColor="@android:color/white"
             android:textSize="20sp" />
 
         <EditText
             android:id="@+id/txtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:layout_marginTop="30dp"
+            android:drawableLeft="@drawable/ic_fingerprint_black_24dp"
             android:ems="10"
-            android:hint="Passwort"
+            android:hint=" Password"
             android:inputType="textPassword"
             android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnPassVerg"
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="180dp"
+            android:layout_weight="0.08"
+            android:background="@android:color/transparent"
+            android:text="Forgot password?"
+            android:textColor="?attr/colorControlNormal"
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_weight="0.08"
-            android:background="?attr/colorButtonNormal"
-            android:onClick = "login"
+            android:background="@drawable/btn_rounded"
+            android:onClick="login"
             android:text="Login" />
 
         <Button
@@ -52,17 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.08"
             android:background="@android:color/transparent"
-            android:text="Noch nicht registriert?"
-            android:textColor="?attr/colorControlNormal"
-            android:textSize="10sp" />
-
-        <Button
-            android:id="@+id/btnPassVerg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.08"
-            android:background="@android:color/transparent"
-            android:text="Passwort vergessen?"
+            android:text="Not registered yet?"
             android:textColor="?attr/colorControlNormal"
             android:textSize="10sp" />
 
