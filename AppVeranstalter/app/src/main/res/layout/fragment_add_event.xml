@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,48 +8,106 @@
     <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="60dp"
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/txtName"
+            android:id="@+id/editText_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
             android:ems="10"
             android:hint="Name"
-            android:inputType="textPersonName"
-            android:textSize="20sp" />
+            android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/txtMaxAnzahl"
+            android:id="@+id/editText_maxCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@android:color/transparent"
             android:ems="10"
-            android:hint="Max Anzahl"
-            android:inputType="number"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/tvDatum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Datum"
-            android:textSize="20sp" />
+            android:hint="Max Count"
+            android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/dtDatum"
+            android:id="@+id/editText_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@android:color/transparent"
             android:ems="10"
-            android:inputType="date" />
+            android:hint="20.04.2018"
+            android:inputType="date"
+            android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/tvSportart"
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginTop="15dp">
+
+            <ImageButton
+                android:id="@+id/imageButton8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/ic_menu_send" />
+
+            <ImageButton
+                android:id="@+id/imageButton9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/ic_menu_slideshow" />
+
+            <ImageButton
+                android:id="@+id/imageButton10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/ic_menu_camera" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_menu_share" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp">
+
+            <ImageButton
+                android:id="@+id/imageButton12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_menu_gallery" />
+
+            <EditText
+                android:id="@+id/editText_other"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
+                android:ems="10"
+                android:hint="other"
+                android:inputType="textPersonName" />
+
+        </TableRow>
+
+        <Button
+            android:id="@+id/button_create"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sportart:"
-            android:textSize="20sp" />
+            android:layout_marginTop="50dp"
+            android:text="Create" />
 
     </LinearLayout>
+
 </FrameLayout>
