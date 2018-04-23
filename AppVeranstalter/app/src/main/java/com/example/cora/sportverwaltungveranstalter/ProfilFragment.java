@@ -72,7 +72,7 @@ public class ProfilFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_profil, container, false);
 
-        RatingBar rbRating = (RatingBar)view.findViewById(R.id.rbRating);
+        RatingBar rbRating = (RatingBar)view.findViewById(R.id.ratingBar_rating);
         //rbRating.setRating(5);
 
         return view;

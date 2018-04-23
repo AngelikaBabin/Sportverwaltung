@@ -1,5 +1,6 @@
 package com.example.cora.sportverwaltungveranstalter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -96,7 +97,7 @@ public class MenuActivity extends AppCompatActivity
                     eventsFragment.getTag()
             ).commit();
         } else if (id == R.id.nav_logout) {
-
+            startActivity(new Intent(MenuActivity.this, LoginActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

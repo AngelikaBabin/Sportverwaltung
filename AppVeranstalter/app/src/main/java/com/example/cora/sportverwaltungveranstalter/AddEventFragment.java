@@ -2,6 +2,7 @@ package com.example.cora.sportverwaltungveranstalter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,7 +34,7 @@ import android.widget.Toast;
  * Use the {@link AddEventFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddEventFragment extends Fragment {
+public class AddEventFragment extends Fragment implements OnMapReadyCallback{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,6 +47,8 @@ public class AddEventFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     Button button_date;
+    private MapView mapView_googleMaps;
+    GoogleMap map;
 
     public AddEventFragment() {
         // Required empty public constructor
@@ -69,43 +84,12 @@ public class AddEventFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_add_event, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_event, container, false);
 
-        /*button_date = view.findViewById(R.id.button_date);
-        button_date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        mapView_googleMaps = (MapView) view.findViewById(R.id.mapView_googleMaps);
+        mapView_googleMaps.onCreate(savedInstanceState);
+        mapView_googleMaps.getMapAsync(this);
 
-                builder.setMessage("this is message");
-                builder.setTitle("this is title");
-
-                //Setting message manually and performing action on button click
-                builder.setMessage("Do you want to close this application ?");
-                //This will not allow to close dialogbox until user selects an option
-                builder.setCancelable(false);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        //Toast.makeText(this, "positive button", Toast.LENGTH_SHORT).show();
-                        //builder.finish();
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        //  Action for 'NO' Button
-                        //Toast.makeText(this, "negative button", Toast.LENGTH_SHORT).show();
-                        dialog.cancel();
-                    }
-                });
-
-                //Creating dialog box
-                AlertDialog alert = builder.create();
-                //Setting the title manually
-                alert.setTitle("Date Picker");
-                alert.show();
-            }
-        });*/
         return view;
     }
 
@@ -120,6 +104,20 @@ public class AddEventFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        map = googleMap;
+        final LatLng PERTH = new LatLng(-31.90, 115.86); // Perth, Australia
+        Marker mymarker = googleMap.addMarker(new MarkerOptions().position(PERTH).title("Perth,Australia"));
+        mymarker.showInfoWindow();
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(PERTH, 16));
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+        googleMap.getUiSettings().setAllGesturesEnabled(true);
+        googleMap.getUiSettings().setCompassEnabled(true);
+
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this
