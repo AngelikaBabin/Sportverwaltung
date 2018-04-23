@@ -36,6 +36,11 @@ public class Login {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public static Login parseTokenToLogin(String token) throws Exception{
+        token = new Crypt().decrypt(token);
+        return new Login(token.split(":")[0], token.split(":")[1]);
+    }
 
     @Override
     public String toString() {

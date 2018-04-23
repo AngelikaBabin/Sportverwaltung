@@ -5,7 +5,9 @@
  */
 package Services;
 
+import Data.Authentification;
 import Data.Database;
+import Data.Login;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
@@ -46,11 +48,13 @@ public class AccountService {
     public Response getAccount(@HeaderParam("Token") String token) {
         Response r;
         try{
-            
+            if(Authentification.isUserAuthenticated(token)){
+                r = Response.ok(db.getAccount(Login.parseTokenToLogin(token))).build();
+            }
+            else{
+                
+            }
             r = Response.accepted().header("Token", token).build();
-        }
-        catch(AccountNotFoundException ex){
-            r = Response.status(Response.Status.UNAUTHORIZED).entity(ex).type(MediaType.APPLICATION_JSON).build();
         }
         catch(Exception ex){
             r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
