@@ -5,10 +5,13 @@
  */
 package Data;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author chris
  */
+@XmlRootElement
 public class Teilnehmer {
     private int id;
     private double score;

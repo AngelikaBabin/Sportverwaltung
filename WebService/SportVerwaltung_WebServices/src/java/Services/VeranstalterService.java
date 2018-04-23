@@ -26,15 +26,15 @@ import javax.ws.rs.core.Response;
  *
  * @author chris
  */
-@Path("registerVeranstalter")
-public class RegisterVeranstalteService {
+@Path("veranstalter")
+public class VeranstalterService {
 
     @Context
     private UriInfo context;
     private Gson gson;
     private Database db;
 
-    public RegisterVeranstalteService() {
+    public VeranstalterService() {
         try{
             gson = new Gson();
             db = Database.newInstance();

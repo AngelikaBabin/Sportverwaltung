@@ -5,10 +5,13 @@
  */
 package Data;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author chris
  */
+@XmlRootElement
 public class Account {
     private int id;
     private String name;
