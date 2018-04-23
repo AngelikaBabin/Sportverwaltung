@@ -34,11 +34,11 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void getViewElements(){
-        button_register = findViewById(R.id.btnRegistrieren);
-        editText_email = findViewById(R.id.txtEmail);
-        editText_name = findViewById(R.id.txtBenutzer);
-        editText_password = findViewById(R.id.txtPassword);
-        editText_passwordConfirm = findViewById(R.id.txtPassBes);
+        button_register = findViewById(R.id.button_register);
+        editText_email = findViewById(R.id.editText_email);
+        editText_name = findViewById(R.id.textView_username);
+        editText_password = findViewById(R.id.editText_password);
+        editText_passwordConfirm = findViewById(R.id.editText_confirmPassword);
     }
 
     private void registerEventhandlers() {

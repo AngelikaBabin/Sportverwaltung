@@ -22,8 +22,8 @@ import java.util.Collection;
  * @author Gerald
  */
 public class Database {
-    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
-    private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
+    private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
+    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
     private static final String USER = "d4a07";
     private static final String PASSWD = "d4a";
     private Connection conn = null;
@@ -116,11 +116,28 @@ public class Database {
         PreparedStatement stmt = conn.prepareStatement(select);
         stmt.setString(1, l.getEmail());
         rs = stmt.executeQuery();
-        if (!rs.next()) {
+        if (rs.next()) {
             a = new Account(rs.getInt("id"), rs.getString("name"), rs.getString("email"), null);
         }
         conn.close();
         return a;
+    }
+    
+    public Teilnehmer getTeilnehmer(Login l) throws Exception{
+        ResultSet rs;
+        Teilnehmer t = null;
+        conn = createConnection();
+        String select = "SELECT * FROM account join teilnehmer \n" +
+                            "on teilnehmer.id_account = account.id\n" +
+                            "WHERE account.email = ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setString(1, l.getEmail());
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            t = new Teilnehmer(rs.getInt("id"), rs.getDouble("score"));
+        }
+        conn.close();
+        return t;
     }
 /*
     public Producer getProducer(int id) throws Exception {

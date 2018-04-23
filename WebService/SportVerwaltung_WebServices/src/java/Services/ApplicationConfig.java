@@ -33,8 +33,8 @@ public class ApplicationConfig extends Application {
         resources.add(Services.AuthtestService.class);
         resources.add(Services.LoginService.class);
         resources.add(Services.LogoutService.class);
-        resources.add(Services.RegisterTeilnehmerService.class);
-        resources.add(Services.RegisterVeranstalteService.class);
+        resources.add(Services.TeilnehmerService.class);
+        resources.add(Services.VeranstalterService.class);
     }
     
 }

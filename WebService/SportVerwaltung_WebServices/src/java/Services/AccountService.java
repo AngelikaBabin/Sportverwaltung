@@ -5,6 +5,7 @@
  */
 package Services;
 
+import Data.Account;
 import Data.Authentification;
 import Data.Database;
 import Data.Login;
@@ -32,43 +33,25 @@ public class AccountService {
     private UriInfo context;
     private Database db;
 
-    /**
-     * Creates a new instance of AccountService
-     */
     public AccountService() {
         db = Database.newInstance();
     }
 
-    /**
-     * Retrieves representation of an instance of Services.AccountService
-     * @return an instance of java.lang.String
-     */
-    @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAccount(@HeaderParam("Token") String token) {
         Response r;
         try{
             if(Authentification.isUserAuthenticated(token)){
-                r = Response.ok(db.getAccount(Login.parseTokenToLogin(token))).build();
+                Account a = db.getAccount(Login.parseTokenToLogin(token));
+                r = Response.ok().entity(a).build();
             }
             else{
-                
+                r = Response.status(Response.Status.FORBIDDEN).build();
             }
-            r = Response.accepted().header("Token", token).build();
         }
         catch(Exception ex){
             r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
         return r;
-    }
-
-    /**
-     * PUT method for updating or creating an instance of AccountService
-     * @param content representation for the resource
-     * @return an HTTP response with content of the updated or created resource.
-     */
-    @PUT
-    @Consumes("application/xml")
-    public void putXml(String content) {
     }
 }
