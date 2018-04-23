@@ -16,7 +16,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class ControllerSync extends AsyncTask<String, Void, String> {
     private String url_first;
-    private static final String url_second = "SportVerwaltung/webresources";
+    private static final String url_second = "/SportVerwaltung/webresources";
 
     @Override
     protected String doInBackground(String... params) {
@@ -28,9 +28,9 @@ public class ControllerSync extends AsyncTask<String, Void, String> {
         URL url = null;
 
         try{
-            if(params[0].equals("registerVeranstalter")) {
+            if(params[0].equals("REGISTER_VERANSTALTER")) {
                 url = new URL(url_first + url_second + "registerVeranstalter");
-            } else if(params[0].equals("registerTeilnehmer")) {
+            } else if(params[0].equals("REGISTER_TEILNEHMER")) {
                 url = new URL(url_first + url_second + "registerTeilnehmer");
             }
 

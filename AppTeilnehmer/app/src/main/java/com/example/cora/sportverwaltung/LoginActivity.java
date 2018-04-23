@@ -7,19 +7,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
+
 public class LoginActivity extends AppCompatActivity {
     Button login, registrieren;
     EditText txtBenutzer, txtPassword;
+    DatabaseConnection connection = DatabaseConnection.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        login = (Button) findViewById(R.id.btnLogin);
-        registrieren = (Button) findViewById(R.id.btnRegistrieren);
-        txtBenutzer = (EditText) findViewById(R.id.txtBenutzer);
-        txtPassword = (EditText) findViewById(R.id.txtPassword);
+        login = (Button) findViewById(R.id.button_login);
+        registrieren = (Button) findViewById(R.id.button_register);
+        txtBenutzer = (EditText) findViewById(R.id.textView_username);
+        txtPassword = (EditText) findViewById(R.id.editText_password);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

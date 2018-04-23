@@ -25,8 +25,8 @@ CREATE TABLE Account(
   password VARCHAR2(100),
   
   CONSTRAINT pk_account PRIMARY KEY(id),
-  CONSTRAINT uq_account_name UNIQUE(name),
-  CONSTRAINT uq_account_email UNIQUE(email)
+  CONSTRAINT uq_account_email UNIQUE(email),
+  CONSTRAINT ck_account_email_valid CHECK(email like '%___@___%')
 );
 
 CREATE TABLE Sportart(
@@ -57,7 +57,7 @@ CREATE TABLE Veranstalter(
 --Teilnehmer
 CREATE TABLE Teilnehmer(
   id_account INTEGER,
-  score INTEGER,
+  score INTEGER DEFAULT 0,
   
   CONSTRAINT pk_teilnehmer PRIMARY KEY(id_account),
   CONSTRAINT fk_teilnehmer_id_account FOREIGN KEY(id_account) REFERENCES Account(id)
@@ -122,3 +122,5 @@ INSERT INTO Teilnehmer VALUES(3, 100);
 
 INSERT INTO Veranstaltung VALUES(seq_veranstaltung_id.NEXTVAL, 'Rote Nasen Lauf', 'Laufen', 4, 1, DATE '2018-03-20', 'Ein Lauf.', null, null);
 INSERT INTO Veranstaltung VALUES(seq_veranstaltung_id.NEXTVAL, 'Basketballspiel', 'Basketball', 5, 2, DATE '2018-11-14', 'Ein spannedes Spiel!', 6, 20);
+
+COMMIT;
