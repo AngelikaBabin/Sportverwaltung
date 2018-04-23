@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d1d1d1"
+    android:background="#434343"
     android:orientation="vertical"
     tools:context="com.example.cora.sportverwaltung.LoginActivity">
 
@@ -12,7 +12,8 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="133dp"
-        app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+        android:layout_marginTop="30dp"
+        app:srcCompat="@drawable/logo" />
 
     <EditText
         android:id="@+id/editText_username"
@@ -21,7 +22,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="50dp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/input_rounded"
         android:drawableLeft="@drawable/ic_account_circle_black_24dp"
         android:ems="10"
         android:hint=" Username"
@@ -34,7 +35,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="10dp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/input_rounded"
         android:drawableLeft="@drawable/ic_fingerprint_black_24dp"
         android:ems="10"
         android:hint=" Password"
@@ -50,6 +51,7 @@
         android:background="@android:color/transparent"
         android:text="@string/text_forgot_password"
         android:textAlignment="textEnd"
+        android:textColor="#dddddd"
         android:textSize="10sp" />
 
     <Button
