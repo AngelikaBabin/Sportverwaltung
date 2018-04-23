@@ -139,6 +139,27 @@ public class Database {
         conn.close();
         return t;
     }
+    
+    public void updateAccount(Account a) throws Exception {
+        conn = createConnection();
+        String select = "UPDATE account SET name = ?, password = ? where email = ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setString(1, a.getName());
+        stmt.setString(2, a.getPassword());
+        stmt.setString(3, a.getEmail());
+        stmt.executeUpdate();
+        conn.close();
+    }
+    
+    public void updateTeilnehmer(Teilnehmer t) throws Exception {
+        conn = createConnection();
+        String select = "UPDATE teilnehmer SET score = ? where id_account = ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setDouble(1, t.getScore());
+        stmt.setDouble(2, t.getId());
+        stmt.executeUpdate();
+        conn.close();
+    }
 /*
     public Producer getProducer(int id) throws Exception {
         Producer producer = null;
