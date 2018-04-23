@@ -51,7 +51,7 @@ public class LoginService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response login(String content) throws IOException {
         Response r;
-        String token = null;
+        String token;
         try{
             Login l = gson.fromJson(content, Login.class);
             System.out.println(l);
