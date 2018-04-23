@@ -7,9 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
+
 public class LoginActivity extends AppCompatActivity {
     Button login, registrieren;
     EditText txtBenutzer, txtPassword;
+    DatabaseConnection connection = DatabaseConnection.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

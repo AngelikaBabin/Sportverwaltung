@@ -18,7 +18,7 @@ public class DatabaseConnection {
     private static ControllerSync controller;
     private String url;
 
-    public DatabaseConnection getInstance(){
+    public static DatabaseConnection getInstance(){
         if(DatabaseConnection == null)
             DatabaseConnection = new DatabaseConnection();
         return DatabaseConnection;
