@@ -34,8 +34,12 @@
 
     <!-- Veranstaltung -->
     <string name="label_eventname">Name:</string>
-    <string name="example_eventname">Description</string>
+    <string name="example_eventname">Running with the wolves</string>
     <string name="hint_eventname">Der Name der Veranstaltung</string>
+
+    <string name="label_details">Details:</string>
+    <string name="example_details">Infos</string>
+    <string name="hint_details">Details zur Veranstaltung</string>
 
     <string name="label_veranstalter">Veranstalter:</string>
     <string name="example_veranstalter">Kristian INC</string>
@@ -46,23 +50,21 @@
     <string name="hint_date">DD.MM.YYYY</string>
 
     <string name="label_location">Ort:</string>
+    <string name="example_location">Oslo</string>
+    <string name="hint_location">Der Ort</string>
 
     <string name="label_teilnehmerCount">Teilnehmer:</string>
+    <string name="example_teilnehmerCount">25/50</string>
+    <string name="hint_teilnehmerCount">Die Anzahl der Teilnehmer</string>
 
-    <!-- Listing -->
+    <!-- Images -->
+    <string name="desc_profilePicture">profile picture</string>
+    <string name="desc_logo">Sporteventmanager</string>
+
+    <!-- GUI -->
     <string name="label_allEvents">Alle</string>
     <string name="label_myEvents">Meine</string>
     <string name="label_pastEvents">Abgeschlossen</string>
-
-
-
-
-
-    <string name="example_location">Oslo</string>
-    <string name="example_teilnehmerCount">25/50</string>
-
-
-
 
     <string name="text_abmelden">Abmelden</string>
     <string name="text_button_teilnehmen">Teilnehmen</string>
@@ -71,13 +73,7 @@
     <string name="text_button_login">Login</string>
     <string name="text_not_registered_yet">Not registered yet?</string>
 
-    <string name="desc_profilePicture">profile picture</string>
-
-
-
-
-    <!-- Misc -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="desc_logo">Sporteventmanager</string>
+
 </resources>
