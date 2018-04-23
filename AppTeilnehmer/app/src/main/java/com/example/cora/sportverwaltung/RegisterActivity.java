@@ -24,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         // create database connection
-        connection = new DatabaseConnection();
+        connection = DatabaseConnection.getInstance();
 
         // get view elements
         getViewElements();
