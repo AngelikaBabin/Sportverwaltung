@@ -34,7 +34,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/example_scoreAndPlace"
+        android:text="@string/example_rank"
         android:textAlignment="center"
         android:textSize="20sp" />
 

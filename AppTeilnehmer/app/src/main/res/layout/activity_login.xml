@@ -10,6 +10,86 @@
     <EditText
         android:id="@+id/textView_username"
         android:layout_width="match_parent"
+<<<<<<< HEAD
+        android:layout_height="match_parent"
+        android:background="#d2d2d2"
+        android:orientation="vertical"
+        android:weightSum="1"
+        tools:layout_editor_absoluteX="6dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="124dp"
+            app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+
+        <EditText
+            android:id="@+id/txtBenutzer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="30dp"
+            android:background="#e5e5e5"
+            android:drawableLeft="@drawable/ic_account_circle_black_24dp"
+            android:editable="true"
+            android:ems="10"
+            android:hint=" Username"
+            android:inputType="textPersonName"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/txtPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/colorAccent"
+            android:drawableLeft="@drawable/ic_fingerprint_black_24dp"
+            android:ems="10"
+            android:hint=" Password"
+            android:inputType="textPassword"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnPassVerg"
+            android:layout_width="287dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_weight="0.08"
+            android:background="@android:color/transparent"
+            android:text="Forgot password?"
+            android:textAlignment="textEnd"
+            android:textColor="?attr/colorControlNormal"
+            android:textSize="10sp" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_weight="0.08"
+            android:background="@drawable/btn_rounded"
+            android:onClick="login"
+            android:text="Login" />
+
+        <Button
+            android:id="@+id/btnRegistrieren"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.08"
+            android:background="@drawable/btn_rounded"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:text="Register"/>
+=======
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
@@ -55,6 +135,7 @@
         android:layout_weight="0.08"
         android:background="@drawable/btn_rounded"
         android:text="@string/text_button_login" />
+>>>>>>> 3d5913b6d1f9e5920244edfb9317bce52156cb6a
 
     <Button
         android:id="@+id/button_register"
