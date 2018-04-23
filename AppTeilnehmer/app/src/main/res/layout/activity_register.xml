@@ -13,7 +13,7 @@
         android:layout_marginTop="50dp"
         android:layout_weight="0.08"
         android:ems="10"
-        android:hint="@string/hint_benutzername"
+        android:hint="@string/hint_username"
         android:inputType="textPersonName"
         android:textSize="20sp" />
 
