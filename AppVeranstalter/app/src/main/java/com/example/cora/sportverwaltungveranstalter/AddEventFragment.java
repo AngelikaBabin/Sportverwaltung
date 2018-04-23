@@ -1,12 +1,16 @@
 package com.example.cora.sportverwaltungveranstalter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 
 /**
@@ -28,6 +32,8 @@ public class AddEventFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    Button button_date;
 
     public AddEventFragment() {
         // Required empty public constructor
@@ -64,7 +70,43 @@ public class AddEventFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_event, container, false);
+        View view =  inflater.inflate(R.layout.fragment_add_event, container, false);
+
+        /*button_date = view.findViewById(R.id.button_date);
+        button_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+                builder.setMessage("this is message");
+                builder.setTitle("this is title");
+
+                //Setting message manually and performing action on button click
+                builder.setMessage("Do you want to close this application ?");
+                //This will not allow to close dialogbox until user selects an option
+                builder.setCancelable(false);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //Toast.makeText(this, "positive button", Toast.LENGTH_SHORT).show();
+                        //builder.finish();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //  Action for 'NO' Button
+                        //Toast.makeText(this, "negative button", Toast.LENGTH_SHORT).show();
+                        dialog.cancel();
+                    }
+                });
+
+                //Creating dialog box
+                AlertDialog alert = builder.create();
+                //Setting the title manually
+                alert.setTitle("Date Picker");
+                alert.show();
+            }
+        });*/
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

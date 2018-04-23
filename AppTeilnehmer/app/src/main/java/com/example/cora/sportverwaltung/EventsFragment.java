@@ -66,7 +66,7 @@ public class EventsFragment extends Fragment {
                              Bundle savedInstanceState) {
        View view = inflater.inflate(R.layout.fragment_events, container, false);
 
-        Button btnAlleEvents = (Button) view.findViewById(R.id.btnAlleEvents);
+        Button btnAlleEvents = (Button) view.findViewById(R.id.button_allEvents);
         btnAlleEvents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,7 +74,7 @@ public class EventsFragment extends Fragment {
             }
         });
 
-        Button btnMeineEvents = (Button) view.findViewById(R.id.btnMeineEvents);
+        Button btnMeineEvents = (Button) view.findViewById(R.id.button_myEvents);
         btnMeineEvents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,7 +82,7 @@ public class EventsFragment extends Fragment {
             }
         });
 
-        Button btnAbgEvents = (Button) view.findViewById(R.id.btnAbgeschlosseneEvents);
+        Button btnAbgEvents = (Button) view.findViewById(R.id.button_pastEvents);
         btnAbgEvents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

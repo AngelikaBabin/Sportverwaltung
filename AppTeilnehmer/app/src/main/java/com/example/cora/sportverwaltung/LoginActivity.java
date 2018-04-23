@@ -17,9 +17,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         login = (Button) findViewById(R.id.btnLogin);
-        registrieren = (Button) findViewById(R.id.btnRegistrieren);
-        txtBenutzer = (EditText) findViewById(R.id.txtBenutzer);
-        txtPassword = (EditText) findViewById(R.id.txtPassword);
+        registrieren = (Button) findViewById(R.id.button_register);
+        txtBenutzer = (EditText) findViewById(R.id.textView_username);
+        txtPassword = (EditText) findViewById(R.id.editText_password);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

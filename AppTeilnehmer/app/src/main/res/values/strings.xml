@@ -6,39 +6,41 @@
 
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_login">Sign in</string>
-
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="example_header">HEADER</string>
-    <string name="example_date">04.10.2018</string>
-    <string name="label_teilnehmer">Teilnehmer:</string>
     <string name="label_yourRank">Dein Rang:</string>
     <string name="label_points">Punkte:</string>
-    <string name="desc_profilepicture">profile picture</string>
-    <string name="example_username">Eduard Timmerer</string>
-    <string name="example_email">eduard.timmerer@gmail.com</string>
     <string name="label_date">Datum:</string>
     <string name="label_location">Ort:</string>
-    <string name="example_location">Oslo</string>
     <string name="label_teilnehmerCount">Teilnehmer:</string>
-    <string name="example_teilnehmerCount">25/50</string>
     <string name="label_veranstalter">Veranstalter:</string>
-    <string name="example_veranstalter">Kristian</string>
+    <string name="label_allEvents">Alle</string>
+    <string name="label_myEvents">Meine</string>
+    <string name="label_pastEvents">Abgeschlossen</string>
+
+    <string name="example_header">HEADER</string>
+    <string name="example_date">04.10.2018</string>
+    <string name="example_username">Eduard Timmerer</string>
+    <string name="example_email">eduard.timmerer@gmail.com</string>
+    <string name="example_location">Oslo</string>
+    <string name="example_teilnehmerCount">25/50</string>
+    <string name="example_veranstalter">Kristian INC</string>
     <string name="example_description">Description</string>
-    <string name="text_abmelden">Abmelden</string>
     <string name="example_rank">3</string>
     <string name="example_points">300</string>
+    <string name="example_scoreAndPlace">#400 (350P)</string>
+    <string name="example_details">Infos</string>
+
+    <string name="text_abmelden">Abmelden</string>
+    <string name="text_button_teilnehmen">Teilnehmen</string>
+    <string name="text_button_register">Registrieren</string>
+    <string name="text_forgot_password">Forgot password?</string>
+    <string name="text_button_login">Login</string>
+    <string name="text_not_registered_yet">Not registered yet?</string>
+
+    <string name="desc_profilePicture">profile picture</string>
+
+    <string name="hint_confirmPassword">Passwort bestätigen</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_benutzername">Benutzername</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
 </resources>

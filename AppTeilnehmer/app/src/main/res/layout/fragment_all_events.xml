@@ -6,34 +6,32 @@
     tools:context="com.example.cora.sportverwaltung.AllEventsFragment">
 
     <TextView
-        android:id="@+id/textView_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="HEADER"
+        android:text="@string/example_header"
         android:textAlignment="center"
         android:textSize="40sp" />
 
     <EditText
-        android:id="@+id/txtEventInfo"
+        android:hint="@string/example_details"
         android:layout_width="match_parent"
         android:layout_height="186dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Infos" />
+        android:text="@string/example_details" />
 
     <EditText
-        android:id="@+id/txtEventDesc"
+        android:hint="@string/example_description"
         android:layout_width="match_parent"
         android:layout_height="159dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Description" />
+        android:text="@string/example_description" />
 
     <Button
-        android:id="@+id/btnTeilnehmen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Teilnehmen" />
+        android:text="@string/text_button_teilnehmen" />
 
 </LinearLayout>
