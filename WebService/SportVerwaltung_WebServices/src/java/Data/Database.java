@@ -12,14 +12,18 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
  * @author Gerald
  */
 public class Database {
-    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
-    private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
+    private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
+    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
     private static final String USER = "d4a07";
     private static final String PASSWD = "d4a";
     private Connection conn = null;
@@ -29,14 +33,15 @@ public class Database {
      */
     private static Database database = null;
 
-    public static Database newInstance() {
+    public static Database newInstance() throws Exception {
         if (database == null) {
             database = new Database();
         }
+
         return database;
     }
 
-    private Database() {
+    private Database() throws Exception {
     }
 
     private Connection createConnection() throws Exception {

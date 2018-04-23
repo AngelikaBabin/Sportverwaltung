@@ -19,7 +19,7 @@ public class Veranstalter extends Account {
     public String toString() {
         return "Veranstalter{" +
                 "id=" + getId() +
-                ", email='" + getEmail() + '\'' +
+                ", example_email='" + getEmail() + '\'' +
                 ", name='" + getName() + '\'' +
                 ", password='" + getPassword() + '\'' +
                 '}';

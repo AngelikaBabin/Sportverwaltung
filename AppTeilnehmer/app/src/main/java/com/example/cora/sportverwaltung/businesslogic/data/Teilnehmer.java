@@ -59,7 +59,7 @@ public class Teilnehmer extends Account{
     public String toString() {
         return "Account{" +
                 "id=" + getId() +
-                ", email='" + getEmail() + '\'' +
+                ", example_email='" + getEmail() + '\'' +
                 ", name='" + getName() + '\'' +
                 ", password='" + getPassword() + '\'' +
                 "score=" + getScore() + '\'' +
