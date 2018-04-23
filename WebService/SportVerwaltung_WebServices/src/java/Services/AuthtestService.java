@@ -13,6 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.POST;
@@ -37,7 +38,7 @@ public class AuthtestService {
 
     @POST
     @Consumes(MediaType.TEXT_PLAIN)
-    public boolean putXml(String content) throws Exception {
-        return Authentification.isUserAuthenticated(content);
+    public boolean putXml(@HeaderParam("Token") String token) throws Exception {
+        return Authentification.isUserAuthenticated(token);
     }
 }

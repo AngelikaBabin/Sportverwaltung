@@ -22,7 +22,7 @@ import java.util.Collection;
  * @author Gerald
  */
 public class Database {
-    private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
+    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
     //private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
     private static final String USER = "d4a07";
     private static final String PASSWD = "d4a";
@@ -33,15 +33,14 @@ public class Database {
      */
     private static Database database = null;
 
-    public static Database newInstance() throws Exception {
+    public static Database newInstance() {
         if (database == null) {
             database = new Database();
         }
-
         return database;
     }
 
-    private Database() throws Exception {
+    private Database() {
     }
 
     private Connection createConnection() throws Exception {
@@ -107,6 +106,21 @@ public class Database {
             throw new AccountNotFoundException("Account/email not founds");
         }
         conn.close();
+    }
+    
+    public Account getAccount(Login l) throws Exception{
+        ResultSet rs;
+        Account a = null;
+        conn = createConnection();
+        String select = "SELECT * FROM account WHERE email = ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setString(1, l.getEmail());
+        rs = stmt.executeQuery();
+        if (!rs.next()) {
+            a = new Account(rs.getInt("id"), rs.getString("name"), rs.getString("email"), null);
+        }
+        conn.close();
+        return a;
     }
 /*
     public Producer getProducer(int id) throws Exception {
