@@ -9,11 +9,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorAccent"
+        android:background="#d2d2d2"
         android:orientation="vertical"
         android:weightSum="1"
         tools:layout_editor_absoluteX="6dp"
         tools:layout_editor_absoluteY="8dp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="124dp"
+            app:srcCompat="@drawable/ic_account_circle_black_24dp" />
 
         <EditText
             android:id="@+id/txtBenutzer"
@@ -21,14 +27,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:layout_marginTop="100dp"
-            android:layout_weight="0.08"
+            android:layout_marginTop="30dp"
+            android:background="#e5e5e5"
             android:drawableLeft="@drawable/ic_account_circle_black_24dp"
             android:editable="true"
             android:ems="10"
             android:hint=" Username"
             android:inputType="textPersonName"
-            android:textColor="@android:color/white"
+            android:textColor="#000000"
             android:textSize="20sp" />
 
         <EditText
@@ -38,6 +44,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="30dp"
+            android:background="@color/colorAccent"
             android:drawableLeft="@drawable/ic_fingerprint_black_24dp"
             android:ems="10"
             android:hint=" Password"
@@ -46,12 +53,14 @@
 
         <Button
             android:id="@+id/btnPassVerg"
-            android:layout_width="187dp"
+            android:layout_width="287dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="180dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:layout_weight="0.08"
             android:background="@android:color/transparent"
             android:text="Forgot password?"
+            android:textAlignment="textEnd"
             android:textColor="?attr/colorControlNormal"
             android:textSize="10sp" />
 
@@ -61,6 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+            android:layout_marginTop="50dp"
             android:layout_weight="0.08"
             android:background="@drawable/btn_rounded"
             android:onClick="login"
@@ -71,10 +81,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.08"
-            android:background="@android:color/transparent"
-            android:text="Not registered yet?"
-            android:textColor="?attr/colorControlNormal"
-            android:textSize="10sp" />
+            android:background="@drawable/btn_rounded"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:text="Register"/>
 
     </LinearLayout>
 
