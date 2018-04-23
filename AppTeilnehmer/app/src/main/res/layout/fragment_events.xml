@@ -1,45 +1,44 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.cora.sportverwaltung.EventsFragment">
+
+    <ListView
+        android:id="@+id/lvEvents"
+        android:layout_width="match_parent"
+        android:layout_height="457dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        style="?android:attr/buttonBarStyle">
 
-        <ListView
-            android:id="@+id/lvEvents"
-            android:layout_width="match_parent"
-            android:layout_height="457dp" />
+        <Button
+            android:id="@+id/button_allEvents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/label_allEvents"
+            style="?android:attr/buttonBarButtonStyle" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+        <Button
+            android:id="@+id/button_myEvents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/label_myEvents"
+            style="?android:attr/buttonBarButtonStyle" />
 
-            <Button
-                android:id="@+id/btnAlleEvents"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Alle " />
-
-            <Button
-                android:id="@+id/btnMeineEvents"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Meine" />
-
-            <Button
-                android:id="@+id/btnAbgeschlosseneEvents"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Abgeschlossen" />
-        </LinearLayout>
-
+        <Button
+            android:id="@+id/button_pastEvents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/label_pastEvents"
+            style="?android:attr/buttonBarButtonStyle" />
     </LinearLayout>
-</FrameLayout>
+
+</LinearLayout>

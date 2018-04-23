@@ -22,23 +22,31 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="example_header">HEADER</string>
-    <string name="example_date">04.10.2018</string>
+
     <string name="label_teilnehmer">Teilnehmer:</string>
     <string name="label_yourRank">Dein Rang:</string>
     <string name="label_points">Punkte:</string>
-    <string name="desc_profilepicture">profile picture</string>
-    <string name="example_username">Eduard Timmerer</string>
-    <string name="example_email">eduard.timmerer@gmail.com</string>
     <string name="label_date">Datum:</string>
     <string name="label_location">Ort:</string>
-    <string name="example_location">Oslo</string>
     <string name="label_teilnehmerCount">Teilnehmer:</string>
-    <string name="example_teilnehmerCount">25/50</string>
     <string name="label_veranstalter">Veranstalter:</string>
+
+    <string name="example_header">HEADER</string>
+    <string name="example_date">04.10.2018</string>
+    <string name="example_username">Eduard Timmerer</string>
+    <string name="example_email">eduard.timmerer@gmail.com</string>
+    <string name="example_location">Oslo</string>
+    <string name="example_teilnehmerCount">25/50</string>
     <string name="example_veranstalter">Kristian</string>
     <string name="example_description">Description</string>
-    <string name="text_abmelden">Abmelden</string>
     <string name="example_rank">3</string>
     <string name="example_points">300</string>
+
+    <string name="text_abmelden">Abmelden</string>
+    <string name="desc_profilepicture">profile picture</string>
+    <string name="example_teilnehmer">Eduard Timmerer</string>
+    <string name="example_scoreAndPlace">#400 (350P)</string>
+    <string name="label_allEvents">Alle</string>
+    <string name="label_myEvents">Meine</string>
+    <string name="label_pastEvents">Abgeschlossen</string>
 </resources>
