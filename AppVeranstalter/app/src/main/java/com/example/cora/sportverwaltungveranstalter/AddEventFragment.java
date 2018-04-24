@@ -99,23 +99,23 @@ public class AddEventFragment extends Fragment implements OnMapReadyCallback{
 
         editText_adress = (EditText) view.findViewById(R.id.editText_adress);
 
-        editText_adress.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-
-                    coordinates = getLocationFromAddress(v.getContext(), v.getText().toString());
-
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        //coordinates = getLocationFromAddress(editText_adress.getContext(), editText_adress.getText().toString());
-        mapView_googleMaps = (MapView) view.findViewById(R.id.mapView_googleMaps);
-        mapView_googleMaps.onCreate(savedInstanceState);
-        mapView_googleMaps.getMapAsync(this);
+//        editText_adress.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                if (actionId == EditorInfo.IME_ACTION_DONE) {
+//
+//                    coordinates = getLocationFromAddress(v.getContext(), v.getText().toString());
+//
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
+//
+//        //coordinates = getLocationFromAddress(editText_adress.getContext(), editText_adress.getText().toString());
+//        mapView_googleMaps = (MapView) view.findViewById(R.id.mapView_googleMaps);
+//        mapView_googleMaps.onCreate(savedInstanceState);
+//        mapView_googleMaps.getMapAsync(this);
 
         return view;
     }
