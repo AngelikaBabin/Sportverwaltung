@@ -5,7 +5,7 @@
  */
 package Data;
 
-import Exceptions.AccountAlreadyExistsException;
+import Exceptions.RegisterExcpetion;
 import Exceptions.AccountNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,8 +22,8 @@ import java.util.Collection;
  * @author Gerald
  */
 public class Database {
-    private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
-    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
+    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
+    private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
     private static final String USER = "d4a07";
     private static final String PASSWD = "d4a";
     private Connection conn = null;
@@ -68,7 +68,9 @@ public class Database {
         }
         catch(SQLException ex){
             if(ex.getErrorCode() == 1)
-                throw new AccountAlreadyExistsException("Account already exists!");
+                throw new RegisterExcpetion("Account already exists!");
+            else if(ex.getSQLState() == "23000")
+                throw new RegisterExcpetion("Email not valid!");
             else
                 throw ex;
         }
@@ -157,6 +159,28 @@ public class Database {
         PreparedStatement stmt = conn.prepareStatement(select);
         stmt.setDouble(1, t.getScore());
         stmt.setDouble(2, t.getId());
+        stmt.executeUpdate();
+        conn.close();
+    }
+    
+    public void deleteTeilnehmer(Account t) throws Exception {
+        conn = createConnection();
+        String select = "delete from teilnehmer where id = ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setInt(1, t.getId());
+        stmt.executeUpdate();
+        
+        select = "delete from teilnahme where id_teilnehmer = ?";
+        stmt = conn.prepareStatement(select);
+        stmt.setInt(1, t.getId());
+        stmt.executeUpdate();
+        conn.close();
+    }
+    
+    public void deleteVeranstalter(Account v) throws Exception {
+        conn = createConnection();
+        String select = "delete from teilnehmer where id = ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
         stmt.executeUpdate();
         conn.close();
     }

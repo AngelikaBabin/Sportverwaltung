@@ -10,7 +10,7 @@ import Data.Authentification;
 import Data.Database;
 import Data.Login;
 import Data.Teilnehmer;
-import Exceptions.AccountAlreadyExistsException;
+import Exceptions.RegisterExcpetion;
 import com.google.gson.Gson;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -72,7 +72,7 @@ public class TeilnehmerService {
             db.addTeilnehmerToAccount(t);
             r = Response.status(Response.Status.CREATED).build();
         }
-        catch(AccountAlreadyExistsException ex){
+        catch(RegisterExcpetion ex){
             r = Response.status(Response.Status.CONFLICT).entity(ex).type(MediaType.APPLICATION_JSON).build();
         }
         catch(Exception ex){
