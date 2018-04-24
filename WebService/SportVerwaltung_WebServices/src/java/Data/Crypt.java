@@ -19,20 +19,25 @@ import sun.misc.BASE64Encoder;
  * @author chris
  */
 public class Crypt {
-    SecretKeySpec secretKeySpec= null;
+    private SecretKeySpec secretKeySpec = null;
 
-    public Crypt() throws Exception{
-        // Das Passwort bzw der Schluesseltext
-        String keyStr = "ks934lw5e34jf35kvjc0dnß3bd0v";
-        // byte-Array erzeugen
-        byte[] key = (keyStr).getBytes("UTF-8");
-        // aus dem Array einen Hash-Wert erzeugen mit MD5 oder SHA
-        MessageDigest sha = MessageDigest.getInstance("SHA-256");
-        key = sha.digest(key);
-        // nur die ersten 128 bit nutzen
-        key = Arrays.copyOf(key, 16); 
-        // der fertige Schluessel
-        secretKeySpec = new SecretKeySpec(key, "AES");
+    public Crypt(){
+        try{
+            // Das Passwort bzw der Schluesseltext
+            String keyStr = "ks934lw5e34jf35kvjc0dnß3bd0v";
+            // byte-Array erzeugen
+            byte[] key = (keyStr).getBytes("UTF-8");
+            // aus dem Array einen Hash-Wert erzeugen mit MD5 oder SHA
+            MessageDigest sha = MessageDigest.getInstance("SHA-256");
+            key = sha.digest(key);
+            // nur die ersten 128 bit nutzen
+            key = Arrays.copyOf(key, 16); 
+            // der fertige Schluessel
+            secretKeySpec = new SecretKeySpec(key, "AES");
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
     
     public String encrypt(String text) throws Exception{
