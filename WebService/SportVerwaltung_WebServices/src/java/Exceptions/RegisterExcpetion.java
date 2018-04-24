@@ -12,14 +12,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author chris
  */
 @XmlRootElement
-public class AccountAlreadyExistsException extends Exception{
+public class RegisterExcpetion extends Exception{
     private String errMessage;
-    public AccountAlreadyExistsException(String errMessage){
+    public RegisterExcpetion(String errMessage){
         super(errMessage);
         this.errMessage = errMessage;
     }
     
-    public AccountAlreadyExistsException(){
+    public RegisterExcpetion(){
         super();
     }
 

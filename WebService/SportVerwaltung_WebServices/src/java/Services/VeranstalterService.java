@@ -7,7 +7,7 @@ package Services;
 
 import Data.Account;
 import Data.Database;
-import Exceptions.AccountAlreadyExistsException;
+import Exceptions.RegisterExcpetion;
 import com.google.gson.Gson;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -52,7 +52,7 @@ public class VeranstalterService {
             db.addVeranstalterToAccount(t);
             r = Response.status(Response.Status.CREATED).build();
         }
-        catch(AccountAlreadyExistsException ex){
+        catch(RegisterExcpetion ex){
             r = Response.status(Response.Status.CONFLICT).entity(ex).type(MediaType.APPLICATION_JSON).build();
         }
         catch(Exception ex){
