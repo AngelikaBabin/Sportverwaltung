@@ -16,30 +16,37 @@ import java.net.URL;
 
 public class ControllerSync extends AsyncTask<String, Void, String> {
     private String url_first;
-    private static final String url_second = "/SportVerwaltung_WebServices/webresources";
+    private static final String url_second = "SportVerwaltung_WebServices/webresources";
 
     @Override
     protected String doInBackground(String... params) {
-        HttpMethod httpMethod = null;
-        String content = null;
-        URL url = null;
+        HttpMethod httpMethod;
+        String content;
+        URL url;
         String whatToRead = "CONTENT";
 
         try {
-            if (params[0].equals("LOGIN_TEILNEHMER")) {
-                url = new URL("http://" + url_first + url_second + "/teilnehmer");
-                httpMethod = HttpMethod.GET;
-                whatToRead = "TOKEN";
-            } else if (params[0].equals("REGISTER_TEILNEHMER")) {
-                url = new URL("http://" + url_first + url_second + "/teilnehmer");
-                httpMethod = HttpMethod.POST;
-                whatToRead = "TOKEN";
-            } else if (params[0].equals("UPDATE_TEILNEHMER")) {
-                url = new URL("http://" + url_first + url_second + "/teilnehmer");
-                httpMethod = HttpMethod.PUT;
-            } else if (params[0].equals("DELETE_TEILNEHMER")) {
-                url = new URL("http://" + url_first + url_second + "/teilnehmer");
-                httpMethod = HttpMethod.DELETE;
+            switch (params[0]) {
+                case "LOGIN_TEILNEHMER":
+                    url = new URL("http://" + url_first + "/" + url_second + "/teilnehmer");
+                    httpMethod = HttpMethod.GET;
+                    whatToRead = "TOKEN";
+                    break;
+                case "REGISTER_TEILNEHMER":
+                    url = new URL("http://" + url_first + "/" + url_second + "/teilnehmer");
+                    httpMethod = HttpMethod.POST;
+                    whatToRead = "TOKEN";
+                    break;
+                case "UPDATE_TEILNEHMER":
+                    url = new URL("http://" + url_first + "/" + url_second + "/teilnehmer");
+                    httpMethod = HttpMethod.PUT;
+                    break;
+                case "DELETE_TEILNEHMER":
+                    url = new URL("http://" + url_first + "/" + url_second + "/teilnehmer");
+                    httpMethod = HttpMethod.DELETE;
+                    break;
+                default:
+                    throw new Exception("invalid route identifier");
             }
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -57,24 +64,24 @@ public class ControllerSync extends AsyncTask<String, Void, String> {
         return content;
     }
 
-    public ControllerSync(String url_first) throws Exception {
+    ControllerSync(String url_first) {
         this.url_first = url_first;
     }
 
     private String read(HttpURLConnection connection, String whatToRead) throws IOException {
         String result = "NOT READ CORRECTLY";
-        if(whatToRead == "CONTENT") {
-        BufferedReader reader = new BufferedReader(new InputStreamReader((connection.getInputStream())));
-        StringBuilder sb = new StringBuilder();
-        String line;
+        if (whatToRead.equals("CONTENT")) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader((connection.getInputStream())));
+            StringBuilder sb = new StringBuilder();
+            String line;
 
-        while ((line = reader.readLine()) != null) {
-            sb.append(line);
-        }
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+            }
 
-        result = sb.toString();
-        reader.close();
-        } else if(whatToRead == "TOKEN") {
+            result = sb.toString();
+            reader.close();
+        } else if (whatToRead.equals("TOKEN")) {
             result = connection.getHeaderField("token");
         }
 
