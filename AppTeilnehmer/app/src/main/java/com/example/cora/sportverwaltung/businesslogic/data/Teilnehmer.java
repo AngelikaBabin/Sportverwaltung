@@ -1,14 +1,12 @@
 package com.example.cora.sportverwaltung.businesslogic.data;
 
-import java.util.HashMap;
-
 /**
  * Created by nicok on 18.04.2018 ^-^.
  */
 
 public class Teilnehmer extends Account{
     private int score;
-    private HashMap<Veranstaltung, Teilnahme> teilnahmen;
+    //TODO Veranstaltungen
 
     public Teilnehmer(int score) {
         this.score = score;

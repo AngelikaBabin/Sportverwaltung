@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -29,14 +30,16 @@ public class ControllerSync extends AsyncTask<String, Void, String> {
 
         try{
             if(params[0].equals("REGISTER_VERANSTALTER")) {
-                url = new URL(url_first + url_second + "registerVeranstalter");
+                url = new URL("http://" + url_first + url_second + "/registerVeranstalter");
             } else if(params[0].equals("REGISTER_TEILNEHMER")) {
-                url = new URL(url_first + url_second + "registerTeilnehmer");
+                url = new URL("http://" + url_first + url_second + "/registerTeilnehmer");
+                isPut = true;
+                isGet = false;
             }
 
-            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             if(isPut) {
-                connection.setRequestMethod("PUT");
+                connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type", "application/json");
                 writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
                 writer.write(params[1]);
