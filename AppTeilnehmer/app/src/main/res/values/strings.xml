@@ -80,4 +80,29 @@
     <string name="error_invalidPassword">password is required</string>
     <string name="error_invalidConfirmPassword">passwords do not match</string>
 
+
+    <string-array name="test_array_all">
+        <item>Shuttle Badminton</item>
+        <item>Tennis</item>
+        <item>FootBall</item>
+        <item>Basket Ball</item>
+        <item>Table Tennis</item>
+        <item>Chess</item>
+        <item>Hockey</item>
+    </string-array>
+
+
+    <string-array name="test_array_done">
+        <item>Shuttle Badminton</item>
+        <item>FootBall</item>
+        <item>Table Tennis</item>
+        <item>Hockey</item>
+    </string-array>
+
+    <string-array name="test_array_toDo">
+        <item>Tennis</item>
+        <item>Basket Ball</item>
+        <item>Chess</item>
+    </string-array>
+
 </resources>

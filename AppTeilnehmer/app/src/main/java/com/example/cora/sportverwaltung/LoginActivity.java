@@ -54,6 +54,8 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, ex.getMessage(), Toast.LENGTH_SHORT);
                     ex.printStackTrace();
                 }
+
+                //startActivity(new Intent(LoginActivity.this, MenuActivity.class));
             }
         });
 

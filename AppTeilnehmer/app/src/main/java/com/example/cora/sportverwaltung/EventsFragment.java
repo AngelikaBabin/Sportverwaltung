@@ -1,13 +1,17 @@
 package com.example.cora.sportverwaltung;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 
 /**
@@ -29,6 +33,13 @@ public class EventsFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    ListView listView_events;
+    Button button_allEvents, button_myEvents, button_pastEvents;
+
+    View view;
+
+    FragmentManager manager;
 
     public EventsFragment() {
         // Required empty public constructor
@@ -59,60 +70,64 @@ public class EventsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.fragment_events, container, false);
-
-        Button btnAlleEvents = (Button) view.findViewById(R.id.button_allEvents);
-        btnAlleEvents.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                swapFragmentAlleEvents();
-            }
-        });
-
-        Button btnMeineEvents = (Button) view.findViewById(R.id.button_myEvents);
-        btnMeineEvents.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                swapFragmentMeineEvents();
-            }
-        });
-
-        Button btnAbgEvents = (Button) view.findViewById(R.id.button_pastEvents);
-        btnAbgEvents.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                swapFragmentAbgEvents();
-            }
-        });
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_events, container, false);
+        getViewElements();
+        registerEventhandlers();
+        manager = getFragmentManager();
+        setAdapterData(getResources().getStringArray(R.array.test_array_all));
         return view;
     }
 
-    private void swapFragmentAlleEvents(){
-        AllEventsFragment allEventsFragment = new AllEventsFragment();
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.ConstraintLayout_for_fragment, allEventsFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+    private void getViewElements() {
+        listView_events = view.findViewById(R.id.listView_events);
+        button_allEvents = (Button) view.findViewById(R.id.button_allEvents);
+        button_myEvents = (Button) view.findViewById(R.id.button_myEvents);
+        button_pastEvents = (Button) view.findViewById(R.id.button_pastEvents);
     }
-    private void swapFragmentMeineEvents(){
-        MyEventsFragment myEventsFragment = new MyEventsFragment();
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.ConstraintLayout_for_fragment, myEventsFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+
+    private void registerEventhandlers() {
+        button_allEvents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAdapterData(getResources().getStringArray(R.array.test_array_all));
+            }
+        });
+
+        button_myEvents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAdapterData(getResources().getStringArray(R.array.test_array_toDo));
+            }
+        });
+
+        button_pastEvents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAdapterData(getResources().getStringArray(R.array.test_array_done));
+            }
+        });
+
+        listView_events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                MyEventsFragment myEventsFragment = new MyEventsFragment();
+                manager.beginTransaction().replace(
+                        R.id.ConstraintLayout_for_fragment,
+                        myEventsFragment,
+                        myEventsFragment.getTag()
+                ).commit();
+            }
+        });
     }
-    private void swapFragmentAbgEvents(){
-        PastEventsFragment pastEventsFragment = new PastEventsFragment();
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.ConstraintLayout_for_fragment, pastEventsFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+
+    private void setAdapterData(String[] entries){
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1 ,entries);
+        listView_events.setAdapter(adapter);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -2,42 +2,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#434343"
     android:orientation="vertical"
+    android:padding="15dp"
     tools:context="com.example.cora.sportverwaltung.EventsFragment">
 
     <ListView
+        android:id="@+id/listView_events"
         android:layout_width="match_parent"
-        android:layout_height="457dp" />
+        android:layout_height="457dp"
+        android:clickable="true"/>
 
     <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        style="?android:attr/buttonBarStyle">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/button_allEvents"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/label_allEvents"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:background="@drawable/btn_rounded"
+            android:text="@string/label_allEvents" />
 
         <Button
             android:id="@+id/button_myEvents"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/label_myEvents"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:background="@drawable/btn_rounded"
+            android:text="@string/label_myEvents" />
 
         <Button
             android:id="@+id/button_pastEvents"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/label_pastEvents"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:background="@drawable/btn_rounded"
+            android:text="@string/label_pastEvents" />
     </LinearLayout>
 
 </LinearLayout>

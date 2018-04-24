@@ -2,36 +2,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#434343"
     android:orientation="vertical"
+    android:padding="15dp"
     tools:context="com.example.cora.sportverwaltung.AllEventsFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/input_rounded"
         android:text="@string/example_header"
         android:textAlignment="center"
         android:textSize="40sp" />
 
     <EditText
-        android:hint="@string/example_eventname"
         android:layout_width="match_parent"
         android:layout_height="186dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/input_rounded"
         android:ems="10"
+        android:hint="@string/example_eventname"
         android:inputType="textPersonName"
         android:text="@string/example_eventname" />
 
     <EditText
-        android:hint="@string/example_details"
         android:layout_width="match_parent"
         android:layout_height="159dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/input_rounded"
         android:ems="10"
+        android:hint="@string/example_details"
         android:inputType="textPersonName"
         android:text="@string/example_eventname" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         android:layout_marginTop="50dp"
+        android:background="@drawable/btn_rounded"
         android:text="@string/text_button_teilnehmen" />
 
 </LinearLayout>
