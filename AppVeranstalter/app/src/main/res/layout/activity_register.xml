@@ -4,67 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#434343"
     tools:context="com.example.cora.sportverwaltungveranstalter.RegisterActivity">
+
     <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="495dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
         android:orientation="vertical"
         android:weightSum="1"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
         <EditText
-            android:id="@+id/txtBenutzer"
+            android:id="@+id/editText_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:layout_weight="0.08"
-            android:editable="true"
+            android:background="@drawable/input_rounded"
+            android:drawableLeft="@drawable/ic_account_circle_black_24dp"
             android:ems="10"
-            android:hint="Benutzername"
-            android:inputType="textPersonName"
-            android:textSize="20sp" />
+            android:hint="Username"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:layout_marginTop="30dp"
             android:layout_weight="0.08"
+            android:background="@drawable/input_rounded"
+            android:drawableLeft="@android:drawable/ic_dialog_email"
             android:ems="10"
             android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:textSize="20sp" />
+            android:inputType="textEmailAddress" />
+
 
         <EditText
-            android:id="@+id/txtPassword"
+            android:id="@+id/editText_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:layout_marginTop="30dp"
+            android:layout_weight="0.08"
+            android:background="@drawable/input_rounded"
+            android:drawableLeft="@drawable/ic_fingerprint_black_24dp"
             android:ems="10"
-            android:hint="Passwort"
-            android:inputType="textPassword"
-            android:textSize="20sp" />
+            android:hint="Password"
+            android:inputType="textPassword" />
 
         <EditText
             android:id="@+id/txtPassBes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:layout_marginTop="30dp"
             android:layout_weight="0.08"
+            android:background="@drawable/input_rounded"
+            android:drawableLeft="@drawable/ic_fingerprint_black_24dp"
             android:ems="10"
-            android:hint="Passwort bestätigen"
-            android:inputType="textPassword"
-            android:textSize="20sp" />
+            android:hint="Confirm Password "
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/btnRegistrieren"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:layout_marginTop="50dp"
             android:layout_weight="0.08"
-            android:background="?attr/colorButtonNormal"
-            android:text="Registrieren" />
+            android:background="@drawable/btn_rounded"
+            android:ems="10"
+            android:text="Register" />
 
     </LinearLayout>
 

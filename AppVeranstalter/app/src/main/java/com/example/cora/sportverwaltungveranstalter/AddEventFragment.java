@@ -2,15 +2,21 @@ package com.example.cora.sportverwaltungveranstalter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -24,6 +30,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
+import java.util.List;
 
 
 /**
@@ -48,6 +57,8 @@ public class AddEventFragment extends Fragment implements OnMapReadyCallback{
 
     Button button_date;
     private MapView mapView_googleMaps;
+    private EditText editText_adress;
+    private LatLng coordinates;
     GoogleMap map;
 
     public AddEventFragment() {
@@ -86,11 +97,45 @@ public class AddEventFragment extends Fragment implements OnMapReadyCallback{
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_event, container, false);
 
+        editText_adress = (EditText) view.findViewById(R.id.editText_adress);
+
+        editText_adress.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+
+                    coordinates = getLocationFromAddress(v.getContext(), v.getText().toString());
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        //coordinates = getLocationFromAddress(editText_adress.getContext(), editText_adress.getText().toString());
         mapView_googleMaps = (MapView) view.findViewById(R.id.mapView_googleMaps);
         mapView_googleMaps.onCreate(savedInstanceState);
         mapView_googleMaps.getMapAsync(this);
 
         return view;
+    }
+
+    public LatLng getLocationFromAddress(Context context, String strAddress) {
+        Geocoder coder = new Geocoder(context);
+        List<Address> address;
+        LatLng p1 = null;
+        try {
+            // May throw an IOException
+            address = coder.getFromLocationName(strAddress, 5);
+            if (address == null) {
+                return null;
+            }
+            Address location = address.get(0);
+            p1 = new LatLng(location.getLatitude(), location.getLongitude() );
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return p1;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -108,14 +153,12 @@ public class AddEventFragment extends Fragment implements OnMapReadyCallback{
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        final LatLng PERTH = new LatLng(-31.90, 115.86); // Perth, Australia
-        Marker mymarker = googleMap.addMarker(new MarkerOptions().position(PERTH).title("Perth,Australia"));
+        Marker mymarker = googleMap.addMarker(new MarkerOptions().position(coordinates).title(editText_adress.getText().toString()));
         mymarker.showInfoWindow();
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(PERTH, 16));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 16));
         googleMap.getUiSettings().setZoomControlsEnabled(true);
         googleMap.getUiSettings().setAllGesturesEnabled(true);
         googleMap.getUiSettings().setCompassEnabled(true);
-
     }
 
 
