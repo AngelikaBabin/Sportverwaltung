@@ -17,18 +17,15 @@ public class DatabaseConnection {
     private final Gson GSON = new Gson();
     private static ControllerSync controller;
     private String url;
+    private String userToken;
 
     public static DatabaseConnection getInstance() {
         if (DatabaseConnection == null)
-            DatabaseConnection = new DatabaseConnection("192.168.193.150");
+            DatabaseConnection = new DatabaseConnection("192.168.43.142:8080");
         return DatabaseConnection;
     }
 
     private DatabaseConnection(String url) {
-        setUrl(url);
-    }
-
-    public void setUrl(String url) {
         this.url = url;
     }
 
@@ -40,9 +37,8 @@ public class DatabaseConnection {
         String stringFromWebService = controller.get();
 
         Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {}.getType();
-        ArrayList<Veranstaltung> vec = GSON.fromJson(stringFromWebService, collectionType);
 
-        return vec;
+        return GSON.<ArrayList<Veranstaltung>>fromJson(stringFromWebService, collectionType);
     }
 
     //Post Example
@@ -56,7 +52,8 @@ public class DatabaseConnection {
 
         controller.execute(params);
 
-        return controller.get();
+        userToken = controller.get();
+        return userToken;
     }
 
     public String login(Teilnehmer teilnehmer) throws Exception{
@@ -64,11 +61,12 @@ public class DatabaseConnection {
 
         String stringTeilnehmer = GSON.toJson(teilnehmer, Teilnehmer.class);
         String params[] = new String[2];
-        params[0] = "REGISTER_TEILNEHMER";
+        params[0] = "LOGIN_TEILNEHMER";
         params[1] = stringTeilnehmer;
 
         controller.execute(params);
 
-        return controller.get();
+        userToken = controller.get();
+        return userToken;
     }
 }

@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
                     Teilnehmer t = new Teilnehmer(0,"",username, password,0);
 
                     String token = connection.login(t);
-                    
+
                     if(token != null) {
                         startActivity(new Intent(LoginActivity.this, MenuActivity.class));
                     } else {

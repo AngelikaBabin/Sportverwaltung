@@ -74,5 +74,10 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="regex_email">LALAAJIAJS</string>
+    <string name="error_invalidEmail">email not valid</string>
+    <string name="error_invalidName">username is required</string>
+    <string name="error_invalidPassword">password is required</string>
+    <string name="error_invalidConfirmPassword">passwords do not match</string>
 
 </resources>

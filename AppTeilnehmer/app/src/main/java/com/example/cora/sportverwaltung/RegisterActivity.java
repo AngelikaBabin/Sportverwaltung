@@ -1,8 +1,8 @@
 package com.example.cora.sportverwaltung;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,8 +11,12 @@ import android.widget.Toast;
 import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
 import com.example.cora.sportverwaltung.businesslogic.data.Teilnehmer;
 
-public class RegisterActivity extends AppCompatActivity {
+import java.util.InputMismatchException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+public class RegisterActivity extends AppCompatActivity {
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     Button button_register;
     EditText editText_email, editText_name, editText_password, editText_passwordConfirm;
 
@@ -33,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerEventhandlers();
     }
 
-    private void getViewElements(){
+    private void getViewElements() {
         button_register = findViewById(R.id.button_register);
         editText_email = findViewById(R.id.editText_email);
         editText_name = findViewById(R.id.textView_username);
@@ -52,24 +56,42 @@ public class RegisterActivity extends AppCompatActivity {
                     String password = editText_password.getText().toString();
                     String passwordConfirm = editText_passwordConfirm.getText().toString();
 
-                    // check password
-                    if (password.equals(passwordConfirm)) {
-                        // create Teilnehmer
-                        Teilnehmer t = new Teilnehmer(email, name, password);
+                    // constraints
+                    check(email, name, password, passwordConfirm);
 
-                        // register in database
-                        String token = connection.registerTeilnehmer(t);
+                    // create Teilnehmer
+                    Teilnehmer t = new Teilnehmer(email, name, password);
 
-                        // open menu activity
-                        startActivity(new Intent(RegisterActivity.this, MenuActivity.class));
-                    } else {
-                        Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_SHORT);
-                    }
+                    // register in database
+                    String token = connection.registerTeilnehmer(t);
+
+                    // open menu activity
+                    startActivity(new Intent(RegisterActivity.this, MenuActivity.class));
+
                 } catch (Exception ex) {
-                    Toast.makeText(RegisterActivity.this, ex.getMessage(), Toast.LENGTH_SHORT);
+                    Toast.makeText(RegisterActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                     ex.printStackTrace();
                 }
             }
         });
+    }
+
+    private void check(String email, String name, String password, String passwordConfirm) {
+        if(name == null || name.length() < 3){
+            throw new InputMismatchException(getString(R.string.error_invalidName));
+        }
+
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
+        if(!matcher.find()) {
+            throw new InputMismatchException(getString(R.string.error_invalidEmail));
+        }
+
+        if(password == null || password.length() < 8) {
+            throw new InputMismatchException(getString(R.string.error_invalidPassword));
+        }
+
+        if(!password.equals(passwordConfirm)) {
+            throw new InputMismatchException(getString(R.string.error_invalidConfirmPassword));
+        }
     }
 }
