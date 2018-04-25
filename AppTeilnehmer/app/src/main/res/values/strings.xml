@@ -8,11 +8,11 @@
 
     <!-- Userdata -->
     <string name="label_username">Name:</string>
-    <string name="example_username">Eduard Timmerer</string>
+    <string name="example_username">Christof Kraschl</string>
     <string name="hint_username">Username</string>
 
     <string name="label_email">E-Mail:</string>
-    <string name="example_email">eduard.timmerer@gmail.com</string>
+    <string name="example_email">kraschlc@edu.htl-villach.com</string>
     <string name="hint_email">Email</string>
 
     <string name="label_password">Passwort:</string>
@@ -21,7 +21,7 @@
 
     <string name="label_confirmPassword">Passwort:</string>
     <string name="example_confirmPassword">dummypw1234</string>
-    <string name="hint_confirmPassword">Passwort bestätigen</string>
+    <string name="hint_confirmPassword">Confirm password</string>
 
     <string name="label_rank">Dein Rang:</string>
     <string name="example_rank">3</string>
@@ -61,23 +61,22 @@
     <string name="desc_logo">Sporteventmanager</string>
 
     <!-- GUI -->
-    <string name="label_allEvents">Alle</string>
-    <string name="label_myEvents">Meine</string>
-    <string name="label_pastEvents">Abgeschlossen</string>
+    <string name="label_allEvents">All events</string>
+    <string name="label_myEvents">My events</string>
+    <string name="label_pastEvents">Past events</string>
 
-    <string name="text_abmelden">Abmelden</string>
+    <string name="text_abmelden">Logout</string>
     <string name="text_button_teilnehmen">Teilnehmen</string>
-    <string name="text_button_register">Registrieren</string>
+    <string name="text_button_register">Register</string>
     <string name="text_forgot_password">Forgot password?</string>
     <string name="text_button_login">Login</string>
     <string name="text_not_registered_yet">Not registered yet?</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="regex_email">LALAAJIAJS</string>
     <string name="error_invalidEmail">email not valid</string>
-    <string name="error_invalidName">username is required</string>
-    <string name="error_invalidPassword">password is required</string>
+    <string name="error_invalidName">username must be at least 3 characters long</string>
+    <string name="error_invalidPassword">password must be at least 8 characters long</string>
     <string name="error_invalidConfirmPassword">passwords do not match</string>
 
 
