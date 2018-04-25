@@ -26,7 +26,7 @@ public class DatabaseConnection {
     private DatabaseConnection(String url) {
         this.url = url;
     }
-    
+
     public String registerTeilnehmer(Teilnehmer teilnehmer) throws Exception {
         controller = new ControllerSync(url);
 
