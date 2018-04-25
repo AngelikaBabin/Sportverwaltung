@@ -19,7 +19,7 @@ public class DatabaseConnection {
 
     public static DatabaseConnection getInstance() {
         if (connection == null)
-            connection = new DatabaseConnection("192.168.43.142");
+            connection = new DatabaseConnection("192.168.193.150");
         return connection;
     }
 

@@ -86,7 +86,7 @@ public class TeilnehmerService {
         }
         catch(RegisterExcpetion ex){
             r = Response.status(Response.Status.CONFLICT).entity(ex).type(MediaType.APPLICATION_JSON).build();
-            System.out.println("Failed");
+            System.out.println("Failed: already exists");
         }
         catch(Exception ex){
             r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
