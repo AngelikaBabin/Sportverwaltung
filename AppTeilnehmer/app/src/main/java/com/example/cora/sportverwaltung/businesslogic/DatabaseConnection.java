@@ -62,7 +62,7 @@ public class DatabaseConnection {
     public String login(Account account) throws Exception{
         controller = new ControllerSync(url);
 
-        String stringTeilnehmer = GSON.toJson(account, Teilnehmer.class);
+        String stringTeilnehmer = GSON.toJson(account, Account.class);
         String params[] = new String[2];
         params[0] = "LOGIN";
         params[1] = stringTeilnehmer;
@@ -71,5 +71,14 @@ public class DatabaseConnection {
 
         userToken = controller.get();
         return userToken;
+    }
+
+    public void logout() throws Exception{
+        controller = new ControllerSync(url);
+
+        String params[] = new String[1];
+        params[0] = "LOGOUT";
+
+        controller.execute(params);
     }
 }
