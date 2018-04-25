@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private void getViewElements(){
         button_login = findViewById(R.id.button_login);
         button_register = findViewById(R.id.button_register);
-        editText_username = findViewById(R.id.textView_username);
+        editText_username = findViewById(R.id.editText_username);
         editText_password = findViewById(R.id.editText_password);
     }
 
@@ -41,17 +41,17 @@ public class LoginActivity extends AppCompatActivity {
                     String username = editText_username.getText().toString();
                     String password = editText_password.getText().toString();
 
-                    Teilnehmer t = new Teilnehmer(0,"",username, password,0);
+                    Teilnehmer t = new Teilnehmer(0, username,"", password,0);
 
                     String token = connection.login(t);
 
                     if(token != null) {
                         startActivity(new Intent(LoginActivity.this, MenuActivity.class));
                     } else {
-                        Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_SHORT);
+                        Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception ex) {
-                    Toast.makeText(LoginActivity.this, ex.getMessage(), Toast.LENGTH_SHORT);
+                    Toast.makeText(LoginActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                     ex.printStackTrace();
                 }
             }

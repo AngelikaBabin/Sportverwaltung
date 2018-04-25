@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.net.NoRouteToHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,15 +54,17 @@ public class DatabaseConnection {
         controller.execute(params);
 
         userToken = controller.get();
+        if(userToken.startsWith("Exception"))
+            throw new NoRouteToHostException(userToken);
         return userToken;
     }
 
-    public String login(Teilnehmer teilnehmer) throws Exception{
+    public String login(Account account) throws Exception{
         controller = new ControllerSync(url);
 
-        String stringTeilnehmer = GSON.toJson(teilnehmer, Teilnehmer.class);
+        String stringTeilnehmer = GSON.toJson(account, Teilnehmer.class);
         String params[] = new String[2];
-        params[0] = "LOGIN_TEILNEHMER";
+        params[0] = "LOGIN";
         params[1] = stringTeilnehmer;
 
         controller.execute(params);

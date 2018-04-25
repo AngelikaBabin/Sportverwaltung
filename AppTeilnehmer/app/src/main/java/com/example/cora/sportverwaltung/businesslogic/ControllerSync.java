@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.NoRouteToHostException;
 import java.net.URL;
 
 /**
@@ -17,6 +18,7 @@ import java.net.URL;
 public class ControllerSync extends AsyncTask<String, Void, String> {
     private String url_first;
     private static final String url_second = "SportVerwaltung_WebServices/webresources";
+    private static String token;
 
     @Override
     protected String doInBackground(String... params) {
@@ -27,9 +29,14 @@ public class ControllerSync extends AsyncTask<String, Void, String> {
 
         try {
             switch (params[0]) {
-                case "LOGIN_TEILNEHMER":
-                    url = new URL("http://" + url_first + "/" + url_second + "/teilnehmer");
-                    httpMethod = HttpMethod.GET;
+                case "LOGIN":
+                    url = new URL("http://" + url_first + "/" + url_second + "/login");
+                    httpMethod = HttpMethod.POST;
+                    whatToRead = "TOKEN";
+                    break;
+                case "LOGOUT":
+                    url = new URL("http://" + url_first + "/" + url_second + "/logout");
+                    httpMethod = HttpMethod.POST;
                     whatToRead = "TOKEN";
                     break;
                 case "REGISTER_TEILNEHMER":
@@ -50,6 +57,9 @@ public class ControllerSync extends AsyncTask<String, Void, String> {
             }
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            if(token != null) {
+                connection.setRequestProperty("Token", token);
+            }
             if (httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT || httpMethod == HttpMethod.DELETE) {
                 write(connection, params);
             }
@@ -57,8 +67,10 @@ public class ControllerSync extends AsyncTask<String, Void, String> {
             content = read(connection, whatToRead);
 
             connection.disconnect();
+        } catch(NoRouteToHostException ex){
+          content = "Exception: make sure you are connected to the internet";
         } catch (Exception ex) {
-            content = "Error in doInBackground: " + ex.getMessage();
+            content = "Exception in doInBackground: " + ex.getMessage();
         }
 
         return content;
@@ -69,7 +81,7 @@ public class ControllerSync extends AsyncTask<String, Void, String> {
     }
 
     private String read(HttpURLConnection connection, String whatToRead) throws IOException {
-        String result = "NOT READ CORRECTLY";
+        String result = "NOTHING READ";
         if (whatToRead.equals("CONTENT")) {
             BufferedReader reader = new BufferedReader(new InputStreamReader((connection.getInputStream())));
             StringBuilder sb = new StringBuilder();
@@ -83,6 +95,9 @@ public class ControllerSync extends AsyncTask<String, Void, String> {
             reader.close();
         } else if (whatToRead.equals("TOKEN")) {
             result = connection.getHeaderField("token");
+            token = result;
+        } else if (whatToRead.equals("NOTHING")){
+            result = "";
         }
 
         return result;
