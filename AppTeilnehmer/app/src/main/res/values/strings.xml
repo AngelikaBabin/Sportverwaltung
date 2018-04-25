@@ -21,7 +21,11 @@
 
     <string name="label_confirmPassword">Password:</string>
     <string name="example_confirmPassword">dummypw1234</string>
+<<<<<<< HEAD
     <string name="hint_confirmPassword">conrifm Password</string>
+=======
+    <string name="hint_confirmPassword">Confirm password</string>
+>>>>>>> 39a81c54130938def498f434196c2bc07c28c79a
 
     <string name="label_rank">Rank:</string>
     <string name="example_rank">3</string>
@@ -61,12 +65,21 @@
     <string name="desc_logo">Sporteventmanager</string>
 
     <!-- GUI -->
+<<<<<<< HEAD
     <string name="label_allEvents">All</string>
     <string name="label_myEvents">My</string>
     <string name="label_pastEvents">Done</string>
 
     <string name="text_abmelden">Logout</string>
     <string name="text_button_teilnehmen">Participate</string>
+=======
+    <string name="label_allEvents">All events</string>
+    <string name="label_myEvents">My events</string>
+    <string name="label_pastEvents">Past events</string>
+
+    <string name="text_abmelden">Logout</string>
+    <string name="text_button_teilnehmen">Teilnehmen</string>
+>>>>>>> 39a81c54130938def498f434196c2bc07c28c79a
     <string name="text_button_register">Register</string>
     <string name="text_forgot_password">Forgot password?</string>
     <string name="text_button_login">Login</string>

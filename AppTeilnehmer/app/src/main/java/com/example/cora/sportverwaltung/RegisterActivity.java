@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
-import com.example.cora.sportverwaltung.businesslogic.data.Teilnehmer;
+import com.example.cora.sportverwaltung.businesslogic.data.Account;
 
 import java.util.InputMismatchException;
 import java.util.regex.Matcher;
@@ -60,16 +60,23 @@ public class RegisterActivity extends AppCompatActivity {
                     check(email, name, password, passwordConfirm);
 
                     // create Teilnehmer
-                    Teilnehmer t = new Teilnehmer(email, name, password);
+                    Account a = new Account(email, name, password);
 
                     // register in database
-                    String token = connection.registerTeilnehmer(t);
+                    String token = connection.registerTeilnehmer(a);
 
-                    // open menu activity
-                    startActivity(new Intent(RegisterActivity.this, MenuActivity.class));
+                    // open menu activity if successful
+                    if(token != null) {
+                        startActivity(new Intent(RegisterActivity.this, MenuActivity.class));
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "could not create account", Toast.LENGTH_LONG).show();
+                    }
 
-                } catch (Exception ex) {
-                    Toast.makeText(RegisterActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                } catch(NullPointerException ex){
+                    Toast.makeText(RegisterActivity.this, "account already exists", Toast.LENGTH_LONG).show();
+                    ex.printStackTrace();
+                }catch (Exception ex) {
+                    Toast.makeText(RegisterActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
                     ex.printStackTrace();
                 }
             }
@@ -86,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
             throw new InputMismatchException(getString(R.string.error_invalidEmail));
         }
 
-        if(password == null || password.length() < 8) {
+        if(password == null || password.length() < 6) {
             throw new InputMismatchException(getString(R.string.error_invalidPassword));
         }
 

@@ -27,6 +27,10 @@ public class Account {
         this(0, email, "", password);
     }
 
+    public Account(String email, String name, String password) {
+        this(0,email, name,password);
+    }
+
     public int getId() {
         return id;
     }

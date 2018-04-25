@@ -1,68 +1,63 @@
 package com.example.cora.sportverwaltung.businesslogic;
 
-import com.example.cora.sportverwaltung.businesslogic.data.*;
+import com.example.cora.sportverwaltung.businesslogic.data.Account;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
+import java.net.MalformedURLException;
 import java.net.NoRouteToHostException;
-import java.util.ArrayList;
-import java.util.List;
+import java.net.URL;
 
 /**
  * Created by nicok on 18.04.2018 ^-^.
  */
 
 public class DatabaseConnection {
-    private static DatabaseConnection DatabaseConnection;
+    private static DatabaseConnection connection;
     private final Gson GSON = new Gson();
     private static ControllerSync controller;
-    private String url;
+
+    private URL url;
+
     private String userToken;
 
     public static DatabaseConnection getInstance() {
-        if (DatabaseConnection == null)
-            DatabaseConnection = new DatabaseConnection("192.168.43.142:8080");
-        return DatabaseConnection;
+        if (connection == null) {
+            URL url = null;
+            try {
+                url = new URL("http", "192.168.193.150", "SportVerwaltung_WebServices/webresources");
+                connection = new DatabaseConnection(url);
+            } catch (MalformedURLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return connection;
     }
 
-    private DatabaseConnection(String url) {
+    private DatabaseConnection(URL url) {
         this.url = url;
+        controller = new ControllerSync(url);
     }
 
-    //Get Example
-    public List<Veranstaltung> getVeranstaltungen() throws Exception {
-        controller = new ControllerSync(url);
-        controller.execute("VERANSTALTUNGEN");
-
-        String stringFromWebService = controller.get();
-
-        Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {}.getType();
-
-        return GSON.<ArrayList<Veranstaltung>>fromJson(stringFromWebService, collectionType);
-    }
-
-    //Post Example
-    public String registerTeilnehmer(Teilnehmer teilnehmer) throws Exception {
+    public String registerTeilnehmer(Account account) throws Exception {
         controller = new ControllerSync(url);
 
-        String stringTeilnehmer = GSON.toJson(teilnehmer, Teilnehmer.class);
+        String stringTeilnehmer = GSON.toJson(account, Account.class);
         String params[] = new String[2];
-        params[0] = "REGISTER_TEILNEHMER";
+        params[0] = "REGISTER";
         params[1] = stringTeilnehmer;
 
         controller.execute(params);
 
         userToken = controller.get();
-        if(userToken.startsWith("Exception"))
+        if (userToken.startsWith("Exception"))
             throw new NoRouteToHostException(userToken);
         return userToken;
     }
 
-    public String login(Account account) throws Exception{
+    public String login(Account account) throws Exception {
         controller = new ControllerSync(url);
 
-        String stringTeilnehmer = GSON.toJson(account, Teilnehmer.class);
+        String stringTeilnehmer = GSON.toJson(account, Account.class);
         String params[] = new String[2];
         params[0] = "LOGIN";
         params[1] = stringTeilnehmer;
@@ -71,5 +66,16 @@ public class DatabaseConnection {
 
         userToken = controller.get();
         return userToken;
+    }
+
+    public void logout() throws Exception {
+        controller = new ControllerSync(url);
+
+        String params[] = new String[1];
+        params[0] = "LOGOUT";
+
+        controller.execute(params);
+
+        controller.get();
     }
 }
