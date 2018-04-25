@@ -73,12 +73,12 @@ public class TeilnehmerService {
     public Response registerTeilnehmer(String content){
         Response r;
         String token = "";
-        Account t = null;
+        Account a;
         try{
-            t = gson.fromJson(content, Account.class);
-            System.out.print("Register: " + t + "...");
-            db.addAccount(t);
-            db.addTeilnehmerToAccount(t);
+            a = gson.fromJson(content, Account.class);
+            System.out.print("Register: " + a + "...");
+            db.addAccount(a);
+            db.addTeilnehmerToAccount(a);
             token = crypt.encrypt(token);
             Authentification.loginToken(token);
             r = Response.status(Response.Status.CREATED).header("Token", token).build();

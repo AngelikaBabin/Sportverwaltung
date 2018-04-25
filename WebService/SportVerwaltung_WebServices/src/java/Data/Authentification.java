@@ -14,6 +14,7 @@ import java.util.HashSet;
  * @author chris
  */
 public class Authentification {
+    //ToDo delete token loool
     private static HashSet<String> collTokens = new HashSet<>(Arrays.asList(new String[] {"gvlXQIl+LAtN9sdXh/3EjojCIjaCFLCxcH/WETETQco="}));
     
     public static boolean isUserAuthenticated(String token) throws IOException, Exception{
