@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 
 /**
@@ -27,6 +29,11 @@ public class AllEventsFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    View view;
+    TextView textView_header, textView_Details;
+    TextView textView_date, textView_place, textView_participator, textView_organizer;
+    Button button_participate;
 
     public AllEventsFragment() {
         // Required empty public constructor
@@ -63,8 +70,34 @@ public class AllEventsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_all_events, container, false);
+        view =  inflater.inflate(R.layout.fragment_all_events, container, false);
+
+        getViewElements();
+        registerEventhandlers();
+
+        return view;
     }
+
+
+    private void getViewElements() {
+        textView_header = view.findViewById(R.id.textView_header);
+        textView_Details = view.findViewById(R.id.textView_Details);
+        textView_date = view.findViewById(R.id.textView_date);
+        textView_place = view.findViewById(R.id.textView_place);
+        textView_participator = view.findViewById(R.id.textView_participator);
+        textView_organizer = view.findViewById(R.id.textView_organizer);
+        button_participate = view.findViewById(R.id.button_participate);
+    }
+
+    private void registerEventhandlers() {
+        button_participate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //ToDO
+            }
+        });
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
