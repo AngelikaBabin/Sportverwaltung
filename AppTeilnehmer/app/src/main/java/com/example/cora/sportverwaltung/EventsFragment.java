@@ -80,6 +80,7 @@ public class EventsFragment extends Fragment {
         registerEventhandlers();
         manager = getFragmentManager();
         setAdapterData(getResources().getStringArray(R.array.test_array_all));
+        setOnItemClickListener(new AllEventsFragment());
         return view;
     }
 
@@ -94,7 +95,8 @@ public class EventsFragment extends Fragment {
         button_allEvents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setAdapterData(getResources().getStringArray(R.array.test_array_all));
+            setAdapterData(getResources().getStringArray(R.array.test_array_all));
+            setOnItemClickListener(new AllEventsFragment());
             }
         });
 
@@ -102,6 +104,7 @@ public class EventsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 setAdapterData(getResources().getStringArray(R.array.test_array_toDo));
+                setOnItemClickListener(new MyEventsFragment());
             }
         });
 
@@ -109,10 +112,11 @@ public class EventsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 setAdapterData(getResources().getStringArray(R.array.test_array_done));
+                setOnItemClickListener(new PastEventsFragment());
             }
         });
 
-        listView_events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*listView_events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 MyEventsFragment myEventsFragment = new MyEventsFragment();
@@ -120,6 +124,20 @@ public class EventsFragment extends Fragment {
                         R.id.ConstraintLayout_for_fragment,
                         myEventsFragment,
                         myEventsFragment.getTag()
+                ).commit();
+            }
+        });*/
+    }
+
+    private void setOnItemClickListener(final Fragment myFragment){
+        listView_events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Fragment fragment = myFragment;
+                manager.beginTransaction().replace(
+                        R.id.ConstraintLayout_for_fragment,
+                        fragment,
+                        fragment.getTag()
                 ).commit();
             }
         });
