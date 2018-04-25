@@ -1,7 +1,6 @@
 package com.example.cora.sportverwaltung.businesslogic;
 
 import com.example.cora.sportverwaltung.businesslogic.data.Account;
-import com.example.cora.sportverwaltung.businesslogic.data.Teilnehmer;
 import com.google.gson.Gson;
 
 import java.net.NoRouteToHostException;
@@ -19,7 +18,7 @@ public class DatabaseConnection {
 
     public static DatabaseConnection getInstance() {
         if (connection == null)
-            connection = new DatabaseConnection("192.168.43.142");
+            connection = new DatabaseConnection("192.168.193.150");
         return connection;
     }
 
@@ -27,10 +26,10 @@ public class DatabaseConnection {
         this.url = url;
     }
 
-    public String registerTeilnehmer(Teilnehmer teilnehmer) throws Exception {
+    public String registerTeilnehmer(Account account) throws Exception {
         controller = new ControllerSync(url);
 
-        String stringTeilnehmer = GSON.toJson(teilnehmer, Teilnehmer.class);
+        String stringTeilnehmer = GSON.toJson(account, Account.class);
         String params[] = new String[2];
         params[0] = "REGISTER_TEILNEHMER";
         params[1] = stringTeilnehmer;

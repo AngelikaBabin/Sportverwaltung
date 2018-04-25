@@ -101,7 +101,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
         } catch (Exception ex) {
-            Toast.makeText(MenuActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(MenuActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
             ex.printStackTrace();
         }
         return true;

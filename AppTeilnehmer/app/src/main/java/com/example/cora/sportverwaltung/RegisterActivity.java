@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
-import com.example.cora.sportverwaltung.businesslogic.data.Teilnehmer;
+import com.example.cora.sportverwaltung.businesslogic.data.Account;
 
 import java.util.InputMismatchException;
 import java.util.regex.Matcher;
@@ -60,20 +60,20 @@ public class RegisterActivity extends AppCompatActivity {
                     check(email, name, password, passwordConfirm);
 
                     // create Teilnehmer
-                    Teilnehmer t = new Teilnehmer(email, name, password);
+                    Account a = new Account(email, name, password);
 
                     // register in database
-                    String token = connection.registerTeilnehmer(t);
+                    String token = connection.registerTeilnehmer(a);
 
                     // open menu activity if successful
                     if(token != null) {
                         startActivity(new Intent(RegisterActivity.this, MenuActivity.class));
                     } else {
-                        Toast.makeText(RegisterActivity.this, "could not create account", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "could not create account", Toast.LENGTH_LONG).show();
                     }
 
                 } catch (Exception ex) {
-                    Toast.makeText(RegisterActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
                     ex.printStackTrace();
                 }
             }
