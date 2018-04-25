@@ -32,7 +32,7 @@ public class LogoutService {
     @POST
     @Consumes(MediaType.TEXT_PLAIN)
     public Response logout(@HeaderParam("Token") String token) {
-        Response r = null;
+        Response r;
         try{
             if(Authentification.isUserAuthenticated(token)){
                 Authentification.logoutToken(token);

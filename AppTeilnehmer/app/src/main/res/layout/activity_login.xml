@@ -9,24 +9,25 @@
     tools:context="com.example.cora.sportverwaltung.LoginActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView_logo"
         android:layout_width="match_parent"
         android:layout_height="133dp"
         android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/logo"
+        android:contentDescription="@string/desc_logo" />
 
     <EditText
-        android:id="@+id/editText_username"
+        android:id="@+id/editText_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/input_rounded"
-        android:drawableLeft="@drawable/ic_account_circle_black_24dp"
+        android:drawableStart="@drawable/ic_account_circle_black_24dp"
         android:ems="10"
-        android:hint=" Username"
-        android:inputType="textPersonName" />
+        android:hint="@string/hint_email"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/editText_password"
@@ -36,23 +37,24 @@
         android:layout_marginRight="50dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/input_rounded"
-        android:drawableLeft="@drawable/ic_fingerprint_black_24dp"
+        android:drawableStart="@drawable/ic_fingerprint_black_24dp"
         android:ems="10"
-        android:hint=" Password"
-        android:inputType="textPersonName" />
+        android:hint="@string/hint_password"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/button_forgotPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginTop="10dp"
         android:background="@android:color/transparent"
         android:text="@string/text_forgot_password"
         android:textAlignment="textEnd"
         android:textColor="#dddddd"
-        android:textSize="10sp" />
+        android:textSize="10sp"
+        tools:ignore="SmallSp" />
 
     <Button
         android:id="@+id/button_login"

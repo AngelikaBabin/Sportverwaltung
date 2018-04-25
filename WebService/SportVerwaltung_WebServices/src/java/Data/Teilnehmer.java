@@ -12,23 +12,20 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author chris
  */
 @XmlRootElement
-public class Teilnehmer {
-    private int id;
+public class Teilnehmer extends Account {
     private double score;
 
-    public Teilnehmer(int id, double score) {
-        this.id = id;
+    public Teilnehmer(int id, String name, String email, String password, double score) {
+        super(id, name, email, password);
         this.score = score;
     }
     
-    public Teilnehmer(){}
-
-    public int getId() {
-        return id;
+     public Teilnehmer(String email, String password){
+        super(email, password);
     }
-
-    public void setId(int id) {
-        this.id = id;
+    
+    public Teilnehmer(){
+        super();
     }
 
     public double getScore() {
@@ -41,6 +38,6 @@ public class Teilnehmer {
 
     @Override
     public String toString() {
-        return "Teilnehmer{" + "id=" + id + ", score=" + score + '}';
+        return "Teilnehmer{" + "score=" + score + '}';
     }
 }

@@ -23,6 +23,10 @@ public class Account {
         setPassword(password);
     }
 
+    public Account(String email, String password) {
+        this(0, email, "", password);
+    }
+
     public int getId() {
         return id;
     }
