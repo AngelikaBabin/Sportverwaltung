@@ -15,10 +15,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        login = (Button) findViewById(R.id.btnLogin);
-        registrieren = (Button) findViewById(R.id.btnRegistrieren);
-        txtBenutzer = (EditText) findViewById(R.id.txtBenutzer);
-        txtPassword = (EditText) findViewById(R.id.txtPassword);
+        initComponents();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,5 +30,13 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
+    }
+
+    private void initComponents()
+    {
+        login = (Button) findViewById(R.id.btnLogin);
+        registrieren = (Button) findViewById(R.id.btnRegistrieren);
+        txtBenutzer = (EditText) findViewById(R.id.txtBenutzer);
+        txtPassword = (EditText) findViewById(R.id.txtPassword);
     }
 }

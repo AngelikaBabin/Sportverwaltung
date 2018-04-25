@@ -3,21 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#434343"
     tools:context="com.example.cora.sportverwaltungveranstalter.AddEventFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="25dp"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/editText_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
+            android:layout_height="40dp"
+            android:background="@drawable/input_rounded"
             android:ems="10"
             android:hint="Name"
             android:inputType="textPersonName" />
@@ -25,9 +26,9 @@
         <EditText
             android:id="@+id/editText_maxCount"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginTop="15dp"
-            android:backgroundTint="@android:color/transparent"
+            android:background="@drawable/input_rounded"
             android:ems="10"
             android:hint="Max Count"
             android:inputType="textPersonName" />
@@ -35,50 +36,65 @@
         <EditText
             android:id="@+id/editText_date"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginTop="15dp"
-            android:backgroundTint="@android:color/transparent"
+            android:background="@drawable/input_rounded"
             android:ems="10"
             android:hint="20.04.2018"
             android:inputType="date"
             android:textSize="18sp" />
 
+        <EditText
+            android:id="@+id/editText_adress"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/input_rounded"
+            android:ems="10"
+            android:hint="Villach"
+            android:singleLine="true"
+            android:text="Villach"
+            android:textSize="18sp" />
+
         <com.google.android.gms.maps.MapView
             android:id="@+id/mapView_googleMaps"
             android:layout_width="match_parent"
-            android:layout_height="169dp" />
+            android:layout_height="87dp"
+            android:layout_marginTop="30dp" />
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginLeft="35dp"
-            android:layout_marginRight="35dp"
             android:layout_marginTop="15dp">
 
             <ImageButton
                 android:id="@+id/imageButton8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
+                android:layout_width="51dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/btn_type_rounded_normal"
                 android:src="@drawable/ic_menu_send" />
 
             <ImageButton
                 android:id="@+id/imageButton9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
+                android:layout_width="54dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/btn_type_rounded_normal"
                 android:src="@drawable/ic_menu_slideshow" />
 
             <ImageButton
                 android:id="@+id/imageButton10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
+                android:layout_width="54dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/btn_type_rounded_normal"
                 android:src="@drawable/ic_menu_camera" />
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="49dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/btn_type_rounded_normal"
                 android:src="@drawable/ic_menu_share" />
 
         </TableRow>
@@ -97,8 +113,8 @@
             <EditText
                 android:id="@+id/editText_other"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent"
+                android:layout_height="40dp"
+                android:background="@drawable/input_rounded"
                 android:ems="10"
                 android:hint="other"
                 android:inputType="textPersonName" />
@@ -110,6 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:background="@drawable/btn_rounded"
             android:text="Create" />
 
     </LinearLayout>

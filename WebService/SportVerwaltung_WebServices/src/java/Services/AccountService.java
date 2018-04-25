@@ -8,7 +8,6 @@ package Services;
 import Data.Account;
 import Data.Authentification;
 import Data.Database;
-import Data.Login;
 import com.google.gson.Gson;
 import javax.ws.rs.GET;
 import javax.ws.rs.core.Context;
@@ -44,7 +43,7 @@ public class AccountService {
         Response r;
         try{
             if(Authentification.isUserAuthenticated(token)){
-                Account a = db.getAccount(Login.parseTokenToLogin(token));
+                Account a = db.getAccount(Account.parseToken(token));
                 r = Response.ok().entity(a).build();
             }
             else{

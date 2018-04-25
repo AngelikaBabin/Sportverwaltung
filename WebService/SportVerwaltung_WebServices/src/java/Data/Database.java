@@ -69,8 +69,6 @@ public class Database {
         catch(SQLException ex){
             if(ex.getErrorCode() == 1)
                 throw new RegisterExcpetion("Account already exists!");
-            else if(ex.getSQLState() == "23000")
-                throw new RegisterExcpetion("Email not valid!");
             else
                 throw ex;
         }
@@ -96,13 +94,13 @@ public class Database {
         conn.close();
     }
 
-    public void login(Login l) throws Exception{
+    public void login(Account a) throws Exception{
         ResultSet rs;
         conn = createConnection();
         String select = "SELECT * FROM account WHERE email = ? and password = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
-        stmt.setString(1, l.getEmail());
-        stmt.setString(2, l.getPassword());
+        stmt.setString(1, a.getEmail());
+        stmt.setString(2, a.getPassword());
         rs = stmt.executeQuery();
         if (!rs.next()) {
             throw new AccountNotFoundException("Account/email not founds");
@@ -110,13 +108,12 @@ public class Database {
         conn.close();
     }
     
-    public Account getAccount(Login l) throws Exception{
+    public Account getAccount(Account a) throws Exception{
         ResultSet rs;
-        Account a = null;
         conn = createConnection();
         String select = "SELECT * FROM account WHERE email = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
-        stmt.setString(1, l.getEmail());
+        stmt.setString(1, a.getEmail());
         rs = stmt.executeQuery();
         if (rs.next()) {
             a = new Account(rs.getInt("id"), rs.getString("name"), rs.getString("email"), null);
@@ -125,7 +122,7 @@ public class Database {
         return a;
     }
     
-    public Teilnehmer getTeilnehmer(Login l) throws Exception{
+    public Teilnehmer getTeilnehmer(Account a) throws Exception{
         ResultSet rs;
         Teilnehmer t = null;
         conn = createConnection();
@@ -133,7 +130,7 @@ public class Database {
                             "on teilnehmer.id_account = account.id\n" +
                             "WHERE account.email = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
-        stmt.setString(1, l.getEmail());
+        stmt.setString(1, a.getEmail());
         rs = stmt.executeQuery();
         if (rs.next()) {
             t = new Teilnehmer(rs.getInt("id"), rs.getDouble("score"));

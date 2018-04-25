@@ -6,8 +6,6 @@
 package Services;
 
 import Data.Authentification;
-import Data.Login;
-import Exceptions.AccountNotFoundException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;

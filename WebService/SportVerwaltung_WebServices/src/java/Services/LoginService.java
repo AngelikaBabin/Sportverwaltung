@@ -5,10 +5,10 @@
  */
 package Services;
 
+import Data.Account;
 import Data.Authentification;
 import Data.Database;
 import Data.Crypt;
-import Data.Login;
 import Exceptions.AccountNotFoundException;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -53,18 +53,21 @@ public class LoginService {
         Response r;
         String token;
         try{
-            Login l = gson.fromJson(content, Login.class);
-            System.out.println(l);
-            db.login(l);
-            token = crypt.encrypt(l.toString());
+            Account a = gson.fromJson(content, Account.class);
+            System.out.print("Login: " + a + "...");
+            db.login(a);
+            token = crypt.encrypt(a.toString());
             Authentification.loginToken(token);
             r = Response.accepted().header("Token", token).build();
+            System.out.println("Success");
         }
         catch(AccountNotFoundException ex){
             r = Response.status(Response.Status.UNAUTHORIZED).entity(ex).type(MediaType.APPLICATION_JSON).build();
+            System.out.println("Failed");
         }
         catch(Exception ex){
             r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            System.out.println("Failed");
         }
         return r;
     }
