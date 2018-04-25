@@ -48,10 +48,10 @@ public class LoginActivity extends AppCompatActivity {
                     if (token != null) {
                         startActivity(new Intent(LoginActivity.this, MenuActivity.class));
                     } else {
-                        Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception ex) {
-                    Toast.makeText(LoginActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
                     ex.printStackTrace();
                 }
 
