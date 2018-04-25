@@ -59,16 +59,17 @@ public class LoginService {
             token = crypt.encrypt(a.toString());
             Authentification.loginToken(token);
             r = Response.accepted().header("Token", token).build();
-            System.out.println("Success");
+            System.out.print("Success");
         }
         catch(AccountNotFoundException ex){
             r = Response.status(Response.Status.UNAUTHORIZED).entity(ex).type(MediaType.APPLICATION_JSON).build();
-            System.out.println("Failed");
+            System.out.print("failed");
         }
         catch(Exception ex){
             r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-            System.out.println("Failed");
+            System.out.print("Failed");
         }
+        System.out.println();
         return r;
     }
 }
