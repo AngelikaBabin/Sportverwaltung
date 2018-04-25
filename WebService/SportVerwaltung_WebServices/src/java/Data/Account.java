@@ -19,20 +19,19 @@ public class Account {
     private String password;
     private static Crypt crypt = new Crypt();
 
-    public Account(int id, String name, String email, String password) throws Exception{
+    public Account(int id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
     }
     
-    public Account(String email, String password) throws Exception{
-        this.crypt = new Crypt();
+    public Account(String email, String password) {
         this.email = email;
         this.password = password;
     }
     
-    public Account() throws Exception{
+    public Account(){
     }
 
     public int getId() {

@@ -9,11 +9,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
-import com.example.cora.sportverwaltung.businesslogic.data.Teilnehmer;
+import com.example.cora.sportverwaltung.businesslogic.data.Account;
 
 public class LoginActivity extends AppCompatActivity {
     Button button_login, button_register;
-    EditText editText_username, editText_password;
+    EditText editText_email, editText_password;
     DatabaseConnection connection = DatabaseConnection.getInstance();
 
     @Override
@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private void getViewElements(){
         button_login = findViewById(R.id.button_login);
         button_register = findViewById(R.id.button_register);
-        editText_username = findViewById(R.id.editText_username);
+        editText_email = findViewById(R.id.editText_email);
         editText_password = findViewById(R.id.editText_password);
     }
 
@@ -38,10 +38,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try{
-                    String username = editText_username.getText().toString();
+                    String email = editText_email.getText().toString();
                     String password = editText_password.getText().toString();
 
-                    Teilnehmer t = new Teilnehmer(0, username,"", password,0);
+                    Account t = new Account(email,password);
 
                     String token = connection.login(t);
 

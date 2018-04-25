@@ -133,7 +133,7 @@ public class Database {
         stmt.setString(1, a.getEmail());
         rs = stmt.executeQuery();
         if (rs.next()) {
-            t = new Teilnehmer(rs.getInt("id"), rs.getDouble("score"));
+            t = new Teilnehmer(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password"), rs.getDouble("score"));
         }
         conn.close();
         return t;
