@@ -3,7 +3,9 @@ package com.example.cora.sportverwaltung.businesslogic;
 import com.example.cora.sportverwaltung.businesslogic.data.Account;
 import com.google.gson.Gson;
 
+import java.net.MalformedURLException;
 import java.net.NoRouteToHostException;
+import java.net.URL;
 
 /**
  * Created by nicok on 18.04.2018 ^-^.
@@ -13,17 +15,27 @@ public class DatabaseConnection {
     private static DatabaseConnection connection;
     private final Gson GSON = new Gson();
     private static ControllerSync controller;
-    private String url;
+
+    private URL url;
+
     private String userToken;
 
     public static DatabaseConnection getInstance() {
-        if (connection == null)
-            connection = new DatabaseConnection("192.168.193.150");
+        if (connection == null) {
+            URL url = null;
+            try {
+                url = new URL("http", "192.168.193.150", "SportVerwaltung_WebServices/webresources");
+                connection = new DatabaseConnection(url);
+            } catch (MalformedURLException ex) {
+                ex.printStackTrace();
+            }
+        }
         return connection;
     }
 
-    private DatabaseConnection(String url) {
+    private DatabaseConnection(URL url) {
         this.url = url;
+        controller = new ControllerSync(url);
     }
 
     public String registerTeilnehmer(Account account) throws Exception {
@@ -37,12 +49,12 @@ public class DatabaseConnection {
         controller.execute(params);
 
         userToken = controller.get();
-        if(userToken.startsWith("Exception"))
+        if (userToken.startsWith("Exception"))
             throw new NoRouteToHostException(userToken);
         return userToken;
     }
 
-    public String login(Account account) throws Exception{
+    public String login(Account account) throws Exception {
         controller = new ControllerSync(url);
 
         String stringTeilnehmer = GSON.toJson(account, Account.class);
@@ -56,7 +68,7 @@ public class DatabaseConnection {
         return userToken;
     }
 
-    public void logout() throws Exception{
+    public void logout() throws Exception {
         controller = new ControllerSync(url);
 
         String params[] = new String[1];
