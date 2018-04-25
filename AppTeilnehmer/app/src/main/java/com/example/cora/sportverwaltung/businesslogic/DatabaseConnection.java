@@ -1,48 +1,32 @@
 package com.example.cora.sportverwaltung.businesslogic;
 
-import com.example.cora.sportverwaltung.businesslogic.data.*;
+import com.example.cora.sportverwaltung.businesslogic.data.Account;
+import com.example.cora.sportverwaltung.businesslogic.data.Teilnehmer;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.net.NoRouteToHostException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by nicok on 18.04.2018 ^-^.
  */
 
 public class DatabaseConnection {
-    private static DatabaseConnection DatabaseConnection;
+    private static DatabaseConnection connection;
     private final Gson GSON = new Gson();
     private static ControllerSync controller;
     private String url;
     private String userToken;
 
     public static DatabaseConnection getInstance() {
-        if (DatabaseConnection == null)
-            DatabaseConnection = new DatabaseConnection("192.168.43.142:8080");
-        return DatabaseConnection;
+        if (connection == null)
+            connection = new DatabaseConnection("192.168.43.142");
+        return connection;
     }
 
     private DatabaseConnection(String url) {
         this.url = url;
     }
-
-    //Get Example
-    public List<Veranstaltung> getVeranstaltungen() throws Exception {
-        controller = new ControllerSync(url);
-        controller.execute("VERANSTALTUNGEN");
-
-        String stringFromWebService = controller.get();
-
-        Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {}.getType();
-
-        return GSON.<ArrayList<Veranstaltung>>fromJson(stringFromWebService, collectionType);
-    }
-
-    //Post Example
+    
     public String registerTeilnehmer(Teilnehmer teilnehmer) throws Exception {
         controller = new ControllerSync(url);
 
@@ -80,5 +64,7 @@ public class DatabaseConnection {
         params[0] = "LOGOUT";
 
         controller.execute(params);
+
+        controller.get();
     }
 }
