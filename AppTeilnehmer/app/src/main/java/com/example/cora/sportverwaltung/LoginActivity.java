@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                     ex.printStackTrace();
                 }
 
-                startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+                //startActivity(new Intent(LoginActivity.this, MenuActivity.class));
             }
         });
 
