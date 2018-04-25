@@ -31,7 +31,7 @@ public class DatabaseConnection {
 
         String stringTeilnehmer = GSON.toJson(account, Account.class);
         String params[] = new String[2];
-        params[0] = "REGISTER_TEILNEHMER";
+        params[0] = "REGISTER";
         params[1] = stringTeilnehmer;
 
         controller.execute(params);

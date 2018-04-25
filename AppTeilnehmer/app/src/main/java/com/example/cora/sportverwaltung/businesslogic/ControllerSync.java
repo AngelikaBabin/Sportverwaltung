@@ -39,16 +39,16 @@ public class ControllerSync extends AsyncTask<String, Void, String> {
                     httpMethod = HttpMethod.POST;
                     whatToRead = "TOKEN";
                     break;
-                case "REGISTER_TEILNEHMER":
+                case "REGISTER":
                     url = new URL("http://" + url_first + "/" + url_second + "/teilnehmer");
                     httpMethod = HttpMethod.POST;
                     whatToRead = "TOKEN";
                     break;
-                case "UPDATE_TEILNEHMER":
+                case "CHANGE_USERDATA":
                     url = new URL("http://" + url_first + "/" + url_second + "/teilnehmer");
                     httpMethod = HttpMethod.PUT;
                     break;
-                case "DELETE_TEILNEHMER":
+                case "DELETE":
                     url = new URL("http://" + url_first + "/" + url_second + "/teilnehmer");
                     httpMethod = HttpMethod.DELETE;
                     break;
