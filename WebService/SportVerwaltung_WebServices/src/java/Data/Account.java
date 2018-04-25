@@ -27,7 +27,6 @@ public class Account {
     }
     
     public Account(String email, String password) {
-        this.crypt = new Crypt();
         this.email = email;
         this.password = password;
     }
