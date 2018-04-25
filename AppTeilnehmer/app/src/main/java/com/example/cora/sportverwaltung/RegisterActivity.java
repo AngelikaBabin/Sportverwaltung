@@ -72,7 +72,10 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "could not create account", Toast.LENGTH_LONG).show();
                     }
 
-                } catch (Exception ex) {
+                } catch(NullPointerException ex){
+                    Toast.makeText(RegisterActivity.this, "account already exists", Toast.LENGTH_LONG).show();
+                    ex.printStackTrace();
+                }catch (Exception ex) {
                     Toast.makeText(RegisterActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
                     ex.printStackTrace();
                 }
@@ -90,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
             throw new InputMismatchException(getString(R.string.error_invalidEmail));
         }
 
-        if(password == null || password.length() < 8) {
+        if(password == null || password.length() < 6) {
             throw new InputMismatchException(getString(R.string.error_invalidPassword));
         }
 

@@ -76,7 +76,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="error_invalidEmail">email not valid</string>
     <string name="error_invalidName">username must be at least 3 characters long</string>
-    <string name="error_invalidPassword">password must be at least 8 characters long</string>
+    <string name="error_invalidPassword">password must be at least 6 characters long</string>
     <string name="error_invalidConfirmPassword">passwords do not match</string>
 
 

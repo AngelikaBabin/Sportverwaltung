@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#434343"
+    android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     tools:context="com.example.cora.sportverwaltung.LoginActivity">
 
@@ -52,7 +52,7 @@
         android:background="@android:color/transparent"
         android:text="@string/text_forgot_password"
         android:textAlignment="textEnd"
-        android:textColor="#dddddd"
+        android:textColor="@color/text"
         android:textSize="10sp"
         tools:ignore="SmallSp" />
 
