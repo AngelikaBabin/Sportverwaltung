@@ -57,11 +57,13 @@ public class ControllerSync extends AsyncTask<String, Void, String> {
             }
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
             if(token != null) {
                 connection.setRequestProperty("Token", token);
             }
+
             if (httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT || httpMethod == HttpMethod.DELETE) {
-                write(connection, params);
+                    write(connection, params);
             }
 
             content = read(connection, whatToRead);
@@ -106,10 +108,12 @@ public class ControllerSync extends AsyncTask<String, Void, String> {
     private void write(HttpURLConnection connection, String[] params) throws IOException {
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
+
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
         writer.write(params[1]);
         writer.flush();
         writer.close();
+
         connection.getResponseCode();
     }
 }

@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
         registerEventhandlers();
     }
 
-    private void getViewElements(){
+    private void getViewElements() {
         button_login = findViewById(R.id.button_login);
         button_register = findViewById(R.id.button_register);
         editText_email = findViewById(R.id.editText_email);
@@ -37,15 +37,15 @@ public class LoginActivity extends AppCompatActivity {
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try{
+                try {
                     String email = editText_email.getText().toString();
                     String password = editText_password.getText().toString();
 
-                    Account t = new Account(email,password);
+                    Account a = new Account(email, password);
 
-                    String token = connection.login(t);
+                    String token = connection.login(a);
 
-                    if(token != null) {
+                    if (token != null) {
                         startActivity(new Intent(LoginActivity.this, MenuActivity.class));
                     } else {
                         Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_SHORT).show();

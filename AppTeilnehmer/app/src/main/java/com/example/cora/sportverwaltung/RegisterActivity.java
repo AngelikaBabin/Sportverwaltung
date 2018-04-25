@@ -65,8 +65,12 @@ public class RegisterActivity extends AppCompatActivity {
                     // register in database
                     String token = connection.registerTeilnehmer(t);
 
-                    // open menu activity
-                    startActivity(new Intent(RegisterActivity.this, MenuActivity.class));
+                    // open menu activity if successful
+                    if(token != null) {
+                        startActivity(new Intent(RegisterActivity.this, MenuActivity.class));
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "could not create account", Toast.LENGTH_SHORT).show();
+                    }
 
                 } catch (Exception ex) {
                     Toast.makeText(RegisterActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
