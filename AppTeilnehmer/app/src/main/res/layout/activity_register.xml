@@ -1,67 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#434343"
     android:orientation="vertical"
     tools:context="com.example.cora.sportverwaltung.RegisterActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="133dp"
+        android:layout_marginTop="30dp"
+        app:srcCompat="@drawable/logo" />
 
     <EditText
         android:id="@+id/textView_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/input_rounded"
+        android:drawableLeft="@drawable/ic_account_circle_black_24dp"
         android:ems="10"
         android:hint="@string/hint_username"
         android:inputType="textPersonName"
-        android:textSize="20sp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:drawableLeft="@drawable/ic_account_circle_black_24dp"
-        android:background="@drawable/input_rounded"/>
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/editText_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/input_rounded"
+        android:drawableLeft="@drawable/icon_email"
         android:ems="10"
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
-        android:textSize="20sp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:drawableLeft="@drawable/icon_confirm"
-        android:background="@drawable/input_rounded"/>
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/editText_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/input_rounded"
+        android:drawableLeft="@drawable/ic_fingerprint_black_24dp"
         android:ems="10"
         android:hint="@string/hint_password"
         android:inputType="textPassword"
-        android:textSize="20sp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"/>
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/editText_confirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/input_rounded"
+        android:drawableLeft="@drawable/icon_confirm"
         android:ems="10"
         android:hint="@string/hint_confirmPassword"
         android:inputType="textPassword"
-        android:textSize="20sp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"/>
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/button_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_rounded"
-        android:text="@string/text_button_register"
         android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"/>
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/btn_rounded"
+        android:text="@string/text_button_register" />
 
 </LinearLayout>
 
