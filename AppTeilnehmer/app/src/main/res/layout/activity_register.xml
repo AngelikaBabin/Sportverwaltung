@@ -10,53 +10,58 @@
         android:id="@+id/textView_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_weight="0.08"
         android:ems="10"
         android:hint="@string/hint_username"
         android:inputType="textPersonName"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:drawableLeft="@drawable/ic_account_circle_black_24dp"
+        android:background="@drawable/input_rounded"/>
 
     <EditText
         android:id="@+id/editText_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_weight="0.08"
         android:ems="10"
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:drawableLeft="@drawable/icon_confirm"
+        android:background="@drawable/input_rounded"/>
 
     <EditText
         android:id="@+id/editText_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:ems="10"
         android:hint="@string/hint_password"
         android:inputType="textPassword"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"/>
 
     <EditText
         android:id="@+id/editText_confirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_weight="0.08"
         android:ems="10"
         android:hint="@string/hint_confirmPassword"
         android:inputType="textPassword"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"/>
 
     <Button
         android:id="@+id/button_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_weight="0.08"
-        android:background="?attr/colorButtonNormal"
-        android:text="@string/text_button_register" />
+        android:background="@drawable/btn_rounded"
+        android:text="@string/text_button_register"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"/>
 
 </LinearLayout>
 

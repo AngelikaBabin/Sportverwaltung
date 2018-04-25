@@ -5,6 +5,7 @@
     android:background="#434343"
     android:orientation="vertical"
     android:padding="15dp"
+
     tools:context="com.example.cora.sportverwaltung.EventsFragment">
 
     <ListView
