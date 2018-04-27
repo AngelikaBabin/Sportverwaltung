@@ -7,11 +7,15 @@ package Data;
 
 import Exceptions.RegisterExcpetion;
 import Exceptions.AccountNotFoundException;
+import com.oracle.jrockit.jfr.Producer;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
@@ -156,7 +160,8 @@ public class Database {
         conn.close();
     }
     
-    public void deleteTeilnehmer(Account t) throws Exception {
+    /*
+    public void deleteTeilnehmer(Account t) throws Exception { //fix implementation
         conn = createConnection();
         String select = "delete from teilnehmer where id = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
@@ -170,129 +175,59 @@ public class Database {
         conn.close();
     }
     
-    public void deleteVeranstalter(Account v) throws Exception {
+    public void deleteVeranstalter(Account v) throws Exception { //fix implementation
         conn = createConnection();
-        String select = "delete from teilnehmer where id = ?";
+        String select = "delete from account where id = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setInt(1, v.getId());
+        stmt.executeUpdate();
+        
+        select = "delete from teilnahme where id_teilnehmer = ?";
+        stmt = conn.prepareStatement(select);
+        stmt.setInt(1, v.getId());
         stmt.executeUpdate();
         conn.close();
-    }
-/*
-    public Producer getProducer(int id) throws Exception {
-        Producer producer = null;
-        conn = createConnection();
-        String select = "SELECT id, name, sales FROM producers WHERE id = ? ";
-        PreparedStatement stmt = conn.prepareStatement(select);
-        stmt.setInt(1, id);
-        ResultSet rs = stmt.executeQuery();
-        if (rs.next()) {
-            producer = new Producer(rs.getInt("id"), rs.getString("name"), rs.getBigDecimal("sales"));
-        } else {
-            throw new Exception("producer with id '" + id + "' not found");
-        }
-        conn.close();
-        return producer;
-    }
-    public void addProducer(Producer p) throws Exception {
-        conn = createConnection();
-        String select = "INSERT INTO producers VALUES(seqProducer.NEXTVAL,?,?)";
-        PreparedStatement stmt = conn.prepareStatement(select);
-        stmt.setString(1, p.getName());
-        stmt.setBigDecimal(2, p.getSales());
-        stmt.executeUpdate();
-        conn.close();
-    }
-    public void updateProducer(Producer p) throws Exception {
-        conn = createConnection();
-        String select = "UPDATE producers SET name = ?, sales = ?";
-        PreparedStatement stmt = conn.prepareStatement(select);
-        stmt.setString(1, p.getName());
-        stmt.setBigDecimal(2, p.getSales());
-        stmt.executeUpdate();
-        conn.close();
-    }
-    
-    public Product getProduct(int id) throws Exception {
-        Product product = null;
-        Producer producer ;
-        
-        conn = createConnection();
-        String select = "SELECT products.id, products.name, onStock, TO_CHAR(onMarket,'YYYY-MM-DD'), producers.id, producers.name, sales " + 
-                        " FROM products INNER JOIN producers ON products.id_pc = producers.id " + 
-                        " WHERE products.id = ? ";
-        PreparedStatement stmt = conn.prepareStatement(select);
-        stmt.setInt(1, id);
-        ResultSet rs = stmt.executeQuery();
-        
-        if (rs.next()) {
-            producer = new Producer(rs.getInt(5), rs.getString(6), rs.getBigDecimal("sales"));
-            product = new Product(rs.getInt(1), rs.getString(2), 
-                                  rs.getInt(3), LocalDate.parse(rs.getString(4)));
-            product.setProducer(producer);
-        } else {
-            throw new Exception("product with id '" + id + "' not found");
-        }
-        conn.close();
-        return product;
-    }
-    public void addProduct(Product p) throws Exception {
-        if (p.getProducer() == null)
-            throw new Exception("error: no producer given");
-        conn = createConnection();
-        String select = "INSERT INTO products VALUES(seqProduct.NEXTVAL, ?, ?, ?, TO_DATE(?,'YYYY-MM-DD')";
-        PreparedStatement stmt = conn.prepareStatement(select);
-        stmt.setString(1, p.getName());
-        stmt.setInt(2, p.getProducer().getId());
-        stmt.setInt(3, p.getOnStock());
-        stmt.setString(4, p.getOnMarket().format(DateTimeFormatter.ISO_DATE));
-        stmt.executeUpdate();
-        conn.close();
-    }
-    public void updateProduct(Product p) throws Exception {
-        conn = createConnection();
-        String select = "UPDATE products SET name = ?, "
-                + " id_pc = ?, onStock = ? "
-                + " WHERE id = ?";
-        PreparedStatement stmt = conn.prepareStatement(select);
-        stmt.setString(1, p.getName());
-        stmt.setInt(2, p.getProducer().getId());
-        stmt.setInt(3, p.getOnStock());
-        stmt.setInt(4, p.getId());
-        System.out.println("***update: " + stmt.executeUpdate());
-        conn.commit();
-        conn.close();
-    }
-    public Collection<Producer> getAllProducers() throws Exception {
-        ArrayList<Producer> collProducers = new ArrayList<>();
-        Producer producer = null;
-        
-        conn = createConnection();
-        String select = "SELECT id, name, sales FROM producers ";
-        PreparedStatement stmt = conn.prepareStatement(select);
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            producer = new Producer(rs.getInt("id"), rs.getString("name"), rs.getBigDecimal("sales"));
-            collProducers.add(producer);
-        } 
-        conn.close();
-        return collProducers;
-    }
-    public Collection<Product> getAllProducts() throws Exception {
-        ArrayList<Product> collProducts = new ArrayList<>();
-        Product product = null;
-        
-        conn = createConnection();
-        String select = "SELECT products.id, products.name, onStock, TO_CHAR(onMarket,'YYYY-MM-DD') FROM products";
-        PreparedStatement stmt = conn.prepareStatement(select);
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            product = new Product(rs.getInt(1), rs.getString(2), 
-                                  rs.getInt(3), LocalDate.parse(rs.getString(4)));
-
-            collProducts.add(product);
-        } 
-        conn.close();
-        return collProducts;
     }
     */
+    
+     public Collection<Event> getEvents() throws Exception {
+        ArrayList<Event> collVeranstaltung = new ArrayList<>();
+         
+        conn = createConnection();
+        String select = "SELECT * FROM veranstaltung";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            collVeranstaltung.add(new Event(rs.getInt("id"), 
+                    rs.getInt("id_veranstalter"), rs.getString("name"), rs.getDate("datetime").toLocalDate(), 
+                    rs.getString("details"), "", rs.getInt("max_teilnehmer"), 
+                    rs.getInt("min_teilnehmer"), rs.getString("sportart")));
+        } 
+        conn.close();
+        return collVeranstaltung;
+    }
+     
+     public void updateEvent(Event e) throws Exception{
+         conn = createConnection();
+        String select = "UPDATE veranstatlung SET name = ?, datetime = ?, "
+                + "details = ? max_teilnehmer = ?, min_teilnehmer = ?, sportart = ? where id = ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setString(1, e.getName());
+        stmt.setDate(2, Date.valueOf(e.getDatetime()));
+        stmt.setString(3, e.getDetails());
+        stmt.setInt(4, e.getMax_teilnehmer());
+        stmt.setInt(5, e.getMin_teilnehmer());
+        stmt.setString(6, e.getSportart());
+        stmt.setInt(7, e.getId());
+        stmt.executeUpdate();
+     }
+     
+     public void deleteEvent(Event e) throws Exception  { //löschen von teilnahmen?
+         conn = createConnection();
+        String select = "delete from veranstaltung where id = ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setInt(1, e.getId());
+        stmt.executeUpdate();
+        conn.close();
+     }
 }
