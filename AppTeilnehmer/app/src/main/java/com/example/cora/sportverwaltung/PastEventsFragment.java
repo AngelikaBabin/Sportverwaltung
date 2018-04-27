@@ -7,6 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
+import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
+
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,6 +62,8 @@ public class PastEventsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        ArrayList<Veranstaltung> pastEvents = DatabaseConnection.getInstance().getPastEvents();
     }
 
     @Override
