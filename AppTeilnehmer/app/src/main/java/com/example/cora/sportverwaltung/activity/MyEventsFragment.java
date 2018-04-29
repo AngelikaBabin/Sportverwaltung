@@ -1,4 +1,4 @@
-package com.example.cora.sportverwaltung;
+package com.example.cora.sportverwaltung.activity;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,21 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
-import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
-
-import java.util.ArrayList;
+import com.example.cora.sportverwaltung.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link PastEventsFragment.OnFragmentInteractionListener} interface
+ * {@link MyEventsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link PastEventsFragment#newInstance} factory method to
+ * Use the {@link MyEventsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PastEventsFragment extends Fragment {
+public class MyEventsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,7 +30,7 @@ public class PastEventsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public PastEventsFragment() {
+    public MyEventsFragment() {
         // Required empty public constructor
     }
 
@@ -43,11 +40,11 @@ public class PastEventsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment PastEventsFragment.
+     * @return A new instance of fragment MyEventsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PastEventsFragment newInstance(String param1, String param2) {
-        PastEventsFragment fragment = new PastEventsFragment();
+    public static MyEventsFragment newInstance(String param1, String param2) {
+        MyEventsFragment fragment = new MyEventsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -62,15 +59,13 @@ public class PastEventsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        ArrayList<Veranstaltung> pastEvents = DatabaseConnection.getInstance().getPastEvents();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_past_events, container, false);
+        return inflater.inflate(R.layout.fragment_my_events, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

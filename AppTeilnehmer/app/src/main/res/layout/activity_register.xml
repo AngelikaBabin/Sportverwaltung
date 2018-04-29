@@ -6,14 +6,15 @@
     android:layout_height="match_parent"
     android:background="#434343"
     android:orientation="vertical"
-    tools:context="com.example.cora.sportverwaltung.RegisterActivity">
+    tools:context="com.example.cora.sportverwaltung.activity.RegisterActivity">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="133dp"
         android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/logo"
+        android:contentDescription="@string/desc_logo" />
 
     <EditText
         android:id="@+id/textView_username"
@@ -23,7 +24,7 @@
         android:layout_marginRight="50dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/input_rounded"
-        android:drawableLeft="@drawable/ic_account_circle_black_24dp"
+        android:drawableStart="@drawable/ic_account_circle_black_24dp"
         android:ems="10"
         android:hint="@string/hint_username"
         android:inputType="textPersonName"

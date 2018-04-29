@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/background_main"
     android:orientation="vertical"
-    tools:context="com.example.cora.sportverwaltung.LoginActivity">
+    tools:context="com.example.cora.sportverwaltung.activity.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView_logo"
         android:layout_width="match_parent"
         android:layout_height="133dp"
         android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/logo"
-        android:contentDescription="@string/desc_logo" />
+        android:contentDescription="@string/desc_logo"
+        app:srcCompat="@drawable/logo" />
 
     <EditText
         android:id="@+id/editText_email"
@@ -46,13 +46,13 @@
         android:id="@+id/button_forgotPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
         android:layout_marginEnd="50dp"
+        android:layout_marginStart="150dp"
         android:layout_marginTop="10dp"
         android:background="@android:color/transparent"
         android:text="@string/text_forgot_password"
         android:textAlignment="textEnd"
-        android:textColor="@color/text"
+        android:textColor="@color/text_dark"
         android:textSize="10sp"
         tools:ignore="SmallSp" />
 
