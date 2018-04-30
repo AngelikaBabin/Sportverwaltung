@@ -22,8 +22,8 @@ import java.util.Collection;
  * @author Gerald
  */
 public class Database {
-    private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
-    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
+    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
+    private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
     private static final String USER = "d4a07";
     private static final String PASSWD = "d4a";
     private Connection conn = null;
@@ -230,4 +230,21 @@ public class Database {
         stmt.executeUpdate();
         conn.close();
      }
+     
+     public void insertEvent(Event e) throws Exception{
+        conn = createConnection();
+        String select = "INSERT INTO veranstaltung VALUES(seq_veranstaltung_id.nextVal, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setString(1, e.getName());
+        stmt.setString(2, e.getSportart());
+        stmt.setInt(3, e.getId_veranstalter());
+        stmt.setInt(4, 0); //location
+        stmt.setDate(5, Date.valueOf(e.getDatetime()));
+        stmt.setString(6, e.getDetails());
+        stmt.setInt(7, e.getMin_teilnehmer());
+        stmt.setInt(8, e.getMax_teilnehmer());
+        stmt.executeUpdate();
+        conn.close();
+     }
+             
 }

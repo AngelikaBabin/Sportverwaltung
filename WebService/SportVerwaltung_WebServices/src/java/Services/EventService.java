@@ -11,7 +11,9 @@ import Data.Crypt;
 import Data.Database;
 import Data.Teilnehmer;
 import Data.Event;
+import Exceptions.RegisterExcpetion;
 import com.google.gson.Gson;
+import java.time.LocalDate;
 import java.util.Collection;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -20,6 +22,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
@@ -72,5 +75,29 @@ public class EventService {
     @PUT
     @Consumes("application/xml")
     public void putXml(@HeaderParam("Token") String token, String content) {
+    }
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addEvent(@HeaderParam("Token") String token, String content) {
+        Response r;
+        Event e;
+        try{
+            if(Authentification.isUserAuthenticated(token)){
+                e = gson.fromJson(content, Event.class);            
+                System.out.print("Register: " + e + "...");
+                db.insertEvent(e);
+                r = Response.status(Response.Status.CREATED).build();
+                System.out.println("Sucess");
+            }
+            else{
+                r = Response.status(Response.Status.FORBIDDEN).build();
+            }
+        }
+        catch(Exception ex){
+            r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            System.out.println("Failed");
+        }
+        return r;
     }
 }

@@ -5,7 +5,6 @@
  */
 package Data;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import javax.xml.bind.annotation.XmlRootElement;
 
