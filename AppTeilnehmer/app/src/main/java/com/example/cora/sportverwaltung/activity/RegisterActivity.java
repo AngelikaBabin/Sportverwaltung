@@ -1,4 +1,4 @@
-package com.example.cora.sportverwaltung;
+package com.example.cora.sportverwaltung.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
 import com.example.cora.sportverwaltung.businesslogic.data.Account;
 

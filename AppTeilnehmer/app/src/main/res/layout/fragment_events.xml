@@ -6,13 +6,14 @@
     android:orientation="vertical"
     android:padding="15dp"
 
-    tools:context="com.example.cora.sportverwaltung.EventsFragment">
+    tools:context="com.example.cora.sportverwaltung.activity.EventsFragment">
 
     <ListView
         android:id="@+id/listView_events"
         android:layout_width="match_parent"
         android:layout_height="457dp"
-        android:clickable="true"/>
+        android:clickable="true"
+        android:focusable="true" />
 
     <LinearLayout
         style="?android:attr/buttonBarStyle"

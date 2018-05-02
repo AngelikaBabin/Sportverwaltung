@@ -5,9 +5,10 @@
     android:background="#434343"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context="com.example.cora.sportverwaltung.MyEventsFragment">
+    tools:context="com.example.cora.sportverwaltung.activity.MyEventsFragment">
 
     <TextView
+        android:id="@+id/textView_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/input_rounded"
@@ -35,6 +36,7 @@
                 android:textSize="25sp" />
 
             <TextView
+                android:id="@+id/textView_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="53dp"
@@ -53,6 +55,7 @@
                 android:textSize="25sp" />
 
             <TextView
+                android:id="@+id/textView_place"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="53dp"
@@ -71,6 +74,7 @@
                 android:textSize="25sp" />
 
             <TextView
+                android:id="@+id/textView_participator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="53dp"
@@ -89,6 +93,7 @@
                 android:textSize="25sp" />
 
             <TextView
+                android:id="@+id/textView_organizer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="53dp"
@@ -99,6 +104,7 @@
     </TableLayout>
 
     <TextView
+        android:id="@+id/textView_Details"
         android:layout_width="match_parent"
         android:layout_height="191dp"
         android:layout_marginLeft="25dp"
@@ -108,6 +114,7 @@
         android:textSize="25sp" />
 
     <Button
+        android:id="@+id/button_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"

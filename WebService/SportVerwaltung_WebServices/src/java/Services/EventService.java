@@ -10,17 +10,21 @@ import Data.Authentification;
 import Data.Crypt;
 import Data.Database;
 import Data.Teilnehmer;
+import Data.Event;
 import Exceptions.RegisterExcpetion;
 import com.google.gson.Gson;
+import java.time.LocalDate;
+import java.util.Collection;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -29,8 +33,8 @@ import javax.ws.rs.core.Response;
  *
  * @author chris
  */
-@Path("teilnehmer")
-public class TeilnehmerService {
+@Path("event")
+public class EventService {
 
     @Context
     private UriInfo context;
@@ -38,7 +42,7 @@ public class TeilnehmerService {
     private Database db;
     private Crypt crypt;
 
-    public TeilnehmerService() {
+    public EventService() {
         try{
             db = Database.newInstance();
             gson = new Gson();
@@ -51,11 +55,11 @@ public class TeilnehmerService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTeilnehmer(@HeaderParam("Token") String token) {
-       Response r;
+    public Response getEvents(@HeaderParam("Token") String token) {
+        Response r;
         try{
             if(Authentification.isUserAuthenticated(token)){
-                Teilnehmer a = db.getTeilnehmer(Account.parseToken(token));
+                Collection<Event> a = db.getEvents();
                 r = Response.ok().entity(a).build();
             }
             else{
@@ -67,43 +71,24 @@ public class TeilnehmerService {
         }
         return r;
     }
+
+    @PUT
+    @Consumes("application/xml")
+    public void putXml(@HeaderParam("Token") String token, String content) {
+    }
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response registerTeilnehmer(String content){
+    public Response addEvent(@HeaderParam("Token") String token, String content) {
         Response r;
-        String token = "";
-        Account a;
-        try{
-            a = gson.fromJson(content, Account.class);
-            System.out.print("Register: " + a + "...");
-            db.addAccount(a);
-            db.addTeilnehmerToAccount(a);
-            token = crypt.encrypt(token);
-            Authentification.loginToken(token);
-            r = Response.status(Response.Status.CREATED).header("Token", token).build();
-            System.out.println("Sucess");
-        }
-        catch(RegisterExcpetion ex){
-            r = Response.status(Response.Status.CONFLICT).entity(ex).type(MediaType.APPLICATION_JSON).build();
-            System.out.println("Failed: already exists");
-        }
-        catch(Exception ex){
-            r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-            System.out.println("Failed");
-        }
-        return r;
-    }
-    
-    @PUT
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response updateScore(@HeaderParam("Token") String token, String content) {
-       Response r;
+        Event e;
         try{
             if(Authentification.isUserAuthenticated(token)){
-                Teilnehmer t = gson.fromJson(content, Teilnehmer.class);
-                db.updateTeilnehmer(t);
-                r = Response.ok().build();
+                e = gson.fromJson(content, Event.class);            
+                System.out.print("Register: " + e + "...");
+                db.insertEvent(e);
+                r = Response.status(Response.Status.CREATED).build();
+                System.out.println("Sucess");
             }
             else{
                 r = Response.status(Response.Status.FORBIDDEN).build();
@@ -111,6 +96,7 @@ public class TeilnehmerService {
         }
         catch(Exception ex){
             r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            System.out.println("Failed");
         }
         return r;
     }

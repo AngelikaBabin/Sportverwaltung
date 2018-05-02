@@ -8,65 +8,66 @@
 
     <!-- Userdata -->
     <string name="label_username">Name:</string>
-    <string name="example_username">Christof Kraschl</string>
+    <string name="example_username">Eduard Timmerer</string>
     <string name="hint_username">Username</string>
 
     <string name="label_email">E-Mail:</string>
-    <string name="example_email">kraschlc@edu.htl-villach.com</string>
+    <string name="example_email">eduard.timmerer@gmail.com</string>
     <string name="hint_email">Email</string>
 
-    <string name="label_password">Passwort:</string>
+    <string name="label_password">Password:</string>
     <string name="example_password">dummypw1234</string>
     <string name="hint_password">Password</string>
 
-    <string name="label_confirmPassword">Passwort:</string>
+    <string name="label_confirmPassword">Password:</string>
     <string name="example_confirmPassword">dummypw1234</string>
     <string name="hint_confirmPassword">Confirm password</string>
 
-    <string name="label_rank">Dein Rang:</string>
+    <string name="label_rank">Rank:</string>
     <string name="example_rank">3</string>
-    <string name="hint_rank">Dein Rang weltweit</string>
+    <string name="hint_rank">worldwirde rank</string>
 
-    <string name="label_points">Punkte:</string>
+    <string name="label_points">Points:</string>
     <string name="example_points">300</string>
-    <string name="hint_points">Deine Punkte</string>
+    <string name="hint_points">your Points</string>
 
     <!-- Veranstaltung -->
     <string name="label_eventname">Name:</string>
     <string name="example_eventname">Running with the wolves</string>
-    <string name="hint_eventname">Der Name der Veranstaltung</string>
+    <string name="hint_eventname">Event name</string>
 
     <string name="label_details">Details:</string>
     <string name="example_details">Infos</string>
-    <string name="hint_details">Details zur Veranstaltung</string>
+    <string name="hint_details">Details about the event</string>
 
-    <string name="label_veranstalter">Veranstalter:</string>
+    <string name="label_veranstalter">Organizer:</string>
     <string name="example_veranstalter">Kristian INC</string>
-    <string name="hint_veranstalter">Der Name des Veranstalters</string>
+    <string name="hint_veranstalter">Organizer name</string>
 
-    <string name="label_date">Datum:</string>
+    <string name="label_date">Date:</string>
     <string name="example_date">04.10.2018</string>
     <string name="hint_date">DD.MM.YYYY</string>
 
-    <string name="label_location">Ort:</string>
+    <string name="label_location">Place:</string>
     <string name="example_location">Oslo</string>
-    <string name="hint_location">Der Ort</string>
+    <string name="hint_location">Place</string>
 
-    <string name="label_teilnehmerCount">Teilnehmer:</string>
+    <string name="label_teilnehmerCount">Participator:</string>
     <string name="example_teilnehmerCount">25/50</string>
-    <string name="hint_teilnehmerCount">Die Anzahl der Teilnehmer</string>
+    <string name="hint_teilnehmerCount">Count Participator</string>
 
     <!-- Images -->
     <string name="desc_profilePicture">profile picture</string>
     <string name="desc_logo">Sporteventmanager</string>
 
     <!-- GUI -->
-    <string name="label_allEvents">All events</string>
-    <string name="label_myEvents">My events</string>
-    <string name="label_pastEvents">Past events</string>
+    <string name="label_allEvents">All</string>
+    <string name="label_myEvents">My</string>
+    <string name="label_pastEvents">Done</string>
 
     <string name="text_abmelden">Logout</string>
-    <string name="text_button_teilnehmen">Teilnehmen</string>
+    <string name="text_button_teilnehmen">Participate</string>
+
     <string name="text_button_register">Register</string>
     <string name="text_forgot_password">Forgot password?</string>
     <string name="text_button_login">Login</string>
@@ -75,8 +76,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="error_invalidEmail">email not valid</string>
-    <string name="error_invalidName">username must be at least 3 characters long</string>
-    <string name="error_invalidPassword">password must be at least 6 characters long</string>
+    <string name="error_invalidName">username is required</string>
+    <string name="error_invalidPassword">password is required</string>
     <string name="error_invalidConfirmPassword">passwords do not match</string>
 
 
