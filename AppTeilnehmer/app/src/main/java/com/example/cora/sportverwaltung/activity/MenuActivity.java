@@ -1,4 +1,4 @@
-package com.example.cora.sportverwaltung;
+package com.example.cora.sportverwaltung.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
 
 public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -71,7 +72,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         try {
@@ -79,23 +79,27 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             int id = item.getItemId();
             FragmentManager manager = getSupportFragmentManager();
 
-            if (id == R.id.nav_home) {
-                HomeFragment homeFragment = new HomeFragment();
-                manager.beginTransaction().replace(
-                        R.id.ConstraintLayout_for_fragment,
-                        homeFragment,
-                        homeFragment.getTag()
-                ).commit();
-            } else if (id == R.id.nav_events) {
-                EventsFragment eventsFragment = new EventsFragment();
-                manager.beginTransaction().replace(
-                        R.id.ConstraintLayout_for_fragment,
-                        eventsFragment,
-                        eventsFragment.getTag()
-                ).commit();
-            } else if (id == R.id.nav_logout) {
-                connection.logout();
-                startActivity(new Intent(MenuActivity.this, LoginActivity.class));
+            switch(id) { // TODO make fragments into activities
+                case R.id.nav_home:
+                    HomeFragment homeFragment = new HomeFragment();
+                    manager.beginTransaction().replace(
+                            R.id.ConstraintLayout_for_fragment,
+                            homeFragment,
+                            homeFragment.getTag()
+                    ).commit();
+                break;
+                case R.id.nav_events:
+                    EventsFragment eventsFragment = new EventsFragment();
+                    manager.beginTransaction().replace(
+                            R.id.ConstraintLayout_for_fragment,
+                            eventsFragment,
+                            eventsFragment.getTag()
+                    ).commit();
+                break;
+                case R.id.nav_logout:
+                    connection.logout();
+                    startActivity(new Intent(MenuActivity.this, LoginActivity.class));
+                break;
             }
 
             DrawerLayout drawer = findViewById(R.id.drawer_layout);

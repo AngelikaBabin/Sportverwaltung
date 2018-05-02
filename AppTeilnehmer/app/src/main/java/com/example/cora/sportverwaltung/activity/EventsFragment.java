@@ -1,6 +1,5 @@
-package com.example.cora.sportverwaltung;
+package com.example.cora.sportverwaltung.activity;
 
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.example.cora.sportverwaltung.R;
 
 
 /**

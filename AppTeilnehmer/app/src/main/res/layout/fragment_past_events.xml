@@ -5,7 +5,7 @@
     android:background="#434343"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context="com.example.cora.sportverwaltung.PastEventsFragment">
+    tools:context="com.example.cora.sportverwaltung.activity.PastEventsFragment">
 
     <TextView
         android:layout_width="match_parent"

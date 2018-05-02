@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.cora.sportverwaltung.HomeFragment">
+    tools:context="com.example.cora.sportverwaltung.activity.HomeFragment">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -49,6 +49,7 @@
             android:orientation="vertical">
 
             <TabWidget
+                android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

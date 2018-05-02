@@ -5,8 +5,8 @@
     android:background="#434343"
     android:orientation="vertical"
     android:padding="15dp"
-    android:parentActivityName="com.example.cora.sportverwaltung.EventsFragment"
-    tools:context="com.example.cora.sportverwaltung.AllEventsFragment">
+    android:parentActivityName="com.example.cora.sportverwaltung.activity.EventsFragment"
+    tools:context="com.example.cora.sportverwaltung.activity.AllEventsFragment">
 
     <TextView
         android:id="@+id/textView_header"
