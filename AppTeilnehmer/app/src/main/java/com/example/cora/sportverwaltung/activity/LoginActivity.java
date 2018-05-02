@@ -38,10 +38,25 @@ public class LoginActivity extends AppCompatActivity {
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    String email = editText_email.getText().toString();
-                    String password = editText_password.getText().toString();
+//                try {
+//                    String email = editText_email.getText().toString();
+//                    String password = editText_password.getText().toString();
+//
+//                    Account a = new Account(email, password);
+//
+//                    String token = connection.login(a);
+//
+//                    if (token != null) {
+//                        startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+//                    } else {
+//                        Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_LONG).show();
+//                    }
+//                } catch (Exception ex) {
+//                    Toast.makeText(LoginActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
+//                    ex.printStackTrace();
+//                }
 
+<<<<<<< HEAD
                     Credentials credentials = new Credentials(email, password);
 
                     String token = connection.login(credentials);
@@ -59,6 +74,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 //startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+=======
+                startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+>>>>>>> b0a21e05953d6dbe4789edf539710b12c234fbee
             }
         });
 
