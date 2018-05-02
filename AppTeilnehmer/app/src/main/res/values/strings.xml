@@ -8,11 +8,11 @@
 
     <!-- Userdata -->
     <string name="label_username">Name:</string>
-    <string name="example_username">Eduard Timmerer</string>
+    <string name="example_username">Christof Kraschl</string>
     <string name="hint_username">Username</string>
 
     <string name="label_email">E-Mail:</string>
-    <string name="example_email">eduard.timmerer@gmail.com</string>
+    <string name="example_email">kraschlc@edu.htl-villach.com</string>
     <string name="hint_email">Email</string>
 
     <string name="label_password">Password:</string>
@@ -76,8 +76,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="error_invalidEmail">email not valid</string>
-    <string name="error_invalidName">username is required</string>
-    <string name="error_invalidPassword">password is required</string>
+    <string name="error_invalidName">username must be at least 3 characters long</string>
+    <string name="error_invalidPassword">password must be at least 6 characters long</string>
     <string name="error_invalidConfirmPassword">passwords do not match</string>
 
 
@@ -104,5 +104,7 @@
         <item>Basket Ball</item>
         <item>Chess</item>
     </string-array>
+    <string name="title_activity_events">EventsActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
 </resources>

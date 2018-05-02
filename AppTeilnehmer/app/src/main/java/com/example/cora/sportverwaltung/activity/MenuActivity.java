@@ -89,12 +89,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                     ).commit();
                 break;
                 case R.id.nav_events:
-                    EventsFragment eventsFragment = new EventsFragment();
-                    manager.beginTransaction().replace(
-                            R.id.ConstraintLayout_for_fragment,
-                            eventsFragment,
-                            eventsFragment.getTag()
-                    ).commit();
+                    startActivity(new Intent(MenuActivity.this, EventsActivity.class));
                 break;
                 case R.id.nav_logout:
                     connection.logout();
