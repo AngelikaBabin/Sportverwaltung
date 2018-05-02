@@ -8,23 +8,9 @@ public class Teilnehmer extends Account{
     private int score;
     //TODO Veranstaltungen
 
-    public Teilnehmer(int score) {
-        this.score = score;
-    }
-
-    public Teilnehmer(int id, String email, String name, String password, int score) {
-        super(id, email, name, password);
+    public Teilnehmer(String email, String name, String password, int score) {
+        super(email, name, password);
         setScore(score);
-    }
-
-    public Teilnehmer(Account a, int score) {
-        this(a.getId(), a.getEmail(), a.getName(), a.getPassword(), score);
-    }
-
-    public Teilnehmer(){}
-
-    public Teilnehmer(String email, String name, String password) {
-        this(0,email,name,password,0);
     }
 
     public int getScore() {
@@ -56,11 +42,10 @@ public class Teilnehmer extends Account{
     @Override
     public String toString() {
         return "Account{" +
-                "id=" + getId() +
-                ", example_email='" + getEmail() + '\'' +
+                "email='" + getEmail() + '\'' +
                 ", name='" + getName() + '\'' +
                 ", password='" + getPassword() + '\'' +
-                "score=" + getScore() + '\'' +
+                ", score=" + getScore() + '\'' +
                 '}';
     }
 }

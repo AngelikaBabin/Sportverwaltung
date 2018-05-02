@@ -35,10 +35,14 @@ public class ControllerSync extends AsyncTask<String, Void, String> {
         HttpMethod httpMethod = HttpMethod.valueOf(params[0]);
         String route = params[1];
         String whatToRead = params[2];
-        String json = (params.length >= 4) ? params[3] : null;
+        String payload = (params.length >= 4) ? params[3] : null;
 
         try {
             // build url for request
+            if(payload != null && httpMethod == HttpMethod.GET){
+                route += "?" + payload;
+            }
+
             url = new URL(url + "/" + route);
 
             // create connection
@@ -49,10 +53,10 @@ public class ControllerSync extends AsyncTask<String, Void, String> {
                 connection.setRequestProperty("Token", token);
             }
 
-            // write post data
-            if (httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT || httpMethod == HttpMethod.DELETE) {
-                write(connection, httpMethod, json);
+            if(payload != null && httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT || httpMethod == HttpMethod.DELETE) {
+                write(connection, httpMethod, payload);
             }
+
 
             // read response
             content = read(connection, ResultType.valueOf(whatToRead));

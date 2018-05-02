@@ -6,5 +6,5 @@ package com.example.cora.sportverwaltung.businesslogic.misc;
 public enum ResultType {
     CONTENT,
     TOKEN,
-    NOTHING
+    NOTHING;
 }

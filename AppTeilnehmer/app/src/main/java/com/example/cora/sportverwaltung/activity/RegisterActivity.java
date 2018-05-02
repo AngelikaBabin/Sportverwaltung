@@ -61,10 +61,10 @@ public class RegisterActivity extends AppCompatActivity {
                     check(email, name, password, passwordConfirm);
 
                     // create Teilnehmer
-                    Account a = new Account(email, name, password);
+                    Account account = new Account(email, name, password);
 
                     // register in database
-                    String token = connection.registerTeilnehmer(a);
+                    String token = connection.registerTeilnehmer(account);
 
                     // open menu activity if successful
                     if(token != null) {

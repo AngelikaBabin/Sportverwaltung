@@ -1,31 +1,20 @@
 package com.example.cora.sportverwaltung.businesslogic.data;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by nicok on 18.04.2018 ^-^.
  */
 
 public class Location {
-    private int id;
     private String name;
     private double latitude;
     private double longitude;
 
     public Location(String name, double latitude, double longitude) {
-
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
-    public Location(){
-
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        setName(name);
+        setLatitude(latitude);
+        setLongitude(longitude);
     }
 
     public String getName() {
@@ -40,7 +29,7 @@ public class Location {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(@NonNull double latitude) {
         this.latitude = latitude;
     }
 
@@ -48,7 +37,7 @@ public class Location {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(@NonNull double longitude) {
         this.longitude = longitude;
     }
 }

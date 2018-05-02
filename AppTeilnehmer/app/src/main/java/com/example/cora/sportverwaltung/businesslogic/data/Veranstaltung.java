@@ -2,13 +2,13 @@ package com.example.cora.sportverwaltung.businesslogic.data;
 
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Created by nicok on 18.04.2018 ^-^.
  */
 
 public class Veranstaltung {
-    private int id;
     private String name;
     private String details;
     private Veranstalter veranstalter;
@@ -19,7 +19,6 @@ public class Veranstaltung {
     private int maxTeilnehmer;
 
     public Veranstaltung(int id, String name, String details, Veranstalter veranstalter, Location location, Sportart sportart, LocalDate datetime, int minTeilnehmer, int maxTeilnehmer) {
-        setId(id);
         setName(name);
         setDetails(details);
         setVeranstalter(veranstalter);
@@ -31,14 +30,6 @@ public class Veranstaltung {
     }
 
     public Veranstaltung(){}
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -108,43 +99,27 @@ public class Veranstaltung {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Veranstaltung)) return false;
-
         Veranstaltung that = (Veranstaltung) o;
-
-        if (getId() != that.getId()) return false;
-        if (getMinTeilnehmer() != that.getMinTeilnehmer()) return false;
-        if (getMaxTeilnehmer() != that.getMaxTeilnehmer()) return false;
-        if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null)
-            return false;
-        if (getDetails() != null ? !getDetails().equals(that.getDetails()) : that.getDetails() != null)
-            return false;
-        if (getVeranstalter() != null ? !getVeranstalter().equals(that.getVeranstalter()) : that.getVeranstalter() != null)
-            return false;
-        if (getLocation() != null ? !getLocation().equals(that.getLocation()) : that.getLocation() != null)
-            return false;
-        if (getSportart() != that.getSportart()) return false;
-        return getDatetime() != null ? getDatetime().equals(that.getDatetime()) : that.getDatetime() == null;
+        return getMinTeilnehmer() == that.getMinTeilnehmer() &&
+                getMaxTeilnehmer() == that.getMaxTeilnehmer() &&
+                Objects.equals(getName(), that.getName()) &&
+                Objects.equals(getDetails(), that.getDetails()) &&
+                Objects.equals(getVeranstalter(), that.getVeranstalter()) &&
+                Objects.equals(getLocation(), that.getLocation()) &&
+                getSportart() == that.getSportart() &&
+                Objects.equals(getDatetime(), that.getDatetime());
     }
 
     @Override
     public int hashCode() {
-        int result = getId();
-        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-        result = 31 * result + (getDetails() != null ? getDetails().hashCode() : 0);
-        result = 31 * result + (getVeranstalter() != null ? getVeranstalter().hashCode() : 0);
-        result = 31 * result + (getLocation() != null ? getLocation().hashCode() : 0);
-        result = 31 * result + (getSportart() != null ? getSportart().hashCode() : 0);
-        result = 31 * result + (getDatetime() != null ? getDatetime().hashCode() : 0);
-        result = 31 * result + getMinTeilnehmer();
-        result = 31 * result + getMaxTeilnehmer();
-        return result;
+
+        return Objects.hash(getName(), getDetails(), getVeranstalter(), getLocation(), getSportart(), getDatetime(), getMinTeilnehmer(), getMaxTeilnehmer());
     }
 
     @Override
     public String toString() {
         return "Veranstaltung{" +
-                "id=" + getId() +
-                ", name='" + getName() + '\'' +
+                "name='" + getName() + '\'' +
                 ", details='" + getDetails() + '\'' +
                 ", veranstalter=" + getVeranstalter() +
                 ", location=" + getLocation() +

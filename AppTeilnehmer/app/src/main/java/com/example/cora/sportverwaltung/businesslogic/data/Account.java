@@ -6,45 +6,16 @@ import android.support.annotation.NonNull;
  * Created by nicok on 18.04.2018 ^-^.
  */
 
-public class Account {
-    private int id;
-    private String email;
+public class Account extends Credentials{
     private String name;
-    private String password;
 
-    public Account() {
-
-    }
-
-    public Account(int id, String email, String name, String password) {
-        setId(id);
-        setEmail(email);
+    public Account(String email, String name, String password) {
+        super(email, password);
         setName(name);
-        setPassword(password);
     }
 
     public Account(String email, String password) {
-        this(0, email, "", password);
-    }
-
-    public Account(String email, String name, String password) {
-        this(0,email, name,password);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(@NonNull int id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(@NonNull String email) {
-        this.email = email;
+        super(email, password);
     }
 
     public String getName() {
@@ -55,14 +26,6 @@ public class Account {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(@NonNull String password) {
-        this.password = password;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,7 +33,6 @@ public class Account {
 
         Account account = (Account) o;
 
-        if (getId() != account.getId()) return false;
         if (!getEmail().equals(account.getEmail())) return false;
         if (!getName().equals(account.getName())) return false;
         return getPassword().equals(account.getPassword());
@@ -78,8 +40,7 @@ public class Account {
 
     @Override
     public int hashCode() {
-        int result = getId();
-        result = 31 * result + getEmail().hashCode();
+        int result = getEmail().hashCode();
         result = 31 * result + getName().hashCode();
         result = 31 * result + getPassword().hashCode();
         return result;
@@ -88,8 +49,7 @@ public class Account {
     @Override
     public String toString() {
         return "Account{" +
-                "id=" + getId() +
-                ", example_email='" + getEmail() + '\'' +
+                "email='" + getEmail() + '\'' +
                 ", name='" + getName() + '\'' +
                 ", password='" + getPassword() + '\'' +
                 '}';

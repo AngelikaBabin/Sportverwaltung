@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
-import com.example.cora.sportverwaltung.businesslogic.data.Account;
+import com.example.cora.sportverwaltung.businesslogic.data.Credentials;
 
 public class LoginActivity extends AppCompatActivity {
     Button button_login, button_register;
@@ -42,9 +42,11 @@ public class LoginActivity extends AppCompatActivity {
                     String email = editText_email.getText().toString();
                     String password = editText_password.getText().toString();
 
-                    Account a = new Account(email, password);
+                    Credentials credentials = new Credentials(email, password);
 
-                    String token = connection.login(a);
+                    String token = connection.login(credentials);
+
+                    connection.getAllEvents();
 
                     if (token != null) {
                         startActivity(new Intent(LoginActivity.this, MenuActivity.class));
