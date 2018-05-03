@@ -109,6 +109,9 @@ public class ControllerSync extends AsyncTask<String, Void, String> {
                 result = connection.getHeaderField("Token");
                 token = result;
                 break;
+            case STATUS:
+                result = String.valueOf(connection.getResponseCode());
+                break;
         }
 
         return result;

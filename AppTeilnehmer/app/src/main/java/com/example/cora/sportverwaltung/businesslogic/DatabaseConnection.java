@@ -64,15 +64,15 @@ public class DatabaseConnection {
     }
 
     public String logout() throws Exception {
-        String result = get(HttpMethod.POST, "logout", ResultType.NOTHING);
+        String result = get(HttpMethod.POST, "logout", ResultType.STATUS);
 
         checkResult(result);
 
         return result;
     }
 
-    public ArrayList<Veranstaltung> getPastEvents() throws Exception {
-        String responseText = get(HttpMethod.GET, "event", ResultType.CONTENT, "filter=" + Filter.PAST.toString());
+    public ArrayList<Veranstaltung> getEvents(Filter filter) throws Exception {
+        String responseText = get(HttpMethod.GET, "event", ResultType.CONTENT, "filter=" + filter.toString());
 
         checkResult(responseText);
 
@@ -82,32 +82,18 @@ public class DatabaseConnection {
         return events;
     }
 
-    public ArrayList<Veranstaltung> getCurrentEvents() throws Exception {
-        String responseText = get(HttpMethod.GET, "event", ResultType.CONTENT, "filter=" + Filter.CURRENT.toString());
-
-        checkResult(responseText);
-
-        Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {}.getType();
-        ArrayList<Veranstaltung> events = GSON.fromJson(responseText, collectionType);
-
-        return events;
+    public int deleteAccount(){
+        return 500;
     }
 
-    public ArrayList<Veranstaltung> getAllEvents() throws Exception {
-        String responseText = get(HttpMethod.GET, "event", ResultType.CONTENT, "filter=" + Filter.ALL.toString());
-
-        checkResult(responseText);
-
-        Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {}.getType();
-        ArrayList<Veranstaltung> events = GSON.fromJson(responseText, collectionType);
-
-        return events;
+    public int updateAccount(){
+        return 500;
     }
 
     private String get(HttpMethod httpMethod, String route, ResultType resultType, String... params) throws ExecutionException, InterruptedException {
         ControllerSync controller = new ControllerSync(url);
 
-        ArrayList<String> connectionParams = new ArrayList<String>();
+        ArrayList<String> connectionParams = new ArrayList<>();
         connectionParams.add(httpMethod.toString());
         connectionParams.add(route);
         connectionParams.add(resultType.toString());
