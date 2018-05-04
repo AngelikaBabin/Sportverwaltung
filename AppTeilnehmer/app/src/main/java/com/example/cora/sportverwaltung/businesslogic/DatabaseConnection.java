@@ -46,7 +46,7 @@ public class DatabaseConnection {
     public String registerTeilnehmer(Account account) throws Exception {
         String accountString = GSON.toJson(account, Account.class);
 
-        String result = get(HttpMethod.POST,"teilnehmer", ResultType.TOKEN, accountString);
+        String result = get(HttpMethod.POST, "teilnehmer", ResultType.TOKEN, accountString);
 
         checkResult(result);
 
@@ -76,17 +76,42 @@ public class DatabaseConnection {
 
         checkResult(responseText);
 
-        Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {}.getType();
+        Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
+        }.getType();
         ArrayList<Veranstaltung> events = GSON.fromJson(responseText, collectionType);
 
         return events;
     }
 
-    public int deleteAccount(){
+    public Veranstaltung getEvent(int eventId) throws Exception {
+        String responseText = get(HttpMethod.GET, "event", ResultType.CONTENT, "id=" + eventId);
+
+        checkResult(responseText);
+
+        Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
+        }.getType();
+        ArrayList<Veranstaltung> events = GSON.fromJson(responseText, collectionType);
+
+        return events.get(0);
+    }
+
+    public int participate(final int _eventId, final int _userId) throws Exception {
+        String payload = GSON.toJson(new Object() {
+            public int userId = _userId;
+            public int eventId = _eventId;
+        });
+        String responseText = get(HttpMethod.POST, "event", ResultType.STATUS, payload);
+
+        //checkResult(responseText);
+
+        return Integer.parseInt(responseText);
+    }
+
+    public int deleteAccount() {
         return 500;
     }
 
-    public int updateAccount(){
+    public int updateAccount() {
         return 500;
     }
 
