@@ -96,10 +96,7 @@ public class DatabaseConnection {
     }
 
     public int participate(final int _eventId, final int _userId) throws Exception {
-        String payload = GSON.toJson(new Object() {
-            public int userId = _userId;
-            public int eventId = _eventId;
-        });
+        String payload = ""; // TODO
         String responseText = get(HttpMethod.POST, "event", ResultType.STATUS, payload);
 
         //checkResult(responseText);
