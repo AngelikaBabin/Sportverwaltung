@@ -190,7 +190,41 @@ public class Database {
     }
     */
     
-     public Collection<Event> getEvents() throws Exception {
+     public Collection<Event> getEventsByDistance() throws Exception {
+        ArrayList<Event> collVeranstaltung = new ArrayList<>();
+         
+        conn = createConnection();
+        String select = "SELECT * FROM veranstaltung";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            collVeranstaltung.add(new Event(rs.getInt("id"), 
+                    rs.getInt("id_veranstalter"), rs.getString("name"), rs.getDate("datetime").toLocalDate(), 
+                    rs.getString("details"), "", rs.getInt("max_teilnehmer"), 
+                    rs.getInt("min_teilnehmer"), rs.getString("sportart")));
+        } 
+        conn.close();
+        return collVeranstaltung;
+    }
+     
+    public Collection<Event> getEventsByDateTime() throws Exception {
+        ArrayList<Event> collVeranstaltung = new ArrayList<>();
+         
+        conn = createConnection();
+        String select = "SELECT * FROM veranstaltung";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            collVeranstaltung.add(new Event(rs.getInt("id"), 
+                    rs.getInt("id_veranstalter"), rs.getString("name"), rs.getDate("datetime").toLocalDate(), 
+                    rs.getString("details"), "", rs.getInt("max_teilnehmer"), 
+                    rs.getInt("min_teilnehmer"), rs.getString("sportart")));
+        } 
+        conn.close();
+        return collVeranstaltung;
+    }
+    
+    public Collection<Event> getEventsByTeilnehmer() throws Exception {
         ArrayList<Event> collVeranstaltung = new ArrayList<>();
          
         conn = createConnection();

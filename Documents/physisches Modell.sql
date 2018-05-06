@@ -123,4 +123,7 @@ INSERT INTO Teilnehmer VALUES(3, 100);
 INSERT INTO Veranstaltung VALUES(seq_veranstaltung_id.NEXTVAL, 'Rote Nasen Lauf', 'Laufen', 4, 1, DATE '2018-03-20', 'Ein Lauf.', null, null);
 INSERT INTO Veranstaltung VALUES(seq_veranstaltung_id.NEXTVAL, 'Basketballspiel', 'Basketball', 5, 2, DATE '2018-11-14', 'Ein spannedes Spiel!', 6, 20);
 
+INSERT INTO Teilnahme VALUES(1, 1, 1, 100);
+INSERT INTO Teilnahme VALUES(1, 2, 2, 150);
+
 COMMIT;

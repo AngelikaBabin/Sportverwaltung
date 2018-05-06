@@ -17,7 +17,6 @@ import java.time.LocalDate;
 import java.util.Collection;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
@@ -25,6 +24,7 @@ import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -35,7 +35,6 @@ import javax.ws.rs.core.Response;
  */
 @Path("event")
 public class EventService {
-
     @Context
     private UriInfo context;
     private Gson gson;
@@ -55,11 +54,12 @@ public class EventService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getEvents(@HeaderParam("Token") String token) {
+    public Response getEvents(@HeaderParam("Token") String token, @QueryParam("filter") String filter) {
         Response r;
         try{
             if(Authentification.isUserAuthenticated(token)){
-                Collection<Event> a = db.getEvents();
+                System.out.println("Get Events");
+                Collection<Event> a = db.getEventsByDateTime();
                 r = Response.ok().entity(a).build();
             }
             else{
@@ -75,6 +75,7 @@ public class EventService {
     @PUT
     @Consumes("application/xml")
     public void putXml(@HeaderParam("Token") String token, String content) {
+        
     }
     
     @POST
