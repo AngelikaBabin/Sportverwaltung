@@ -11,6 +11,8 @@ import Data.Crypt;
 import Data.Database;
 import Data.Teilnehmer;
 import Data.Event;
+import Data.Filter;
+import Exceptions.FilterExcpetion;
 import Exceptions.RegisterExcpetion;
 import com.google.gson.Gson;
 import java.time.LocalDate;
@@ -59,12 +61,15 @@ public class EventService {
         try{
             if(Authentification.isUserAuthenticated(token)){
                 System.out.println("Get Events");
-                Collection<Event> a = db.getEventsByDateTime();
+                Collection<Event> a = db.getEvents(Filter.valueOf(filter), Account.parseToken(token));
                 r = Response.ok().entity(a).build();
             }
             else{
                 r = Response.status(Response.Status.FORBIDDEN).build();
             }
+        }
+        catch(FilterExcpetion ex){
+            r = Response.status(Response.Status.BAD_REQUEST).build();
         }
         catch(Exception ex){
             r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

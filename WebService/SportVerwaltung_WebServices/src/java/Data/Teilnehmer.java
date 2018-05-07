@@ -20,8 +20,8 @@ public class Teilnehmer extends Account {
         this.score = score;
     }
     
-     public Teilnehmer(String email, String password){
-        super(email, password);
+    public Teilnehmer(String email){
+        super(email);
     }
     
     public Teilnehmer(){
