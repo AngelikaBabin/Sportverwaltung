@@ -83,7 +83,7 @@ CREATE TABLE Veranstaltung(
 
 --Teilnahme
 CREATE TABLE Teilnahme(
-  id_veranstalter INTEGER,
+  id_veranstaltung INTEGER,
   id_teilnehmer INTEGER,
   starting_number INTEGER,
   score INTEGER,
