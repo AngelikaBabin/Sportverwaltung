@@ -89,7 +89,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                     ).commit();
                 break;
                 case R.id.nav_events:
-                    startActivity(new Intent(MenuActivity.this, EventsActivity.class));
+                    startActivity(new Intent(MenuActivity.this, EventsSwipeActivity.class));
                 break;
                 case R.id.nav_logout:
                     connection.logout();

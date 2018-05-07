@@ -19,8 +19,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.cora.sportverwaltung.R;
+import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
 
-public class EventsActivity extends AppCompatActivity {
+public class EventsSwipeActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -128,16 +129,15 @@ public class EventsActivity extends AppCompatActivity {
 
             switch(position){
                 case 0:
-
-                    result = EventsFragment.newInstance("","", "All");
+                    result = EventsFragment.newInstance("","", Filter.ALL);
                     break;
 
                 case 1:
-                    result = EventsFragment.newInstance("","","My");
+                    result = EventsFragment.newInstance("","",Filter.CURRENT);
                     break;
 
                 case 2:
-                    result = EventsFragment.newInstance("","","Past");
+                    result = EventsFragment.newInstance("","",Filter.PAST);
                     break;
             }
             // getItem is called to instantiate the fragment for the given page.

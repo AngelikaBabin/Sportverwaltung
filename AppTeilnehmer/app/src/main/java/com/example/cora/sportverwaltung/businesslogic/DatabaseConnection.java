@@ -2,7 +2,7 @@ package com.example.cora.sportverwaltung.businesslogic;
 
 import com.example.cora.sportverwaltung.businesslogic.data.Account;
 import com.example.cora.sportverwaltung.businesslogic.data.Credentials;
-import com.example.cora.sportverwaltung.businesslogic.data.Filter;
+import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod;
 import com.example.cora.sportverwaltung.businesslogic.misc.ResultType;

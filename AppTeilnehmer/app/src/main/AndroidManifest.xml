@@ -27,9 +27,12 @@
         </activity>
         <activity android:name=".activity.RegisterActivity" />
         <activity
-            android:name=".activity.EventsActivity"
+            android:name=".activity.EventsSwipeActivity"
             android:label="@string/title_activity_events"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activity.InfoAllEventsActivity" />
+        <activity android:name=".activity.InfoMyEventsActivity" />
+        <activity android:name=".activity.InfoPastEventsActivity"></activity>
     </application>
 
 </manifest>

@@ -15,38 +15,4 @@
         android:clickable="true"
         android:focusable="true" />
 
-    <LinearLayout
-        style="?android:attr/buttonBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button_allEvents"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/btn_rounded"
-            android:text="@string/label_allEvents" />
-
-        <Button
-            android:id="@+id/button_myEvents"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/btn_rounded"
-            android:text="@string/label_myEvents" />
-
-        <Button
-            android:id="@+id/button_pastEvents"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/btn_rounded"
-            android:text="@string/label_pastEvents" />
-    </LinearLayout>
-
 </LinearLayout>
