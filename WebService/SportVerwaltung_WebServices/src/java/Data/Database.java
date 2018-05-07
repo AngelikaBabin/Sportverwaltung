@@ -7,6 +7,7 @@ package Data;
 
 import Exceptions.RegisterExcpetion;
 import Exceptions.AccountNotFoundException;
+import Exceptions.FilterExcpetion;
 import com.oracle.jrockit.jfr.Producer;
 import java.sql.Connection;
 import java.sql.Date;
@@ -22,8 +23,8 @@ import java.util.Collection;
  * @author Gerald
  */
 public class Database {
-    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
-    private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
+    private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
+    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
     private static final String USER = "d4a07";
     private static final String PASSWD = "d4a";
     private Connection conn = null;
@@ -94,18 +95,20 @@ public class Database {
         conn.close();
     }
 
-    public void login(Account a) throws Exception{
+    public Account login(Account a) throws Exception{
         ResultSet rs;
         conn = createConnection();
-        String select = "SELECT * FROM account WHERE email = ? and password = ?";
+        String select = "SELECT id, email, password FROM account WHERE email = ? and password = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
         stmt.setString(1, a.getEmail());
         stmt.setString(2, a.getPassword());
         rs = stmt.executeQuery();
-        if (!rs.next()) {
+        if (rs.next()) 
+            a = new Account(rs.getInt("id"), rs.getString("email"));
+        else
             throw new AccountNotFoundException("Account/email not founds");
-        }
         conn.close();
+        return a;
     }
     
     public Account getAccount(Account a) throws Exception{
@@ -224,21 +227,40 @@ public class Database {
         return collVeranstaltung;
     }
     
-    public Collection<Event> getEventsByTeilnehmer() throws Exception {
+    private Collection<Event> getEventsByTeilnehmer(Account a) throws Exception {
         ArrayList<Event> collVeranstaltung = new ArrayList<>();
          
         conn = createConnection();
-        String select = "SELECT * FROM veranstaltung";
+        String select = "select id, name, location, datetime, details, min_teilnehmer, max_teilnehmer from teilnahme inner join veranstaltung " +
+            "on teilnahme.id_veranstaltung = veranstaltung.id " +
+            "where teilnahme.id_teilnehmer = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setInt(1, a.getId());
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             collVeranstaltung.add(new Event(rs.getInt("id"), 
-                    rs.getInt("id_veranstalter"), rs.getString("name"), rs.getDate("datetime").toLocalDate(), 
+                    rs.getInt("id_veranstaltung"), rs.getString("name"), rs.getDate("datetime").toLocalDate(), 
                     rs.getString("details"), "", rs.getInt("max_teilnehmer"), 
                     rs.getInt("min_teilnehmer"), rs.getString("sportart")));
         } 
         conn.close();
         return collVeranstaltung;
+    }
+    
+    public Collection<Event> getEvents(Filter filter, Account a) throws Exception{
+        Collection<Event> collEvents = null;
+        switch(filter){
+            case PAST:
+                break;
+            case CURRENT:
+                break;
+            case ALL:
+                collEvents = getEventsByTeilnehmer(a);
+                break;
+            default:
+                throw new FilterExcpetion("Unknown filter");
+        }
+        return collEvents;
     }
      
      public void updateEvent(Event e) throws Exception{

@@ -55,8 +55,8 @@ public class LoginService {
         try{
             Account a = gson.fromJson(content, Account.class);
             System.out.print("Login: " + a + "...");
-            db.login(a);
-            token = crypt.encrypt(a.toString());
+            a = db.login(a);
+            token = crypt.encrypt(a.toTokenString());
             Authentification.loginToken(token);
             r = Response.accepted().header("Token", token).build();
             System.out.print("Success");

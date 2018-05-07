@@ -4,6 +4,7 @@ import com.example.cora.sportverwaltung.businesslogic.data.Account;
 import com.example.cora.sportverwaltung.businesslogic.data.Credentials;
 import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
+import com.example.cora.sportverwaltung.businesslogic.misc.AsyncResult;
 import com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod;
 import com.example.cora.sportverwaltung.businesslogic.misc.ResultType;
 import com.google.gson.Gson;
@@ -14,7 +15,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by nicok on 18.04.2018 ^-^.
@@ -99,8 +99,6 @@ public class DatabaseConnection {
         String payload = ""; // TODO
         String responseText = get(HttpMethod.POST, "event", ResultType.STATUS, payload);
 
-        //checkResult(responseText);
-
         return Integer.parseInt(responseText);
     }
 
@@ -112,7 +110,7 @@ public class DatabaseConnection {
         return 500;
     }
 
-    private String get(HttpMethod httpMethod, String route, ResultType resultType, String... params) throws ExecutionException, InterruptedException {
+    private String get(HttpMethod httpMethod, String route, ResultType resultType, String... params) throws Exception {
         ControllerSync controller = new ControllerSync(url);
 
         ArrayList<String> connectionParams = new ArrayList<>();
@@ -124,7 +122,13 @@ public class DatabaseConnection {
         params = connectionParams.toArray(params);
 
         controller.execute(params);
-        return controller.get();
+
+        AsyncResult<String> result =  controller.get();
+        if(result.getError() != null) {
+            throw result.getError();
+        }
+
+        return result.getResult();
     }
 
     private void checkResult(String result) throws Exception {

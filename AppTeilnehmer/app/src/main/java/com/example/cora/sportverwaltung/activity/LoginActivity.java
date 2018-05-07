@@ -44,8 +44,6 @@ public class LoginActivity extends AppCompatActivity {
 
                     Credentials credentials = new Credentials(email, password);
 
-                    connection.participate(12, 17);
-
                     String token = connection.login(credentials);
 
                     if (token != null) {
@@ -57,8 +55,6 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
                     ex.printStackTrace();
                 }
-
-                startActivity(new Intent(LoginActivity.this, MenuActivity.class));
             }
         });
 
