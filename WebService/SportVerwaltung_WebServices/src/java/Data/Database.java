@@ -7,6 +7,7 @@ package Data;
 
 import Exceptions.RegisterExcpetion;
 import Exceptions.AccountNotFoundException;
+import Exceptions.FilterExcpetion;
 import com.oracle.jrockit.jfr.Producer;
 import java.sql.Connection;
 import java.sql.Date;
@@ -239,6 +240,20 @@ public class Database {
         } 
         conn.close();
         return collVeranstaltung;
+    }
+    
+    public Collection<Event> getEvents(Filter filter, Account a) throws Exception{
+        switch(filter){
+            case PAST:
+                break;
+            case CURRENT:
+                break;
+            case ALL:
+                break;
+            default:
+                throw new FilterExcpetion("Unknown filter");
+        }
+        return null;
     }
      
      public void updateEvent(Event e) throws Exception{
