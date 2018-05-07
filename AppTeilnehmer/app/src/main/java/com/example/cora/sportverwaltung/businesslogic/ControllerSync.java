@@ -37,14 +37,12 @@ public class ControllerSync extends AsyncTask<String, Void, AsyncResult<String>>
         String payload = (params.length >= 4) ? params[3] : null;
 
         try {
-            // build url for request
+            // set payload or querystring
             if(payload != null && httpMethod == HttpMethod.GET){
                 route += "?" + payload;
             }
 
             url = new URL(url + "/" + route);
-
-            // create connection
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             // set token header if logged in
@@ -56,11 +54,8 @@ public class ControllerSync extends AsyncTask<String, Void, AsyncResult<String>>
                 write(connection, httpMethod, payload);
             }
 
-
-            // read response
             result = new AsyncResult<>(read(connection, ResultType.valueOf(whatToRead)));
 
-            // disconnect
             connection.disconnect();
 
         } catch (Exception ex) {

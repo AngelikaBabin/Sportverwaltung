@@ -99,8 +99,6 @@ public class DatabaseConnection {
         String payload = ""; // TODO
         String responseText = get(HttpMethod.POST, "event", ResultType.STATUS, payload);
 
-        //checkResult(responseText);
-
         return Integer.parseInt(responseText);
     }
 
