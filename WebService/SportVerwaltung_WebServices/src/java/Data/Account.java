@@ -29,6 +29,11 @@ public class Account {
     public Account(String email) {
         this.email = email;
     }
+    public Account(int id, String email) {
+        this.id = id;
+        this.email = email;
+    }
+    
     
     public Account(){
     }
@@ -66,13 +71,13 @@ public class Account {
     }
     
     public String toTokenString(){
-        return getEmail() + ":" + getEmail().hashCode();
+        return getId() + ":" + getEmail() + ":" + getEmail().hashCode();
     }
 
     public static Account parseToken(String token) throws Exception{
         token = crypt.decrypt(token);
         String[] data = token.split(":");
-        return new Account(data[0]);
+        return new Account(Integer.parseInt(data[0]), data[1]);
     }
     
     @Override
