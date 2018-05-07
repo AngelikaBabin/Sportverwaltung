@@ -2,6 +2,7 @@ package com.example.cora.sportverwaltung.businesslogic;
 
 import android.os.AsyncTask;
 
+import com.example.cora.sportverwaltung.businesslogic.misc.AsyncResult;
 import com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod;
 import com.example.cora.sportverwaltung.businesslogic.misc.ResultType;
 
@@ -11,15 +12,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.NoRouteToHostException;
 import java.net.URL;
 
 /**
  * Created by nicok on 18.04.2018 ^-^ ^-^.
  */
 
-public class ControllerSync extends AsyncTask<String, Void, String> {
+public class ControllerSync extends AsyncTask<String, Void, AsyncResult<String>> {
     private URL url;
     private static String token;
 
@@ -28,8 +27,8 @@ public class ControllerSync extends AsyncTask<String, Void, String> {
     }
 
     @Override
-    protected String doInBackground(String... params) {
-        String content;
+    protected AsyncResult<String> doInBackground(String... params) {
+        AsyncResult<String> result;
 
         // extract request params for clarity
         HttpMethod httpMethod = HttpMethod.valueOf(params[0]);
@@ -59,21 +58,16 @@ public class ControllerSync extends AsyncTask<String, Void, String> {
 
 
             // read response
-            content = read(connection, ResultType.valueOf(whatToRead));
+            result = new AsyncResult<>(read(connection, ResultType.valueOf(whatToRead)));
 
             // disconnect
             connection.disconnect();
 
-        } catch (MalformedURLException ex) {
-            ex.printStackTrace(); //TODO listener
-            content = "ERROR: url was not valid";
-        } catch (NoRouteToHostException ex) {
-            content = "ERROR: make sure you are connected to the internet";
         } catch (Exception ex) {
-            content = "ERROR: " + ex.getMessage();
+            result = new AsyncResult<>(ex);
         }
 
-        return content;
+        return result;
     }
 
     private void write(HttpURLConnection connection, HttpMethod httpMethod, String json) throws IOException {
