@@ -48,34 +48,22 @@ public class DatabaseConnection {
 
         String result = get(HttpMethod.POST, "teilnehmer", ResultType.TOKEN, accountString);
 
-        checkResult(result);
-
         return result;
     }
 
     public String login(Credentials credentials) throws Exception {
         String accountString = GSON.toJson(credentials, Credentials.class);
-
         String result = get(HttpMethod.POST, "login", ResultType.TOKEN, accountString);
-
-        checkResult(result);
-
         return result;
     }
 
     public String logout() throws Exception {
         String result = get(HttpMethod.POST, "logout", ResultType.STATUS);
-
-        checkResult(result);
-
         return result;
     }
 
     public ArrayList<Veranstaltung> getEvents(Filter filter) throws Exception {
         String responseText = get(HttpMethod.GET, "event", ResultType.CONTENT, "filter=" + filter.toString());
-
-        checkResult(responseText);
-
         Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
         }.getType();
         ArrayList<Veranstaltung> events = GSON.fromJson(responseText, collectionType);
@@ -85,9 +73,6 @@ public class DatabaseConnection {
 
     public Veranstaltung getEvent(int eventId) throws Exception {
         String responseText = get(HttpMethod.GET, "event", ResultType.CONTENT, "id=" + eventId);
-
-        checkResult(responseText);
-
         Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
         }.getType();
         ArrayList<Veranstaltung> events = GSON.fromJson(responseText, collectionType);
@@ -131,8 +116,4 @@ public class DatabaseConnection {
         return result.getResult();
     }
 
-    private void checkResult(String result) throws Exception {
-        if (result.startsWith("ERROR")) //TODO SEMIPROF
-            throw new Exception(result);
-    }
 }
