@@ -33,7 +33,8 @@
         <activity android:name=".activity.InfoAllEventsActivity" />
         <activity android:name=".activity.InfoMyEventsActivity" />
         <activity android:name=".activity.InfoPastEventsActivity" />
-        <activity android:name=".activity.HomeActivity"></activity>
+        <activity android:name=".activity.HomeActivity" />
+        <activity android:name=".activity.ProfileActivity"></activity>
     </application>
 
 </manifest>

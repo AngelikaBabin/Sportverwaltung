@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
 import com.example.cora.sportverwaltung.businesslogic.data.Credentials;
+import com.example.cora.sportverwaltung.businesslogic.misc.EmailNotificator;
 
 public class LoginActivity extends AppCompatActivity {
     Button button_login, button_register, button_forgotPassword;
@@ -70,7 +71,10 @@ public class LoginActivity extends AppCompatActivity {
         button_forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(LoginActivity.this, "Recovery email sent", Toast.LENGTH_LONG).show();
+                String email = editText_email.getText().toString();
+                String password = "LALI";
+                EmailNotificator en = new EmailNotificator(LoginActivity.this);
+                en.send(email, "PASSWORD RECOVERY", "Your password is: " + password);
             }
         });
     }
