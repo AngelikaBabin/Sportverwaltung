@@ -315,7 +315,7 @@ public class Database {
         conn.close();
     }
 
-    public void addTeilnahme(Event e, Account a) throws Exception{
+    public void addTeilnahme(int eventId, Account a) throws Exception{
         int startNum = 0;
         
         ResultSet rs;
@@ -324,7 +324,6 @@ public class Database {
             "on teilnahme.ID_veranstaltung = veranstaltung.id " +
             "group by veranstaltung.id";
         PreparedStatement stmt = conn.prepareStatement(select);
-        stmt.setString(1, a.getEmail());
         rs = stmt.executeQuery();
         if (rs.next()) {
             startNum = rs.getInt(1);
@@ -332,10 +331,10 @@ public class Database {
         
         startNum++;
         conn = createConnection();
-        select = "INSERT INTO teilnehmer "
-                + "(id_veranstaltung, id_teilnehmer, starting_number) VALUES(?,?,?)";
+        select = "INSERT INTO teilnahme "
+                + "(id_veranstaltung, id_teilnehmer, STARTING_NUMBER) VALUES(?,?,?)";
         stmt = conn.prepareStatement(select);
-        stmt.setInt(1, e.getId());
+        stmt.setInt(1, eventId);
         stmt.setInt(2, a.getId());
         stmt.setInt(3, startNum);
         stmt.executeUpdate();

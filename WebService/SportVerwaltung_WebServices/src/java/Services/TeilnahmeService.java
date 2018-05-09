@@ -16,11 +16,13 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -41,6 +43,8 @@ public class TeilnahmeService {
      * Creates a new instance of TeilnahmeService
      */
     public TeilnahmeService() {
+        db = Database.newInstance();
+        gson = new Gson();
     }
 
     /**
@@ -61,16 +65,15 @@ public class TeilnahmeService {
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addTeilnahme(@HeaderParam("Token") String token, String content) {
+    public Response addTeilnahme(@HeaderParam("Token") String token, @QueryParam("eventId") int eventId) {
         Response r;
         Event e;
         Account a;
         try{
             System.out.print("Add Teilnahme");
             if(Authentification.isUserAuthenticated(token)){
-                e = gson.fromJson(content, Event.class);
                 a = Account.parseToken(token);
-                db.addTeilnahme(e, a);
+                db.addTeilnahme(eventId, a);
                 r = Response.status(Response.Status.CREATED).build();
                 System.out.println("Sucess");
             }
