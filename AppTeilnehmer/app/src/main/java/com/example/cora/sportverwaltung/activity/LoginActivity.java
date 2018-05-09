@@ -13,7 +13,7 @@ import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
 import com.example.cora.sportverwaltung.businesslogic.data.Credentials;
 
 public class LoginActivity extends AppCompatActivity {
-    Button button_login, button_register;
+    Button button_login, button_register, button_forgotPassword;
     EditText editText_email, editText_password;
     DatabaseConnection connection = DatabaseConnection.getInstance();
 
@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private void getViewElements() {
         button_login = findViewById(R.id.button_login);
         button_register = findViewById(R.id.button_register);
+        button_forgotPassword = findViewById(R.id.button_forgotPassword);
         editText_email = findViewById(R.id.editText_email);
         editText_password = findViewById(R.id.editText_password);
     }
@@ -63,6 +64,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            }
+        });
+
+        button_forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginActivity.this, "Recovery email sent", Toast.LENGTH_LONG).show();
             }
         });
     }
