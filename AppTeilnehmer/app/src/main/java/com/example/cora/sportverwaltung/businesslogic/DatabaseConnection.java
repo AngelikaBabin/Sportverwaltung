@@ -2,8 +2,9 @@ package com.example.cora.sportverwaltung.businesslogic;
 
 import com.example.cora.sportverwaltung.businesslogic.data.Account;
 import com.example.cora.sportverwaltung.businesslogic.data.Credentials;
-import com.example.cora.sportverwaltung.businesslogic.data.Filter;
+import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
+import com.example.cora.sportverwaltung.businesslogic.misc.AsyncResult;
 import com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod;
 import com.example.cora.sportverwaltung.businesslogic.misc.ResultType;
 import com.google.gson.Gson;
@@ -14,7 +15,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by nicok on 18.04.2018 ^-^.
@@ -48,34 +48,22 @@ public class DatabaseConnection {
 
         String result = get(HttpMethod.POST, "teilnehmer", ResultType.TOKEN, accountString);
 
-        checkResult(result);
-
         return result;
     }
 
     public String login(Credentials credentials) throws Exception {
         String accountString = GSON.toJson(credentials, Credentials.class);
-
         String result = get(HttpMethod.POST, "login", ResultType.TOKEN, accountString);
-
-        checkResult(result);
-
         return result;
     }
 
     public String logout() throws Exception {
         String result = get(HttpMethod.POST, "logout", ResultType.STATUS);
-
-        checkResult(result);
-
         return result;
     }
 
     public ArrayList<Veranstaltung> getEvents(Filter filter) throws Exception {
         String responseText = get(HttpMethod.GET, "event", ResultType.CONTENT, "filter=" + filter.toString());
-
-        checkResult(responseText);
-
         Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
         }.getType();
         ArrayList<Veranstaltung> events = GSON.fromJson(responseText, collectionType);
@@ -85,9 +73,6 @@ public class DatabaseConnection {
 
     public Veranstaltung getEvent(int eventId) throws Exception {
         String responseText = get(HttpMethod.GET, "event", ResultType.CONTENT, "id=" + eventId);
-
-        checkResult(responseText);
-
         Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
         }.getType();
         ArrayList<Veranstaltung> events = GSON.fromJson(responseText, collectionType);
@@ -98,8 +83,6 @@ public class DatabaseConnection {
     public int participate(final int _eventId, final int _userId) throws Exception {
         String payload = ""; // TODO
         String responseText = get(HttpMethod.POST, "event", ResultType.STATUS, payload);
-
-        //checkResult(responseText);
 
         return Integer.parseInt(responseText);
     }
@@ -112,7 +95,7 @@ public class DatabaseConnection {
         return 500;
     }
 
-    private String get(HttpMethod httpMethod, String route, ResultType resultType, String... params) throws ExecutionException, InterruptedException {
+    private String get(HttpMethod httpMethod, String route, ResultType resultType, String... params) throws Exception {
         ControllerSync controller = new ControllerSync(url);
 
         ArrayList<String> connectionParams = new ArrayList<>();
@@ -124,11 +107,13 @@ public class DatabaseConnection {
         params = connectionParams.toArray(params);
 
         controller.execute(params);
-        return controller.get();
+
+        AsyncResult<String> result =  controller.get();
+        if(result.getError() != null) {
+            throw result.getError();
+        }
+
+        return result.getResult();
     }
 
-    private void checkResult(String result) throws Exception {
-        if (result.startsWith("ERROR")) //TODO SEMIPROF
-            throw new Exception(result);
-    }
 }

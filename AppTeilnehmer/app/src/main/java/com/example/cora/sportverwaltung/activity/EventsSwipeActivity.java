@@ -19,8 +19,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.cora.sportverwaltung.R;
+import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
 
-public class EventsActivity extends AppCompatActivity {
+public class EventsSwipeActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -103,8 +104,7 @@ public class EventsActivity extends AppCompatActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_swipe_events, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
@@ -128,16 +128,15 @@ public class EventsActivity extends AppCompatActivity {
 
             switch(position){
                 case 0:
-
-                    result = EventsFragment.newInstance("","", "All");
+                    result = EventsFragment.newInstance("","", Filter.ALL);
                     break;
 
                 case 1:
-                    result = EventsFragment.newInstance("","","My");
+                    result = EventsFragment.newInstance("","",Filter.CURRENT);
                     break;
 
                 case 2:
-                    result = EventsFragment.newInstance("","","Past");
+                    result = EventsFragment.newInstance("","",Filter.PAST);
                     break;
             }
             // getItem is called to instantiate the fragment for the given page.
