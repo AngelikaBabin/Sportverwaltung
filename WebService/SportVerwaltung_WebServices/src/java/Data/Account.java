@@ -71,7 +71,7 @@ public class Account {
     }
     
     public String toTokenString(){
-        return getId() + ":" + getEmail() + ":" + getEmail().hashCode();
+        return getId() + ":" + getEmail();
     }
 
     public static Account parseToken(String token) throws Exception{

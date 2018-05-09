@@ -8,13 +8,13 @@ package Data;
 import Exceptions.RegisterExcpetion;
 import Exceptions.AccountNotFoundException;
 import Exceptions.FilterExcpetion;
-import com.oracle.jrockit.jfr.Producer;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -23,8 +23,9 @@ import java.util.Collection;
  * @author Gerald
  */
 public class Database {
-    private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
-    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
+
+    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
+    private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
     private static final String USER = "d4a07";
     private static final String PASSWD = "d4a";
     private Connection conn = null;
@@ -48,36 +49,37 @@ public class Database {
         DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
         return DriverManager.getConnection(CONNECTSTRING, USER, PASSWD);
     }
-    
-    public Account addAccount(Account a) throws Exception{
+
+    public Account addAccount(Account a) throws Exception {
         conn = createConnection();
         int accountId = -1;
         String select = "select seq_account_id.nextval from dual";
         PreparedStatement stmt = conn.prepareStatement(select);
         ResultSet rs = stmt.executeQuery();
-        if (rs.next())
+        if (rs.next()) {
             a.setId(rs.getInt(1));
-        
+        }
+
         select = "INSERT INTO account VALUES(?,?,?,?)";
         stmt = conn.prepareStatement(select);
         stmt.setInt(1, a.getId());
         stmt.setString(2, a.getName());
         stmt.setString(3, a.getEmail());
         stmt.setString(4, a.getPassword());
-        try{
+        try {
             stmt.executeUpdate();
-        }
-        catch(SQLException ex){
-            if(ex.getErrorCode() == 1)
+        } catch (SQLException ex) {
+            if (ex.getErrorCode() == 1) {
                 throw new RegisterExcpetion("Account already exists!");
-            else
+            } else {
                 throw ex;
+            }
         }
         conn.close();
         return a;
     }
-    
-    public void addTeilnehmerToAccount(Account a) throws Exception{
+
+    public void addTeilnehmerToAccount(Account a) throws Exception {
         conn = createConnection();
         String select = "INSERT INTO teilnehmer (id_account) VALUES(?)";
         PreparedStatement stmt = conn.prepareStatement(select);
@@ -85,8 +87,8 @@ public class Database {
         stmt.executeUpdate();
         conn.close();
     }
-    
-    public void addVeranstalterToAccount(Account a) throws Exception{
+
+    public void addVeranstalterToAccount(Account a) throws Exception {
         conn = createConnection();
         String select = "INSERT INTO veranstalter VALUES(?)";
         PreparedStatement stmt = conn.prepareStatement(select);
@@ -95,7 +97,7 @@ public class Database {
         conn.close();
     }
 
-    public Account login(Account a) throws Exception{
+    public Account login(Account a) throws Exception {
         ResultSet rs;
         conn = createConnection();
         String select = "SELECT id, email, password FROM account WHERE email = ? and password = ?";
@@ -103,15 +105,16 @@ public class Database {
         stmt.setString(1, a.getEmail());
         stmt.setString(2, a.getPassword());
         rs = stmt.executeQuery();
-        if (rs.next()) 
+        if (rs.next()) {
             a = new Account(rs.getInt("id"), rs.getString("email"));
-        else
+        } else {
             throw new AccountNotFoundException("Account/email not founds");
+        }
         conn.close();
         return a;
     }
-    
-    public Account getAccount(Account a) throws Exception{
+
+    public Account getAccount(Account a) throws Exception {
         ResultSet rs;
         conn = createConnection();
         String select = "SELECT * FROM account WHERE email = ?";
@@ -124,14 +127,14 @@ public class Database {
         conn.close();
         return a;
     }
-    
-    public Teilnehmer getTeilnehmer(Account a) throws Exception{
+
+    public Teilnehmer getTeilnehmer(Account a) throws Exception {
         ResultSet rs;
         Teilnehmer t = null;
         conn = createConnection();
-        String select = "SELECT * FROM account join teilnehmer \n" +
-                            "on teilnehmer.id_account = account.id\n" +
-                            "WHERE account.email = ?";
+        String select = "SELECT * FROM account join teilnehmer \n"
+                + "on teilnehmer.id_account = account.id\n"
+                + "WHERE account.email = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
         stmt.setString(1, a.getEmail());
         rs = stmt.executeQuery();
@@ -141,7 +144,7 @@ public class Database {
         conn.close();
         return t;
     }
-    
+
     public void updateAccount(Account a) throws Exception {
         conn = createConnection();
         String select = "UPDATE account SET name = ?, password = ? where email = ?";
@@ -152,7 +155,7 @@ public class Database {
         stmt.executeUpdate();
         conn.close();
     }
-    
+
     public void updateTeilnehmer(Teilnehmer t) throws Exception {
         conn = createConnection();
         String select = "UPDATE teilnehmer SET score = ? where id_account = ?";
@@ -162,97 +165,106 @@ public class Database {
         stmt.executeUpdate();
         conn.close();
     }
-    
+
     /*
-    public void deleteTeilnehmer(Account t) throws Exception { //fix implementation
-        conn = createConnection();
-        String select = "delete from teilnehmer where id = ?";
-        PreparedStatement stmt = conn.prepareStatement(select);
-        stmt.setInt(1, t.getId());
-        stmt.executeUpdate();
+     public void deleteTeilnehmer(Account t) throws Exception { //fix implementation
+     conn = createConnection();
+     String select = "delete from teilnehmer where id = ?";
+     PreparedStatement stmt = conn.prepareStatement(select);
+     stmt.setInt(1, t.getId());
+     stmt.executeUpdate();
         
-        select = "delete from teilnahme where id_teilnehmer = ?";
-        stmt = conn.prepareStatement(select);
-        stmt.setInt(1, t.getId());
-        stmt.executeUpdate();
-        conn.close();
-    }
+     select = "delete from teilnahme where id_teilnehmer = ?";
+     stmt = conn.prepareStatement(select);
+     stmt.setInt(1, t.getId());
+     stmt.executeUpdate();
+     conn.close();
+     }
     
-    public void deleteVeranstalter(Account v) throws Exception { //fix implementation
-        conn = createConnection();
-        String select = "delete from account where id = ?";
-        PreparedStatement stmt = conn.prepareStatement(select);
-        stmt.setInt(1, v.getId());
-        stmt.executeUpdate();
+     public void deleteVeranstalter(Account v) throws Exception { //fix implementation
+     conn = createConnection();
+     String select = "delete from account where id = ?";
+     PreparedStatement stmt = conn.prepareStatement(select);
+     stmt.setInt(1, v.getId());
+     stmt.executeUpdate();
         
-        select = "delete from teilnahme where id_teilnehmer = ?";
-        stmt = conn.prepareStatement(select);
-        stmt.setInt(1, v.getId());
-        stmt.executeUpdate();
-        conn.close();
-    }
-    */
-    
-     public Collection<Event> getEventsByDistance() throws Exception {
+     select = "delete from teilnahme where id_teilnehmer = ?";
+     stmt = conn.prepareStatement(select);
+     stmt.setInt(1, v.getId());
+     stmt.executeUpdate();
+     conn.close();
+     }
+     */
+    public Collection<Event> getEventsByDistance() throws Exception {
         ArrayList<Event> collVeranstaltung = new ArrayList<>();
-         
+
         conn = createConnection();
         String select = "SELECT * FROM veranstaltung";
         PreparedStatement stmt = conn.prepareStatement(select);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
-            collVeranstaltung.add(new Event(rs.getInt("id"), 
-                    rs.getInt("id_veranstalter"), rs.getString("name"), rs.getDate("datetime").toLocalDate(), 
-                    rs.getString("details"), "", rs.getInt("max_teilnehmer"), 
+            collVeranstaltung.add(new Event(rs.getInt("id"),
+                    rs.getInt("id_veranstalter"), rs.getString("name"), rs.getDate("datetime").toLocalDate(),
+                    rs.getString("details"), "", rs.getInt("max_teilnehmer"),
                     rs.getInt("min_teilnehmer"), rs.getString("sportart")));
-        } 
+        }
         conn.close();
         return collVeranstaltung;
     }
-     
-    public Collection<Event> getEventsByDateTime() throws Exception {
+
+    public ArrayList<Event> getEventsByDate(Account a, LocalDate date, Filter filter) throws Exception {
         ArrayList<Event> collVeranstaltung = new ArrayList<>();
-         
+
         conn = createConnection();
-        String select = "SELECT * FROM veranstaltung";
+        String select = "SELECT * FROM veranstaltung " +
+                        "where datetime {comp} to_date(?, 'yyyy-MM-dd') " +
+                        "and id_veranstalter = ?";
+        if(filter == Filter.PAST)
+            select = select.replace("{comp}", "<");
+        else if(filter == Filter.CURRENT)
+            select = select.replace("{comp}", ">="); 
         PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setDate(1, Date.valueOf(date));
+        stmt.setInt(2, a.getId());
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
-            collVeranstaltung.add(new Event(rs.getInt("id"), 
-                    rs.getInt("id_veranstalter"), rs.getString("name"), rs.getDate("datetime").toLocalDate(), 
-                    rs.getString("details"), "", rs.getInt("max_teilnehmer"), 
+            collVeranstaltung.add(new Event(rs.getInt("id"),
+                    rs.getInt("id_veranstalter"), rs.getString("name"), rs.getDate("datetime").toLocalDate(),
+                    rs.getString("details"), "", rs.getInt("max_teilnehmer"),
                     rs.getInt("min_teilnehmer"), rs.getString("sportart")));
-        } 
+        }
         conn.close();
         return collVeranstaltung;
     }
-    
-    private Collection<Event> getEventsByTeilnehmer(Account a) throws Exception {
+
+    private ArrayList<Event> getEventsByTeilnehmer(Account a) throws Exception {
         ArrayList<Event> collVeranstaltung = new ArrayList<>();
-         
+
         conn = createConnection();
-        String select = "select id, name, location, datetime, details, min_teilnehmer, max_teilnehmer from teilnahme inner join veranstaltung " +
-            "on teilnahme.id_veranstaltung = veranstaltung.id " +
-            "where teilnahme.id_teilnehmer = ?";
+        String select = "select * from teilnahme inner join veranstaltung "
+                + "on teilnahme.id_veranstaltung = veranstaltung.id "
+                + "where teilnahme.id_teilnehmer = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
         stmt.setInt(1, a.getId());
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
-            collVeranstaltung.add(new Event(rs.getInt("id"), 
-                    rs.getInt("id_veranstaltung"), rs.getString("name"), rs.getDate("datetime").toLocalDate(), 
-                    rs.getString("details"), "", rs.getInt("max_teilnehmer"), 
+            collVeranstaltung.add(new Event(rs.getInt("id"),
+                    rs.getInt("id_veranstalter"), rs.getString("name"), rs.getDate("datetime").toLocalDate(),
+                    rs.getString("details"), "", rs.getInt("max_teilnehmer"),
                     rs.getInt("min_teilnehmer"), rs.getString("sportart")));
-        } 
+        }
         conn.close();
         return collVeranstaltung;
     }
-    
-    public Collection<Event> getEvents(Filter filter, Account a) throws Exception{
-        Collection<Event> collEvents = null;
-        switch(filter){
+
+    public ArrayList<Event> getEvents(Filter filter, Account a) throws Exception {
+        ArrayList<Event> collEvents = null;
+        switch (filter) {
             case PAST:
+                collEvents = getEventsByDate(a, LocalDate.now(), filter);
                 break;
             case CURRENT:
+                collEvents = getEventsByDate(a, LocalDate.now(), filter);
                 break;
             case ALL:
                 collEvents = getEventsByTeilnehmer(a);
@@ -262,9 +274,9 @@ public class Database {
         }
         return collEvents;
     }
-     
-     public void updateEvent(Event e) throws Exception{
-         conn = createConnection();
+
+    public void updateEvent(Event e) throws Exception {
+        conn = createConnection();
         String select = "UPDATE veranstatlung SET name = ?, datetime = ?, "
                 + "details = ? max_teilnehmer = ?, min_teilnehmer = ?, sportart = ? where id = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
@@ -276,18 +288,18 @@ public class Database {
         stmt.setString(6, e.getSportart());
         stmt.setInt(7, e.getId());
         stmt.executeUpdate();
-     }
-     
-     public void deleteEvent(Event e) throws Exception  { //löschen von teilnahmen?
-         conn = createConnection();
+    }
+
+    public void deleteEvent(Event e) throws Exception { //löschen von teilnahmen?
+        conn = createConnection();
         String select = "delete from veranstaltung where id = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
         stmt.setInt(1, e.getId());
         stmt.executeUpdate();
         conn.close();
-     }
-     
-     public void insertEvent(Event e) throws Exception{
+    }
+
+    public void insertEvent(Event e) throws Exception {
         conn = createConnection();
         String select = "INSERT INTO veranstaltung VALUES(seq_veranstaltung_id.nextVal, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt = conn.prepareStatement(select);
@@ -301,6 +313,32 @@ public class Database {
         stmt.setInt(8, e.getMax_teilnehmer());
         stmt.executeUpdate();
         conn.close();
-     }
-             
+    }
+
+    public void addTeilnahme(Event e, Account a) throws Exception{
+        int startNum = 0;
+        
+        ResultSet rs;
+        conn = createConnection();
+        String select = "SELECT count(*) FROM teilnahme inner join veranstaltung " +
+            "on teilnahme.ID_veranstaltung = veranstaltung.id " +
+            "group by veranstaltung.id";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setString(1, a.getEmail());
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            startNum = rs.getInt(1);
+        }
+        
+        startNum++;
+        conn = createConnection();
+        select = "INSERT INTO teilnehmer "
+                + "(id_veranstaltung, id_teilnehmer, starting_number) VALUES(?,?,?)";
+        stmt = conn.prepareStatement(select);
+        stmt.setInt(1, e.getId());
+        stmt.setInt(2, a.getId());
+        stmt.setInt(3, startNum);
+        stmt.executeUpdate();
+        conn.close();
+    }
 }
