@@ -79,6 +79,7 @@ CREATE TABLE Veranstaltung(
   CONSTRAINT pk_veranstaltung PRIMARY KEY(id),
   CONSTRAINT fk_veranstaltung_sportart FOREIGN KEY(sportart) REFERENCES Sportart(name),
   CONSTRAINT fk_veranstaltung_id_veranst FOREIGN KEY(id_veranstalter) REFERENCES Veranstalter(id_account)
+  CONSTRAINT fk_veranstaltung_laction FOREIGN KEY(location) REFERENCES Location(id)
 );
 
 --Teilnahme
