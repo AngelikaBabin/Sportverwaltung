@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Filter;
 import android.widget.ListView;
 
 import com.example.cora.sportverwaltung.R;
@@ -36,8 +37,6 @@ public class EventsFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     ListView listView_events;
-    Button button_allEvents, button_myEvents, button_pastEvents;
-
     View view;
 
     FragmentManager manager;
@@ -55,7 +54,7 @@ public class EventsFragment extends Fragment {
      * @return A new instance of fragment EventsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EventsFragment newInstance(String param1, String param2, String Select) {
+    public static EventsFragment newInstance(String param1, String param2, com.example.cora.sportverwaltung.businesslogic.misc.Filter Select) {
         EventsFragment fragment = new EventsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -87,13 +86,10 @@ public class EventsFragment extends Fragment {
 
     private void getViewElements() {
         listView_events = view.findViewById(R.id.listView_events);
-        button_allEvents = (Button) view.findViewById(R.id.button_allEvents);
-        button_myEvents = (Button) view.findViewById(R.id.button_myEvents);
-        button_pastEvents = (Button) view.findViewById(R.id.button_pastEvents);
     }
 
     private void registerEventhandlers() {
-        button_allEvents.setOnClickListener(new View.OnClickListener() {
+        /*button_allEvents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             setAdapterData(getResources().getStringArray(R.array.test_array_all));
@@ -114,18 +110,6 @@ public class EventsFragment extends Fragment {
             public void onClick(View view) {
                 setAdapterData(getResources().getStringArray(R.array.test_array_done));
                 setOnItemClickListener(new PastEventsFragment());
-            }
-        });
-
-        /*listView_events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                MyEventsFragment myEventsFragment = new MyEventsFragment();
-                manager.beginTransaction().replace(
-                        R.id.ConstraintLayout_for_fragment,
-                        myEventsFragment,
-                        myEventsFragment.getTag()
-                ).commit();
             }
         });*/
     }
