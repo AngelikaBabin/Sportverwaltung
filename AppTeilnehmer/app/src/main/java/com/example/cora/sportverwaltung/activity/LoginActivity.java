@@ -44,7 +44,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     Credentials credentials = new Credentials(email, password);
 
-                    String token =  "lali"; // connection.login(credentials);
+                    // String token =  connection.login(credentials);
+                    String token =  "LALI";
 
                     if (token != null) {
                         startActivity(new Intent(LoginActivity.this, EventsSwipeActivity.class));
