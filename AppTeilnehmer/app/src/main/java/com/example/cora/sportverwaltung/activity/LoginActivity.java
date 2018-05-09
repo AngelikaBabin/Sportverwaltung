@@ -44,10 +44,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     Credentials credentials = new Credentials(email, password);
 
-                    String token = connection.login(credentials);
+                    String token =  "lali"; // connection.login(credentials);
 
                     if (token != null) {
-                        startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+                        startActivity(new Intent(LoginActivity.this, EventsSwipeActivity.class));
                     } else {
                         Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_LONG).show();
                     }
