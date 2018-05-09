@@ -109,7 +109,7 @@
         </TableLayout>
 
         <TextView
-            android:id="@+id/textView_Details"
+            android:id="@+id/textView_details"
             android:layout_width="match_parent"
             android:layout_height="191dp"
             android:layout_marginLeft="25dp"

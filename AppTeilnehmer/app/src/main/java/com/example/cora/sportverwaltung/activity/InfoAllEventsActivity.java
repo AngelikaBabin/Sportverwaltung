@@ -1,8 +1,12 @@
 package com.example.cora.sportverwaltung.activity;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -10,7 +14,6 @@ import com.example.cora.sportverwaltung.R;
 
 public class InfoAllEventsActivity extends AppCompatActivity {
 
-    View view;
     TextView textView_header, textView_Details;
     TextView textView_date, textView_place, textView_participator, textView_organizer;
     Button button_participate;
@@ -26,13 +29,13 @@ public class InfoAllEventsActivity extends AppCompatActivity {
     }
 
     private void getViewElements() {
-        textView_header = view.findViewById(R.id.textView_header);
-        textView_Details = view.findViewById(R.id.textView_Details);
-        textView_date = view.findViewById(R.id.textView_date);
-        textView_place = view.findViewById(R.id.textView_place);
-        textView_participator = view.findViewById(R.id.textView_participator);
-        textView_organizer = view.findViewById(R.id.textView_organizer);
-        button_participate = view.findViewById(R.id.button_participate);
+        textView_header = findViewById(R.id.textView_header);
+        textView_Details = findViewById(R.id.textView_Details);
+        textView_date = findViewById(R.id.textView_date);
+        textView_place = findViewById(R.id.textView_place);
+        textView_participator = findViewById(R.id.textView_participator);
+        textView_organizer = findViewById(R.id.textView_organizer);
+        button_participate = findViewById(R.id.button_participate);
     }
 
     private void registerEventhandlers() {
