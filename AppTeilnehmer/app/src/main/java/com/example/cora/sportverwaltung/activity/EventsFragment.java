@@ -1,5 +1,6 @@
 package com.example.cora.sportverwaltung.activity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,10 +11,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Filter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
+import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
 
 
 /**
@@ -29,9 +31,12 @@ public class EventsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_Filter = "filter";
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Filter filter;
 
 
     private OnFragmentInteractionListener mListener;
@@ -42,23 +47,19 @@ public class EventsFragment extends Fragment {
     FragmentManager manager;
 
     public EventsFragment() {
-        // Required empty public constructor
+
     }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment EventsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EventsFragment newInstance(String param1, String param2, com.example.cora.sportverwaltung.businesslogic.misc.Filter Select) {
+    public static EventsFragment newInstance(String param1, String param2, Filter Select) {
         EventsFragment fragment = new EventsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString("FILTER", Select.toString());
         fragment.setArguments(args);
         return fragment;
     }
@@ -67,8 +68,7 @@ public class EventsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            filter = Filter.valueOf(getArguments().getString("FILTER"));
         }
 
     }
@@ -79,8 +79,7 @@ public class EventsFragment extends Fragment {
         getViewElements();
         registerEventhandlers();
         manager = getFragmentManager();
-        setAdapterData(getResources().getStringArray(R.array.test_array_all));
-        setOnItemClickListener(new AllEventsFragment());
+        setLists();
         return view;
     }
 
@@ -88,48 +87,41 @@ public class EventsFragment extends Fragment {
         listView_events = view.findViewById(R.id.listView_events);
     }
 
-    private void registerEventhandlers() {
-        /*button_allEvents.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            setAdapterData(getResources().getStringArray(R.array.test_array_all));
-            setOnItemClickListener(new AllEventsFragment());
-            }
-        });
-
-        button_myEvents.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    public void setLists(){
+        switch (filter) {
+            case ALL:
+                setAdapterData(getResources().getStringArray(R.array.test_array_all));
+                break;
+            case CURRENT:
                 setAdapterData(getResources().getStringArray(R.array.test_array_toDo));
-                setOnItemClickListener(new MyEventsFragment());
-            }
-        });
-
-        button_pastEvents.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                break;
+            case PAST:
                 setAdapterData(getResources().getStringArray(R.array.test_array_done));
-                setOnItemClickListener(new PastEventsFragment());
-            }
-        });*/
+                break;
+        }
     }
 
-    private void setOnItemClickListener(final Fragment myFragment){
+    private void registerEventhandlers() {
         listView_events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Fragment fragment = myFragment;
-                manager.beginTransaction().replace(
-                        R.id.ConstraintLayout_for_fragment,
-                        fragment,
-                        fragment.getTag()
-                ).commit();
+                switch (filter) {
+                    case ALL:
+                        startActivity(new Intent(getActivity(), InfoAllEventsActivity.class));
+                        break;
+                    case CURRENT:
+                        startActivity(new Intent(getActivity(), InfoMyEventsActivity.class));
+                        break;
+                    case PAST:
+                        startActivity(new Intent(getActivity(), InfoPastEventsActivity.class));
+                        break;
+                }
             }
         });
     }
 
-    private void setAdapterData(String[] entries){
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1 ,entries);
+    private void setAdapterData(String[] entries) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, entries);
         listView_events.setAdapter(adapter);
     }
 
