@@ -109,5 +109,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_sport_event_manager_base">SportEventManagerBaseActivity</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="title_activity_lali">lali</string>
+    <string name="title_activity_lalilol">lalilol</string>
 
 </resources>

@@ -80,7 +80,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             FragmentManager manager = getSupportFragmentManager();
 
             switch(id) { // TODO make fragments into activities
-                case R.id.nav_home:
+                case R.id.nav_profile:
                     HomeFragment homeFragment = new HomeFragment();
                     manager.beginTransaction().replace(
                             R.id.ConstraintLayout_for_fragment,
