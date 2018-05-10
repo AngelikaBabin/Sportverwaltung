@@ -2,27 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/EventService.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Exceptions/FilterExcpetion.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Data/Account.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Data/Crypt.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Exceptions/RegisterExcpetion.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/AccountService.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/LogoutService.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/VeranstalterService.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Exceptions/AccountNotFoundException.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Data/Teilnehmer.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/TeilnahmeService.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Data/Authentification.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Data/Database.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/AuthtestService.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/ApplicationConfig.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Data/Event.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/web/index.html</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/LoginService.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/TeilnehmerService.java</file>
-            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Data/Filter.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -90,7 +90,6 @@ CREATE TABLE Teilnahme(
   score INTEGER,
   
   CONSTRAINT pk_teilnahme PRIMARY KEY(id_veranstaltung, id_teilnehmer),
-  CONSTRAINT uq_teilnahme_starting_number UNIQUE(starting_number),
   CONSTRAINT fk_teilnahme_id_veranstaltung FOREIGN KEY(id_veranstaltung) REFERENCES Veranstaltung(id),
   CONSTRAINT fk_teilnahme_id_teilnehmer FOREIGN KEY(id_teilnehmer) REFERENCES Teilnehmer(id_account)
 );
