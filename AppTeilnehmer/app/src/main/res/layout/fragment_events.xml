@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="15dp"
 
-    tools:context="com.example.cora.sportverwaltung.activity.EventsFragment">
+    tools:context="com.example.cora.sportverwaltung.activity.events.EventsFragment">
 
     <ListView
         android:id="@+id/listView_events"

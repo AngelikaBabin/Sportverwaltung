@@ -18,6 +18,6 @@ public class MenuFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.layout_nav_view, container, false);
+        return inflater.inflate(R.layout.activity_base_nav_view, container, false);
     }
 }

@@ -15,7 +15,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
-import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
+import com.example.cora.sportverwaltung.activity.account.LoginActivity;
+import com.example.cora.sportverwaltung.activity.events.EventsSwipeActivity;
+import com.example.cora.sportverwaltung.businesslogic.connection.DatabaseConnection;
 
 public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DatabaseConnection connection;
@@ -53,7 +55,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.menu_app_bar, menu);
         return true;
     }
 
