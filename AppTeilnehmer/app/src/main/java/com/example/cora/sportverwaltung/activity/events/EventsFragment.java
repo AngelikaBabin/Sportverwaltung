@@ -1,4 +1,4 @@
-package com.example.cora.sportverwaltung.activity;
+package com.example.cora.sportverwaltung.activity.events;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -10,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
@@ -27,24 +25,16 @@ import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
  * create an instance of this fragment.
  */
 public class EventsFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private static final String ARG_Filter = "filter";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private Filter filter;
-
 
     private OnFragmentInteractionListener mListener;
 
-    ListView listView_events;
-    View view;
+    private ListView listView_events;
+    private View view;
 
-    FragmentManager manager;
+    private FragmentManager manager;
 
     public EventsFragment() {
 
@@ -56,10 +46,10 @@ public class EventsFragment extends Fragment {
      * @return A new instance of fragment EventsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EventsFragment newInstance(String param1, String param2, Filter Select) {
+    public static EventsFragment newInstance(Filter filter) {
         EventsFragment fragment = new EventsFragment();
         Bundle args = new Bundle();
-        args.putString("FILTER", Select.toString());
+        args.putString("FILTER", filter.toString());
         fragment.setArguments(args);
         return fragment;
     }
@@ -79,7 +69,7 @@ public class EventsFragment extends Fragment {
         getViewElements();
         registerEventhandlers();
         manager = getFragmentManager();
-        setLists();
+        fillList();
         return view;
     }
 
@@ -87,7 +77,7 @@ public class EventsFragment extends Fragment {
         listView_events = view.findViewById(R.id.listView_events);
     }
 
-    public void setLists(){
+    public void fillList(){
         switch (filter) {
             case ALL:
                 setAdapterData(getResources().getStringArray(R.array.test_array_all));

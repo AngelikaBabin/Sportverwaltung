@@ -1,4 +1,4 @@
-package com.example.cora.sportverwaltung.businesslogic;
+package com.example.cora.sportverwaltung.businesslogic.connection;
 
 import android.os.AsyncTask;
 

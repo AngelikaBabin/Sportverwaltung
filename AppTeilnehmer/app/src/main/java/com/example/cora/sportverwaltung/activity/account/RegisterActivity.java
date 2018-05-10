@@ -1,35 +1,31 @@
-package com.example.cora.sportverwaltung.activity;
+package com.example.cora.sportverwaltung.activity.account;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
-import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
+import com.example.cora.sportverwaltung.activity.MenuActivity;
+import com.example.cora.sportverwaltung.activity.base.ConnectionActivity;
 import com.example.cora.sportverwaltung.businesslogic.data.Account;
 
 import java.util.InputMismatchException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends ConnectionActivity {
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
     Button button_register;
     EditText editText_email, editText_name, editText_password, editText_passwordConfirm;
-
-    DatabaseConnection connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        // create database connection
-        connection = DatabaseConnection.getInstance();
 
         // get view elements
         getViewElements();

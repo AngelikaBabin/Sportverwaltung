@@ -1,4 +1,4 @@
-package com.example.cora.sportverwaltung.businesslogic;
+package com.example.cora.sportverwaltung.businesslogic.connection;
 
 import com.example.cora.sportverwaltung.businesslogic.data.Account;
 import com.example.cora.sportverwaltung.businesslogic.data.Credentials;
