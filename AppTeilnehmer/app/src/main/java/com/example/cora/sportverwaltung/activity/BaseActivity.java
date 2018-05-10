@@ -9,7 +9,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,19 +17,13 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
-import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
 
-public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    // Views
+public class BaseActivity extends ConnectionActivity implements NavigationView.OnNavigationItemSelectedListener {
     private FrameLayout contentContainer;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
     private NavigationView navigationView;
-
-    // Data
-    protected DatabaseConnection connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +53,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     private void initMisc() {
         contentContainer = findViewById(R.id.content_container);
-
-        connection = DatabaseConnection.getInstance();
     }
 
     private void initNav() {

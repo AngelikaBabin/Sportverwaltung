@@ -2,21 +2,17 @@ package com.example.cora.sportverwaltung.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
-import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
 import com.example.cora.sportverwaltung.businesslogic.data.Credentials;
-import com.example.cora.sportverwaltung.businesslogic.misc.EmailNotificator;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends ConnectionActivity {
     Button button_login, button_register, button_forgotPassword;
     EditText editText_email, editText_password;
-    DatabaseConnection connection = DatabaseConnection.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         button_forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = editText_email.getText().toString();
-                String password = "LALI";
-                EmailNotificator en = new EmailNotificator(LoginActivity.this);
-                en.send(email, "PASSWORD RECOVERY", "Your password is: " + password);
+                Toast.makeText(LoginActivity.this, "Sending recovery email", Toast.LENGTH_SHORT).show();
             }
         });
     }
