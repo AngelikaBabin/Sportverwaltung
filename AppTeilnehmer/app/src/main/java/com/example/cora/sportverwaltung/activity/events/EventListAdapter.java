@@ -47,13 +47,13 @@ public class EventListAdapter extends BaseAdapter {
 
              TextView HeadingText = (TextView) convertView.findViewById(R.id.textHeading);
              TextView Participator = (TextView) convertView.findViewById(R.id.textParticipators);
-             ImageView typeImage = (ImageView) convertView.findViewById(R.id.sporttypeImage);
+             //ImageView typeImage = (ImageView) convertView.findViewById(R.id.sporttypeImage);
 
              Veranstaltung currentVeranstaltung = (Veranstaltung)getItem(position);
 
              HeadingText.setText(currentVeranstaltung.getName());
              Participator.setText(currentVeranstaltung.getMaxTeilnehmer());
-             //ImageView.setImageResource(...);
+             //ImageView.setImageResource(R.drawable.ic_account);
         }
         return convertView;
     }
