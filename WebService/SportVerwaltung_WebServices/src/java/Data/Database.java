@@ -330,7 +330,6 @@ public class Database {
         }
         
         startNum++;
-        conn = createConnection();
         select = "INSERT INTO teilnahme "
                 + "(id_veranstaltung, id_teilnehmer, STARTING_NUMBER) VALUES(?,?,?)";
         stmt = conn.prepareStatement(select);

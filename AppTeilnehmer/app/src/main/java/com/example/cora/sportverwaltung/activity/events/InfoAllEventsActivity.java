@@ -23,7 +23,6 @@ public class InfoAllEventsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info_all_events);
         //get Json form intent
         String strEvent = this.getIntent().getExtras().getString("event");
-        selectedEvent = strEvent
         getViewElements();
         registerEventhandlers();
     }

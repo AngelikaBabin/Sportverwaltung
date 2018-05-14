@@ -11,16 +11,17 @@
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
+
         <TextView
             android:id="@+id/textView_header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="78dp"
             android:background="@drawable/input_rounded"
             android:text="@string/example_header"
             android:textAlignment="center"
             android:textSize="40sp" />
 
-        <TableLayout
+        <!--<TableLayout
             android:layout_width="match_parent"
             android:layout_height="159dp"
             android:layout_marginLeft="30dp"
@@ -105,12 +106,48 @@
                     android:textSize="25sp" />
             </TableRow>
 
-        </TableLayout>
+        </TableLayout>-->
+
+        <TextView
+            android:id="@+id/editText_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/editText_date" />
+
+        <TextView
+            android:id="@+id/editText_place"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/editText_place" />
+
+        <TextView
+            android:id="@+id/editText_participator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/editText_participator" />
+
+        <TextView
+            android:id="@+id/editText_organizer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/editText_organizer" />
 
         <TextView
             android:id="@+id/textView_Details"
             android:layout_width="match_parent"
-            android:layout_height="191dp"
+            android:layout_height="150dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:layout_marginTop="25dp"
@@ -126,5 +163,6 @@
             android:layout_marginTop="50dp"
             android:background="@drawable/btn_rounded"
             android:text="@string/text_button_teilnehmen" />
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
