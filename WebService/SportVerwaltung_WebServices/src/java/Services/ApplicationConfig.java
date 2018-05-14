@@ -26,6 +26,7 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(Services.AccountService.class);
         resources.add(Services.AuthtestService.class);
+        resources.add(Services.EmailResource.class);
         resources.add(Services.EventService.class);
         resources.add(Services.LoginService.class);
         resources.add(Services.LogoutService.class);
