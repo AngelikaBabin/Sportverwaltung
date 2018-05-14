@@ -11,9 +11,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
-import com.example.cora.sportverwaltung.businesslogic.DatabaseConnection;
+import com.example.cora.sportverwaltung.businesslogic.connection.DatabaseConnection;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
 import com.google.gson.Gson;
@@ -34,11 +35,8 @@ public class EventsFragment extends Fragment {
 
     private Filter filter;
 
-<<<<<<< HEAD:AppTeilnehmer/app/src/main/java/com/example/cora/sportverwaltung/activity/EventsFragment.java
     private DatabaseConnection connection;
 
-=======
->>>>>>> 69e124edf402b3e3bd37c9863215c0e3a3507eec:AppTeilnehmer/app/src/main/java/com/example/cora/sportverwaltung/activity/events/EventsFragment.java
     private OnFragmentInteractionListener mListener;
 
     private ListView listView_events;
@@ -80,7 +78,7 @@ public class EventsFragment extends Fragment {
         getViewElements();
         registerEventhandlers();
         manager = getFragmentManager();
-        fillList();
+        setLists();
         return view;
     }
 
@@ -88,27 +86,12 @@ public class EventsFragment extends Fragment {
         listView_events = view.findViewById(R.id.listView_events);
     }
 
-<<<<<<< HEAD:AppTeilnehmer/app/src/main/java/com/example/cora/sportverwaltung/activity/EventsFragment.java
-    public void setLists(){
+    public void setLists() {
         try {
             ArrayList<Veranstaltung> result = connection.getEvents(filter);
             setAdapterData(result);
-        }
-        catch(Exception ex){
-            Toast.makeText(getActivity(),ex.getMessage(), Toast.LENGTH_LONG).show();
-=======
-    public void fillList(){
-        switch (filter) {
-            case ALL:
-                setAdapterData(getResources().getStringArray(R.array.test_array_all));
-                break;
-            case CURRENT:
-                setAdapterData(getResources().getStringArray(R.array.test_array_toDo));
-                break;
-            case PAST:
-                setAdapterData(getResources().getStringArray(R.array.test_array_done));
-                break;
->>>>>>> 69e124edf402b3e3bd37c9863215c0e3a3507eec:AppTeilnehmer/app/src/main/java/com/example/cora/sportverwaltung/activity/events/EventsFragment.java
+        } catch (Exception ex) {
+            Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -124,10 +107,14 @@ public class EventsFragment extends Fragment {
                         startActivity(intent);
                         break;
                     case CURRENT:
-                        startActivity(new Intent(getActivity(), InfoMyEventsActivity.class));
+                        intent = new Intent(getActivity(), InfoMyEventsActivity.class);
+                        intent.putExtra("event", (new Gson().toJson(listView_events.getSelectedItem())));
+                        startActivity(intent);
                         break;
                     case PAST:
-                        startActivity(new Intent(getActivity(), InfoPastEventsActivity.class));
+                        intent = new Intent(getActivity(), InfoPastEventsActivity.class);
+                        intent.putExtra("event", (new Gson().toJson(listView_events.getSelectedItem())));
+                        startActivity(intent);
                         break;
                 }
             }
