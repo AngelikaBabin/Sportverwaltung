@@ -122,7 +122,7 @@ public class EventsFragment extends Fragment {
     }
 
     private void setAdapterData(ArrayList<Veranstaltung> entries) {
-        ArrayAdapter<Veranstaltung> adapter = new ArrayAdapter<Veranstaltung>(getActivity(), android.R.layout.simple_list_item_1, entries);
+        EventListAdapter adapter = new EventListAdapter(getActivity(),entries);
         listView_events.setAdapter(adapter);
     }
 
