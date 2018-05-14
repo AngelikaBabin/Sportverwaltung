@@ -107,10 +107,14 @@ public class EventsFragment extends Fragment {
                         startActivity(intent);
                         break;
                     case CURRENT:
-                        startActivity(new Intent(getActivity(), InfoMyEventsActivity.class));
+                        intent = new Intent(getActivity(), InfoMyEventsActivity.class);
+                        intent.putExtra("event", (new Gson().toJson(listView_events.getSelectedItem())));
+                        startActivity(intent);
                         break;
                     case PAST:
-                        startActivity(new Intent(getActivity(), InfoPastEventsActivity.class));
+                        intent = new Intent(getActivity(), InfoPastEventsActivity.class);
+                        intent.putExtra("event", (new Gson().toJson(listView_events.getSelectedItem())));
+                        startActivity(intent);
                         break;
                 }
             }

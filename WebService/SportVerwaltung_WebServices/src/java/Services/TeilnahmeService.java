@@ -7,21 +7,17 @@ package Services;
 
 import Data.Account;
 import Data.Authentification;
-import Data.Crypt;
 import Data.Database;
 import Data.Event;
 import com.google.gson.Gson;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -36,8 +32,8 @@ public class TeilnahmeService {
 
     @Context
     private UriInfo context;
-    private Gson gson;
-    private Database db;
+    private final Gson gson;
+    private final Database db;
 
     /**
      * Creates a new instance of TeilnahmeService
@@ -58,11 +54,6 @@ public class TeilnahmeService {
         throw new UnsupportedOperationException();
     }
 
-    /**
-     * PUT method for updating or creating an instance of TeilnahmeService
-     * @param content representation for the resource
-     * @return an HTTP response with content of the updated or created resource.
-     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addTeilnahme(@HeaderParam("Token") String token, @QueryParam("eventId") int eventId) {
