@@ -16,7 +16,9 @@ import Exceptions.FilterExcpetion;
 import Exceptions.RegisterExcpetion;
 import com.google.gson.Gson;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -27,6 +29,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -55,14 +58,14 @@ public class EventService {
     }
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON})
     public Response getEvents(@HeaderParam("Token") String token, @QueryParam("filter") String filter) {
         Response r;
         try{
             if(Authentification.isUserAuthenticated(token)){
                 System.out.println("Get Events");
-                Collection<Event> a = db.getEvents(Filter.valueOf(filter), Account.parseToken(token));
-                r = Response.ok().entity(a).build();
+                ArrayList<Event> events = db.getEvents(Filter.valueOf(filter), Account.parseToken(token));
+                r = Response.ok().entity(new GenericEntity<List<Event>>(events) {}).build();
             }
             else{
                 r = Response.status(Response.Status.FORBIDDEN).build();
@@ -75,12 +78,6 @@ public class EventService {
             r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
         return r;
-    }
-
-    @PUT
-    @Consumes("application/xml")
-    public void putXml(@HeaderParam("Token") String token, String content) {
-        
     }
     
     @POST

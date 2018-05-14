@@ -36,10 +36,8 @@ public class Event {
         this.name = name;
         this.sportart = sportart;
     }
-
-    Event(int aInt, int aInt0, LocalDate toLocalDate, String string, String string0, int aInt1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+    public Event(){}
 
     public int getId() {
         return id;

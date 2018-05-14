@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     android:background="#434343"
     android:orientation="vertical"
-    tools:context="com.example.cora.sportverwaltung.activity.RegisterActivity">
+    tools:context="com.example.cora.sportverwaltung.activity.account.RegisterActivity">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="133dp"
         android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/logo"
+        app:srcCompat="@drawable/ic_logo"
         android:contentDescription="@string/desc_logo" />
 
     <EditText
@@ -23,6 +23,8 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="50dp"
+        android:textColor="@color/text_dark"
+        android:textColorHint="@color/text_medium"
         android:background="@drawable/input_rounded"
         android:drawableStart="@drawable/ic_account_circle_black_24dp"
         android:ems="10"
@@ -37,8 +39,10 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="10dp"
+        android:textColor="@color/text_dark"
+        android:textColorHint="@color/text_medium"
         android:background="@drawable/input_rounded"
-        android:drawableStart="@drawable/icon_email"
+        android:drawableStart="@drawable/ic_email"
         android:ems="10"
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
@@ -51,6 +55,8 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="10dp"
+        android:textColor="@color/text_dark"
+        android:textColorHint="@color/text_medium"
         android:background="@drawable/input_rounded"
         android:drawableStart="@drawable/ic_fingerprint_black_24dp"
         android:ems="10"
@@ -65,8 +71,10 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="10dp"
+        android:textColor="@color/text_dark"
+        android:textColorHint="@color/text_medium"
         android:background="@drawable/input_rounded"
-        android:drawableStart="@drawable/icon_confirm"
+        android:drawableStart="@drawable/ic_confirm"
         android:ems="10"
         android:hint="@string/hint_confirmPassword"
         android:inputType="textPassword"

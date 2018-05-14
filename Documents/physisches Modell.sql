@@ -35,7 +35,7 @@ CREATE TABLE Sportart(
   CONSTRAINT pk_Sportart PRIMARY KEY(name)
 );
 
-CREATE SEQUENCE seq_ort_id START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE seq_ort_id START WITH 0 INCREMENT BY 1  MINVALUE 0;
 CREATE TABLE Ort(
   id INTEGER,
   name VARCHAR2(200),
@@ -78,8 +78,8 @@ CREATE TABLE Veranstaltung(
   
   CONSTRAINT pk_veranstaltung PRIMARY KEY(id),
   CONSTRAINT fk_veranstaltung_sportart FOREIGN KEY(sportart) REFERENCES Sportart(name),
-  CONSTRAINT fk_veranstaltung_id_veranst FOREIGN KEY(id_veranstalter) REFERENCES Veranstalter(id_account)
-  CONSTRAINT fk_veranstaltung_laction FOREIGN KEY(location) REFERENCES Location(id)
+  CONSTRAINT fk_veranstaltung_id_veranst FOREIGN KEY(id_veranstalter) REFERENCES Veranstalter(id_account),
+  CONSTRAINT fk_veranstaltung_location FOREIGN KEY(location) REFERENCES ort(id)
 );
 
 --Teilnahme
@@ -90,7 +90,6 @@ CREATE TABLE Teilnahme(
   score INTEGER,
   
   CONSTRAINT pk_teilnahme PRIMARY KEY(id_veranstaltung, id_teilnehmer),
-  CONSTRAINT uq_teilnahme_starting_number UNIQUE(starting_number),
   CONSTRAINT fk_teilnahme_id_veranstaltung FOREIGN KEY(id_veranstaltung) REFERENCES Veranstaltung(id),
   CONSTRAINT fk_teilnahme_id_teilnehmer FOREIGN KEY(id_teilnehmer) REFERENCES Teilnehmer(id_account)
 );
@@ -118,8 +117,8 @@ INSERT INTO Veranstalter VALUES(4);
 INSERT INTO Veranstalter VALUES(5);
 
 INSERT INTO Teilnehmer VALUES(1, 0);
-INSERT INTO Teilnehmer VALUES(2, 10);
-INSERT INTO Teilnehmer VALUES(3, 100);
+INSERT INTO Teilnehmer VALUES(2, 117);
+INSERT INTO Teilnehmer VALUES(3, 17503);
 
 INSERT INTO Veranstaltung VALUES(seq_veranstaltung_id.NEXTVAL, 'Rote Nasen Lauf', 'Laufen', 4, 1, DATE '2018-03-20', 'Ein Lauf.', null, null);
 INSERT INTO Veranstaltung VALUES(seq_veranstaltung_id.NEXTVAL, 'Basketballspiel', 'Basketball', 5, 2, DATE '2018-11-14', 'Ein spannedes Spiel!', 6, 20);
