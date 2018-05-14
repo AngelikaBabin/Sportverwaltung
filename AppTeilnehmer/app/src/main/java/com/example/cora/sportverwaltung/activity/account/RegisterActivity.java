@@ -8,8 +8,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
-import com.example.cora.sportverwaltung.activity.MenuActivity;
 import com.example.cora.sportverwaltung.activity.base.ConnectionActivity;
+import com.example.cora.sportverwaltung.activity.events.EventsSwipeActivity;
 import com.example.cora.sportverwaltung.businesslogic.data.Account;
 
 import java.util.InputMismatchException;
@@ -64,7 +64,7 @@ public class RegisterActivity extends ConnectionActivity {
 
                     // open menu activity if successful
                     if(token != null) {
-                        startActivity(new Intent(RegisterActivity.this, MenuActivity.class));
+                        startActivity(new Intent(RegisterActivity.this, EventsSwipeActivity.class));
                     } else {
                         Toast.makeText(RegisterActivity.this, "could not create account", Toast.LENGTH_LONG).show();
                     }

@@ -23,8 +23,12 @@ public class InfoAllEventsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_all_events);
         //get Json from intent
-        selectedEvent = new Gson().fromJson(this.getIntent().getExtras().getString("event"), Veranstaltung.class);
+        getViewElements();
         registerEventhandlers();
+
+        selectedEvent = new Gson().fromJson(this.getIntent().getExtras().getString("event"), Veranstaltung.class);
+
+        //textView_header.setText(selectedEvent.getName());
     }
 
     private void getViewElements() {
