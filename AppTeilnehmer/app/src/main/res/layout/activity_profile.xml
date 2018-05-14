@@ -8,7 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <ImageView
             android:id="@+id/header_cover_image"
             android:layout_width="match_parent"
@@ -18,7 +17,6 @@
             android:scaleType="centerCrop" />
 
         <android.support.v4.widget.CircleImageView
-
             android:id="@+id/profile"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -37,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/header_cover_image"
-            android:background="#ebca0707"
+            android:background="@color/primary"
             android:elevation="4dp"
             android:paddingBottom="24dp">
 
@@ -48,7 +46,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="80dp"
                 android:text="@string/example_username"
-                android:textColor="#fff"
+                android:textColor="@color/text_light"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 

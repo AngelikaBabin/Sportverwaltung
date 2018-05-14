@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.activity.base.ConnectionActivity;
-import com.example.cora.sportverwaltung.activity.events.EventsSwipeActivity;
 import com.example.cora.sportverwaltung.businesslogic.data.Account;
 
 import java.util.InputMismatchException;
@@ -60,13 +59,14 @@ public class RegisterActivity extends ConnectionActivity {
                     Account account = new Account(email, name, password);
 
                     // register in database
-                    String token = connection.registerTeilnehmer(account);
+                    int code = connection.register(account);
+                    //String token = "asdf";
 
                     // open menu activity if successful
-                    if(token != null) {
-                        startActivity(new Intent(RegisterActivity.this, EventsSwipeActivity.class));
+                    if(code == 200) {
+                        startActivity(new Intent(RegisterActivity.this, VerifyActivity.class));
                     } else {
-                        Toast.makeText(RegisterActivity.this, "could not create account", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this, code + " - could not create account", Toast.LENGTH_LONG).show();
                     }
 
                 } catch(NullPointerException ex){

@@ -42,7 +42,8 @@
         <activity
             android:name=".activity.settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".activity.account.VerifyActivity"></activity>
+        <activity android:name=".activity.account.VerifyActivity" />
+        <activity android:name=".activity.account.RecoveryActivity"></activity>
     </application>
 
 </manifest>

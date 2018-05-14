@@ -54,7 +54,7 @@ public class ControllerSync extends AsyncTask<String, Void, AsyncResult<String>>
                 write(connection, httpMethod, payload);
             }
 
-            result = new AsyncResult<>(read(connection, ResultType.valueOf(whatToRead)));
+            result = read(connection, ResultType.valueOf(whatToRead));
 
             connection.disconnect();
 
@@ -77,11 +77,10 @@ public class ControllerSync extends AsyncTask<String, Void, AsyncResult<String>>
         connection.getResponseCode();
     }
 
-    private String read(HttpURLConnection connection, ResultType resultType) throws IOException {
-        String result = null;
+    private AsyncResult read(HttpURLConnection connection, ResultType resultType) throws IOException {
+        AsyncResult result = null;
         switch (resultType) {
             case CONTENT:
-                // read responseText
                 BufferedReader reader = new BufferedReader(new InputStreamReader((connection.getInputStream())));
                 StringBuilder sb = new StringBuilder();
                 String line;
@@ -90,16 +89,15 @@ public class ControllerSync extends AsyncTask<String, Void, AsyncResult<String>>
                     sb.append(line);
                 }
 
-                result = sb.toString();
+                result = new AsyncResult<String>(sb.toString());
                 reader.close();
                 break;
             case TOKEN:
-                // read token header
-                result = connection.getHeaderField("Token");
-                token = result;
+                token = connection.getHeaderField("Token");
+                result = new AsyncResult<String>(token);
                 break;
             case STATUS:
-                result = String.valueOf(connection.getResponseCode());
+                result = new AsyncResult<Integer>(connection.getResponseCode());
                 break;
         }
 
