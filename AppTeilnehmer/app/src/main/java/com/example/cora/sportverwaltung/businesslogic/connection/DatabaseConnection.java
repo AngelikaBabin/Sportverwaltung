@@ -43,6 +43,8 @@ public class DatabaseConnection {
         this.url = url;
     }
 
+    public DatabaseConnection() { }
+
     public String registerTeilnehmer(Account account) throws Exception {
         String accountString = GSON.toJson(account, Account.class);
 
@@ -115,5 +117,4 @@ public class DatabaseConnection {
 
         return result.getResult();
     }
-
 }
