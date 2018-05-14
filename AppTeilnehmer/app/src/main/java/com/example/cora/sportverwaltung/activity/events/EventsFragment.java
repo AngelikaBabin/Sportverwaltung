@@ -11,9 +11,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
+import com.example.cora.sportverwaltung.businesslogic.connection.DatabaseConnection;
+import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 
 /**
@@ -28,6 +34,8 @@ public class EventsFragment extends Fragment {
     private static final String ARG_Filter = "filter";
 
     private Filter filter;
+
+    private DatabaseConnection connection;
 
     private OnFragmentInteractionListener mListener;
 
@@ -60,6 +68,7 @@ public class EventsFragment extends Fragment {
         if (getArguments() != null) {
             filter = Filter.valueOf(getArguments().getString("FILTER"));
         }
+        connection = DatabaseConnection.getInstance();
 
     }
 
@@ -69,7 +78,7 @@ public class EventsFragment extends Fragment {
         getViewElements();
         registerEventhandlers();
         manager = getFragmentManager();
-        fillList();
+        setLists();
         return view;
     }
 
@@ -77,17 +86,12 @@ public class EventsFragment extends Fragment {
         listView_events = view.findViewById(R.id.listView_events);
     }
 
-    public void fillList(){
-        switch (filter) {
-            case ALL:
-                setAdapterData(getResources().getStringArray(R.array.test_array_all));
-                break;
-            case CURRENT:
-                setAdapterData(getResources().getStringArray(R.array.test_array_toDo));
-                break;
-            case PAST:
-                setAdapterData(getResources().getStringArray(R.array.test_array_done));
-                break;
+    public void setLists() {
+        try {
+            ArrayList<Veranstaltung> result = connection.getEvents(filter);
+            setAdapterData(result);
+        } catch (Exception ex) {
+            Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -95,9 +99,12 @@ public class EventsFragment extends Fragment {
         listView_events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent;
                 switch (filter) {
                     case ALL:
-                        startActivity(new Intent(getActivity(), InfoAllEventsActivity.class));
+                        intent = new Intent(getActivity(), InfoAllEventsActivity.class);
+                        intent.putExtra("event", (new Gson().toJson(listView_events.getSelectedItem())));
+                        startActivity(intent);
                         break;
                     case CURRENT:
                         startActivity(new Intent(getActivity(), InfoMyEventsActivity.class));
@@ -110,8 +117,8 @@ public class EventsFragment extends Fragment {
         });
     }
 
-    private void setAdapterData(String[] entries) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, entries);
+    private void setAdapterData(ArrayList<Veranstaltung> entries) {
+        ArrayAdapter<Veranstaltung> adapter = new ArrayAdapter<Veranstaltung>(getActivity(), android.R.layout.simple_list_item_1, entries);
         listView_events.setAdapter(adapter);
     }
 

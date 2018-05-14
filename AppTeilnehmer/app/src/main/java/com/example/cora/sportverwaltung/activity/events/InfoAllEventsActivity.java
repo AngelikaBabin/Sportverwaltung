@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.cora.sportverwaltung.R;
+import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 
 public class InfoAllEventsActivity extends AppCompatActivity {
 
@@ -14,12 +15,15 @@ public class InfoAllEventsActivity extends AppCompatActivity {
     TextView textView_date, textView_place, textView_participator, textView_organizer;
     Button button_participate;
 
+    private Veranstaltung selectedEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_all_events);
-
+        //get Json form intent
+        String strEvent = this.getIntent().getExtras().getString("event");
+        selectedEvent = strEvent
         getViewElements();
         registerEventhandlers();
     }
