@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
-import com.google.gson.Gson;
 
 public class InfoAllEventsActivity extends AppCompatActivity {
 
@@ -22,13 +21,10 @@ public class InfoAllEventsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_all_events);
-        //get Json from intent
+        //get Json form intent
+        String strEvent = this.getIntent().getExtras().getString("event");
         getViewElements();
         registerEventhandlers();
-
-        selectedEvent = new Gson().fromJson(this.getIntent().getExtras().getString("event"), Veranstaltung.class);
-
-        //textView_header.setText(selectedEvent.getName());
     }
 
     private void getViewElements() {

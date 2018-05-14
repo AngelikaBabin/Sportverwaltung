@@ -30,7 +30,7 @@ public class DatabaseConnection {
     public static DatabaseConnection getInstance() {
         if (connection == null) {
             try {
-                URL url = new URL("http", "192.168.43.31", 8080, "SportVerwaltung_WebServices/webresources");
+                URL url = new URL("http", "192.168.193.150", 8080, "SportVerwaltung_WebServices/webresources");
                 connection = new DatabaseConnection(url);
             } catch (MalformedURLException ex) {
                 ex.printStackTrace();
