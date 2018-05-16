@@ -91,8 +91,8 @@ public class EventsFragment extends Fragment {
 
     public void setLists() {
         try {
-            //ArrayList<Veranstaltung> result = connection.getEvents(filter);
-            ArrayList<Veranstaltung> result = createTestData();
+            ArrayList<Veranstaltung> result = connection.getEvents(filter);
+            //ArrayList<Veranstaltung> result = createTestData();
             setAdapterData(result);
         } catch (Exception ex) {
             Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG).show();
@@ -161,20 +161,20 @@ public class EventsFragment extends Fragment {
 
     //Testing without DatabaseConnection (uncomment)
 
-    private ArrayList<Veranstaltung> createTestData()
-    {
-        ArrayList<Veranstaltung> testlist = new ArrayList<Veranstaltung>();
-        Veranstaltung v;
-
-        v = new Veranstaltung(1,"Kristian", "1", null, new Location("Oslo", 10,10), Sportart.BALLSPORT, null, 30,40);
-        testlist.add(v);
-
-        v = new Veranstaltung(2,"Cora", "Test2", null, new Location("Moskau", 10,10), Sportart.RENNSPORT, null, 30,40);
-        testlist.add(v);
-
-        v = new Veranstaltung(3,"Nico", "Test3", null, new Location("Klagenfurt", 10,10), Sportart.RENNSPORT, null, 30,40);
-        testlist.add(v);
-
-        return testlist;
-    }
+//    private ArrayList<Veranstaltung> createTestData()
+//    {
+//        ArrayList<Veranstaltung> testlist = new ArrayList<Veranstaltung>();
+//        Veranstaltung v;
+//
+//        v = new Veranstaltung(1,"Kristian", "1", null, new Location("Oslo", 10,10), Sportart.BALLSPORT, null, 30,40);
+//        testlist.add(v);
+//
+//        v = new Veranstaltung(2,"Cora", "Test2", null, new Location("Moskau", 10,10), Sportart.RENNSPORT, null, 30,40);
+//        testlist.add(v);
+//
+//        v = new Veranstaltung(3,"Nico", "Test3", null, new Location("Klagenfurt", 10,10), Sportart.RENNSPORT, null, 30,40);
+//        testlist.add(v);
+//
+//        return testlist;
+//    }
 }
