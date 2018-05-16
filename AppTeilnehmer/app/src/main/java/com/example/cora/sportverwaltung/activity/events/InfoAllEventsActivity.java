@@ -25,6 +25,15 @@ public class InfoAllEventsActivity extends AppCompatActivity {
         String strEvent = this.getIntent().getExtras().getString("event");
         getViewElements();
         registerEventhandlers();
+        setValuesInFields();
+    }
+
+    private void setValuesInFields() {
+        textView_header.setText(selectedEvent.getName());
+        textView_date.setText(selectedEvent.getDatetime().toString());
+        textView_place.setText(selectedEvent.getLocation().toString());
+        textView_participator.setText(selectedEvent.getMaxTeilnehmer());
+        textView_organizer.setText(selectedEvent.getVeranstalter().toString());
     }
 
     private void getViewElements() {

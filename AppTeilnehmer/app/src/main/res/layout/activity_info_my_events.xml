@@ -40,15 +40,6 @@
             android:text="@string/editText_place" />
 
         <TextView
-            android:id="@+id/textView_participator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/editText_participator" />
-
-        <TextView
             android:id="@+id/textView_organizer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

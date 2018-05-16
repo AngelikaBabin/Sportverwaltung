@@ -83,6 +83,14 @@
         <item>Basket Ball</item>
         <item>Chess</item>
     </string-array>
+
+    <string-array name="test_array_Teilnehmer">
+        <item>Angie</item>
+        <item>Chrisi</item>
+        <item>Nico</item>
+        <item>Kristian</item>
+    </string-array>
+
     <string name="title_activity_events">EventsActivity</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -153,7 +161,7 @@
     <string name="title_logout">Logout</string>
     <string name="editText_date">Date:</string>
     <string name="editText_place">Place:</string>
-    <string name="editText_participator">Participator:</string>
+    <string name="editText_participator">Max. Participators:</string>
     <string name="editText_organizer">Organizer:</string>
     <string name="register_success">Registered successfully. Check your inbox for the verification-email.</string>
     <string name="text_recover">Recover</string>
