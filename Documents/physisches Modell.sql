@@ -24,6 +24,7 @@ CREATE TABLE Account(
   email VARCHAR2(100),
   password VARCHAR2(100),
   isVerified  NUMBER(1,0) default 0 not null,
+  timestamp DATE default sysdate,
   
   CONSTRAINT pk_account PRIMARY KEY(id),
   CONSTRAINT uq_account_email UNIQUE(email),
@@ -97,11 +98,11 @@ CREATE TABLE Teilnahme(
 );
 
 --Insert Test Data
-INSERT INTO Account VALUES(seq_account_id.NEXTVAL, 'NicoKandut', 'nico.kandut@gmail.com', 'nk', 0);
-INSERT INTO Account VALUES(seq_account_id.NEXTVAL, 'AngelikaBabin', 'babin.angelika@gmail.com', 'ab', 0);
-INSERT INTO Account VALUES(seq_account_id.NEXTVAL, 'ChristofKraschl', 'kraschlc@edu.htl-villach.at', 'ck', 0);
-INSERT INTO Account VALUES(seq_account_id.NEXTVAL, 'CoraKumnig', 'corakumnig@gmail.com', 'ck', 0);
-INSERT INTO Account VALUES(seq_account_id.NEXTVAL, 'KristianRajic', 'rajic-kristion59560@gmx.at', 'kr', 0);
+INSERT INTO Account VALUES(seq_account_id.NEXTVAL, 'NicoKandut', 'nico.kandut@gmail.com', 'nk', 0, sysdate);
+INSERT INTO Account VALUES(seq_account_id.NEXTVAL, 'AngelikaBabin', 'babin.angelika@gmail.com', 'ab', 0, sysdate);
+INSERT INTO Account VALUES(seq_account_id.NEXTVAL, 'ChristofKraschl', 'kraschlc@edu.htl-villach.at', 'ck', 0, sysdate);
+INSERT INTO Account VALUES(seq_account_id.NEXTVAL, 'CoraKumnig', 'corakumnig@gmail.com', 'ck', 0, sysdate);
+INSERT INTO Account VALUES(seq_account_id.NEXTVAL, 'KristianRajic', 'rajic-kristion59560@gmx.at', 'kr', 0, sysdate);
 
 INSERT INTO Sportart VALUES('Fussball');
 INSERT INTO Sportart VALUES('Basketball');
