@@ -27,8 +27,8 @@ public class ControllerSync extends AsyncTask<String, Void, AsyncResult<String>>
     }
 
     @Override
-    protected AsyncResult<String> doInBackground(String... params) {
-        AsyncResult<String> result;
+    protected AsyncResult doInBackground(String... params) {
+        AsyncResult result;
 
         // extract request params for clarity
         HttpMethod httpMethod = HttpMethod.valueOf(params[0]);
@@ -38,7 +38,7 @@ public class ControllerSync extends AsyncTask<String, Void, AsyncResult<String>>
 
         try {
             // set payload or querystring
-            if(payload != null && httpMethod == HttpMethod.GET){
+            if (payload != null && httpMethod == HttpMethod.GET) {
                 route += "?" + payload;
             }
 
@@ -50,7 +50,7 @@ public class ControllerSync extends AsyncTask<String, Void, AsyncResult<String>>
                 connection.setRequestProperty("Token", token);
             }
 
-            if(payload != null && httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT || httpMethod == HttpMethod.DELETE) {
+            if (payload != null && httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT || httpMethod == HttpMethod.DELETE) {
                 write(connection, httpMethod, payload);
             }
 
@@ -89,15 +89,15 @@ public class ControllerSync extends AsyncTask<String, Void, AsyncResult<String>>
                     sb.append(line);
                 }
 
-                result = new AsyncResult<String>(sb.toString());
+                result = new AsyncResult<>(sb.toString());
                 reader.close();
                 break;
             case TOKEN:
                 token = connection.getHeaderField("Token");
-                result = new AsyncResult<String>(token);
+                result = new AsyncResult<>(token);
                 break;
             case STATUS:
-                result = new AsyncResult<Integer>(connection.getResponseCode());
+                result = new AsyncResult<>(connection.getResponseCode());
                 break;
         }
         return result;
