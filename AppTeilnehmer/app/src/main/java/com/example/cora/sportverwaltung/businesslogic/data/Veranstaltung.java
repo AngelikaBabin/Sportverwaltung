@@ -15,7 +15,7 @@ public class Veranstaltung {
     private Location location;
     private Sportart sportart;
     private LocalDate datetime;
-    private int minTeilnehmer;
+    private int minTeilnehmer; //ToDo: Remove
     private int maxTeilnehmer;
 
     public Veranstaltung(int id, String name, String details, Veranstalter veranstalter, Location location, Sportart sportart, LocalDate datetime, int minTeilnehmer, int maxTeilnehmer) {

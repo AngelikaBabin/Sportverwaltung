@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.businesslogic.connection.DatabaseConnection;
+import com.example.cora.sportverwaltung.businesslogic.data.Location;
+import com.example.cora.sportverwaltung.businesslogic.data.Sportart;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstalter;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
@@ -89,8 +91,8 @@ public class EventsFragment extends Fragment {
 
     public void setLists() {
         try {
-            ArrayList<Veranstaltung> result = connection.getEvents(filter);
-            //ArrayList<Veranstaltung> result = createTestData();
+            //ArrayList<Veranstaltung> result = connection.getEvents(filter);
+            ArrayList<Veranstaltung> result = createTestData();
             setAdapterData(result);
         } catch (Exception ex) {
             Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG).show();
@@ -124,8 +126,8 @@ public class EventsFragment extends Fragment {
     }
 
     private void setAdapterData(ArrayList<Veranstaltung> entries) {
-        //EventListAdapter adapter = new EventListAdapter(getActivity().getApplicationContext(),entries);
-        ArrayAdapter<Veranstaltung> adapter = new ArrayAdapter<Veranstaltung>(getActivity(), android.R.layout.simple_list_item_1, entries);
+        EventListAdapter adapter = new EventListAdapter(getActivity(),entries);
+        //ArrayAdapter<Veranstaltung> adapter = new ArrayAdapter<Veranstaltung>(getActivity(), android.R.layout.simple_list_item_1, entries);
         listView_events.setAdapter(adapter);
     }
 
@@ -159,18 +161,20 @@ public class EventsFragment extends Fragment {
 
     //Testing without DatabaseConnection (uncomment)
 
-//    private ArrayList<Veranstaltung> createTestData()
-//    {
-//        ArrayList<Veranstaltung> testlist = new ArrayList<Veranstaltung>();
-//        Veranstaltung v = new Veranstaltung(1,"Kristian", "Test1", null, null, null, null, 30,50);
-//        testlist.add(v);
-//
-//        v = new Veranstaltung(1,"Cora", "Test2", null, null, null, null, 30,40);
-//        testlist.add(v);
-//
-//        v = new Veranstaltung(1,"Nico", "Test3", null, null, null, null, 30,40);
-//        testlist.add(v);
-//
-//        return testlist;
-//    }
+    private ArrayList<Veranstaltung> createTestData()
+    {
+        ArrayList<Veranstaltung> testlist = new ArrayList<Veranstaltung>();
+        Veranstaltung v;
+
+        v = new Veranstaltung(1,"Kristian", "1", null, new Location("Oslo", 10,10), Sportart.BALLSPORT, null, 30,40);
+        testlist.add(v);
+
+        v = new Veranstaltung(2,"Cora", "Test2", null, new Location("Moskau", 10,10), Sportart.RENNSPORT, null, 30,40);
+        testlist.add(v);
+
+        v = new Veranstaltung(3,"Nico", "Test3", null, new Location("Klagenfurt", 10,10), Sportart.RENNSPORT, null, 30,40);
+        testlist.add(v);
+
+        return testlist;
+    }
 }

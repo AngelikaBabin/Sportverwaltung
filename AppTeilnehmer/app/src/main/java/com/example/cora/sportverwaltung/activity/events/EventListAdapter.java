@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import com.example.cora.sportverwaltung.R;
 
@@ -44,16 +46,30 @@ public class EventListAdapter extends BaseAdapter {
         if(convertView == null)
         {
              convertView = thisInflator.inflate(R.layout.row_layout, parent, false);
-
              TextView HeadingText = (TextView) convertView.findViewById(R.id.textHeading);
-             TextView Participator = (TextView) convertView.findViewById(R.id.textParticipators);
-             //ImageView typeImage = (ImageView) convertView.findViewById(R.id.sporttypeImage);
+             TextView Date = (TextView) convertView.findViewById(R.id.textDate);
+             TextView Location = (TextView) convertView.findViewById(R.id.textLocation);
+             ImageView typeImage = (ImageView) convertView.findViewById(R.id.sporttypeImage);
 
              Veranstaltung currentVeranstaltung = (Veranstaltung)getItem(position);
 
-             HeadingText.setText(currentVeranstaltung.getName());
-             Participator.setText(currentVeranstaltung.getMaxTeilnehmer());
-             //ImageView.setImageResource(R.drawable.ic_account);
+             HeadingText.setText(String.valueOf(currentVeranstaltung.getName()));
+             //Date.setText(currentVeranstaltung.getDatetime().toString());
+             Location.setText(String.valueOf(currentVeranstaltung.getLocation().getName()));
+
+             switch(currentVeranstaltung.getSportart())
+             {
+                 case BALLSPORT:
+                     typeImage.setImageResource(R.drawable.ic_account);
+                     break;
+
+                 case RENNSPORT:
+                     typeImage.setImageResource(R.drawable.ic_confirm);
+                     break;
+                 default:
+                     typeImage.setImageResource(R.drawable.ic_email);
+             }
+
         }
         return convertView;
     }
