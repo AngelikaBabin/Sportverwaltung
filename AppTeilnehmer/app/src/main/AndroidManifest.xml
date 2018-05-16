@@ -17,7 +17,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".activity.MenuActivity" />
         <activity android:name=".activity.account.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,6 +42,8 @@
         <activity
             android:name=".activity.settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
+        <activity android:name=".activity.account.VerifyActivity" />
+        <activity android:name=".activity.account.RecoveryActivity"></activity>
     </application>
 
 </manifest>

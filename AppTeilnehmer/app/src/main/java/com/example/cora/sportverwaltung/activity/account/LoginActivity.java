@@ -38,6 +38,7 @@ public class LoginActivity extends ConnectionActivity {
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //startActivity(new Intent(LoginActivity.this, EventsSwipeActivity.class));
                 try {
                     String email = editText_email.getText().toString();
                     String password = editText_password.getText().toString();

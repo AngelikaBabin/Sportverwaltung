@@ -113,8 +113,11 @@ public class BaseActivity extends ConnectionActivity implements NavigationView.O
                     startActivity(new Intent(this, EventsSwipeActivity.class));
                     break;
                 case R.id.nav_logout:
-                    connection.logout();
-                    startActivity(new Intent(this, LoginActivity.class));
+                    int status = connection.logout();
+                    if(status == 200)
+                        startActivity(new Intent(this, LoginActivity.class));
+                    else
+                        throw new Exception("ERROR: " + status);
                     break;
             }
         } catch (Exception e) {

@@ -8,6 +8,7 @@ import com.example.cora.sportverwaltung.businesslogic.misc.AsyncResult;
 import com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod;
 import com.example.cora.sportverwaltung.businesslogic.misc.ResultType;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -30,7 +31,7 @@ public class DatabaseConnection {
     public static DatabaseConnection getInstance() {
         if (connection == null) {
             try {
-                URL url = new URL("http", "192.168.43.31", 8080, "SportVerwaltung_WebServices/webresources");
+                URL url = new URL("http", "192.168.193.150", 8080, "SportVerwaltung_WebServices/webresources");
                 connection = new DatabaseConnection(url);
             } catch (MalformedURLException ex) {
                 ex.printStackTrace();
@@ -43,59 +44,86 @@ public class DatabaseConnection {
         this.url = url;
     }
 
-    public String registerTeilnehmer(Account account) throws Exception {
+    public DatabaseConnection() { }
+
+    //region USER
+    public int register(Account account) throws Exception {
         String accountString = GSON.toJson(account, Account.class);
 
-        String result = get(HttpMethod.POST, "teilnehmer", ResultType.TOKEN, accountString);
+        AsyncResult<Integer> result = get(HttpMethod.POST, "teilnehmer", ResultType.STATUS, accountString);
 
-        return result;
+        return result.getResult();
     }
 
     public String login(Credentials credentials) throws Exception {
         String accountString = GSON.toJson(credentials, Credentials.class);
-        String result = get(HttpMethod.POST, "login", ResultType.TOKEN, accountString);
-        return result;
+        AsyncResult<String> result = get(HttpMethod.POST, "login", ResultType.TOKEN, accountString);
+        return result.getResult();
     }
 
-    public String logout() throws Exception {
-        String result = get(HttpMethod.POST, "logout", ResultType.STATUS);
-        return result;
+    public int logout() throws Exception {
+        AsyncResult<Integer> result = get(HttpMethod.GET, "logout", ResultType.STATUS);
+
+        return result.getResult();
     }
 
+    public int sendRecoveryEmail(String email) throws Exception {
+        JsonObject json = new JsonObject();
+        json.addProperty("email", email);
+
+        AsyncResult<Integer> result = get(HttpMethod.POST, "recover", ResultType.STATUS, json.getAsString());
+
+        return result.getResult();
+    }
+
+    public int deleteAccount(Credentials credentials) throws Exception {
+        String accountString = GSON.toJson(credentials, Credentials.class);
+
+        AsyncResult<Integer> result = get(HttpMethod.DELETE, "delete", ResultType.STATUS, accountString);
+
+        return result.getResult();
+    }
+
+    public int updateAccount(Account account) throws Exception {
+        String accountString = GSON.toJson(account, Account.class);
+
+        AsyncResult<Integer> result = get(HttpMethod.PUT, "update", ResultType.STATUS, accountString);
+
+        return result.getResult();
+    }
+
+    //endregion
+
+    //region EVENTS
     public ArrayList<Veranstaltung> getEvents(Filter filter) throws Exception {
-        String responseText = get(HttpMethod.GET, "event", ResultType.CONTENT, "filter=" + filter.toString());
+        AsyncResult<String> result = get(HttpMethod.GET, "event", ResultType.CONTENT, "filter=" + filter.toString());
         Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
         }.getType();
-        ArrayList<Veranstaltung> events = GSON.fromJson(responseText, collectionType);
+
+        ArrayList<Veranstaltung> events = GSON.fromJson(result.getResult(), collectionType);
 
         return events;
     }
 
     public Veranstaltung getEvent(int eventId) throws Exception {
-        String responseText = get(HttpMethod.GET, "event", ResultType.CONTENT, "id=" + eventId);
+        AsyncResult<String> result = get(HttpMethod.GET, "event", ResultType.CONTENT, "id=" + eventId);
         Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
         }.getType();
-        ArrayList<Veranstaltung> events = GSON.fromJson(responseText, collectionType);
+        ArrayList<Veranstaltung> events = GSON.fromJson(result.getResult(), collectionType);
 
         return events.get(0);
     }
 
     public int participate(final int _eventId, final int _userId) throws Exception {
         String payload = ""; // TODO
-        String responseText = get(HttpMethod.POST, "event", ResultType.STATUS, payload);
+        AsyncResult<Integer> result = get(HttpMethod.POST, "event", ResultType.STATUS, payload);
 
-        return Integer.parseInt(responseText);
+        return result.getResult();
     }
 
-    public int deleteAccount() {
-        return 500;
-    }
+    //endregion
 
-    public int updateAccount() {
-        return 500;
-    }
-
-    private String get(HttpMethod httpMethod, String route, ResultType resultType, String... params) throws Exception {
+    private AsyncResult get(HttpMethod httpMethod, String route, ResultType resultType, String... params) throws Exception {
         ControllerSync controller = new ControllerSync(url);
 
         ArrayList<String> connectionParams = new ArrayList<>();
@@ -113,7 +141,6 @@ public class DatabaseConnection {
             throw result.getError();
         }
 
-        return result.getResult();
+        return result;
     }
-
 }
