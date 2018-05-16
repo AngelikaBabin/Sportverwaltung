@@ -1,73 +1,68 @@
-package com.example.cora.sportverwaltung.businesslogic.connection;
+package com.example.cora.sportverwaltungveranstalter.businesslogic.connection;
 
 import android.os.AsyncTask;
 
-import com.example.cora.sportverwaltung.businesslogic.misc.AsyncResult;
-import com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod;
-import com.example.cora.sportverwaltung.businesslogic.misc.ResultType;
+import com.example.cora.sportverwaltungveranstalter.businesslogic.misc.AsyncResult;
+import com.example.cora.sportverwaltungveranstalter.businesslogic.misc.HttpMethod;
+import com.example.cora.sportverwaltungveranstalter.businesslogic.misc.ResultType;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.ProtocolException;
 import java.net.URL;
 
-/**
- * Created by nicok on 18.04.2018 ^-^ ^-^.
- */
+import static com.example.cora.sportverwaltungveranstalter.businesslogic.misc.ResultType.CONTENT;
+import static com.example.cora.sportverwaltungveranstalter.businesslogic.misc.ResultType.STATUS;
+import static com.example.cora.sportverwaltungveranstalter.businesslogic.misc.ResultType.TOKEN;
 
-public class ControllerSync extends AsyncTask<String, Void, AsyncResult<String>> {
+public class ControllerSync extends AsyncTask <String, Void, AsyncResult<String>>{
     private URL url;
     private static String token;
 
-    ControllerSync(URL url) {
-        this.url = url;
-    }
+    ControllerSync(URL url){this.url = url;}
 
     @Override
-    protected AsyncResult<String> doInBackground(String... params) {
+    protected AsyncResult<String> doInBackground(String... params){
         AsyncResult<String> result;
 
-        // extract request params for clarity
         HttpMethod httpMethod = HttpMethod.valueOf(params[0]);
         String route = params[1];
         String whatToRead = params[2];
         String payload = (params.length >= 4) ? params[3] : null;
 
         try {
-            // set payload or querystring
-            if(payload != null && httpMethod == HttpMethod.GET){
+            if (payload != null && httpMethod == HttpMethod.GET){
                 route += "?" + payload;
             }
 
-            url = new URL(url + "/" + route);
+            url = new URL(url+ "/" + route);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-            // set token header if logged in
-            if (token != null) {
+
+            if (token != null){ // token is null if nobody is logged in
                 connection.setRequestProperty("Token", token);
             }
 
-            if(payload != null && httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT || httpMethod == HttpMethod.DELETE) {
+            if (payload != null && httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT || httpMethod == HttpMethod.DELETE){
                 write(connection, httpMethod, payload);
             }
 
             result = new AsyncResult<>(read(connection, ResultType.valueOf(whatToRead)));
 
             connection.disconnect();
-
-        } catch (Exception ex) {
+        }
+        catch(Exception ex){
             result = new AsyncResult<>(ex);
         }
-
         return result;
     }
 
-    private void write(HttpURLConnection connection, HttpMethod httpMethod, String json) throws IOException {
+    private void write (HttpURLConnection connection, HttpMethod httpMethod, String json) throws Exception {
         connection.setRequestMethod(httpMethod.toString());
-        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setRequestProperty("Content-Type", "appliocation/json");
 
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
         writer.write(json);
@@ -77,27 +72,28 @@ public class ControllerSync extends AsyncTask<String, Void, AsyncResult<String>>
         connection.getResponseCode();
     }
 
-    private String read(HttpURLConnection connection, ResultType resultType) throws IOException {
+
+    private String read(HttpURLConnection connection, ResultType resType) throws Exception{
         String result = null;
-        switch (resultType) {
-            case CONTENT:
-                // read responseText
-                BufferedReader reader = new BufferedReader(new InputStreamReader((connection.getInputStream())));
+        switch (resType){
+            case CONTENT: //to get data from the database
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 StringBuilder sb = new StringBuilder();
                 String line;
 
-                while ((line = reader.readLine()) != null) {
+                while((line = reader.readLine()) != null){
                     sb.append(line);
                 }
 
                 result = sb.toString();
                 reader.close();
                 break;
-            case TOKEN:
-                // read token header
+
+            case TOKEN: // if a Login or register was done
                 result = connection.getHeaderField("Token");
                 token = result;
                 break;
+
             case STATUS:
                 result = String.valueOf(connection.getResponseCode());
                 break;

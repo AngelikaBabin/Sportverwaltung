@@ -1,4 +1,4 @@
-package com.example.cora.sportverwaltungveranstalter;
+package com.example.cora.sportverwaltungveranstalter.activity.account;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,9 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class LoginActivity extends AppCompatActivity {
+import com.example.cora.sportverwaltungveranstalter.MenuActivity;
+import com.example.cora.sportverwaltungveranstalter.R;
+import com.example.cora.sportverwaltungveranstalter.RegisterActivity;
+import com.example.cora.sportverwaltungveranstalter.activity.base.ConnectionToDatabase;
+
+public class LoginActivity extends ConnectionToDatabase {
     Button login, registrieren;
     EditText txtBenutzer, txtPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

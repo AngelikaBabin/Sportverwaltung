@@ -23,6 +23,5 @@ public class AsyncResult<T> {
     public AsyncResult(Exception err) {
         super();
         this.err = err;
-
     }
 }

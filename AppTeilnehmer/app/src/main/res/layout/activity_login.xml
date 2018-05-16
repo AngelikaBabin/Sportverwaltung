@@ -23,13 +23,13 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="50dp"
-        android:textColor="@color/text_dark"
-        android:textColorHint="@color/text_medium"
         android:background="@drawable/input_rounded"
         android:drawableStart="@drawable/ic_account_circle_black_24dp"
         android:ems="10"
         android:hint="@string/hint_email"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:textColor="@color/text_dark"
+        android:textColorHint="@color/text_medium" />
 
     <EditText
         android:id="@+id/editText_password"
