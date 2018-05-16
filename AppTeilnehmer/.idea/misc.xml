@@ -26,8 +26,11 @@
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+<<<<<<< HEAD
     <output url="file://$PROJECT_DIR$/build/classes" />
+=======
     <output url="file://$PROJECT_DIR$/out" />
+>>>>>>> 13de414d941e87f76c93232ca2a65d5f60bbd1b6
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />

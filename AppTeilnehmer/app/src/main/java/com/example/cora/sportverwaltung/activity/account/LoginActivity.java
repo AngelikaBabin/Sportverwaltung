@@ -38,15 +38,13 @@ public class LoginActivity extends ConnectionActivity {
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //startActivity(new Intent(LoginActivity.this, EventsSwipeActivity.class));
                 try {
                     String email = editText_email.getText().toString();
                     String password = editText_password.getText().toString();
 
                     Credentials credentials = new Credentials(email, password);
 
-                    // String token =  connection.login(credentials);
-                    String token =  "LALI";
+                    String token =  connection.login(credentials);
 
                     if (token != null) {
                         startActivity(new Intent(LoginActivity.this, EventsSwipeActivity.class));

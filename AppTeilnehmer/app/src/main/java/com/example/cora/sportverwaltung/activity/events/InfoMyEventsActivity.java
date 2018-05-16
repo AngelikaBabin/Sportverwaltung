@@ -11,7 +11,7 @@ import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.google.gson.Gson;
 
 public class InfoMyEventsActivity extends AppCompatActivity {
-    TextView textView_header, textView_date, textView_place, textView_participator, textView_organizer, textView_details;
+    TextView textView_header, textView_date, textView_place, textView_organizer, textView_details;
     Button button_logout;
 
     private Veranstaltung selectedEvent;
@@ -24,6 +24,14 @@ public class InfoMyEventsActivity extends AppCompatActivity {
         selectedEvent = new Gson().fromJson(this.getIntent().getExtras().getString("event"), Veranstaltung.class);
         getViewElements();
         registerEventhandlers();
+        setValuesInFields();
+    }
+
+    private void setValuesInFields() {
+        textView_header.setText(selectedEvent.getName());
+        textView_date.setText(selectedEvent.getDatetime().toString());
+        textView_place.setText(selectedEvent.getLocation().toString());
+        textView_organizer.setText(selectedEvent.getVeranstalter().toString());
     }
 
     private void getViewElements() {
@@ -31,7 +39,6 @@ public class InfoMyEventsActivity extends AppCompatActivity {
         textView_details = findViewById(R.id.textView_Details);
         textView_date = findViewById(R.id.textView_date);
         textView_place = findViewById(R.id.textView_place);
-        textView_participator = findViewById(R.id.textView_participator);
         textView_organizer = findViewById(R.id.textView_organizer);
         button_logout = findViewById(R.id.button_logout);
     }
