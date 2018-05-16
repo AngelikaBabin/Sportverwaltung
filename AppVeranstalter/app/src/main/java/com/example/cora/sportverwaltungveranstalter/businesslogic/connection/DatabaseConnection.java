@@ -23,7 +23,7 @@ public class DatabaseConnection {
     public static DatabaseConnection getInstance() {
         if (connection == null) {
             try {
-                URL url = new URL("http", "192.168.193.150", 8080, "SportVerwaltung_WebServices/webresources");
+                URL url = new URL("http", "192.168.194.107", 8080, "SportVerwaltung_WebServices/webresources");
                 connection = new DatabaseConnection(url);
             } catch (MalformedURLException ex) {
                 ex.printStackTrace();
@@ -36,9 +36,9 @@ public class DatabaseConnection {
         this.url = url;
     }
 
-    public String registerTeilnehmer(Account account) throws Exception{
+    public String registerVeranstalter(Account account) throws Exception{
         String strAccount = GSON.toJson(account, Account.class);
-        String result = get(HttpMethod.POST, "teilnehmer", ResultType.TOKEN, strAccount);
+        String result = get(HttpMethod.POST, "veranstalter", ResultType.TOKEN, strAccount);
         return result;
     }
 
