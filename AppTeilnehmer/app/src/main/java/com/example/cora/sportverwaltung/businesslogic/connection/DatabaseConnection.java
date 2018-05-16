@@ -93,13 +93,20 @@ public class DatabaseConnection {
     //endregion
 
     //region EVENTS
-    public ArrayList<Veranstaltung> getEvents(Filter filter) throws Exception {
-        AsyncResult<String> result = get(HttpMethod.GET, "event", ResultType.CONTENT, "filter=" + filter.toString());
-        Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
-        }.getType();
+    public ArrayList<Veranstaltung> getEvents(Filter filter) {
+        AsyncResult<String> result = null;
+        ArrayList<Veranstaltung> events = null;
 
-        ArrayList<Veranstaltung> events = GSON.fromJson(result.getResult(), collectionType);
+        try {
+            result = get(HttpMethod.GET, "event", ResultType.CONTENT, "filter=" + filter.toString());
 
+            Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
+            }.getType();
+
+            events = GSON.fromJson(result.getResult(), collectionType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return events;
     }
 
@@ -134,8 +141,8 @@ public class DatabaseConnection {
 
         controller.execute(params);
 
-        AsyncResult<String> result =  controller.get();
-        if(result.getError() != null) {
+        AsyncResult<String> result = controller.get();
+        if (result.getError() != null) {
             throw result.getError();
         }
 
