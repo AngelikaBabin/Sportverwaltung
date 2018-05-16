@@ -157,4 +157,6 @@
     <string name="editText_organizer">Organizer:</string>
     <string name="register_success">Registered successfully. Check your inbox for the verification-email.</string>
     <string name="text_recover">Recover</string>
+    <string name="textView_rank">Rank:</string>
+    <string name="textView_points">Points:</string>
 </resources>
