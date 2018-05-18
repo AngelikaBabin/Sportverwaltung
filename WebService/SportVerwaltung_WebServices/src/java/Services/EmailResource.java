@@ -81,10 +81,10 @@ public class EmailResource {
             for (String recipient: recipientList) {
                 recipientAddresses[counter] = new InternetAddress(recipient.trim());
                 counter++;
-                }
+            }
             message.setRecipients(Message.RecipientType.TO, recipientAddresses);
-            message.setSubject("Serwas");
-            message.setText("Hallo nicoboyyyyyyyyy");
+            message.setSubject("Error when trying to register");
+            message.setText("lol");
             Transport.send(message);
         } catch (MessagingException e) {
             throw new RuntimeException(e);

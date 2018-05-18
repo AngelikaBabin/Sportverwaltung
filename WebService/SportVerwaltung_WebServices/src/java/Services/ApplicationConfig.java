@@ -33,6 +33,7 @@ public class ApplicationConfig extends Application {
         resources.add(Services.TeilnahmeService.class);
         resources.add(Services.TeilnehmerService.class);
         resources.add(Services.VeranstalterService.class);
+        resources.add(Services.VerifyService.class);
     }
     
     
