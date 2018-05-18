@@ -60,14 +60,29 @@ public class EventListAdapter extends BaseAdapter {
              switch(currentVeranstaltung.getSportart())
              {
                  case BALLSPORT:
-                     typeImage.setImageResource(R.drawable.ic_account);
+                     typeImage.setImageResource(R.drawable.icons8_basketball);
                      break;
 
                  case RENNSPORT:
-                     typeImage.setImageResource(R.drawable.ic_confirm);
+                     typeImage.setImageResource(R.drawable.icons8_running);
+                     break;
+                 case KAMPFSPORT:
+                     typeImage.setImageResource(R.drawable.icons8_boxing_glove);
+                     break;
+
+                 case KLETTERSPORT:
+                     typeImage.setImageResource(R.drawable.icons8_climbing);
+                     break;
+
+                 case SCHWIMMSPORT:
+                     typeImage.setImageResource(R.drawable.icons8_swimming);
+                     break;
+
+                 case EXTREMSPORT:
+                     typeImage.setImageResource(R.drawable.icons8_parachute);
                      break;
                  default:
-                     typeImage.setImageResource(R.drawable.ic_email);
+                     typeImage.setImageResource(R.drawable.icons8_trophy);
              }
 
         }
