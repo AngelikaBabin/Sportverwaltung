@@ -13,6 +13,7 @@ import Data.Teilnehmer;
 import Exceptions.RegisterExcpetion;
 import Misc.MailHandler;
 import com.google.gson.Gson;
+import java.net.Inet4Address;
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -92,9 +93,9 @@ public class TeilnehmerService {
             db.addAccount(a);
             db.addTeilnehmerToAccount(a);
             token = crypt.encrypt(a.toTokenString());
-            Authentification.loginToken(token);
+            Authentification.loginToken(token);       
             mail.sendMail(a.getEmail(), "Click the link!", 
-                    "http://192.168.1.104:8080/SportVerwaltung_WebServices/webresources/verify?token=" + crypt.encryptURL(a.toTokenString()));
+                    "http://" + Inet4Address.getLocalHost().getHostAddress() + ":8080/SportVerwaltung_WebServices/webresources/verify?token=" + crypt.encryptURL(a.toTokenString()));
             r = Response.status(Response.Status.CREATED).header("Token", token).build();
             System.out.println("Sucess");
         }
