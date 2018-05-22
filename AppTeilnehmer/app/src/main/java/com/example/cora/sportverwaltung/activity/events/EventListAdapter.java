@@ -45,15 +45,15 @@ public class EventListAdapter extends BaseAdapter {
         {
              convertView = thisInflator.inflate(R.layout.row_layout, parent, false);
              TextView HeadingText = convertView.findViewById(R.id.textView_Heading);
-             TextView Date = convertView.findViewById(R.id.textView_Date);
-             //TextView Location = (TextView) convertView.findViewById(R.id.textLocation);
+             //TextView Date = convertView.findViewById(R.id.textView_Date);
+             TextView Location = (TextView) convertView.findViewById(R.id.textLocation);
              ImageView typeImage = convertView.findViewById(R.id.imageView_sport);
 
              Veranstaltung currentVeranstaltung = (Veranstaltung)getItem(position);
 
              HeadingText.setText(String.valueOf(currentVeranstaltung.getName()));
              //Date.setText(currentVeranstaltung.getDatetime().toString());
-             //Location.setText(String.valueOf(currentVeranstaltung.getLocation().getName()));
+             Location.setText(String.valueOf(currentVeranstaltung.getLocation().getName()));
 
              switch(currentVeranstaltung.getSportart())
              {
