@@ -16,46 +16,60 @@
             android:id="@+id/textView_header"
             android:layout_width="match_parent"
             android:layout_height="78dp"
-            android:background="@drawable/input_rounded"
             android:text="@string/example_header"
             android:textAlignment="center"
             android:textSize="40sp" />
 
-        <TextView
-            android:id="@+id/textView_date"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="25dp"
-            android:text="@string/editText_date" />
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="25dp"
+            android:background="@drawable/show_rounded"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
 
-        <TextView
-            android:id="@+id/textView_place"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/editText_place" />
+            <TextView
+                android:id="@+id/textView_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_kalender"
+                android:text="@string/editText_date"
+                android:textColor="#000000"
+                android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/textView_participator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/editText_participator" />
 
-        <TextView
-            android:id="@+id/textView_organizer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/editText_organizer" />
+            <TextView
+                android:id="@+id/textView_place"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_locattion"
+                android:text="@string/editText_place"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/textView_participator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_teilnehmer"
+                android:text="@string/editText_participator"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/textView_organizer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_veranstalter"
+                android:text="@string/editText_organizer"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView_Details"
@@ -64,8 +78,10 @@
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:layout_marginTop="25dp"
+            android:background="@drawable/show_rounded"
             android:hint="@string/example_eventname"
-            android:textSize="25sp" />
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/button_participate"
@@ -73,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/btn_rounded"
             android:text="@string/text_button_teilnehmen" />
 

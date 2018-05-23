@@ -7,13 +7,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import com.example.cora.sportverwaltung.R;
 
+import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
+
+import java.util.ArrayList;
 
 
 
@@ -46,10 +44,10 @@ public class EventListAdapter extends BaseAdapter {
         if(convertView == null)
         {
              convertView = thisInflator.inflate(R.layout.row_layout, parent, false);
-             TextView HeadingText = (TextView) convertView.findViewById(R.id.textHeading);
-             TextView Date = (TextView) convertView.findViewById(R.id.textDate);
+             TextView HeadingText = convertView.findViewById(R.id.textView_Heading);
+             //TextView Date = convertView.findViewById(R.id.textView_Date);
              TextView Location = (TextView) convertView.findViewById(R.id.textLocation);
-             ImageView typeImage = (ImageView) convertView.findViewById(R.id.sporttypeImage);
+             ImageView typeImage = convertView.findViewById(R.id.imageView_sport);
 
              Veranstaltung currentVeranstaltung = (Veranstaltung)getItem(position);
 
@@ -60,29 +58,29 @@ public class EventListAdapter extends BaseAdapter {
              switch(currentVeranstaltung.getSportart())
              {
                  case BALLSPORT:
-                     typeImage.setImageResource(R.drawable.icons8_basketball);
+                     typeImage.setImageResource(R.drawable.sports_basketball);
                      break;
 
                  case RENNSPORT:
-                     typeImage.setImageResource(R.drawable.icons8_running);
+                     typeImage.setImageResource(R.drawable.sports_running);
                      break;
                  case KAMPFSPORT:
-                     typeImage.setImageResource(R.drawable.icons8_boxing_glove);
+                     typeImage.setImageResource(R.drawable.sports_boxing_glove);
                      break;
 
                  case KLETTERSPORT:
-                     typeImage.setImageResource(R.drawable.icons8_climbing);
+                     typeImage.setImageResource(R.drawable.sports_climbing);
                      break;
 
                  case SCHWIMMSPORT:
-                     typeImage.setImageResource(R.drawable.icons8_swimming);
+                     typeImage.setImageResource(R.drawable.sports_swimming);
                      break;
 
                  case EXTREMSPORT:
-                     typeImage.setImageResource(R.drawable.icons8_parachute);
+                     typeImage.setImageResource(R.drawable.sports_parachute);
                      break;
                  default:
-                     typeImage.setImageResource(R.drawable.icons8_trophy);
+                     typeImage.setImageResource(R.drawable.sports_trophy);
              }
 
         }
