@@ -17,7 +17,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView_Heading"
+                android:id="@+id/textView_heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
@@ -25,7 +25,7 @@
                 android:textSize="30sp" />
 
             <TextView
-                android:id="@+id/textLocation"
+                android:id="@+id/textView_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
@@ -37,7 +37,7 @@
             android:id="@+id/imageView_sport"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:gravity="end"
             app:srcCompat="@drawable/ic_account" />
 
     </LinearLayout>

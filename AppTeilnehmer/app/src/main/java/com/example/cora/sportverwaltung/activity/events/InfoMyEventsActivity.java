@@ -1,10 +1,11 @@
 package com.example.cora.sportverwaltung.activity.events;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
@@ -29,14 +30,15 @@ public class InfoMyEventsActivity extends AppCompatActivity {
 
     private void setValuesInFields() {
         textView_header.setText(selectedEvent.getName());
-        textView_date.setText(selectedEvent.getDatetime().toString());
+        textView_date.setText("Thu 22. May");
         textView_place.setText(selectedEvent.getLocation().toString());
         textView_organizer.setText(selectedEvent.getVeranstalter().toString());
+        textView_details.setText(selectedEvent.getDetails());
     }
 
     private void getViewElements() {
         textView_header = findViewById(R.id.textView_header);
-        textView_details = findViewById(R.id.textView_Details);
+        textView_details = findViewById(R.id.textView_details);
         textView_date = findViewById(R.id.textView_date);
         textView_place = findViewById(R.id.textView_place);
         textView_organizer = findViewById(R.id.textView_organizer);
@@ -47,7 +49,8 @@ public class InfoMyEventsActivity extends AppCompatActivity {
         button_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //ToDO
+                Toast.makeText(InfoMyEventsActivity.this, "You are no longer participating", Toast.LENGTH_LONG).show();
+                button_logout.setEnabled(false);
             }
         });
     }

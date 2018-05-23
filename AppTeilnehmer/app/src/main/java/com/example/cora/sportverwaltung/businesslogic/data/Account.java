@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
  */
 
 public class Account extends Credentials{
+    private int id;
     private String name;
 
     public Account(String email, String name, String password) {
@@ -17,9 +18,17 @@ public class Account extends Credentials{
     public Account(String email, String password) {
         super(email, password);
     }
+    public Account(int id, String email, String password) {
+        this(email, password);
+        this.id = id;
+    }
 
     public String getName() {
         return name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setName(@NonNull String name) {

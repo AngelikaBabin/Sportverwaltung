@@ -1,7 +1,7 @@
 package com.example.cora.sportverwaltung.businesslogic.data;
 
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -14,11 +14,11 @@ public class Veranstaltung {
     private Veranstalter veranstalter;
     private Location location;
     private Sportart sportart;
-    private LocalDate datetime;
+    private Date datetime;
     private int minTeilnehmer; //ToDo: Remove
     private int maxTeilnehmer;
 
-    public Veranstaltung(int id, String name, String details, Veranstalter veranstalter, Location location, Sportart sportart, LocalDate datetime, int minTeilnehmer, int maxTeilnehmer) {
+    public Veranstaltung(int id, String name, String details, Veranstalter veranstalter, Location location, Sportart sportart, Date datetime, int minTeilnehmer, int maxTeilnehmer) {
         setName(name);
         setDetails(details);
         setVeranstalter(veranstalter);
@@ -71,11 +71,11 @@ public class Veranstaltung {
         this.sportart = sportart;
     }
 
-    public LocalDate getDatetime() {
+    public Date getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(LocalDate datetime) {
+    public void setDatetime(Date datetime) {
         this.datetime = datetime;
     }
 

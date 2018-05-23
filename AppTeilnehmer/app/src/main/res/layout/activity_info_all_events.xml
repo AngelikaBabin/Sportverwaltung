@@ -79,8 +79,7 @@
             android:layout_marginRight="25dp"
             android:layout_marginTop="25dp"
             android:background="@drawable/show_rounded"
-            android:hint="@string/example_eventname"
-            android:textColor="#000000"
+            android:textColor="@color/text_dark"
             android:textSize="20sp" />
 
         <Button

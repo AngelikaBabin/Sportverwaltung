@@ -40,4 +40,9 @@ public class Location {
     public void setLongitude(@NonNull double longitude) {
         this.longitude = longitude;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

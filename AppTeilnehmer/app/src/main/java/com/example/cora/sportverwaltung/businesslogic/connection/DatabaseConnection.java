@@ -2,6 +2,7 @@ package com.example.cora.sportverwaltung.businesslogic.connection;
 
 import com.example.cora.sportverwaltung.businesslogic.data.Account;
 import com.example.cora.sportverwaltung.businesslogic.data.Credentials;
+import com.example.cora.sportverwaltung.businesslogic.data.Teilnehmer;
 import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.example.cora.sportverwaltung.businesslogic.misc.AsyncResult;
@@ -31,7 +32,7 @@ public class DatabaseConnection {
     public static DatabaseConnection getInstance() {
         if (connection == null) {
             try {
-                URL url = new URL("http", "10.0.0.28", 8080, "SportVerwaltung_WebServices/webresources");
+                URL url = new URL("http", "192.168.43.142", 8080, "SportVerwaltung_WebServices/webresources");
                 connection = new DatabaseConnection(url);
             } catch (MalformedURLException ex) {
                 ex.printStackTrace();
@@ -124,6 +125,11 @@ public class DatabaseConnection {
         AsyncResult<Integer> result = get(HttpMethod.POST, "event", ResultType.STATUS, payload);
 
         return result.getResult();
+    }
+
+    public Teilnehmer getTeilnehmer() throws Exception {
+        AsyncResult<String> result = get(HttpMethod.GET, "teilnehmer", ResultType.CONTENT);
+        return GSON.fromJson(result.getResult(), Teilnehmer.class);
     }
 
     //endregion

@@ -11,10 +11,6 @@ public class Veranstalter extends Account {
 
     @Override
     public String toString() {
-        return "Veranstalter{" +
-                "email='" + getEmail() + '\'' +
-                ", name='" + getName() + '\'' +
-                ", password='" + getPassword() + '\'' +
-                '}';
+        return getName();
     }
 }
