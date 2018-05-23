@@ -6,8 +6,8 @@
 package Services;
 
 import Data.Account;
-import Data.Authentification;
-import Data.Crypt;
+import Misc.Authentification;
+import Misc.Crypt;
 import Data.Database;
 import Data.Teilnehmer;
 import Data.Event;
@@ -63,19 +63,23 @@ public class EventService {
         Response r;
         try{
             if(Authentification.isUserAuthenticated(token)){
-                System.out.println("Get Events");
+                System.out.println("Get Events..");
                 ArrayList<Event> events = db.getEvents(Filter.valueOf(filter), Account.parseToken(token));
                 r = Response.ok().entity(new GenericEntity<List<Event>>(events) {}).build();
+                System.out.println("Success");
             }
             else{
                 r = Response.status(Response.Status.FORBIDDEN).build();
+                System.out.println("Failed");
             }
         }
         catch(FilterExcpetion ex){
             r = Response.status(Response.Status.BAD_REQUEST).build();
+            System.out.println("Failed");
         }
         catch(Exception ex){
             r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            System.out.println("Failed");
         }
         return r;
     }

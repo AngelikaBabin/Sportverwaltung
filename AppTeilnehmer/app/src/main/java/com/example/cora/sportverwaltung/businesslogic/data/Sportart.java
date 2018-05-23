@@ -6,5 +6,9 @@ package com.example.cora.sportverwaltung.businesslogic.data;
 
 public enum Sportart {
     BALLSPORT,
-    RENNSPORT
+    RENNSPORT,
+    KAMPFSPORT,
+    KLETTERSPORT,
+    SCHWIMMSPORT,
+    EXTREMSPORT
 }

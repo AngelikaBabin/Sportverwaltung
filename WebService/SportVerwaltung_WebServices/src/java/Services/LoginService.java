@@ -6,9 +6,9 @@
 package Services;
 
 import Data.Account;
-import Data.Authentification;
+import Misc.Authentification;
 import Data.Database;
-import Data.Crypt;
+import Misc.Crypt;
 import Exceptions.AccountNotFoundException;
 import com.google.gson.Gson;
 import java.io.IOException;

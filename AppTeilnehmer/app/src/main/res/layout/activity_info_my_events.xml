@@ -12,51 +12,65 @@
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
+
         <TextView
             android:id="@+id/textView_header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/input_rounded"
+            android:layout_height="78dp"
             android:text="@string/example_header"
             android:textAlignment="center"
             android:textSize="40sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/show_rounded"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
 
         <TextView
             android:id="@+id/textView_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="25dp"
+            android:textColor="#000000"
+            android:textSize="30dp"
+            android:drawableLeft="@drawable/ic_kalender"
             android:text="@string/editText_date" />
 
         <TextView
             android:id="@+id/textView_place"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="10dp"
+            android:textColor="#000000"
+            android:textSize="30dp"
+            android:drawableLeft="@drawable/ic_locattion"
             android:text="@string/editText_place" />
 
         <TextView
             android:id="@+id/textView_organizer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="10dp"
+
+            android:textColor="#000000"
+            android:textSize="30dp"
+            android:drawableLeft="@drawable/ic_veranstalter"
             android:text="@string/editText_organizer" />
+    </LinearLayout>
 
         <TextView
             android:id="@+id/textView_details"
             android:layout_width="match_parent"
-            android:layout_height="191dp"
+            android:layout_height="150dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:layout_marginTop="25dp"
-            android:hint="@string/example_eventname"
-            android:textSize="25sp" />
+            android:background="@drawable/show_rounded"
+            android:textColor="@color/text_dark"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/button_logout"
@@ -64,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/btn_rounded"
             android:text="@string/text_abmelden" />
     </LinearLayout>

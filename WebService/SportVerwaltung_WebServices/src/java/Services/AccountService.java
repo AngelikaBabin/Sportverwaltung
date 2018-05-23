@@ -6,7 +6,7 @@
 package Services;
 
 import Data.Account;
-import Data.Authentification;
+import Misc.Authentification;
 import Data.Database;
 import com.google.gson.Gson;
 import javax.ws.rs.GET;

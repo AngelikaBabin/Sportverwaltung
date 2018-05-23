@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.activity.base.ConnectionActivity;
-import com.example.cora.sportverwaltung.activity.events.EventsSwipeActivity;
 import com.example.cora.sportverwaltung.businesslogic.data.Credentials;
 
 public class LoginActivity extends ConnectionActivity {
@@ -42,12 +41,12 @@ public class LoginActivity extends ConnectionActivity {
                     String email = editText_email.getText().toString();
                     String password = editText_password.getText().toString();
 
-                    Credentials credentials = new Credentials(email, password);
+                    Credentials c = new Credentials(email, password);
 
-                    String token =  connection.login(credentials);
+                    String token = connection.login(c);
 
                     if (token != null) {
-                        startActivity(new Intent(LoginActivity.this, EventsSwipeActivity.class));
+                        startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
                     } else {
                         Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_LONG).show();
                     }

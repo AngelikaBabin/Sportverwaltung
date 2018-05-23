@@ -5,9 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
+import com.google.gson.Gson;
 
 public class InfoAllEventsActivity extends AppCompatActivity {
 
@@ -23,6 +25,7 @@ public class InfoAllEventsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info_all_events);
         //get Json form intent
         String strEvent = this.getIntent().getExtras().getString("event");
+        selectedEvent = new Gson().fromJson(strEvent, Veranstaltung.class);
         getViewElements();
         registerEventhandlers();
         setValuesInFields();
@@ -30,10 +33,11 @@ public class InfoAllEventsActivity extends AppCompatActivity {
 
     private void setValuesInFields() {
         textView_header.setText(selectedEvent.getName());
-        textView_date.setText(selectedEvent.getDatetime().toString());
+        textView_date.setText("Thu 22. May");
         textView_place.setText(selectedEvent.getLocation().toString());
-        textView_participator.setText(selectedEvent.getMaxTeilnehmer());
+        textView_participator.setText(String.valueOf(selectedEvent.getMaxTeilnehmer()));
         textView_organizer.setText(selectedEvent.getVeranstalter().toString());
+        textView_Details.setText(selectedEvent.getDetails());
     }
 
     private void getViewElements() {
@@ -50,7 +54,8 @@ public class InfoAllEventsActivity extends AppCompatActivity {
         button_participate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //ToDO
+                Toast.makeText(InfoAllEventsActivity.this, "You are now participating", Toast.LENGTH_LONG).show();
+                button_participate.setEnabled(false);
             }
         });
     }

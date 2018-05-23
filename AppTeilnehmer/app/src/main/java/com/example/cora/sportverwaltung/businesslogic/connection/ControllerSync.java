@@ -44,6 +44,8 @@ public class ControllerSync extends AsyncTask<String, Void, AsyncResult<String>>
 
             url = new URL(url + "/" + route);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setConnectTimeout(5000);
+            connection.setReadTimeout(150000);
 
             // set token header if logged in
             if (token != null) {

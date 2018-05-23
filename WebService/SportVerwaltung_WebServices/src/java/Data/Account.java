@@ -5,6 +5,7 @@
  */
 package Data;
 
+import Misc.Crypt;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -76,6 +77,12 @@ public class Account {
 
     public static Account parseToken(String token) throws Exception{
         token = crypt.decrypt(token);
+        String[] data = token.split(":");
+        return new Account(Integer.parseInt(data[0]), data[1]);
+    }
+    
+    public static Account parseURLToken(String token) throws Exception{
+        token = crypt.decryptURL(token);
         String[] data = token.split(":");
         return new Account(Integer.parseInt(data[0]), data[1]);
     }

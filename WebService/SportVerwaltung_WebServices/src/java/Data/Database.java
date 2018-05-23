@@ -60,12 +60,13 @@ public class Database {
             a.setId(rs.getInt(1));
         }
 
-        select = "INSERT INTO account VALUES(?,?,?,?)";
+        select = "INSERT INTO account (id, name, email, password, isVerified) VALUES(?,?,?,?,?)";
         stmt = conn.prepareStatement(select);
         stmt.setInt(1, a.getId());
         stmt.setString(2, a.getName());
         stmt.setString(3, a.getEmail());
         stmt.setString(4, a.getPassword());
+        stmt.setBoolean(5, false);
         try {
             stmt.executeUpdate();
         } catch (SQLException ex) {
@@ -117,9 +118,9 @@ public class Database {
     public Account getAccount(Account a) throws Exception {
         ResultSet rs;
         conn = createConnection();
-        String select = "SELECT * FROM account WHERE email = ?";
+        String select = "SELECT * FROM account WHERE id = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
-        stmt.setString(1, a.getEmail());
+        stmt.setInt(1, a.getId());
         rs = stmt.executeQuery();
         if (rs.next()) {
             a = new Account(rs.getInt("id"), rs.getString("name"), rs.getString("email"), null);
@@ -216,13 +217,14 @@ public class Database {
         ArrayList<Event> collVeranstaltung = new ArrayList<>();
 
         conn = createConnection();
-        String select = "SELECT * FROM veranstaltung " +
-                        "where datetime {comp} to_date(?, 'yyyy-MM-dd') " +
-                        "and id_veranstalter = ?";
-        if(filter == Filter.PAST)
+        String select = "SELECT * FROM veranstaltung "
+                + "where datetime {comp} to_date(?, 'yyyy-MM-dd') "
+                + "and id_veranstalter = ?";
+        if (filter == Filter.PAST) {
             select = select.replace("{comp}", "<");
-        else if(filter == Filter.CURRENT)
-            select = select.replace("{comp}", ">="); 
+        } else if (filter == Filter.CURRENT) {
+            select = select.replace("{comp}", ">=");
+        }
         PreparedStatement stmt = conn.prepareStatement(select);
         stmt.setDate(1, Date.valueOf(date));
         stmt.setInt(2, a.getId());
@@ -315,20 +317,20 @@ public class Database {
         conn.close();
     }
 
-    public void addTeilnahme(int eventId, Account a) throws Exception{
+    public void addTeilnahme(int eventId, Account a) throws Exception {
         int startNum = 0;
-        
+
         ResultSet rs;
         conn = createConnection();
-        String select = "SELECT count(*) FROM teilnahme inner join veranstaltung " +
-            "on teilnahme.ID_veranstaltung = veranstaltung.id " +
-            "group by veranstaltung.id";
+        String select = "SELECT count(*) FROM teilnahme inner join veranstaltung "
+                + "on teilnahme.ID_veranstaltung = veranstaltung.id "
+                + "group by veranstaltung.id";
         PreparedStatement stmt = conn.prepareStatement(select);
         rs = stmt.executeQuery();
         if (rs.next()) {
             startNum = rs.getInt(1);
         }
-        
+
         startNum++;
         select = "INSERT INTO teilnahme "
                 + "(id_veranstaltung, id_teilnehmer, STARTING_NUMBER) VALUES(?,?,?)";
@@ -338,5 +340,24 @@ public class Database {
         stmt.setInt(3, startNum);
         stmt.executeUpdate();
         conn.close();
+    }
+
+    public void verifyAccount(Account a) throws Exception {
+        conn = createConnection();
+        String select = "UPDATE account SET isVerified = ? where email = ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setBoolean(1, true);
+        stmt.setString(2, a.getEmail());
+        stmt.executeUpdate();
+        conn.close();
+    }
+
+    public void deleteTeilnahme(int eventId, Account a) throws Exception, SQLException {
+        conn = createConnection();
+        String select = "delete from teilnehme where id_veranstaltung = ? and id_teilnehmer = ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setInt(1, eventId);
+        stmt.setInt(2, a.getId());
+        stmt.executeUpdate();
     }
 }

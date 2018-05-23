@@ -7,10 +7,10 @@
     <string name="example_header">HEADER</string>
 
     <!-- Userdata -->
-    <string name="example_username">Christof Kraschl</string>
+    <string name="example_username">Nico Kandut</string>
     <string name="hint_username">Username</string>
 
-    <string name="example_email">kraschlc@edu.htl-villach.com</string>
+    <string name="example_email">nico.kandut@gmail.com</string>
     <string name="hint_email">Email</string>
 
     <string name="hint_password">Password</string>
@@ -44,7 +44,7 @@
 
     <!-- GUI -->
 
-    <string name="text_abmelden">Logout</string>
+    <string name="text_abmelden">Abandon</string>
     <string name="text_button_teilnehmen">Participate</string>
 
     <string name="text_button_register">Register</string>

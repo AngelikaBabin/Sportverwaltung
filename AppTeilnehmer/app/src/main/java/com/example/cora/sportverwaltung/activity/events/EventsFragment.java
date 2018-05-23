@@ -2,14 +2,15 @@ package com.example.cora.sportverwaltung.activity.events;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 /**
@@ -91,36 +93,74 @@ public class EventsFragment extends Fragment {
 
     public void setLists() {
         try {
-            ArrayList<Veranstaltung> result = connection.getEvents(filter);
-            //ArrayList<Veranstaltung> result = createTestData();
+            //ArrayList<Veranstaltung> result = connection.getEvents(filter);
+            ArrayList<Veranstaltung> result = createTestData(filter);
             setAdapterData(result);
         } catch (Exception ex) {
             Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
+    private ArrayList<Veranstaltung> createTestData(Filter filter) {
+        ArrayList<Veranstaltung> result = new ArrayList<Veranstaltung>();
+        switch(filter){
+            case ALL:
+                result.add(new Veranstaltung(1,"Meisterschaft", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.SCHWIMMSPORT, null, 30,40));
+                result.add(new Veranstaltung(2,"Event", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.BALLSPORT, null, 30,40));
+                result.add(new Veranstaltung(3,"Fußball", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.BALLSPORT, null, 30,40));
+                result.add(new Veranstaltung(4,"Basketball", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.RENNSPORT, null, 30,40));
+                result.add(new Veranstaltung(5,"Schwimmen", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.RENNSPORT, null, 30,40));
+                result.add(new Veranstaltung(1,"Meisterschaft", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.KAMPFSPORT, null, 30,40));
+                result.add(new Veranstaltung(2,"Event", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.BALLSPORT, null, 30,40));
+                result.add(new Veranstaltung(3,"Fußball", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.KAMPFSPORT, null, 30,40));
+                result.add(new Veranstaltung(4,"Basketball", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.RENNSPORT, null, 30,40));
+                result.add(new Veranstaltung(5,"Schwimmen", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.SCHWIMMSPORT, null, 30,40));
+                result.add(new Veranstaltung(1,"Meisterschaft", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.KAMPFSPORT, null, 30,40));
+                result.add(new Veranstaltung(2,"Event", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.BALLSPORT, null, 30,40));
+                result.add(new Veranstaltung(3,"Fußball", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.SCHWIMMSPORT, null, 30,40));
+                result.add(new Veranstaltung(4,"Basketball", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.KAMPFSPORT, null, 30,40));
+                result.add(new Veranstaltung(5,"Schwimmen", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.BALLSPORT, null, 30,40));
+                break;
+            case CURRENT:
+                result.add(new Veranstaltung(1,"Meisterschaft", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.KAMPFSPORT, null, 30,40));
+                result.add(new Veranstaltung(2,"Event", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.KAMPFSPORT, null, 30,40));
+                result.add(new Veranstaltung(5,"Schwimmen", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.BALLSPORT, null, 30,40));
+                break;
+            case PAST:
+                result.add(new Veranstaltung(101,"Meisterschaft 2010", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.BALLSPORT, null, 30,40));
+                result.add(new Veranstaltung(102,"Meisterschaft 2011", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.RENNSPORT, null, 30,40));
+                result.add(new Veranstaltung(103,"Meisterschaft 2012", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.KAMPFSPORT, null, 30,40));
+                result.add(new Veranstaltung(104,"Meisterschaft 2013", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.BALLSPORT, null, 30,40));
+                result.add(new Veranstaltung(105,"Meisterschaft 2014", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.BALLSPORT, null, 30,40));
+                result.add(new Veranstaltung(101,"Meisterschaft 2015", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.SCHWIMMSPORT, null, 30,40));
+                result.add(new Veranstaltung(102,"Meisterschaft 2016", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.SCHWIMMSPORT, null, 30,40));
+                result.add(new Veranstaltung(103,"Meisterschaft 2017", "beschreibung der veranstaltung", null, new Location("Oslo", 10,10), Sportart.KLETTERSPORT, null, 30,40));
+                break;
+        }
+
+        return result;
+    }
+
     private void registerEventhandlers() {
         listView_events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent;
+                Intent intent = new Intent();
                 switch (filter) {
                     case ALL:
                         intent = new Intent(getActivity(), InfoAllEventsActivity.class);
-                        intent.putExtra("event", (new Gson().toJson(listView_events.getSelectedItem())));
-                        startActivity(intent);
                         break;
                     case CURRENT:
                         intent = new Intent(getActivity(), InfoMyEventsActivity.class);
-                        intent.putExtra("event", (new Gson().toJson(listView_events.getSelectedItem())));
-                        startActivity(intent);
                         break;
                     case PAST:
                         intent = new Intent(getActivity(), InfoPastEventsActivity.class);
-                        intent.putExtra("event", (new Gson().toJson(listView_events.getSelectedItem())));
-                        startActivity(intent);
                         break;
                 }
+                String json = (new Gson().toJson(new Veranstaltung(1,"Meisterschaft", "beschreibung der veranstaltung", new Veranstalter("nico.kandut@gmail.com", "Nico INC.", "nk"), new Location("Oslo", 10,10), Sportart.BALLSPORT, new Date(20180508), 30,40)));
+                intent.putExtra("event", json);
+                startActivity(intent);
             }
         });
     }

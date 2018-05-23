@@ -5,12 +5,12 @@
  */
 package Services;
 
-import Data.Authentification;
+import Misc.Authentification;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -29,8 +29,7 @@ public class LogoutService {
     public LogoutService() {
     }
 
-    @POST
-    @Consumes(MediaType.TEXT_PLAIN)
+    @GET
     public Response logout(@HeaderParam("Token") String token) {
         Response r;
         try{

@@ -6,12 +6,23 @@
 package Services;
 
 import Data.Account;
-import Data.Authentification;
-import Data.Crypt;
+import Misc.Authentification;
+import Misc.Crypt;
 import Data.Database;
 import Data.Teilnehmer;
 import Exceptions.RegisterExcpetion;
+import Misc.MailHandler;
 import com.google.gson.Gson;
+import java.net.Inet4Address;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -37,12 +48,14 @@ public class TeilnehmerService {
     private Gson gson;
     private Database db;
     private Crypt crypt;
+    private MailHandler mail;
 
     public TeilnehmerService() {
         try{
             db = Database.newInstance();
             gson = new Gson();
             crypt = new Crypt();
+            mail = new MailHandler();
         }
         catch(Exception ex){
             System.out.println("Error: " + ex.getMessage());
@@ -79,8 +92,10 @@ public class TeilnehmerService {
             System.out.print("Register: " + a + "...");
             db.addAccount(a);
             db.addTeilnehmerToAccount(a);
-            token = crypt.encrypt(token);
-            Authentification.loginToken(token);
+            token = crypt.encrypt(a.toTokenString());
+            Authentification.loginToken(token);       
+            mail.sendMail(a.getEmail(), "Click the link!", 
+                    "http://" + Inet4Address.getLocalHost().getHostAddress() + ":8080/SportVerwaltung_WebServices/webresources/verify?token=" + crypt.encryptURL(a.toTokenString()));
             r = Response.status(Response.Status.CREATED).header("Token", token).build();
             System.out.println("Sucess");
         }

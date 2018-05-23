@@ -6,7 +6,7 @@
 package Services;
 
 import Data.Account;
-import Data.Authentification;
+import Misc.Authentification;
 import Data.Database;
 import Data.Event;
 import com.google.gson.Gson;
@@ -17,6 +17,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -66,6 +67,31 @@ public class TeilnahmeService {
                 a = Account.parseToken(token);
                 db.addTeilnahme(eventId, a);
                 r = Response.status(Response.Status.CREATED).build();
+                System.out.println("Sucess");
+            }
+            else{
+                r = Response.status(Response.Status.FORBIDDEN).build();
+            }
+        }
+        catch(Exception ex){
+            r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            System.out.println("Failed");
+        }
+        return r;
+    }
+    
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response deleteTeilnahme(@HeaderParam("Token") String token, @QueryParam("eventId") int eventId) {
+        Response r;
+        Event e;
+        Account a;
+        try{
+            System.out.print("Delete Teilnahme");
+            if(Authentification.isUserAuthenticated(token)){
+                a = Account.parseToken(token);
+                db.deleteTeilnahme(eventId, a);
+                r = Response.ok().build();
                 System.out.println("Sucess");
             }
             else{
