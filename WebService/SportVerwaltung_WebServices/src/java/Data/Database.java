@@ -351,4 +351,13 @@ public class Database {
         stmt.executeUpdate();
         conn.close();
     }
+
+    public void deleteTeilnahme(int eventId, Account a) throws Exception, SQLException {
+        conn = createConnection();
+        String select = "delete from teilnehme where id_veranstaltung = ? and id_teilnehmer = ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setInt(1, eventId);
+        stmt.setInt(2, a.getId());
+        stmt.executeUpdate();
+    }
 }
