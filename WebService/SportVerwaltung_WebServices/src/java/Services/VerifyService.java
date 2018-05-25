@@ -44,11 +44,14 @@ public class VerifyService {
         Account a;
         Response r;
         try {
+            System.out.println("Verify...");
             db.verifyAccount(Account.parseURLToken(accountToken));
-            r = Response.temporaryRedirect(new URI("http://" + Inet4Address.getLocalHost().getHostAddress() + 
+            r = Response.temporaryRedirect(new URI("http://192.168.43.142" +//+ Inet4Address.getLocalHost().getHostAddress() + 
                     ":8080/SportVerwaltung_WebServices/verified.html")).build();
+            System.out.println("Success");
         } catch (MessagingException e) {
             r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            System.out.println("Failed");
         }
         return r;
     }

@@ -2,13 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
-            <file>file:/C:/Users/nicok/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/TeilnehmerService.java</file>
-            <file>file:/C:/Users/nicok/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/LoginService.java</file>
+            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/EventService.java</file>
+            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Data/Database.java</file>
+            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/web/verified.html</file>
+            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/AccountService.java</file>
+            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/ApplicationConfig.java</file>
+            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/VerifyService.java</file>
+            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/web/index.html</file>
+            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/LoginService.java</file>
+            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/TeilnehmerService.java</file>
+            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/EmailResource.java</file>
+            <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/TeilnahmeService.java</file>
         </group>
-=======
-        <group/>
->>>>>>> e243d6ca48cc7b30ecc2817bcd09d47a1d404a78
     </open-files>
 </project-private>
