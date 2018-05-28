@@ -12,8 +12,9 @@ import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.businesslogic.data.Sportart;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Date;
 
 
 public class EventListAdapter extends BaseAdapter {
@@ -44,16 +45,21 @@ public class EventListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if(convertView == null)
         {
+            Veranstaltung currentVeranstaltung = (Veranstaltung)getItem(position);
+
+            Date VerDate = currentVeranstaltung.getDatetime();//getting date
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.mm.yyyy");//formating according to my need
+            String date = dateFormatter.format(VerDate);
+
             convertView = thisInflator.inflate(R.layout.row_layout, parent, false);
             TextView headingText = convertView.findViewById(R.id.textView_heading);
-            //TextView date = convertView.findViewById(R.id.textView_date);
+            TextView TextDate = convertView.findViewById(R.id.textView_date);
             TextView location = (TextView) convertView.findViewById(R.id.textView_location);
             ImageView typeImage = convertView.findViewById(R.id.imageView_sport);
 
-            Veranstaltung currentVeranstaltung = (Veranstaltung)getItem(position);
 
             headingText.setText(String.valueOf(currentVeranstaltung.getName()));
-            //date.setText(currentVeranstaltung.getDatetime().toString());
+            TextDate.setText(currentVeranstaltung.getDatetime().toString());
             location.setText(currentVeranstaltung.getLocation());
 
             switch(Sportart.valueOf(currentVeranstaltung.getSportart().toUpperCase()))
