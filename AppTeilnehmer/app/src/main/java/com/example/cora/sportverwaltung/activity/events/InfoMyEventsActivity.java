@@ -8,10 +8,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
+import com.example.cora.sportverwaltung.activity.base.ConnectionActivity;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.google.gson.Gson;
 
-public class InfoMyEventsActivity extends AppCompatActivity {
+public class InfoMyEventsActivity extends ConnectionActivity {
     TextView textView_header, textView_date, textView_place, textView_organizer, textView_details;
     Button button_logout;
 
@@ -49,8 +50,14 @@ public class InfoMyEventsActivity extends AppCompatActivity {
         button_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(InfoMyEventsActivity.this, "You are no longer participating", Toast.LENGTH_LONG).show();
-                button_logout.setEnabled(false);
+                try {
+                    connection.departicipate(selectedEvent.getId());
+                    Toast.makeText(InfoMyEventsActivity.this, "You are no longer participating", Toast.LENGTH_LONG).show();
+                    button_logout.setEnabled(false);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(InfoMyEventsActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

@@ -67,7 +67,7 @@ public class LoginActivity extends ConnectionActivity {
         button_forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(LoginActivity.this, "Sending recovery email", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, RecoveryActivity.class));
             }
         });
     }

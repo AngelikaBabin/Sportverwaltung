@@ -18,6 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".activity.account.LoginActivity">
+        </activity>
+        <activity android:name=".activity.account.LoginActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -10,8 +10,7 @@ import com.example.cora.sportverwaltung.businesslogic.data.Teilnehmer;
 
 public class ProfileActivity extends BaseActivity {
 
-    TextView textView_name;
-    TextView textView_email;
+    private TextView textView_name, textView_email, textView_score;
 
 
     @Override
@@ -22,7 +21,7 @@ public class ProfileActivity extends BaseActivity {
             setContent(R.layout.activity_profile);
 
             // Teilnehmer t = connection.getTeilnehmer();
-            Teilnehmer t = new Teilnehmer("kraschlc@edu.htl-villach.at", "ChristophKraschl", "ck", 110);
+            Teilnehmer t = connection.getTeilnehmer();
 
             fillIn(t);
         } catch (Exception e) {
@@ -34,8 +33,10 @@ public class ProfileActivity extends BaseActivity {
     private void fillIn(Teilnehmer t) {
         textView_name = findViewById(R.id.textView_name);
         textView_email = findViewById(R.id.textView_email);
+        textView_score = findViewById(R.id.textView_score);
 
-        textView_email.setText(t.getName());
+        textView_name.setText(t.getName());
         textView_email.setText(t.getEmail());
+        textView_score.setText(t.getScore()+ " points");
     }
 }

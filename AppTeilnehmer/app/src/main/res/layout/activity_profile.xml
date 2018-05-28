@@ -7,6 +7,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_account"
+            android:contentDescription="@string/desc_profilePicture" />
+
         <LinearLayout
             android:id="@+id/profile_layout"
             android:layout_width="match_parent"
@@ -16,11 +22,6 @@
             android:layout_centerHorizontal="true"
             android:elevation="4dp"
             android:paddingBottom="24dp">
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/ic_account"/>
 
             <TextView
                 android:id="@+id/textView_name"
@@ -38,6 +39,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="80dp"
                 android:text="@string/example_email"
+                android:textColor="@color/text_light"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:text="@string/example_points"
                 android:textColor="@color/text_light"
                 android:textSize="24sp"
                 android:textStyle="bold" />

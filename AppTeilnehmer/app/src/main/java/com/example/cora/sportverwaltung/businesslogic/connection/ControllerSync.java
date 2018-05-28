@@ -52,7 +52,7 @@ public class ControllerSync extends AsyncTask<String, Void, AsyncResult<String>>
                 connection.setRequestProperty("Token", token);
             }
 
-            if (payload != null && httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT || httpMethod == HttpMethod.DELETE) {
+            if (payload != null && httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT) {
                 write(connection, httpMethod, payload);
             }
 

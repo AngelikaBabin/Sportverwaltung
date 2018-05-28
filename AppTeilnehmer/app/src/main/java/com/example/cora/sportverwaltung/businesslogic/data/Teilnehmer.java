@@ -6,7 +6,6 @@ package com.example.cora.sportverwaltung.businesslogic.data;
 
 public class Teilnehmer extends Account{
     private int score;
-    //TODO Veranstaltungen
 
     public Teilnehmer(String email, String name, String password, int score) {
         super(email, name, password);

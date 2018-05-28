@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cora.sportverwaltung.R;
+import com.example.cora.sportverwaltung.businesslogic.data.Sportart;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 
 import java.util.ArrayList;
@@ -53,11 +54,11 @@ public class EventListAdapter extends BaseAdapter {
 
             headingText.setText(String.valueOf(currentVeranstaltung.getName()));
             //date.setText(currentVeranstaltung.getDatetime().toString());
-            location.setText(String.valueOf(currentVeranstaltung.getLocation().getName()));
+            location.setText(currentVeranstaltung.getLocation());
 
-            switch(currentVeranstaltung.getSportart())
+            switch(Sportart.valueOf(currentVeranstaltung.getSportart().toUpperCase()))
             {
-                case BALLSPORT:
+                case BASKETBALL:
                     typeImage.setImageResource(R.drawable.sports_basketball);
                     break;
 

@@ -32,7 +32,7 @@ public class DatabaseConnection {
     public static DatabaseConnection getInstance() {
         if (connection == null) {
             try {
-                URL url = new URL("http", "192.168.43.142", 8080, "SportVerwaltung_WebServices/webresources");
+                URL url = new URL("http", "192.168.193.150", 8080, "SportVerwaltung_WebServices/webresources");
                 connection = new DatabaseConnection(url);
             } catch (MalformedURLException ex) {
                 ex.printStackTrace();
@@ -96,17 +96,25 @@ public class DatabaseConnection {
     //region EVENTS
     public ArrayList<Veranstaltung> getEvents(Filter filter) {
         AsyncResult<String> result = null;
-        ArrayList<Veranstaltung> events = null;
+        ArrayList<Veranstaltung> events = new ArrayList<>();
 
         try {
             result = get(HttpMethod.GET, "event", ResultType.CONTENT, "filter=" + filter.toString());
 
-            Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
-            }.getType();
+            if(result.getError() != null){
+                throw result.getError().getCause();
+            }
 
-            events = GSON.fromJson(result.getResult(), collectionType);
+            if((result.getResult() != null) && (result.getResult() != "")) {
+                Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
+                }.getType();
+
+                events = GSON.fromJson(result.getResult(), collectionType);
+            }
         } catch (Exception e) {
             e.printStackTrace();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
         }
         return events;
     }
@@ -120,9 +128,16 @@ public class DatabaseConnection {
         return events.get(0);
     }
 
-    public int participate(final int _eventId, final int _userId) throws Exception {
-        String payload = ""; // TODO
-        AsyncResult<Integer> result = get(HttpMethod.POST, "event", ResultType.STATUS, payload);
+    public int participate(int _eventId) throws Exception {
+        String payload = "eventId=" + _eventId;
+        AsyncResult<Integer> result = get(HttpMethod.GET, "teilnahme", ResultType.STATUS, payload);
+
+        return result.getResult();
+    }
+
+    public int departicipate(int _eventId) throws Exception {
+        String payload = "eventId=" + _eventId;
+        AsyncResult<Integer> result = get(HttpMethod.DELETE, "teilnahme", ResultType.STATUS, payload);
 
         return result.getResult();
     }

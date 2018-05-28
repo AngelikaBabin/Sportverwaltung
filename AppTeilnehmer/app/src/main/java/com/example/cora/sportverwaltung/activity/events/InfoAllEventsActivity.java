@@ -8,10 +8,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
+import com.example.cora.sportverwaltung.activity.base.ConnectionActivity;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.google.gson.Gson;
 
-public class InfoAllEventsActivity extends AppCompatActivity {
+public class InfoAllEventsActivity extends ConnectionActivity {
 
     TextView textView_header, textView_Details;
     TextView textView_date, textView_place, textView_participator, textView_organizer;
@@ -23,9 +24,11 @@ public class InfoAllEventsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_all_events);
+
         //get Json form intent
         String strEvent = this.getIntent().getExtras().getString("event");
         selectedEvent = new Gson().fromJson(strEvent, Veranstaltung.class);
+
         getViewElements();
         registerEventhandlers();
         setValuesInFields();
@@ -54,8 +57,14 @@ public class InfoAllEventsActivity extends AppCompatActivity {
         button_participate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                connection.participate(selectedEvent.getId());
                 Toast.makeText(InfoAllEventsActivity.this, "You are now participating", Toast.LENGTH_LONG).show();
                 button_participate.setEnabled(false);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(InfoAllEventsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

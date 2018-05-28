@@ -63,7 +63,7 @@ public class RegisterActivity extends ConnectionActivity {
                     //String token = "asdf";
 
                     // open menu activity if successful
-                    if(code == 200) {
+                    if(code >= 200 || code <= 299) {
                         startActivity(new Intent(RegisterActivity.this, VerifyActivity.class));
                     } else {
                         Toast.makeText(RegisterActivity.this, code + " - could not create account", Toast.LENGTH_LONG).show();
