@@ -95,7 +95,7 @@ public class TeilnehmerService {
             token = crypt.encrypt(a.toTokenString());
             Authentification.loginToken(token);       
             mail.sendMail(a.getEmail(), "Click the link!", 
-                    "http://" + Inet4Address.getLocalHost().getHostAddress() + ":8080/SportVerwaltung_WebServices/webresources/verify?token=" + crypt.encryptURL(a.toTokenString()));
+                    "http://192.168.193.150:8080/SportVerwaltung_WebServices/webresources/verify?token=" + crypt.encryptURL(a.toTokenString()));
             r = Response.status(Response.Status.CREATED).header("Token", token).build();
             System.out.println("Sucess");
         }

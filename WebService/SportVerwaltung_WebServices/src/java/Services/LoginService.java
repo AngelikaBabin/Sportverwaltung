@@ -63,7 +63,7 @@ public class LoginService {
         }
         catch(AccountNotFoundException ex){
             r = Response.status(Response.Status.UNAUTHORIZED).entity(ex).type(MediaType.APPLICATION_JSON).build();
-            System.out.print("failed");
+            System.out.print("Failed");
         }
         catch(Exception ex){
             r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

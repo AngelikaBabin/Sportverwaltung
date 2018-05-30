@@ -64,8 +64,8 @@ public class EventService {
         try{
             if(Authentification.isUserAuthenticated(token)){
                 System.out.println("Get Events..");
-                ArrayList<Event> events = db.getEvents(Filter.valueOf(filter), Account.parseToken(token));
-                r = Response.ok().entity(new GenericEntity<List<Event>>(events) {}).build();
+                List<Event> events = db.getEvents(Filter.valueOf(filter), Account.parseToken(token));
+                r = Response.ok().entity( new GenericEntity<List<Event>>(events){}).build();
                 System.out.println("Success");
             }
             else{

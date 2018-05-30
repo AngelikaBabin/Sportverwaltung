@@ -30,6 +30,7 @@ public class ApplicationConfig extends Application {
         resources.add(Services.EventService.class);
         resources.add(Services.LoginService.class);
         resources.add(Services.LogoutService.class);
+        resources.add(Services.RecoverService.class);
         resources.add(Services.TeilnahmeService.class);
         resources.add(Services.TeilnehmerService.class);
         resources.add(Services.VeranstalterService.class);
