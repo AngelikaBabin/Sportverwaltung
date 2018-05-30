@@ -34,8 +34,8 @@
         <activity android:name=".activity.events.InfoAllEventsActivity" />
         <activity android:name=".activity.events.InfoMyEventsActivity" />
         <activity android:name=".activity.events.InfoPastEventsActivity" />
-        <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.account.ProfileActivity" />
+        <activity android:name=".activity.account.ProfileActivity2" />
         <activity
             android:name=".activity.base.BaseActivity"
             android:label="@string/title_activity_sport_event_manager_base"
@@ -45,7 +45,8 @@
             android:name=".activity.settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity android:name=".activity.account.VerifyActivity" />
-        <activity android:name=".activity.account.RecoveryActivity"></activity>
+        <activity android:name=".activity.account.RecoveryActivity" />
+        <activity android:name=".activity.account.RegisterActivity2" />
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.example.cora.sportverwaltung.businesslogic.connection;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -39,26 +40,32 @@ public class AsyncWebserviceTask extends AsyncTask<String, Void, AsyncTaskResult
     protected AsyncTaskResult doInBackground(String... params) {
         AsyncTaskResult result;
 
-        // extract request params for clarity
-        String payload = (params.length != 0) ? params[0] : null;
-
         try {
-            // set payload or querystring
-            if (payload != null && method == HttpMethod.GET) {
-               url = new URL(url.toString() +"?" + payload);
+            // set querystring
+            if (params.length != 0 && method == HttpMethod.GET) {
+               url = new URL(url.toString() +"?" + params[0]);
             }
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             // set token header if logged in
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(((Activity) handler).getApplicationContext());
-            String token = preferences.getString("TOKEN", null);
+            SharedPreferences preferences = null;
+            if(handler instanceof Activity) {
+                preferences = PreferenceManager.getDefaultSharedPreferences(((Activity) handler).getApplicationContext());
+            } else if(handler instanceof Fragment) {
+                preferences = PreferenceManager.getDefaultSharedPreferences(((Fragment) handler).getActivity().getApplicationContext());
+            }
+            String token = null;
+            if (preferences != null) {
+                token = preferences.getString("TOKEN", null);
+            }
+
             if (token != null) {
                 connection.setRequestProperty("Token", token);
             }
 
-            if (payload != null && method == HttpMethod.POST) {
-                write(connection, method, payload);
+            if (params.length != 0 && method == HttpMethod.POST) {
+                write(connection, method, params[0]);
             }
 
             int statusCode = connection.getResponseCode();

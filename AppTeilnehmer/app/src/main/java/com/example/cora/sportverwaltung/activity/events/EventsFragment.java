@@ -1,5 +1,6 @@
 package com.example.cora.sportverwaltung.activity.events;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -17,6 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
+import com.example.cora.sportverwaltung.activity.account.ProfileActivity2;
+import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandler;
+import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebserviceTask;
 import com.example.cora.sportverwaltung.businesslogic.connection.DatabaseConnection;
 import com.example.cora.sportverwaltung.businesslogic.data.Location;
 import com.example.cora.sportverwaltung.businesslogic.data.Sportart;
@@ -24,9 +28,14 @@ import com.example.cora.sportverwaltung.businesslogic.data.Veranstalter;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Date;
+
+import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.GET;
 
 
 /**
@@ -37,8 +46,9 @@ import java.util.Date;
  * Use the {@link EventsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EventsFragment extends Fragment {
+public class EventsFragment extends Fragment implements AsyncTaskHandler {
     private static final String ARG_Filter = "filter";
+    private ProgressDialog progDialog;
 
     private Filter filter;
 
@@ -75,25 +85,25 @@ public class EventsFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_events, container, false);
-        getViewElements();
-        registerEventhandlers();
-        manager = getFragmentManager();
-        setLists();
+        try {
+            view = inflater.inflate(R.layout.fragment_events, container, false);
+            getViewElements();
+            registerEventhandlers();
+            manager = getFragmentManager();
+
+            String queryString = "filter=" + filter;
+
+            AsyncWebserviceTask task = new AsyncWebserviceTask(GET, "event", this);
+            task.execute(queryString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return view;
     }
 
     private void getViewElements() {
         listView_events = view.findViewById(R.id.listView_events);
-    }
-
-    public void setLists() {
-        try {
-            ArrayList<Veranstaltung> result = connection.getEvents(filter);
-            setAdapterData(result);
-        } catch (Exception ex) {
-            Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG).show();
-        }
     }
 
     private void registerEventhandlers() {
@@ -113,7 +123,7 @@ public class EventsFragment extends Fragment {
                         intent = new Intent(getActivity(), InfoPastEventsActivity.class);
                         break;
                 }
-                Veranstaltung v = (Veranstaltung)listView_events.getItemAtPosition(position);
+                Veranstaltung v = (Veranstaltung) listView_events.getItemAtPosition(position);
                 Gson gson = new Gson();
                 String json = gson.toJson(v, Veranstaltung.class);
                 intent.putExtra("event", json);
@@ -139,6 +149,32 @@ public class EventsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onPreExecute() {
+        progDialog = new ProgressDialog(this.getActivity());
+        progDialog.setMessage("Logging in...");
+        progDialog.setIndeterminate(false);
+        progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progDialog.setCancelable(false);
+        progDialog.show();
+    }
+
+    @Override
+    public void onSuccess(int statusCode, String content) {
+        progDialog.dismiss();
+        Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
+        }.getType();
+
+        ArrayList<Veranstaltung> events = new Gson().fromJson(content, collectionType);
+        setAdapterData(events);
+    }
+
+    @Override
+    public void onError(Error err) {
+        progDialog.cancel();
+        Toast.makeText(this.getActivity(), err.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     /**

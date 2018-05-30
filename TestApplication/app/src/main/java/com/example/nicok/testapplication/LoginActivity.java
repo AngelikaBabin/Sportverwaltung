@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onPreExecute() {
             progDailog = new ProgressDialog(LoginActivity.this);
-            progDailog.setMessage("Loading...");
+            progDailog.setMessage("Logging in...");
             progDailog.setIndeterminate(false);
             progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progDailog.setCancelable(true);

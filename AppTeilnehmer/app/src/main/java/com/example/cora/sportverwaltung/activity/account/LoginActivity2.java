@@ -2,8 +2,10 @@ package com.example.cora.sportverwaltung.activity.account;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,13 +17,15 @@ import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandle
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebserviceTask;
 import com.example.cora.sportverwaltung.businesslogic.data.Credentials;
 import com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod;
+import com.google.gson.Gson;
+
+import java.util.prefs.Preferences;
 
 import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.POST;
 
 public class LoginActivity2 extends ConnectionActivity implements AsyncTaskHandler {
     Button button_login, button_register, button_forgotPassword;
     EditText editText_email, editText_password;
-    private ProgressDialog progDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +54,10 @@ public class LoginActivity2 extends ConnectionActivity implements AsyncTaskHandl
                     String password = editText_password.getText().toString();
 
                     Credentials c = new Credentials(email, password);
+                    String json = gson.toJson(c);
 
                     AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "login", LoginActivity2.this);
-                    task.execute();
+                    task.execute(json);
 
                 } catch (Exception ex) {
                     Toast.makeText(LoginActivity2.this, ex.getMessage(), Toast.LENGTH_LONG).show();
@@ -64,7 +69,7 @@ public class LoginActivity2 extends ConnectionActivity implements AsyncTaskHandl
         button_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity2.this, RegisterActivity.class));
+                startActivity(new Intent(LoginActivity2.this, RegisterActivity2.class));
             }
         });
 
@@ -79,17 +84,17 @@ public class LoginActivity2 extends ConnectionActivity implements AsyncTaskHandl
     @Override
     public void onPreExecute() {
         progDialog = new ProgressDialog(LoginActivity2.this);
-        progDialog.setMessage("Loading...");
+        progDialog.setMessage("Logging in...");
         progDialog.setIndeterminate(false);
         progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progDialog.setCancelable(true);
+        progDialog.setCancelable(false);
         progDialog.show();
     }
 
     @Override
     public void onSuccess(int statusCode, String content) {
         progDialog.dismiss();
-        startActivity(new Intent(LoginActivity2.this, ProfileActivity.class));
+        startActivity(new Intent(LoginActivity2.this, ProfileActivity2.class));
     }
 
     @Override

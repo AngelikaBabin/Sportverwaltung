@@ -1,5 +1,6 @@
 package com.example.cora.sportverwaltung.activity.base;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,14 +15,21 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
+import com.example.cora.sportverwaltung.activity.account.LoginActivity2;
+import com.example.cora.sportverwaltung.activity.account.ProfileActivity2;
 import com.example.cora.sportverwaltung.activity.events.EventsSwipeActivity;
 import com.example.cora.sportverwaltung.activity.account.LoginActivity;
 import com.example.cora.sportverwaltung.activity.account.ProfileActivity;
 import com.example.cora.sportverwaltung.activity.settings.SettingsActivity;
+import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandler;
+import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebserviceTask;
 
-public class BaseActivity extends ConnectionActivity implements NavigationView.OnNavigationItemSelectedListener {
+import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.GET;
+
+public class BaseActivity extends ConnectionActivity implements NavigationView.OnNavigationItemSelectedListener, AsyncTaskHandler {
     private FrameLayout contentContainer;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
@@ -107,17 +115,14 @@ public class BaseActivity extends ConnectionActivity implements NavigationView.O
         try {
             switch (item.getItemId()) {
                 case R.id.nav_profile:
-                    startActivity(new Intent(this, ProfileActivity.class));
+                    startActivity(new Intent(this, ProfileActivity2.class));
                     break;
                 case R.id.nav_events:
                     startActivity(new Intent(this, EventsSwipeActivity.class));
                     break;
                 case R.id.nav_logout:
-                    int status = connection.logout();
-                    if(status == 200)
-                        startActivity(new Intent(this, LoginActivity.class));
-                    else
-                        throw new Exception("ERROR: " + status);
+                    AsyncWebserviceTask task = new AsyncWebserviceTask(GET, "logout", this);
+                    task.execute();
                     break;
             }
         } catch (Exception e) {
@@ -126,5 +131,27 @@ public class BaseActivity extends ConnectionActivity implements NavigationView.O
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onPreExecute() {
+        progDialog = new ProgressDialog(this);
+        progDialog.setMessage("Logging in...");
+        progDialog.setIndeterminate(false);
+        progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progDialog.setCancelable(false);
+        progDialog.show();
+    }
+
+    @Override
+    public void onSuccess(int statusCode, String content) {
+        progDialog.dismiss();
+        startActivity(new Intent(this, LoginActivity2.class));
+    }
+
+    @Override
+    public void onError(Error err) {
+    progDialog.cancel();
+        Toast.makeText(this, err.getMessage(), Toast.LENGTH_SHORT).show();
     }
 }
