@@ -43,7 +43,7 @@ public class AccountService {
         Response r;
         try{
             if(Authentification.isUserAuthenticated(token)){
-                Account a = db.getAccount(Account.parseToken(token));
+                Account a = db.getAccountById(Account.parseToken(token));
                 r = Response.ok().entity(a).build();
             }
             else{

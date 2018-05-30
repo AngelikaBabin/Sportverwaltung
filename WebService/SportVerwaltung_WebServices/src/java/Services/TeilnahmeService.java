@@ -44,15 +44,29 @@ public class TeilnahmeService {
         gson = new Gson();
     }
 
-    /**
-     * Retrieves representation of an instance of Services.TeilnahmeService
-     * @return an instance of java.lang.String
-     */
     @GET
-    @Produces("application/xml")
-    public String getXml() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTeilnahmen(@HeaderParam("Token") String token, @QueryParam("eventId") int eventId) {
+        Response r;
+        Event e;
+        Account a;
+        try{
+            System.out.print("Get Teilnahme");
+            if(Authentification.isUserAuthenticated(token)){
+                a = Account.parseToken(token);
+                db.addTeilnahme(eventId, a);
+                r = Response.status(Response.Status.CREATED).build();
+                System.out.println("Sucess");
+            }
+            else{
+                r = Response.status(Response.Status.FORBIDDEN).build();
+            }
+        }
+        catch(Exception ex){
+            r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            System.out.println("Failed");
+        }
+        return r; //idTeilnehmer, idEvent | ersten 3 Teilnehmer selecten
     }
 
     @POST

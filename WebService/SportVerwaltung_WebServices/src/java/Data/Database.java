@@ -29,6 +29,13 @@ public class Database {
     private static final String USER = "d4a07";
     private static final String PASSWD = "d4a";
     private Connection conn = null;
+    private static int NUM_SELECTED_TEILNEHMER = 3;
+    private static String EVENT_COLUMNS = "veranstaltung.id, veranstaltung.name, "
+            + "veranstaltung.sportart,veranstaltung.location,veranstaltung.datetime, "
+            + "veranstaltung.details, veranstaltung.min_teilnehmer,veranstaltung.max_teilnehmer, "
+            + "account.id as vid, account.name as vname, account.email, account.password";
+    private static String LOCATION_COLUMNS = "ort.id as lid, ort.name as lname"
+            + ", latitude, LONGITUDE";
 
     /**
      * Singleton
@@ -115,7 +122,7 @@ public class Database {
         return a;
     }
 
-    public Account getAccount(Account a) throws Exception {
+    public Account getAccountById(Account a) throws Exception {
         ResultSet rs;
         conn = createConnection();
         String select = "SELECT * FROM account WHERE id = ?";
@@ -123,7 +130,7 @@ public class Database {
         stmt.setInt(1, a.getId());
         rs = stmt.executeQuery();
         if (rs.next()) {
-            a = new Account(rs.getInt("id"), rs.getString("name"), rs.getString("email"), null);
+            a = new Account(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password"));
         }
         conn.close();
         return a;
@@ -200,13 +207,17 @@ public class Database {
         ArrayList<Event> collVeranstaltung = new ArrayList<>();
 
         conn = createConnection();
-        String select = "SELECT * FROM veranstaltung";
+        String select = "SELECT " + EVENT_COLUMNS + ", " + LOCATION_COLUMNS + " FROM veranstaltung inner join account"
+                + " on veranstaltung.id_veranstalter = account.id"
+                + " inner join ort"
+                + " on ort.id = veranstaltung.location";
         PreparedStatement stmt = conn.prepareStatement(select);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             collVeranstaltung.add(new Event(rs.getInt("id"),
-                    rs.getInt("id_veranstalter"), rs.getString("name"), rs.getDate("datetime").toLocalDate(),
-                    rs.getString("details"), "", rs.getInt("max_teilnehmer"),
+                    new Account(rs.getInt("id_veranstalter"), rs.getString("account.name"),
+                            rs.getString("account.email"), rs.getString("account.password")), rs.getString("name"), rs.getDate("datetime").toLocalDate(),
+                    rs.getString("details"), rs.getString("lname"), rs.getInt("max_teilnehmer"),
                     rs.getInt("min_teilnehmer"), rs.getString("sportart")));
         }
         conn.close();
@@ -217,7 +228,10 @@ public class Database {
         ArrayList<Event> collVeranstaltung = new ArrayList<>();
 
         conn = createConnection();
-        String select = "SELECT * FROM veranstaltung "
+        String select = "SELECT " + EVENT_COLUMNS + ", " + LOCATION_COLUMNS + " FROM veranstaltung inner join ort "
+                + "on ort.id = veranstaltung.location "
+                + "inner join account "
+                + "on account.id = veranstaltung.id_veranstalter "
                 + "where datetime {comp} to_date(?, 'yyyy-MM-dd') "
                 + "and id_veranstalter = ?";
         if (filter == Filter.PAST) {
@@ -231,8 +245,9 @@ public class Database {
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             collVeranstaltung.add(new Event(rs.getInt("id"),
-                    rs.getInt("id_veranstalter"), rs.getString("name"), rs.getDate("datetime").toLocalDate(),
-                    rs.getString("details"), "", rs.getInt("max_teilnehmer"),
+                    new Account(rs.getInt("id_veranstalter"), rs.getString("account.name"),
+                            rs.getString("account.email"), rs.getString("account.password")), rs.getString("name"), rs.getDate("datetime").toLocalDate(),
+                    rs.getString("details"),rs.getString("lname"), rs.getInt("max_teilnehmer"),
                     rs.getInt("min_teilnehmer"), rs.getString("sportart")));
         }
         conn.close();
@@ -243,16 +258,19 @@ public class Database {
         ArrayList<Event> collVeranstaltung = new ArrayList<>();
 
         conn = createConnection();
-        String select = "select * from teilnahme inner join veranstaltung "
+        String select = "select " + EVENT_COLUMNS + ", " + LOCATION_COLUMNS + " from teilnahme inner join veranstaltung "
                 + "on teilnahme.id_veranstaltung = veranstaltung.id "
+                + "inner join ort "
+                + "on ort.id = veranstaltung.location "
                 + "where teilnahme.id_teilnehmer = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
         stmt.setInt(1, a.getId());
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             collVeranstaltung.add(new Event(rs.getInt("id"),
-                    rs.getInt("id_veranstalter"), rs.getString("name"), rs.getDate("datetime").toLocalDate(),
-                    rs.getString("details"), "", rs.getInt("max_teilnehmer"),
+                    new Account(rs.getInt("id_veranstalter"), rs.getString("account.name"),
+                            rs.getString("account.email"), rs.getString("account.password")), rs.getString("name"), rs.getDate("datetime").toLocalDate(),
+                    rs.getString("details"), rs.getString("lname"), rs.getInt("max_teilnehmer"),
                     rs.getInt("min_teilnehmer"), rs.getString("sportart")));
         }
         conn.close();
@@ -269,7 +287,7 @@ public class Database {
                 collEvents = getEventsByDate(a, LocalDate.now(), filter);
                 break;
             case ALL:
-                collEvents = getEventsByTeilnehmer(a);
+                collEvents = getFutureEvents();
                 break;
             default:
                 throw new FilterExcpetion("Unknown filter");
@@ -307,7 +325,7 @@ public class Database {
         PreparedStatement stmt = conn.prepareStatement(select);
         stmt.setString(1, e.getName());
         stmt.setString(2, e.getSportart());
-        stmt.setInt(3, e.getId_veranstalter());
+        stmt.setInt(3, e.getVeranstalter().getId());
         stmt.setInt(4, 0); //location
         stmt.setDate(5, Date.valueOf(e.getDatetime()));
         stmt.setString(6, e.getDetails());
@@ -359,5 +377,99 @@ public class Database {
         stmt.setInt(1, eventId);
         stmt.setInt(2, a.getId());
         stmt.executeUpdate();
+    }
+
+    private ArrayList<Teilnahme> getTeilnahmen(Account a, int eventId) throws Exception {
+        ArrayList<Teilnahme> collTeilnahmen = new ArrayList<>();
+
+        conn = createConnection();
+        String select = "select * from "
+                + "(select * from teilnahme inner join teilnehmer "
+                + "on teilnahme.id_teilnehmer = teilnehmer.id_account "
+                + "where id_veranstaltung = ? and id_teilnehmer = ? "
+                + "order by teilnahme.score "
+                + ") where rownum <= ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setInt(1, eventId);
+        stmt.setInt(2, a.getId());
+        stmt.setInt(3, NUM_SELECTED_TEILNEHMER);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            /*
+            collVeranstaltung.add(new Event(rs.getInt("id"),
+                    rs.getInt("id_veranstalter"), rs.getString("name"), rs.getDate("datetime").toLocalDate(),
+                    rs.getString("details"), "", rs.getInt("max_teilnehmer"),
+                    rs.getInt("min_teilnehmer"), rs.getString("sportart")));
+             */
+        }
+        conn.close();
+        return collTeilnahmen;
+    }
+
+    /*
+     select * from 
+(select * from teilnahme inner join teilnehmer
+on teilnahme.id_teilnehmer = teilnehmer.id_account
+where id_veranstaltung = 1
+order by teilnahme.score
+) where rownum <= 3;*/
+
+    private ArrayList<Event> getFutureEvents() throws Exception {
+        ArrayList<Event> collVeranstaltung = new ArrayList<>();
+
+        conn = createConnection();
+        String select = "SELECT " + EVENT_COLUMNS + ", " + LOCATION_COLUMNS + " FROM veranstaltung inner join account "
+                + "on veranstaltung.id_veranstalter = account.id "
+                + "inner join ort "
+                + "on veranstaltung.location = ort.id"
+                + " where datetime > ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setDate(1, Date.valueOf(LocalDate.now()));
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            Event e = new Event(rs.getInt("id"),
+                    new Account(rs.getInt("vid"), rs.getString("vname"),
+                            rs.getString("email"), rs.getString("password")), rs.getString("name"), rs.getDate("datetime").toLocalDate(),
+                    rs.getString("details"), rs.getString("lname"), rs.getInt("max_teilnehmer"),
+                    rs.getInt("min_teilnehmer"), rs.getString("sportart"));
+            e.setCountTeilnehmer(getNumberOfTeilnehmer(e.getId()));
+            collVeranstaltung.add(e);
+
+        }
+        conn.close();
+        return collVeranstaltung;
+    }
+
+    public int getNumberOfTeilnehmer(int eventId) throws Exception {
+        int result = 0;
+        conn = createConnection();
+        String select = "select count(*) from veranstaltung inner join teilnahme "
+                + " on teilnahme.id_veranstaltung = veranstaltung.id "
+                + " where veranstaltung.id = ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setInt(1, eventId);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            result = rs.getInt(1);
+        }
+        conn.close();
+        return result;
+    }
+    
+    public Account getAccountByEmail(Account a) throws Exception{
+        ResultSet rs;
+        conn = createConnection();
+        String select = "SELECT * FROM account WHERE email = ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setString(1, a.getEmail());
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            a = new Account(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password"));
+        }
+        else{
+            throw new AccountNotFoundException();
+        }
+        conn.close();
+        return a;
     }
 }

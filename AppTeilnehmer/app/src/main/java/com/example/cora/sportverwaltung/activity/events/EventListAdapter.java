@@ -12,8 +12,9 @@ import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.businesslogic.data.Sportart;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Date;
 
 
 public class EventListAdapter extends BaseAdapter {
@@ -44,17 +45,24 @@ public class EventListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if(convertView == null)
         {
-            convertView = thisInflator.inflate(R.layout.row_layout, parent, false);
-            TextView headingText = convertView.findViewById(R.id.textView_heading);
-            //TextView date = convertView.findViewById(R.id.textView_date);
-            TextView location = (TextView) convertView.findViewById(R.id.textView_location);
-            ImageView typeImage = convertView.findViewById(R.id.imageView_sport);
-
             Veranstaltung currentVeranstaltung = (Veranstaltung)getItem(position);
 
+            Date VerDate = currentVeranstaltung.getDatetime();//getting date
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");//formating according to my need
+            String date = dateFormatter.format(VerDate);
+
+            convertView = thisInflator.inflate(R.layout.row_layout, parent, false);
+            TextView headingText = convertView.findViewById(R.id.textView_heading);
+            TextView TextDate = convertView.findViewById(R.id.textView_date);
+            TextView location = (TextView) convertView.findViewById(R.id.textView_location);
+            TextView countParticipants = convertView.findViewById(R.id.textView_CountParti);
+            ImageView typeImage = convertView.findViewById(R.id.imageView_sport);
+
+
             headingText.setText(String.valueOf(currentVeranstaltung.getName()));
-            //date.setText(currentVeranstaltung.getDatetime().toString());
+            TextDate.setText(date);
             location.setText(currentVeranstaltung.getLocation());
+            countParticipants.setText(String.valueOf(currentVeranstaltung.getCountTeilnehmer()) + "/" + String.valueOf(currentVeranstaltung.getMaxTeilnehmer()));
 
             switch(Sportart.valueOf(currentVeranstaltung.getSportart().toUpperCase()))
             {

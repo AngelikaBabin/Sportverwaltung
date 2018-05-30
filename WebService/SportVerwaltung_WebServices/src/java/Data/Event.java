@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Event {
     private int id;
-    private int id_veranstalter;
+    private Account veranstalter;
     private String name;
     private LocalDate datetime;
     private String details;
@@ -23,11 +23,12 @@ public class Event {
     private int max_teilnehmer;
     private int min_teilnehmer;
     private String sportart;
+    private int countTeilnehmer;
 
-    public Event(int id, int id_veranstalter, String name, LocalDate datetime, 
+    public Event(int id, Account veranstalter, String name, LocalDate datetime, 
             String details, String location, int max_teilnehmer, int min_teilnehmer, String sportart) {
         this.id = id;
-        this.id_veranstalter = id_veranstalter;
+        this.veranstalter = veranstalter;
         this.datetime = datetime;
         this.details = details;
         this.location = location;
@@ -39,6 +40,14 @@ public class Event {
     
     public Event(){}
 
+    public int getCountTeilnehmer() {
+        return countTeilnehmer;
+    }
+
+    public void setCountTeilnehmer(int countTeilnehmer) {
+        this.countTeilnehmer = countTeilnehmer;
+    }
+    
     public int getId() {
         return id;
     }
@@ -47,12 +56,20 @@ public class Event {
         this.id = id;
     }
 
-    public int getId_veranstalter() {
-        return id_veranstalter;
+    public Account getVeranstalter() {
+        return veranstalter;
     }
 
-    public void setId_veranstalter(int id_veranstalter) {
-        this.id_veranstalter = id_veranstalter;
+    public void setVeranstalter(Account veranstalter) {
+        this.veranstalter = veranstalter;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public LocalDate getDatetime() {
@@ -95,15 +112,6 @@ public class Event {
         this.min_teilnehmer = min_teilnehmer;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    
     public String getSportart() {
         return sportart;
     }
@@ -112,10 +120,12 @@ public class Event {
         this.sportart = sportart;
     }
 
+
+
     @Override
     public String toString() {
         return "Veranstaltung{" + "id=" + id + 
-                ", id_veranstalter=" + id_veranstalter + 
+                ", veranstalter=" + veranstalter + 
                 ", datetime=" + datetime + ", details=" + details + 
                 ", location=" + location + ", max_teilnehmer=" + max_teilnehmer + 
                 ", min_teilnehmer=" + min_teilnehmer + ", name=" + name + ", sportart=" + sportart +'}';
