@@ -18,11 +18,9 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
-import com.example.cora.sportverwaltung.activity.account.LoginActivity2;
-import com.example.cora.sportverwaltung.activity.account.ProfileActivity2;
-import com.example.cora.sportverwaltung.activity.events.EventsSwipeActivity;
 import com.example.cora.sportverwaltung.activity.account.LoginActivity;
 import com.example.cora.sportverwaltung.activity.account.ProfileActivity;
+import com.example.cora.sportverwaltung.activity.events.EventsSwipeActivity;
 import com.example.cora.sportverwaltung.activity.settings.SettingsActivity;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandler;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebserviceTask;
@@ -115,7 +113,7 @@ public class BaseActivity extends ConnectionActivity implements NavigationView.O
         try {
             switch (item.getItemId()) {
                 case R.id.nav_profile:
-                    startActivity(new Intent(this, ProfileActivity2.class));
+                    startActivity(new Intent(this, ProfileActivity.class));
                     break;
                 case R.id.nav_events:
                     startActivity(new Intent(this, EventsSwipeActivity.class));
@@ -146,7 +144,7 @@ public class BaseActivity extends ConnectionActivity implements NavigationView.O
     @Override
     public void onSuccess(int statusCode, String content) {
         progDialog.dismiss();
-        startActivity(new Intent(this, LoginActivity2.class));
+        startActivity(new Intent(this, LoginActivity.class));
     }
 
     @Override

@@ -17,16 +17,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        <!-- USER -->
         <activity android:name=".activity.account.LoginActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.account.LoginActivity2">
-        </activity>
         <activity android:name=".activity.account.RegisterActivity" />
+        <activity android:name=".activity.account.VerifyActivity" />
+        <activity android:name=".activity.account.RecoveryActivity" />
+        <activity android:name=".activity.account.ProfileActivity" />
+
+        <!-- EVENTS -->
         <activity
             android:name=".activity.events.EventsSwipeActivity"
             android:label="@string/title_activity_events"
@@ -34,19 +38,19 @@
         <activity android:name=".activity.events.InfoAllEventsActivity" />
         <activity android:name=".activity.events.InfoMyEventsActivity" />
         <activity android:name=".activity.events.InfoPastEventsActivity" />
-        <activity android:name=".activity.account.ProfileActivity" />
-        <activity android:name=".activity.account.ProfileActivity2" />
+
+        <!-- BASE -->
         <activity
             android:name=".activity.base.BaseActivity"
             android:label="@string/title_activity_sport_event_manager_base"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".activity.base.ConnectionActivity" />
+
+        <!-- MISC -->
         <activity
             android:name=".activity.settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".activity.account.VerifyActivity" />
-        <activity android:name=".activity.account.RecoveryActivity" />
-        <activity android:name=".activity.account.RegisterActivity2" />
+
     </application>
 
 </manifest>

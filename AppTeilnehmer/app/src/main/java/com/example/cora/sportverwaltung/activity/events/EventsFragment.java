@@ -14,26 +14,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
-import com.example.cora.sportverwaltung.activity.account.ProfileActivity2;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandler;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebserviceTask;
 import com.example.cora.sportverwaltung.businesslogic.connection.DatabaseConnection;
-import com.example.cora.sportverwaltung.businesslogic.data.Location;
-import com.example.cora.sportverwaltung.businesslogic.data.Sportart;
-import com.example.cora.sportverwaltung.businesslogic.data.Veranstalter;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.GET;
 

@@ -1,5 +1,6 @@
 package com.example.cora.sportverwaltung.activity.account;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,13 +10,17 @@ import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.activity.base.ConnectionActivity;
+import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandler;
+import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebserviceTask;
 import com.example.cora.sportverwaltung.businesslogic.data.Account;
 
 import java.util.InputMismatchException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegisterActivity extends ConnectionActivity {
+import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.POST;
+
+public class RegisterActivity extends ConnectionActivity implements AsyncTaskHandler {
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     Button button_register;
@@ -57,22 +62,16 @@ public class RegisterActivity extends ConnectionActivity {
 
                     // create Teilnehmer
                     Account account = new Account(email, name, password);
+                    String json = gson.toJson(account);
 
                     // register in database
-                    int code = connection.register(account);
-                    //String token = "asdf";
+                    AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "teilnehmer", RegisterActivity.this);
+                    task.execute(json);
 
-                    // open menu activity if successful
-                    if(code >= 200 || code <= 299) {
-                        startActivity(new Intent(RegisterActivity.this, VerifyActivity.class));
-                    } else {
-                        Toast.makeText(RegisterActivity.this, code + " - could not create account", Toast.LENGTH_LONG).show();
-                    }
-
-                } catch(NullPointerException ex){
+                } catch (NullPointerException ex) {
                     Toast.makeText(RegisterActivity.this, "account already exists", Toast.LENGTH_LONG).show();
                     ex.printStackTrace();
-                }catch (Exception ex) {
+                } catch (Exception ex) {
                     Toast.makeText(RegisterActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
                     ex.printStackTrace();
                 }
@@ -81,21 +80,42 @@ public class RegisterActivity extends ConnectionActivity {
     }
 
     private void check(String email, String name, String password, String passwordConfirm) {
-        if(name == null || name.length() < 3){
+        if (name == null || name.length() < 3) {
             throw new InputMismatchException(getString(R.string.error_invalidName));
         }
 
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
-        if(!matcher.find()) {
+        if (!matcher.find()) {
             throw new InputMismatchException(getString(R.string.error_invalidEmail));
         }
 
-        if(password == null || password.length() < 6) {
+        if (password == null || password.length() < 6) {
             throw new InputMismatchException(getString(R.string.error_invalidPassword));
         }
 
-        if(!password.equals(passwordConfirm)) {
+        if (!password.equals(passwordConfirm)) {
             throw new InputMismatchException(getString(R.string.error_invalidConfirmPassword));
         }
+    }
+
+    @Override
+    public void onPreExecute() {
+        progDialog = new ProgressDialog(this);
+        progDialog.setMessage("Logging in...");
+        progDialog.setIndeterminate(false);
+        progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progDialog.setCancelable(false);
+        progDialog.show();
+    }
+
+    @Override
+    public void onSuccess(int statusCode, String content) {
+        progDialog.dismiss();
+        startActivity(new Intent(RegisterActivity.this, VerifyActivity.class));
+    }
+
+    @Override
+    public void onError(Error err) {
+        Toast.makeText(RegisterActivity.this, err.getMessage() + " - could not create account", Toast.LENGTH_LONG).show();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.cora.sportverwaltung.activity.account;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,9 +10,13 @@ import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.activity.base.ConnectionActivity;
+import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandler;
+import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebserviceTask;
 import com.example.cora.sportverwaltung.businesslogic.data.Credentials;
 
-public class LoginActivity extends ConnectionActivity {
+import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.POST;
+
+public class LoginActivity extends ConnectionActivity implements AsyncTaskHandler {
     Button button_login, button_register, button_forgotPassword;
     EditText editText_email, editText_password;
 
@@ -42,14 +47,11 @@ public class LoginActivity extends ConnectionActivity {
                     String password = editText_password.getText().toString();
 
                     Credentials c = new Credentials(email, password);
+                    String json = gson.toJson(c);
 
-                    String token = connection.login(c);
+                    AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "login", LoginActivity.this);
+                    task.execute(json);
 
-                    if (token != null) {
-                        startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_LONG).show();
-                    }
                 } catch (Exception ex) {
                     Toast.makeText(LoginActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
                     ex.printStackTrace();
@@ -70,5 +72,27 @@ public class LoginActivity extends ConnectionActivity {
                 startActivity(new Intent(LoginActivity.this, RecoveryActivity.class));
             }
         });
+    }
+
+    @Override
+    public void onPreExecute() {
+        progDialog = new ProgressDialog(LoginActivity.this);
+        progDialog.setMessage("Logging in...");
+        progDialog.setIndeterminate(false);
+        progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progDialog.setCancelable(false);
+        progDialog.show();
+    }
+
+    @Override
+    public void onSuccess(int statusCode, String content) {
+        progDialog.dismiss();
+        startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
+    }
+
+    @Override
+    public void onError(Error err) {
+        progDialog.cancel();
+        Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_LONG).show();
     }
 }
