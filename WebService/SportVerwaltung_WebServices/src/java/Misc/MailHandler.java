@@ -45,7 +45,7 @@ public class MailHandler {
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress(username));
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
-        message.setSubject("Click the link");
+        message.setSubject(subject);
         message.setText(body);
         Transport.send(message);
     }

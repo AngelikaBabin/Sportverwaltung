@@ -24,17 +24,17 @@ import java.util.Collection;
  */
 public class Database {
 
-    private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
-    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
+    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
+    private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
     private static final String USER = "d4a07";
     private static final String PASSWD = "d4a";
     private Connection conn = null;
-    private static int NUM_SELECTED_TEILNEHMER = 3;
-    private static String EVENT_COLUMNS = "veranstaltung.id, veranstaltung.name, "
+    private static final int NUM_SELECTED_TEILNEHMER = 3;
+    private static final String EVENT_COLUMNS = "veranstaltung.id, veranstaltung.name, "
             + "veranstaltung.sportart,veranstaltung.location,veranstaltung.datetime, "
             + "veranstaltung.details, veranstaltung.min_teilnehmer,veranstaltung.max_teilnehmer, "
             + "account.id as vid, account.name as vname, account.email, account.password";
-    private static String LOCATION_COLUMNS = "ort.id as lid, ort.name as lname"
+    private static final String LOCATION_COLUMNS = "ort.id as lid, ort.name as lname"
             + ", latitude, LONGITUDE";
 
     /**
@@ -379,6 +379,7 @@ public class Database {
         stmt.executeUpdate();
     }
 
+/*
     private ArrayList<Teilnahme> getTeilnahmen(Account a, int eventId) throws Exception {
         ArrayList<Teilnahme> collTeilnahmen = new ArrayList<>();
 
@@ -395,17 +396,16 @@ public class Database {
         stmt.setInt(3, NUM_SELECTED_TEILNEHMER);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
-            /*
             collVeranstaltung.add(new Event(rs.getInt("id"),
                     rs.getInt("id_veranstalter"), rs.getString("name"), rs.getDate("datetime").toLocalDate(),
                     rs.getString("details"), "", rs.getInt("max_teilnehmer"),
                     rs.getInt("min_teilnehmer"), rs.getString("sportart")));
-             */
         }
         conn.close();
         return collTeilnahmen;
     }
-
+*/
+    
     /*
      select * from 
 (select * from teilnahme inner join teilnehmer
