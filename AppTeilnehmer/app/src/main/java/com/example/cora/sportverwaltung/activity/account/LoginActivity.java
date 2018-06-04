@@ -2,8 +2,9 @@ package com.example.cora.sportverwaltung.activity.account;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
+import android.preference.PreferenceManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,10 +21,14 @@ public class LoginActivity extends ConnectionActivity implements AsyncTaskHandle
     Button button_login, button_register, button_forgotPassword;
     EditText editText_email, editText_password;
 
+    SharedPreferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         getViewElements();
 
@@ -35,43 +40,31 @@ public class LoginActivity extends ConnectionActivity implements AsyncTaskHandle
         button_register = findViewById(R.id.button_register);
         button_forgotPassword = findViewById(R.id.button_forgotPassword);
         editText_email = findViewById(R.id.editText_email);
+        editText_email.setText(preferences.getString("EMAIL", ""));
         editText_password = findViewById(R.id.editText_password);
     }
 
     private void registerEventhandlers() {
-        button_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    String email = editText_email.getText().toString();
-                    String password = editText_password.getText().toString();
+        button_login.setOnClickListener(view -> {
+            try {
+                String email = editText_email.getText().toString();
+                String password = editText_password.getText().toString();
 
-                    Credentials c = new Credentials(email, password);
-                    String json = gson.toJson(c);
+                Credentials c = new Credentials(email, password);
+                String json = gson.toJson(c);
 
-                    AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "login", LoginActivity.this);
-                    task.execute(json);
+                AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "login", LoginActivity.this);
+                task.execute(null, json);
 
-                } catch (Exception ex) {
-                    Toast.makeText(LoginActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
-                    ex.printStackTrace();
-                }
+            } catch (Exception ex) {
+                Toast.makeText(LoginActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
+                ex.printStackTrace();
             }
         });
 
-        button_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-            }
-        });
+        button_register.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
 
-        button_forgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, RecoveryActivity.class));
-            }
-        });
+        button_forgotPassword.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, RecoveryActivity.class)));
     }
 
     @Override
@@ -87,6 +80,7 @@ public class LoginActivity extends ConnectionActivity implements AsyncTaskHandle
     @Override
     public void onSuccess(int statusCode, String content) {
         progDialog.dismiss();
+        preferences.edit().putString("EMAIL", editText_email.getText().toString()).apply();
         startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
     }
 

@@ -1,5 +1,6 @@
 package com.example.cora.sportverwaltung.activity.events;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,10 +10,11 @@ import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.activity.base.ConnectionActivity;
+import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandler;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.google.gson.Gson;
 
-public class InfoMyEventsActivity extends ConnectionActivity {
+public class InfoMyEventsActivity extends ConnectionActivity implements AsyncTaskHandler {
     TextView textView_header, textView_date, textView_place, textView_organizer, textView_details;
     Button button_logout;
 
@@ -60,5 +62,28 @@ public class InfoMyEventsActivity extends ConnectionActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onPreExecute() {
+        progDialog = new ProgressDialog(this);
+        progDialog.setMessage("Logging in...");
+        progDialog.setIndeterminate(false);
+        progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progDialog.setCancelable(false);
+        progDialog.show();
+    }
+
+    @Override
+    public void onSuccess(int statusCode, String content) {
+        progDialog.dismiss();
+        button_logout.setEnabled(false);
+        Toast.makeText(this, "You are now participating", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onError(Error err) {
+        progDialog.cancel();
+        Toast.makeText(this, err.getMessage(), Toast.LENGTH_SHORT).show();
     }
 }

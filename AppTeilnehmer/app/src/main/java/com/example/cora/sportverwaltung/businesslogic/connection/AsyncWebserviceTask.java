@@ -1,14 +1,8 @@
 package com.example.cora.sportverwaltung.businesslogic.connection;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 
 import com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod;
-import com.google.gson.JsonObject;
-import com.loopj.android.http.RequestParams;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,8 +12,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by nicok on 28.05.2018 ^-^.
@@ -40,11 +32,13 @@ public class AsyncWebserviceTask extends AsyncTask<String, Void, AsyncTaskResult
     @Override
     protected AsyncTaskResult doInBackground(String... params) {
         AsyncTaskResult result;
+        String queryString = (params.length > 0) ? params[0] : null;
+        String jsonString = (params.length > 1) ? params[1] : null;
 
         try {
             // set querystring
-            if (params.length != 0 && method == HttpMethod.GET) {
-               url = new URL(url.toString() +"?" + params[0]);
+            if (queryString != null) {
+                url = new URL(url.toString() + "?" + queryString);
             }
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -54,8 +48,9 @@ public class AsyncWebserviceTask extends AsyncTask<String, Void, AsyncTaskResult
                 connection.setRequestProperty("Token", accessToken);
             }
 
-            if (params.length != 0 && method == HttpMethod.POST) {
-                write(connection, method, params[0]);
+            // post json
+            if (jsonString != null && method == HttpMethod.POST) {
+                write(connection, method, jsonString);
             }
 
             int statusCode = connection.getResponseCode();

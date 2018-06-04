@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
@@ -87,7 +88,7 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
             String queryString = "filter=" + filter;
 
             AsyncWebserviceTask task = new AsyncWebserviceTask(GET, "event", this);
-            task.execute(queryString);
+            task.execute(queryString, null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -162,6 +163,11 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
 
         ArrayList<Veranstaltung> events = new Gson().fromJson(content, collectionType);
         setAdapterData(events);
+
+        if(events.size() > 0) {
+            TextView textView_message = this.getActivity().findViewById(R.id.textView_message);
+            textView_message.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

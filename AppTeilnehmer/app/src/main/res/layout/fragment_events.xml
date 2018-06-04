@@ -15,4 +15,11 @@
         android:clickable="true"
         android:focusable="true" />
 
+    <TextView
+        android:id="@+id/textView_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="no events found"
+        android:textAlignment="center" />
+
 </LinearLayout>

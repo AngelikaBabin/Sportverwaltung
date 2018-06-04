@@ -32,7 +32,7 @@ public class RecoveryActivity extends ConnectionActivity implements AsyncTaskHan
                 jsonObject.addProperty("email", email);
 
                 AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "recover", this);
-                task.execute(jsonObject.toString());
+                task.execute(null, jsonObject.toString());
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
