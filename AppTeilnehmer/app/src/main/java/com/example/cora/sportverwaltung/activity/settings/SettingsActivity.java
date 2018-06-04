@@ -1,6 +1,7 @@
 package com.example.cora.sportverwaltung.activity.settings;
 
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -20,6 +21,8 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.example.cora.sportverwaltung.R;
+import com.example.cora.sportverwaltung.activity.account.ProfileActivity;
+import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandler;
 
 import java.util.List;
 
@@ -34,7 +37,8 @@ import java.util.List;
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
  */
-public class SettingsActivity extends AppCompatPreferenceActivity {
+public class SettingsActivity extends AppCompatPreferenceActivity implements AsyncTaskHandler {
+    ProgressDialog progDialog = null;
 
     /**
      * A preference value change listener that updates the preference's summary
@@ -158,29 +162,50 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      */
     protected boolean isValidFragment(String fragmentName) {
         return PreferenceFragment.class.getName().equals(fragmentName)
-                || GeneralPreferenceFragment.class.getName().equals(fragmentName)
+                || AccountPreferenceFragment.class.getName().equals(fragmentName)
                 || DataSyncPreferenceFragment.class.getName().equals(fragmentName)
                 || NotificationPreferenceFragment.class.getName().equals(fragmentName);
     }
 
+    @Override
+    public void onPreExecute() {
+        progDialog = new ProgressDialog(SettingsActivity.this);
+        progDialog.setMessage("changing...");
+        progDialog.setIndeterminate(false);
+        progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progDialog.setCancelable(false);
+        progDialog.show();
+    }
+
+    @Override
+    public void onSuccess(int statusCode, String content) {
+
+    }
+
+    @Override
+    public void onError(Error err) {
+
+    }
+
     /**
-     * This fragment shows general preferences only. It is used when the
+     * This fragment shows account preferences only. It is used when the
      * activity is showing a two-pane settings UI.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class GeneralPreferenceFragment extends PreferenceFragment {
+    public static class AccountPreferenceFragment extends PreferenceFragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_general);
+            addPreferencesFromResource(R.xml.pref_account);
             setHasOptionsMenu(true);
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference("example_text"));
-            bindPreferenceSummaryToValue(findPreference("example_list"));
+            bindPreferenceSummaryToValue(findPreference("changeNameKey"));
+            bindPreferenceSummaryToValue(findPreference("changeEmailKey"));
+            bindPreferenceSummaryToValue(findPreference("changePasswordKey"));
         }
 
         @Override
