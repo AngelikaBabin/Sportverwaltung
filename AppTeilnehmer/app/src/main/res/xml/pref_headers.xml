@@ -3,9 +3,9 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header
-        android:fragment="com.example.cora.sportverwaltung.activity.settings.SettingsActivity$GeneralPreferenceFragment"
+        android:fragment="com.example.cora.sportverwaltung.activity.settings.SettingsActivity$AccountPreferenceFragment"
         android:icon="@drawable/ic_info"
-        android:title="@string/pref_header_general" />
+        android:title="@string/pref_header_Account" />
 
     <header
         android:fragment="com.example.cora.sportverwaltung.activity.settings.SettingsActivity$NotificationPreferenceFragment"
