@@ -20,7 +20,6 @@ import android.widget.Toast;
 import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandler;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebserviceTask;
-import com.example.cora.sportverwaltung.businesslogic.connection.DatabaseConnection;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
 import com.google.gson.Gson;
@@ -45,8 +44,6 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
     private ProgressDialog progDialog;
 
     private Filter filter;
-
-    private DatabaseConnection connection;
 
     private OnFragmentInteractionListener mListener;
 
@@ -73,8 +70,6 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
         if (getArguments() != null) {
             filter = Filter.valueOf(getArguments().getString("FILTER"));
         }
-        connection = DatabaseConnection.getInstance();
-
     }
 
     @Override
@@ -164,7 +159,7 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
         ArrayList<Veranstaltung> events = new Gson().fromJson(content, collectionType);
         setAdapterData(events);
 
-        if(events.size() > 0) {
+        if (events.size() > 0) {
             TextView textView_message = this.getActivity().findViewById(R.id.textView_message);
             textView_message.setVisibility(View.INVISIBLE);
         }
