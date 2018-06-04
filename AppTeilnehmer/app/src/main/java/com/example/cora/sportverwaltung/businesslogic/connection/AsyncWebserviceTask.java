@@ -29,6 +29,7 @@ public class AsyncWebserviceTask extends AsyncTask<String, Void, AsyncTaskResult
     private AsyncTaskHandler handler;
     private HttpMethod method;
     private URL url;
+    private static String accessToken = null;
 
     public AsyncWebserviceTask(HttpMethod method, String route, AsyncTaskHandler handler) throws MalformedURLException {
         this.handler = handler;
@@ -49,19 +50,8 @@ public class AsyncWebserviceTask extends AsyncTask<String, Void, AsyncTaskResult
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             // set token header if logged in
-            SharedPreferences preferences = null;
-            if(handler instanceof Activity) {
-                preferences = PreferenceManager.getDefaultSharedPreferences(((Activity) handler).getApplicationContext());
-            } else if(handler instanceof Fragment) {
-                preferences = PreferenceManager.getDefaultSharedPreferences(((Fragment) handler).getActivity().getApplicationContext());
-            }
-            String token = null;
-            if (preferences != null) {
-                token = preferences.getString("TOKEN", null);
-            }
-
-            if (token != null) {
-                connection.setRequestProperty("Token", token);
+            if (accessToken != null) {
+                connection.setRequestProperty("Token", accessToken);
             }
 
             if (params.length != 0 && method == HttpMethod.POST) {
@@ -72,9 +62,8 @@ public class AsyncWebserviceTask extends AsyncTask<String, Void, AsyncTaskResult
             String content = read(connection);
 
             // set new token if necessary
-            if (preferences.getString("TOKEN", null) == null) {
-                preferences.edit().putString("TOKEN", connection.getHeaderField("Token")).apply();
-
+            if (accessToken == null) {
+                accessToken = connection.getHeaderField("Token");
             }
 
             result = new AsyncTaskResult(statusCode, content);
