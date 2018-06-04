@@ -47,34 +47,31 @@ public class RegisterActivity extends ConnectionActivity implements AsyncTaskHan
     }
 
     private void registerEventhandlers() {
-        button_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    // get view contents
-                    String email = editText_email.getText().toString();
-                    String name = editText_name.getText().toString();
-                    String password = editText_password.getText().toString();
-                    String passwordConfirm = editText_passwordConfirm.getText().toString();
+        button_register.setOnClickListener(view -> {
+            try {
+                // get view contents
+                String email = editText_email.getText().toString();
+                String name = editText_name.getText().toString();
+                String password = editText_password.getText().toString();
+                String passwordConfirm = editText_passwordConfirm.getText().toString();
 
-                    // constraints
-                    check(email, name, password, passwordConfirm);
+                // constraints
+                check(email, name, password, passwordConfirm);
 
-                    // create Teilnehmer
-                    Account account = new Account(email, name, password);
-                    String json = gson.toJson(account);
+                // create Teilnehmer
+                Account account = new Account(email, name, password);
+                String json = gson.toJson(account);
 
-                    // register in database
-                    AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "teilnehmer", RegisterActivity.this);
-                    task.execute(json);
+                // register in database
+                AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "teilnehmer", RegisterActivity.this);
+                task.execute(null, json);
 
-                } catch (NullPointerException ex) {
-                    Toast.makeText(RegisterActivity.this, "account already exists", Toast.LENGTH_LONG).show();
-                    ex.printStackTrace();
-                } catch (Exception ex) {
-                    Toast.makeText(RegisterActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
-                    ex.printStackTrace();
-                }
+            } catch (NullPointerException ex) {
+                Toast.makeText(RegisterActivity.this, "account already exists", Toast.LENGTH_LONG).show();
+                ex.printStackTrace();
+            } catch (Exception ex) {
+                Toast.makeText(RegisterActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
+                ex.printStackTrace();
             }
         });
     }

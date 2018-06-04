@@ -1,14 +1,8 @@
 package com.example.cora.sportverwaltung.businesslogic.connection;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 
 import com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod;
-import com.google.gson.JsonObject;
-import com.loopj.android.http.RequestParams;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,8 +12,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by nicok on 28.05.2018 ^-^.
@@ -29,6 +21,7 @@ public class AsyncWebserviceTask extends AsyncTask<String, Void, AsyncTaskResult
     private AsyncTaskHandler handler;
     private HttpMethod method;
     private URL url;
+    private static String accessToken = null;
 
     public AsyncWebserviceTask(HttpMethod method, String route, AsyncTaskHandler handler) throws MalformedURLException {
         this.handler = handler;
@@ -39,42 +32,33 @@ public class AsyncWebserviceTask extends AsyncTask<String, Void, AsyncTaskResult
     @Override
     protected AsyncTaskResult doInBackground(String... params) {
         AsyncTaskResult result;
+        String queryString = (params.length > 0) ? params[0] : null;
+        String jsonString = (params.length > 1) ? params[1] : null;
 
         try {
             // set querystring
-            if (params.length != 0 && method == HttpMethod.GET) {
-               url = new URL(url.toString() +"?" + params[0]);
+            if (queryString != null) {
+                url = new URL(url.toString() + "?" + queryString);
             }
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             // set token header if logged in
-            SharedPreferences preferences = null;
-            if(handler instanceof Activity) {
-                preferences = PreferenceManager.getDefaultSharedPreferences(((Activity) handler).getApplicationContext());
-            } else if(handler instanceof Fragment) {
-                preferences = PreferenceManager.getDefaultSharedPreferences(((Fragment) handler).getActivity().getApplicationContext());
-            }
-            String token = null;
-            if (preferences != null) {
-                token = preferences.getString("TOKEN", null);
+            if (accessToken != null) {
+                connection.setRequestProperty("Token", accessToken);
             }
 
-            if (token != null) {
-                connection.setRequestProperty("Token", token);
-            }
-
-            if (params.length != 0 && method == HttpMethod.POST) {
-                write(connection, method, params[0]);
+            // post json
+            if (jsonString != null && method == HttpMethod.POST) {
+                write(connection, method, jsonString);
             }
 
             int statusCode = connection.getResponseCode();
             String content = read(connection);
 
             // set new token if necessary
-            if (preferences.getString("TOKEN", null) == null) {
-                preferences.edit().putString("TOKEN", connection.getHeaderField("Token")).apply();
-
+            if (accessToken == null) {
+                accessToken = connection.getHeaderField("Token");
             }
 
             result = new AsyncTaskResult(statusCode, content);
