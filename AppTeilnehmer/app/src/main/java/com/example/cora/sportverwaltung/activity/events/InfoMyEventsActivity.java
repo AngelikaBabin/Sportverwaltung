@@ -13,7 +13,7 @@ import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.google.gson.Gson;
 
 public class InfoMyEventsActivity extends ConnectionActivity {
-    TextView textView_header, textView_date, textView_place, textView_organizer, textView_details;
+    TextView textView_header, textView_date, textView_place, textView_organizer, textView_details, textView_sport;
     Button button_logout;
 
     private Veranstaltung selectedEvent;
@@ -35,6 +35,7 @@ public class InfoMyEventsActivity extends ConnectionActivity {
         textView_place.setText(selectedEvent.getLocation().toString());
         textView_organizer.setText(selectedEvent.getVeranstalter().toString());
         textView_details.setText(selectedEvent.getDetails());
+        textView_sport.setText(selectedEvent.getSportart());
     }
 
     private void getViewElements() {
@@ -44,6 +45,7 @@ public class InfoMyEventsActivity extends ConnectionActivity {
         textView_place = findViewById(R.id.textView_place);
         textView_organizer = findViewById(R.id.textView_organizer);
         button_logout = findViewById(R.id.button_logout);
+        textView_sport = findViewById(R.id.textView_sport);
     }
 
     private void registerEventhandlers() {

@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 public class InfoAllEventsActivity extends ConnectionActivity {
 
     TextView textView_header, textView_Details;
-    TextView textView_date, textView_place, textView_participator, textView_organizer;
+    TextView textView_date, textView_place, textView_participator, textView_organizer, textView_sport;
     Button button_participate;
 
     private Veranstaltung selectedEvent;
@@ -41,6 +41,7 @@ public class InfoAllEventsActivity extends ConnectionActivity {
         textView_participator.setText(String.valueOf(selectedEvent.getMaxTeilnehmer()));
         textView_organizer.setText(selectedEvent.getVeranstalter().toString());
         textView_Details.setText(selectedEvent.getDetails());
+        textView_sport.setText(selectedEvent.getSportart());
     }
 
     private void getViewElements() {
@@ -51,6 +52,7 @@ public class InfoAllEventsActivity extends ConnectionActivity {
         textView_participator = findViewById(R.id.textView_participator);
         textView_organizer = findViewById(R.id.textView_organizer);
         button_participate = findViewById(R.id.button_participate);
+        textView_sport = findViewById(R.id.textView_sport);
     }
 
     private void registerEventhandlers() {

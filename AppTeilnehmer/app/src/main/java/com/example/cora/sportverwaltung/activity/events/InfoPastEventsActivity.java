@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 public class InfoPastEventsActivity extends AppCompatActivity {
-    TextView textView_header, textView_date, textView_place, textView_organizer, textView_rank, textView_points;
+    TextView textView_header, textView_date, textView_place, textView_organizer, textView_rank, textView_points, textView_sport;
     ListView listView_topDrei;
     private Veranstaltung selectedEvent;
 
@@ -34,6 +34,7 @@ public class InfoPastEventsActivity extends AppCompatActivity {
         textView_organizer.setText(selectedEvent.getVeranstalter().toString());
         textView_points.setText("40 pts");
         textView_rank.setText("1st");
+        textView_sport.setText(selectedEvent.getSportart());
         setTopDreiListView();
     }
 
@@ -61,5 +62,6 @@ public class InfoPastEventsActivity extends AppCompatActivity {
         textView_rank = findViewById(R.id.textView_rank);
         textView_points = findViewById(R.id.textView_points);
         listView_topDrei = findViewById(R.id.listView_topDrei);
+        textView_sport = findViewById(R.id.textView_sport);
     }
 }

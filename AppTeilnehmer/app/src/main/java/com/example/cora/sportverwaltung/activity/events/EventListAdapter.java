@@ -62,7 +62,15 @@ public class EventListAdapter extends BaseAdapter {
             headingText.setText(String.valueOf(currentVeranstaltung.getName()));
             TextDate.setText(date);
             location.setText(currentVeranstaltung.getLocation());
-            countParticipants.setText(String.valueOf(currentVeranstaltung.getCountTeilnehmer()) + "/" + String.valueOf(currentVeranstaltung.getMaxTeilnehmer()));
+            if(currentVeranstaltung.getMaxTeilnehmer() == 0)
+            {
+                countParticipants.setText(String.valueOf(currentVeranstaltung.getCountTeilnehmer()) + "/∞");
+            }
+            else
+            {
+                countParticipants.setText(String.valueOf(currentVeranstaltung.getCountTeilnehmer()) + "/" + String.valueOf(currentVeranstaltung.getMaxTeilnehmer()));
+            }
+
 
             switch(Sportart.valueOf(currentVeranstaltung.getSportart().toUpperCase()))
             {

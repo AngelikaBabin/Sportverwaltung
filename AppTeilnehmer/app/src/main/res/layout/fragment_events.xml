@@ -4,9 +4,20 @@
     android:layout_height="match_parent"
     android:background="@color/background_main"
     android:orientation="vertical"
-    android:padding="15dp"
 
     tools:context="com.example.cora.sportverwaltung.activity.events.EventsFragment">
+
+    <EditText
+        android:id="@+id/editText_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/input_rounded_transparent"
+        android:ems="10"
+        android:hint="Search"
+        android:inputType="textPersonName"
+        android:paddingStart="10dp"
+        android:textColor="#FFFFFF" />
 
     <ListView
         android:id="@+id/listView_events"
