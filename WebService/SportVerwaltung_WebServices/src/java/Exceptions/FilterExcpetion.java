@@ -7,7 +7,7 @@ package Exceptions;
 
 /**
  *
- * @author chris
+ * @author Kraschl
  */
 public class FilterExcpetion extends Exception{
     private String errMessage;

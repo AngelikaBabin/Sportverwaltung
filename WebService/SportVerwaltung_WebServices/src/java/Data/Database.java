@@ -20,7 +20,7 @@ import java.util.Collection;
 
 /**
  *
- * @author Gerald
+ * @author Kraschl
  */
 public class Database {
 
