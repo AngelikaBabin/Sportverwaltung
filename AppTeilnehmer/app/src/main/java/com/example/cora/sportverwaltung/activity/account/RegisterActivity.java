@@ -3,13 +3,12 @@ package com.example.cora.sportverwaltung.activity.account;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
-import com.example.cora.sportverwaltung.activity.base.ConnectionActivity;
+import com.example.cora.sportverwaltung.activity.base.ExposingActivity;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandler;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebserviceTask;
 import com.example.cora.sportverwaltung.businesslogic.data.Account;
@@ -20,7 +19,13 @@ import java.util.regex.Pattern;
 
 import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.POST;
 
-public class RegisterActivity extends ConnectionActivity implements AsyncTaskHandler {
+/**
+ * @kandut validation, async listener and code cleanup
+ * @kumnig gui structure and activity code
+ * @rajic gui design
+ */
+
+public class RegisterActivity extends ExposingActivity implements AsyncTaskHandler {
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     Button button_register;
@@ -31,14 +36,11 @@ public class RegisterActivity extends ConnectionActivity implements AsyncTaskHan
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // get view elements
-        getViewElements();
-
-        // register eventhandlers
-        registerEventhandlers();
+        initUIReferences();
+        initEventhandlers();
     }
 
-    private void getViewElements() {
+    private void initUIReferences() {
         button_register = findViewById(R.id.button_register);
         editText_email = findViewById(R.id.editText_email);
         editText_name = findViewById(R.id.textView_username);
@@ -46,7 +48,7 @@ public class RegisterActivity extends ConnectionActivity implements AsyncTaskHan
         editText_passwordConfirm = findViewById(R.id.editText_confirmPassword);
     }
 
-    private void registerEventhandlers() {
+    private void initEventhandlers() {
         button_register.setOnClickListener(view -> {
             try {
                 // get view contents

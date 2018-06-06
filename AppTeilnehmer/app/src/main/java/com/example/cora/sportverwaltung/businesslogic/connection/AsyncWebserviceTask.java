@@ -17,7 +17,7 @@ import java.net.URL;
  * Created by nicok on 28.05.2018 ^-^.
  */
 public class AsyncWebserviceTask extends AsyncTask<String, Void, AsyncTaskResult> {
-    private static final String BASE_URL = "http://192.168.193.150:8080/SportVerwaltung_WebServices/webresources/";
+    private static final String BASE_URL = "http://192.168.193.150:8080/sportverwaltung/webresources/";
     private AsyncTaskHandler handler;
     private HttpMethod method;
     private URL url;

@@ -1,7 +1,6 @@
 package com.example.cora.sportverwaltung.activity.events;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,15 +9,14 @@ import android.widget.Toast;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandler;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebserviceTask;
 import com.example.cora.sportverwaltung.R;
-import com.example.cora.sportverwaltung.activity.base.ConnectionActivity;
+import com.example.cora.sportverwaltung.activity.base.ExposingActivity;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.google.gson.Gson;
 import android.app.ProgressDialog;
 
 import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.DELETE;
-import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.POST;
 
-public class InfoMyEventsActivity extends ConnectionActivity implements AsyncTaskHandler {
+public class InfoMyEventsActivity extends ExposingActivity implements AsyncTaskHandler {
     TextView textView_header, textView_date, textView_place, textView_organizer, textView_details, textView_sport;
     Button button_logout;
 
@@ -75,7 +73,7 @@ public class InfoMyEventsActivity extends ConnectionActivity implements AsyncTas
     @Override
     public void onPreExecute() {
         progDialog = new ProgressDialog(this);
-        progDialog.setMessage("Logging in...");
+        progDialog.setMessage("Getting events...");
         progDialog.setIndeterminate(false);
         progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progDialog.setCancelable(false);

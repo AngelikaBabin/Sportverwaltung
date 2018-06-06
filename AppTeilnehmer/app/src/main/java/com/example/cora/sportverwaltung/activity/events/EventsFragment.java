@@ -33,15 +33,12 @@ import java.util.ArrayList;
 
 import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.GET;
 
-
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link EventsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link EventsFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * @kandut async listener and code cleanup
+ * @kumnig logical structure, gui structure different webservice calls
+ * @rajic fragmentmanager related stuff, searching, filtering and gui design
  */
+
 public class EventsFragment extends Fragment implements AsyncTaskHandler {
     private static final String ARG_Filter = "filter";
     private ProgressDialog progDialog;
@@ -55,6 +52,7 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
     EditText editText_search;
     ArrayList<Veranstaltung> events;
     private FragmentManager manager;
+    TextView textView_message;
 
     public EventsFragment() {
 
@@ -86,8 +84,8 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
 
             String queryString = "filter=" + filter;
 
-            AsyncWebserviceTask task = new AsyncWebserviceTask(GET, "event", this);
-            task.execute(queryString, null);
+            AsyncWebserviceTask task = new AsyncWebserviceTask(GET, "events", this);
+            task.execute(queryString);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,6 +96,7 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
     private void getViewElements() {
         listView_events = view.findViewById(R.id.listView_events);
         editText_search = view.findViewById(R.id.editText_search);
+        textView_message = view.findViewById(R.id.textView_message);
     }
 
     private void registerEventhandlers() {
@@ -195,8 +194,9 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
         setAdapterData(events);
 
         if (events.size() > 0) {
-            TextView textView_message = this.getActivity().findViewById(R.id.textView_message);
             textView_message.setVisibility(View.INVISIBLE);
+        } else {
+            textView_message.setVisibility(View.VISIBLE);
         }
     }
 

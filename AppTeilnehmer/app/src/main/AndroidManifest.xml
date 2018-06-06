@@ -44,7 +44,7 @@
             android:name=".activity.base.BaseActivity"
             android:label="@string/title_activity_sport_event_manager_base"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".activity.base.ConnectionActivity" />
+        <activity android:name=".activity.base.ExposingActivity" />
 
         <!-- MISC -->
         <activity

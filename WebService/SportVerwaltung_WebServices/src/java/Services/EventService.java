@@ -9,15 +9,10 @@ import Data.Account;
 import Misc.Authentification;
 import Misc.Crypt;
 import Data.Database;
-import Data.Teilnehmer;
 import Data.Event;
 import Data.Filter;
 import Exceptions.FilterExcpetion;
-import Exceptions.RegisterExcpetion;
 import com.google.gson.Gson;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -27,7 +22,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -38,7 +32,7 @@ import javax.ws.rs.core.Response;
  *
  * @author chris
  */
-@Path("event")
+@Path("events")
 public class EventService {
     @Context
     private UriInfo context;
@@ -103,7 +97,7 @@ public class EventService {
         }
         catch(Exception ex){
             r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-            System.out.println("Failed ");
+            System.out.println("Failed");
         }
         return r;
     }

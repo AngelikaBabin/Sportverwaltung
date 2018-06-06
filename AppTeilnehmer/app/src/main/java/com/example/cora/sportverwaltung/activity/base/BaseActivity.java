@@ -27,12 +27,16 @@ import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebservice
 
 import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.GET;
 
-public class BaseActivity extends ConnectionActivity implements NavigationView.OnNavigationItemSelectedListener, AsyncTaskHandler {
+/**
+ * @kandut generalization from other activities
+ */
+
+public class BaseActivity extends ExposingActivity implements NavigationView.OnNavigationItemSelectedListener, AsyncTaskHandler {
+
+    // UI references
     private FrameLayout contentContainer;
     private DrawerLayout drawer;
-    private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
-    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +47,12 @@ public class BaseActivity extends ConnectionActivity implements NavigationView.O
         initToolbar();
         initDrawer();
         initNav();
-
-        // set up the rest
-        initMisc();
+        initContainer();
     }
 
     private void initDrawer() {
         drawer = findViewById(R.id.drawer_layout);
-        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
     }
@@ -60,12 +62,12 @@ public class BaseActivity extends ConnectionActivity implements NavigationView.O
         setSupportActionBar(toolbar);
     }
 
-    private void initMisc() {
+    private void initContainer() {
         contentContainer = findViewById(R.id.content_container);
     }
 
     private void initNav() {
-        navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -134,7 +136,7 @@ public class BaseActivity extends ConnectionActivity implements NavigationView.O
     @Override
     public void onPreExecute() {
         progDialog = new ProgressDialog(this);
-        progDialog.setMessage("Logging in...");
+        progDialog.setMessage("Processing...");
         progDialog.setIndeterminate(false);
         progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progDialog.setCancelable(false);

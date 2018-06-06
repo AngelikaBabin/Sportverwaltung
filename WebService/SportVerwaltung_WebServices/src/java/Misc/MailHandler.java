@@ -19,7 +19,7 @@ import javax.mail.internet.MimeMessage;
  * @author chris
  */
 public class MailHandler {
-    private Session session;
+    private final Session session;
     private boolean authentication=true;
     private boolean smtpServerTTLSEnabled = true;
     private String host = "smtp.gmail.com";
