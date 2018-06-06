@@ -2,40 +2,41 @@ package com.example.cora.sportverwaltung.activity.account;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
-import com.example.cora.sportverwaltung.activity.base.ConnectionActivity;
+import com.example.cora.sportverwaltung.activity.base.ExposingActivity;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandler;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebserviceTask;
 import com.example.cora.sportverwaltung.businesslogic.data.Credentials;
 
 import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.POST;
 
-public class LoginActivity extends ConnectionActivity implements AsyncTaskHandler {
+/**
+ * @kandut async listener and code cleanup
+ * @kumnig gui structure and activity code
+ * @rajic gui design
+ */
+
+public class LoginActivity extends ExposingActivity implements AsyncTaskHandler {
+
+    // UI references
     Button button_login, button_register, button_forgotPassword;
     EditText editText_email, editText_password;
-
-    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-        getViewElements();
-
-        registerEventhandlers();
+        initUIReferences();
+        initEventhandlers();
     }
 
-    private void getViewElements() {
+    private void initUIReferences() {
         button_login = findViewById(R.id.button_login);
         button_register = findViewById(R.id.button_register);
         button_forgotPassword = findViewById(R.id.button_forgotPassword);
@@ -44,7 +45,7 @@ public class LoginActivity extends ConnectionActivity implements AsyncTaskHandle
         editText_password = findViewById(R.id.editText_password);
     }
 
-    private void registerEventhandlers() {
+    private void initEventhandlers() {
         button_login.setOnClickListener(view -> {
             try {
                 String email = editText_email.getText().toString();

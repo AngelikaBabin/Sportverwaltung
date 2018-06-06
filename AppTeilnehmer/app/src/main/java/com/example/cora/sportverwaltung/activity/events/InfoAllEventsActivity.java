@@ -2,27 +2,21 @@ package com.example.cora.sportverwaltung.activity.events;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
-import com.example.cora.sportverwaltung.activity.base.ConnectionActivity;
+import com.example.cora.sportverwaltung.activity.base.ExposingActivity;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandler;
-import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskResult;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebserviceTask;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.POST;
 
-public class InfoAllEventsActivity extends ConnectionActivity implements AsyncTaskHandler{
+public class InfoAllEventsActivity extends ExposingActivity implements AsyncTaskHandler{
 
     TextView textView_header, textView_Details;
     TextView textView_date, textView_place, textView_participator, textView_organizer, textView_sport;

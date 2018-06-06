@@ -7,30 +7,39 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
-import com.example.cora.sportverwaltung.activity.base.ConnectionActivity;
+import com.example.cora.sportverwaltung.activity.base.ExposingActivity;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandler;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebserviceTask;
 import com.google.gson.JsonObject;
 
-import java.nio.file.attribute.PosixFileAttributes;
-
 import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.POST;
 
-public class RecoveryActivity extends ConnectionActivity implements AsyncTaskHandler {
+/**
+ * @kandut everything (which is not a lot)
+ */
+
+public class RecoveryActivity extends ExposingActivity implements AsyncTaskHandler {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recovery);
 
+        initEventhandler();
+    }
+
+    private void initEventhandler() {
         findViewById(R.id.button_recover).setOnClickListener(view -> {
             try {
+                // get email string
                 TextView editText_email = findViewById(R.id.editText_email);
                 String email = editText_email.getText().toString();
 
+                // build json
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("email", email);
 
+                // request recovery email
                 AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "recover", this);
                 task.execute(null, jsonObject.toString());
             } catch (Exception e) {
