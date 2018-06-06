@@ -13,16 +13,6 @@ import Data.Teilnehmer;
 import Exceptions.RegisterExcpetion;
 import Misc.MailHandler;
 import com.google.gson.Gson;
-import java.net.Inet4Address;
-import java.util.Properties;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -85,7 +75,7 @@ public class TeilnehmerService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registerTeilnehmer(String content){
         Response r;
-        String token = "";
+        String token;
         Account a;
         try{
             a = gson.fromJson(content, Account.class);

@@ -7,7 +7,6 @@ package Services;
 
 import Data.Account;
 import Data.Database;
-import java.net.Inet4Address;
 import java.net.URI;
 import javax.mail.MessagingException;
 import javax.ws.rs.core.Context;

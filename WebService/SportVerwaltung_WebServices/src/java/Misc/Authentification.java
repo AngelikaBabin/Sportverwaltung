@@ -6,7 +6,6 @@
 package Misc;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashSet;
 
 /**
@@ -14,9 +13,7 @@ import java.util.HashSet;
  * @author chris
  */
 public class Authentification {
-    //ToDo delete token loool
-    private static HashSet<String> collTokens = new HashSet<>(Arrays.asList(new String[] {"/7jucYcuXnMX0sh59w87XFxraAHfNmUhs4MiH+63bcw=",
-        "bowNAfawP1qjkpzRaoucRe9A3OJQ9Hxx0mcrYjKaH7VIRpEmzk/nrt6CV9qMXKKF/f5jR8m7Zthw BO5n3Xkl8XoW2sRXqCrafSg6NKVak70="}));
+    private static HashSet<String> collTokens = new HashSet<>();
     
     public static boolean isUserAuthenticated(String token) throws IOException, Exception{
         return collTokens.contains(token);

@@ -9,15 +9,10 @@ import Data.Account;
 import Misc.Authentification;
 import Misc.Crypt;
 import Data.Database;
-import Data.Teilnehmer;
 import Data.Event;
 import Data.Filter;
 import Exceptions.FilterExcpetion;
-import Exceptions.RegisterExcpetion;
 import com.google.gson.Gson;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -27,7 +22,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -38,7 +32,7 @@ import javax.ws.rs.core.Response;
  *
  * @author chris
  */
-@Path("event")
+@Path("events")
 public class EventService {
     @Context
     private UriInfo context;
@@ -62,15 +56,15 @@ public class EventService {
     public Response getEvents(@HeaderParam("Token") String token, @QueryParam("filter") String filter) {
         Response r;
         try{
+            System.out.println("Get Events..." + filter);
             if(Authentification.isUserAuthenticated(token)){
-                System.out.println("Get Events..");
                 List<Event> events = db.getEvents(Filter.valueOf(filter), Account.parseToken(token));
                 r = Response.ok().entity( new GenericEntity<List<Event>>(events){}).build();
                 System.out.println("Success");
             }
             else{
                 r = Response.status(Response.Status.FORBIDDEN).build();
-                System.out.println("Failed");
+                System.out.println("Auth Failed");
             }
         }
         catch(FilterExcpetion ex){
@@ -92,7 +86,7 @@ public class EventService {
         try{
             if(Authentification.isUserAuthenticated(token)){
                 e = gson.fromJson(content, Event.class);            
-                System.out.print("Register: " + e + "...");
+                System.out.print("Add Event: " + e + "...");
                 db.insertEvent(e);
                 r = Response.status(Response.Status.CREATED).build();
                 System.out.println("Sucess");

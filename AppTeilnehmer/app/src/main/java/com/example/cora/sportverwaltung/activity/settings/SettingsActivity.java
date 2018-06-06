@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -198,6 +199,14 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Asy
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_account);
             setHasOptionsMenu(true);
+
+            SharedPreferences sharedPref = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getContext());
+            }
+            String changeName = sharedPref.getString("changeNameKey", "@string/pref_default_display_name");
+            String changeMail = sharedPref.getString("changeNameKey", "@string/pref_default_display_name");
+            String changePassword = sharedPref.getString("changeNameKey", "@string/pref_default_display_name");
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are
