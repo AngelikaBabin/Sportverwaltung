@@ -4,7 +4,7 @@
     <EditTextPreference
         android:capitalize="words"
         android:defaultValue="@string/pref_default_display_name"
-        android:inputType="textCapWords"
+        android:inputType="textPersonName"
         android:key="changeNameKey"
         android:maxLines="1"
         android:selectAllOnFocus="true"
@@ -13,6 +13,7 @@
 
     <EditTextPreference
         android:defaultValue="@string/pref_default_change_email"
+        android:inputType="textEmailAddress"
         android:key="changeEmailKey"
         android:selectAllOnFocus="true"
         android:singleLine="true"
@@ -20,6 +21,7 @@
 
     <EditTextPreference
         android:defaultValue="@string/pref_default_change_password"
+        android:inputType="textPassword"
         android:key="changePasswordKey"
         android:selectAllOnFocus="true"
         android:singleLine="true"
