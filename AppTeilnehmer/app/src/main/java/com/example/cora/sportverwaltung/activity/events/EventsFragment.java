@@ -9,10 +9,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +23,6 @@ import android.widget.Toast;
 import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandler;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebserviceTask;
-import com.example.cora.sportverwaltung.businesslogic.connection.DatabaseConnection;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
 import com.google.gson.Gson;
@@ -46,13 +48,12 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
 
     private Filter filter;
 
-    private DatabaseConnection connection;
-
     private OnFragmentInteractionListener mListener;
 
     private ListView listView_events;
     private View view;
-
+    EditText editText_search;
+    ArrayList<Veranstaltung> events;
     private FragmentManager manager;
 
     public EventsFragment() {
@@ -73,8 +74,6 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
         if (getArguments() != null) {
             filter = Filter.valueOf(getArguments().getString("FILTER"));
         }
-        connection = DatabaseConnection.getInstance();
-
     }
 
     @Override
@@ -98,6 +97,7 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
 
     private void getViewElements() {
         listView_events = view.findViewById(R.id.listView_events);
+        editText_search = view.findViewById(R.id.editText_search);
     }
 
     private void registerEventhandlers() {
@@ -122,6 +122,36 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
                 String json = gson.toJson(v, Veranstaltung.class);
                 intent.putExtra("event", json);
                 startActivity(intent);
+            }
+        });
+
+        editText_search.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                ArrayList<Veranstaltung> filteredEvents = new ArrayList<>();
+
+                if(editText_search.getText().equals("") || editText_search.getText() == null)
+                {
+                    setAdapterData(events);
+                }
+                else
+                {
+                    for(Veranstaltung v : events)
+                    {
+                        if(v.getName().contains(editText_search.getText()))
+                        {
+                            filteredEvents.add(v);
+                        }
+                    }
+                    setAdapterData(filteredEvents);
+                }
             }
         });
     }
@@ -161,10 +191,10 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
         Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
         }.getType();
 
-        ArrayList<Veranstaltung> events = new Gson().fromJson(content, collectionType);
+        events = new Gson().fromJson(content, collectionType);
         setAdapterData(events);
 
-        if(events.size() > 0) {
+        if (events.size() > 0) {
             TextView textView_message = this.getActivity().findViewById(R.id.textView_message);
             textView_message.setVisibility(View.INVISIBLE);
         }

@@ -77,6 +77,16 @@
                 android:text="@string/textView_points"
                 android:textColor="#000000"
                 android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/textView_sport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_sport"
+                android:text="@string/editText_organizer"
+                android:textColor="#000000"
+                android:textSize="30sp" />
         </LinearLayout>
 
         <ListView
