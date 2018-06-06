@@ -103,7 +103,7 @@ public class EventService {
         }
         catch(Exception ex){
             r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-            System.out.println("Failed");
+            System.out.println("Failed ");
         }
         return r;
     }
