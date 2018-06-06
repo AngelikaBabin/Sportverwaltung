@@ -1,8 +1,9 @@
 package com.example.cora.sportverwaltung.businesslogic.connection;
 
 /**
- * Created by nicok on 28.05.2018 ^-^.
+ * @kandut everything
  */
+
 public class AsyncTaskResult {
     private int statusCode;
     private String content;

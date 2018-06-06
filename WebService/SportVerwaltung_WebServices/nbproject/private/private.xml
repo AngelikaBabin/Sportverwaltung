@@ -3,6 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/mnt/hgfs/WebService/SportVerwaltung_WebServices/src/java/Services/TeilnehmerService.java</file>
+            <file>file:/mnt/hgfs/WebService/SportVerwaltung_WebServices/src/java/Data/Database.java</file>
+=======
             <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Misc/Authentification.java</file>
             <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Data/Event.java</file>
             <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Services/VeranstalterService.java</file>
@@ -28,6 +32,7 @@
             <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Data/Filter.java</file>
             <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Exceptions/RegisterExcpetion.java</file>
             <file>file:/C:/Users/chris/Documents/GitHub/Sportverwaltung/WebService/SportVerwaltung_WebServices/src/java/Data/Account.java</file>
+>>>>>>> dce51cb208fc932cdc1a0c8372bf0b2dd8f6f1af
         </group>
     </open-files>
 </project-private>
