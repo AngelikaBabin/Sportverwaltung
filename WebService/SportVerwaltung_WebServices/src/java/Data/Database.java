@@ -24,15 +24,15 @@ import java.util.Collection;
  */
 public class Database {
 
-    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
-    private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
+    private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
+    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
     private static final String USER = "d4a07";
     private static final String PASSWD = "d4a";
     private Connection conn = null;
     private static final int NUM_SELECTED_TEILNEHMER = 3;
     private static final String EVENT_COLUMNS = "veranstaltung.id, veranstaltung.name, "
             + "veranstaltung.sportart,veranstaltung.location,veranstaltung.datetime, "
-            + "veranstaltung.details, veranstaltung.min_teilnehmer,veranstaltung.max_teilnehmer, "
+            + "veranstaltung.details, veranstaltung.max_teilnehmer, "
             + "account.id as vid, account.name as vname, account.email, account.password";
     private static final String LOCATION_COLUMNS = "ort.id as lid, ort.name as lname"
             + ", latitude, LONGITUDE";
@@ -233,7 +233,7 @@ public class Database {
                 + "inner join account "
                 + "on account.id = veranstaltung.id_veranstalter "
                 + "where datetime {comp} to_date(?, 'yyyy-MM-dd') "
-                + "and id_veranstalter = ?";
+                + "and account.id = ?";
         if (filter == Filter.PAST) {
             select = select.replace("{comp}", "<");
         } else if (filter == Filter.CURRENT) {
@@ -303,8 +303,8 @@ public class Database {
         stmt.setString(1, e.getName());
         stmt.setDate(2, Date.valueOf(e.getDatetime()));
         stmt.setString(3, e.getDetails());
-        stmt.setInt(4, e.getMax_teilnehmer());
-        stmt.setInt(5, e.getMin_teilnehmer());
+        stmt.setInt(4, e.getMaxTeilnehmer());
+        stmt.setInt(5, 0);
         stmt.setString(6, e.getSportart());
         stmt.setInt(7, e.getId());
         stmt.executeUpdate();
@@ -329,8 +329,8 @@ public class Database {
         stmt.setInt(4, 0); //location
         stmt.setDate(5, Date.valueOf(e.getDatetime()));
         stmt.setString(6, e.getDetails());
-        stmt.setInt(7, e.getMin_teilnehmer());
-        stmt.setInt(8, e.getMax_teilnehmer());
+        stmt.setInt(7, 0);
+        stmt.setInt(8, e.getMaxTeilnehmer());
         stmt.executeUpdate();
         conn.close();
     }

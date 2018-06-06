@@ -62,15 +62,15 @@ public class EventService {
     public Response getEvents(@HeaderParam("Token") String token, @QueryParam("filter") String filter) {
         Response r;
         try{
+            System.out.println("Get Events..." + filter);
             if(Authentification.isUserAuthenticated(token)){
-                System.out.println("Get Events..");
                 List<Event> events = db.getEvents(Filter.valueOf(filter), Account.parseToken(token));
                 r = Response.ok().entity( new GenericEntity<List<Event>>(events){}).build();
                 System.out.println("Success");
             }
             else{
                 r = Response.status(Response.Status.FORBIDDEN).build();
-                System.out.println("Failed");
+                System.out.println("Auth Failed");
             }
         }
         catch(FilterExcpetion ex){
@@ -92,7 +92,7 @@ public class EventService {
         try{
             if(Authentification.isUserAuthenticated(token)){
                 e = gson.fromJson(content, Event.class);            
-                System.out.print("Register: " + e + "...");
+                System.out.print("Add Event: " + e + "...");
                 db.insertEvent(e);
                 r = Response.status(Response.Status.CREATED).build();
                 System.out.println("Sucess");

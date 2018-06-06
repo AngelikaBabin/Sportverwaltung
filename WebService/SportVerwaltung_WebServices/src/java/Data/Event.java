@@ -20,8 +20,7 @@ public class Event {
     private LocalDate datetime;
     private String details;
     private String location;
-    private int max_teilnehmer;
-    private int min_teilnehmer;
+    private int maxTeilnehmer;
     private String sportart;
     private int countTeilnehmer;
 
@@ -32,8 +31,7 @@ public class Event {
         this.datetime = datetime;
         this.details = details;
         this.location = location;
-        this.max_teilnehmer = max_teilnehmer;
-        this.min_teilnehmer = min_teilnehmer;
+        this.maxTeilnehmer = max_teilnehmer;
         this.name = name;
         this.sportart = sportart;
     }
@@ -96,20 +94,12 @@ public class Event {
         this.location = location;
     }
 
-    public int getMax_teilnehmer() {
-        return max_teilnehmer;
+    public int getMaxTeilnehmer() {
+        return maxTeilnehmer;
     }
 
-    public void setMax_teilnehmer(int max_teilnehmer) {
-        this.max_teilnehmer = max_teilnehmer;
-    }
-
-    public int getMin_teilnehmer() {
-        return min_teilnehmer;
-    }
-
-    public void setMin_teilnehmer(int min_teilnehmer) {
-        this.min_teilnehmer = min_teilnehmer;
+    public void setMaxTeilnehmer(int max_teilnehmer) {
+        this.maxTeilnehmer = max_teilnehmer;
     }
 
     public String getSportart() {
@@ -127,7 +117,6 @@ public class Event {
         return "Veranstaltung{" + "id=" + id + 
                 ", veranstalter=" + veranstalter + 
                 ", datetime=" + datetime + ", details=" + details + 
-                ", location=" + location + ", max_teilnehmer=" + max_teilnehmer + 
-                ", min_teilnehmer=" + min_teilnehmer + ", name=" + name + ", sportart=" + sportart +'}';
+                ", location=" + location + ", max_teilnehmer=" + maxTeilnehmer + ", name=" + name + ", sportart=" + sportart +'}';
     }
 }
