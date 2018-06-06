@@ -8,7 +8,7 @@
         android:title="@string/pref_header_Account" />
 
     <header
-        android:fragment="com.example.cora.sportverwaltung.activity.settings.SettingsActivity$NotificationPreferenceFragment"
+        android:fragment="com.example.cora.sportverwaltung.activity.settings.SettingsActivity$HostAddressPreferenceFragment"
         android:icon="@drawable/ic_notifications"
         android:title="@string/pref_header_notifications" />
 

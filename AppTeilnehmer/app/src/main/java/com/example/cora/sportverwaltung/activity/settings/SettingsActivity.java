@@ -20,23 +20,15 @@ import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.cora.sportverwaltung.R;
-import com.example.cora.sportverwaltung.activity.account.ProfileActivity;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandler;
 
 import java.util.List;
 
 /**
- * A {@link PreferenceActivity} that presents a set of application settings. On
- * handset devices, settings are presented as a single list. On tablets,
- * settings are split by category, with category headers shown to the left of
- * the list of settings.
- * <p>
- * See <a href="http://developer.android.com/design/patterns/settings.html">
- * Android Design: Settings</a> for design guidelines and the <a
- * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
- * API Guide</a> for more information on developing a Settings UI.
+ * @Kumnig activity code
  */
 public class SettingsActivity extends AppCompatPreferenceActivity implements AsyncTaskHandler {
     ProgressDialog progDialog = null;
@@ -165,7 +157,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Asy
         return PreferenceFragment.class.getName().equals(fragmentName)
                 || AccountPreferenceFragment.class.getName().equals(fragmentName)
                 || DataSyncPreferenceFragment.class.getName().equals(fragmentName)
-                || NotificationPreferenceFragment.class.getName().equals(fragmentName);
+                || HostAddressPreferenceFragment.class.getName().equals(fragmentName);
     }
 
     @Override
@@ -194,6 +186,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Asy
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static class AccountPreferenceFragment extends PreferenceFragment {
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -204,9 +197,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Asy
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                 sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getContext());
             }
-            String changeName = sharedPref.getString("changeNameKey", "@string/pref_default_display_name");
-            String changeMail = sharedPref.getString("changeNameKey", "@string/pref_default_display_name");
-            String changePassword = sharedPref.getString("changeNameKey", "@string/pref_default_display_name");
+            String changeName = sharedPref.getString("changeNameKey", null);
+            String changeMail = sharedPref.getString("changeMailKey", null);
+            String changePassword = sharedPref.getString("changePasswordKey", null);
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are
@@ -233,11 +226,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Asy
      * activity is showing a two-pane settings UI.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class NotificationPreferenceFragment extends PreferenceFragment {
+    public static class HostAddressPreferenceFragment extends PreferenceFragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_notification);
+            addPreferencesFromResource(R.xml.pref_hostAddress);
             setHasOptionsMenu(true);
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
