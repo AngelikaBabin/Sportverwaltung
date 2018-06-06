@@ -16,24 +16,27 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * @rajic everything
+ */
 
 public class EventListAdapter extends BaseAdapter {
-    private ArrayList<Veranstaltung> singleRow;
-    private LayoutInflater thisInflator;
+    private ArrayList<Veranstaltung> events;
+    private LayoutInflater inflater;
 
-    public EventListAdapter(Context context, ArrayList<Veranstaltung> aRow)
-    {
-        this.singleRow = aRow;
-        this.thisInflator = (LayoutInflater.from(context));
+    public EventListAdapter(Context context, ArrayList<Veranstaltung> events) {
+        this.events = events;
+        this.inflater = (LayoutInflater.from(context));
     }
+
     @Override
     public int getCount() {
-        return singleRow.size();
+        return events.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return singleRow.get(position);
+        return events.get(position);
     }
 
     @Override
@@ -43,37 +46,31 @@ public class EventListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(convertView == null)
-        {
-            Veranstaltung currentVeranstaltung = (Veranstaltung)getItem(position);
+        if (convertView == null) {
+            Veranstaltung currentVeranstaltung = (Veranstaltung) getItem(position);
 
-            Date VerDate = currentVeranstaltung.getDatetime();//getting date
-            SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");//formating according to my need
+            // get date and formatting according to my need
+            Date VerDate = currentVeranstaltung.getDatetime();
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
             String date = dateFormatter.format(VerDate);
 
-            convertView = thisInflator.inflate(R.layout.row_layout, parent, false);
+            convertView = inflater.inflate(R.layout.row_layout, parent, false);
             TextView headingText = convertView.findViewById(R.id.textView_heading);
             TextView TextDate = convertView.findViewById(R.id.textView_date);
-            TextView location = (TextView) convertView.findViewById(R.id.textView_location);
+            TextView location = convertView.findViewById(R.id.textView_location);
             TextView countParticipants = convertView.findViewById(R.id.textView_CountParti);
             ImageView typeImage = convertView.findViewById(R.id.imageView_sport);
-
 
             headingText.setText(String.valueOf(currentVeranstaltung.getName()));
             TextDate.setText(date);
             location.setText(currentVeranstaltung.getLocation());
-            if(currentVeranstaltung.getMaxTeilnehmer() == 0)
-            {
+            if (currentVeranstaltung.getMaxTeilnehmer() == 0) {
                 countParticipants.setText(String.valueOf(currentVeranstaltung.getCountTeilnehmer()) + "/∞");
-            }
-            else
-            {
+            } else {
                 countParticipants.setText(String.valueOf(currentVeranstaltung.getCountTeilnehmer()) + "/" + String.valueOf(currentVeranstaltung.getMaxTeilnehmer()));
             }
 
-
-            switch(Sportart.valueOf(currentVeranstaltung.getSportart().toUpperCase()))
-            {
+            switch (Sportart.valueOf(currentVeranstaltung.getSportart().toUpperCase())) {
                 case BASKETBALL:
                     typeImage.setImageResource(R.drawable.sports_basketball);
                     break;
@@ -99,7 +96,6 @@ public class EventListAdapter extends BaseAdapter {
                 default:
                     typeImage.setImageResource(R.drawable.sports_trophy);
             }
-
         }
         return convertView;
     }

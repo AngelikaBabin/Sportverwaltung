@@ -14,8 +14,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by nicok on 28.05.2018 ^-^.
+ * @kandut everything
  */
+
 public class AsyncWebserviceTask extends AsyncTask<String, Void, AsyncTaskResult> {
     private static final String BASE_URL = "http://192.168.193.150:8080/sportverwaltung/webresources/";
     private AsyncTaskHandler handler;

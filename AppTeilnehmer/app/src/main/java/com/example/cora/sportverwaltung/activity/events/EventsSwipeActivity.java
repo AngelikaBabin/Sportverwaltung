@@ -7,16 +7,19 @@ import android.support.v4.view.ViewPager;
 import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.activity.base.BaseActivity;
 
+/**
+ * @kandut code cleanup
+ * @kumnig everything
+ * @rajic everything(together)
+ */
+
 public class EventsSwipeActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // display layout
         setContent(R.layout.activity_swipe_events);
 
-        // setup swipe behaviour
         initSwipeBehavior(R.id.container);
     }
 

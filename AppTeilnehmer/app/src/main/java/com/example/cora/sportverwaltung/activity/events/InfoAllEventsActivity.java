@@ -16,6 +16,12 @@ import com.google.gson.Gson;
 
 import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.POST;
 
+/**
+ * @kandut async listener and code cleanup
+ * @kumnig activity code
+ * @rajic gui design
+ */
+
 public class InfoAllEventsActivity extends ExposingActivity implements AsyncTaskHandler{
 
     TextView textView_header, textView_Details;

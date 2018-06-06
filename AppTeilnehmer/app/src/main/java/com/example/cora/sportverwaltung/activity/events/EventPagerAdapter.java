@@ -7,8 +7,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
 
 /**
- * Created by nicok on 09.05.2018 ^-^.
+ * @rajic everything
  */
+
 public class EventPagerAdapter extends FragmentPagerAdapter {
 
     public EventPagerAdapter(FragmentManager fm) {

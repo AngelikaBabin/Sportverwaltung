@@ -40,7 +40,6 @@ import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.GET
  */
 
 public class EventsFragment extends Fragment implements AsyncTaskHandler {
-    private static final String ARG_Filter = "filter";
     private ProgressDialog progDialog;
 
     private Filter filter;
@@ -48,11 +47,13 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
     private OnFragmentInteractionListener mListener;
 
     private ListView listView_events;
-    private View view;
-    EditText editText_search;
-    ArrayList<Veranstaltung> events;
+
+    private EditText editText_search;
+    private ArrayList<Veranstaltung> events;
     private FragmentManager manager;
-    TextView textView_message;
+    private TextView textView_message;
+
+    private View view;
 
     public EventsFragment() {
 
