@@ -57,7 +57,7 @@ public class InfoMyEventsActivity extends ExposingActivity implements AsyncTaskH
             @Override
             public void onClick(View view) {
                 try {
-                    AsyncWebserviceTask task = new AsyncWebserviceTask(DELETE, "teilnahme", InfoMyEventsActivity.this);
+                    AsyncWebserviceTask task = new AsyncWebserviceTask(DELETE, "teilnahme", InfoMyEventsActivity.this, getApplicationContext());
                     task.execute("eventId=" + selectedEvent.getId(), null);
                     Toast.makeText(InfoMyEventsActivity.this, "You are no longer participating", Toast.LENGTH_LONG).show();
                     button_logout.setEnabled(false);

@@ -70,7 +70,7 @@ public class InfoAllEventsActivity extends ExposingActivity implements AsyncTask
             @Override
             public void onClick(View view) {
                 try {
-                    AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "teilnahme", InfoAllEventsActivity.this);
+                    AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "teilnahme", InfoAllEventsActivity.this, getApplicationContext());
                     task.execute("eventId=" + selectedEvent.getId(), null);
                 } catch (Exception e) {
                     e.printStackTrace();
