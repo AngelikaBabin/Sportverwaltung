@@ -156,8 +156,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Asy
     protected boolean isValidFragment(String fragmentName) {
         return PreferenceFragment.class.getName().equals(fragmentName)
                 || AccountPreferenceFragment.class.getName().equals(fragmentName)
-                || DataSyncPreferenceFragment.class.getName().equals(fragmentName)
-                || HostAddressPreferenceFragment.class.getName().equals(fragmentName);
+                || DataSyncPreferenceFragment.class.getName().equals(fragmentName);
+                //|| HostAddressPreferenceFragment.class.getName().equals(fragmentName);
     }
 
     @Override
@@ -225,7 +225,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Asy
      * This fragment shows notification preferences only. It is used when the
      * activity is showing a two-pane settings UI.
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    /*@TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static class HostAddressPreferenceFragment extends PreferenceFragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -250,7 +250,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Asy
             return super.onOptionsItemSelected(item);
         }
     }
-
+*/
     /**
      * This fragment shows data and sync preferences only. It is used when the
      * activity is showing a two-pane settings UI.
