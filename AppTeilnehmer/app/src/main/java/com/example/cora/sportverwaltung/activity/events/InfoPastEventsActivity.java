@@ -10,6 +10,7 @@ import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class InfoPastEventsActivity extends AppCompatActivity {
@@ -29,7 +30,7 @@ public class InfoPastEventsActivity extends AppCompatActivity {
 
     private void setValuesInFields() {
         textView_header.setText(selectedEvent.getName());
-        textView_date.setText("Thu 22. May");
+        textView_date.setText(new SimpleDateFormat("dd.MM.yyyy").format(selectedEvent.getDatetime())); //toDo isnt tested yet, test if it works and remove this toDo
         textView_place.setText(selectedEvent.getLocation().toString());
         textView_organizer.setText(selectedEvent.getVeranstalter().toString());
         textView_points.setText("40 pts");
