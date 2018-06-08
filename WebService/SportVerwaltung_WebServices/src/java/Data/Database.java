@@ -7,7 +7,7 @@ package Data;
 
 import Exceptions.RegisterExcpetion;
 import Exceptions.AccountNotFoundException;
-import Exceptions.FilterExcpetion;
+import Exceptions.FilterException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -290,7 +290,7 @@ public class Database {
                 collEvents = getFutureEvents();
                 break;
             default:
-                throw new FilterExcpetion("Unknown filter");
+                throw new FilterException("Unknown filter");
         }
         return collEvents;
     }

@@ -9,14 +9,14 @@ package Exceptions;
  *
  * @author Kraschl
  */
-public class FilterExcpetion extends Exception{
+public class FilterException extends Exception{
     private String errMessage;
-    public FilterExcpetion(String errMessage){
+    public FilterException(String errMessage){
         super(errMessage);
         this.errMessage = errMessage;
     }
     
-    public FilterExcpetion(){
+    public FilterException(){
         super();
     }
 
