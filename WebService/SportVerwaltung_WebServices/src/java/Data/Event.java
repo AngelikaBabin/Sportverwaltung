@@ -25,7 +25,7 @@ public class Event {
     private int countTeilnehmer;
 
     public Event(int id, Account veranstalter, String name, LocalDate datetime, 
-            String details, String location, int max_teilnehmer, int min_teilnehmer, String sportart) {
+            String details, String location, int max_teilnehmer, String sportart) {
         this.id = id;
         this.veranstalter = veranstalter;
         this.datetime = datetime;
