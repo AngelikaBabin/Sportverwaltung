@@ -14,6 +14,8 @@ import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebservice
 import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
+
 import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.POST;
 
 /**
@@ -46,7 +48,7 @@ public class InfoAllEventsActivity extends ExposingActivity implements AsyncTask
 
     private void setValuesInFields() {
         textView_header.setText(selectedEvent.getName());
-        textView_date.setText("Thu 22. May");
+        textView_date.setText(new SimpleDateFormat("dd.MM.yyyy").format(selectedEvent.getDatetime())); //toDo isnt tested yet, test if it works and remove this toDo
         textView_place.setText(selectedEvent.getLocation().toString());
         textView_participator.setText(String.valueOf(selectedEvent.getMaxTeilnehmer()));
         textView_organizer.setText(selectedEvent.getVeranstalter().toString());
@@ -70,7 +72,7 @@ public class InfoAllEventsActivity extends ExposingActivity implements AsyncTask
             @Override
             public void onClick(View view) {
                 try {
-                    AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "teilnahme", InfoAllEventsActivity.this);
+                    AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "teilnahme", InfoAllEventsActivity.this, getApplicationContext());
                     task.execute("eventId=" + selectedEvent.getId(), null);
                 } catch (Exception e) {
                     e.printStackTrace();

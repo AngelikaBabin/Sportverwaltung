@@ -14,6 +14,8 @@ import com.example.cora.sportverwaltung.businesslogic.data.Veranstaltung;
 import com.google.gson.Gson;
 import android.app.ProgressDialog;
 
+import java.text.SimpleDateFormat;
+
 import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.DELETE;
 
 public class InfoMyEventsActivity extends ExposingActivity implements AsyncTaskHandler {
@@ -35,7 +37,7 @@ public class InfoMyEventsActivity extends ExposingActivity implements AsyncTaskH
 
     private void setValuesInFields() {
         textView_header.setText(selectedEvent.getName());
-        textView_date.setText("Thu 22. May");
+        textView_date.setText(new SimpleDateFormat("dd.MM.yyyy").format(selectedEvent.getDatetime())); //toDo isnt tested yet, test if it works and remove this toDo
         textView_place.setText(selectedEvent.getLocation().toString());
         textView_organizer.setText(selectedEvent.getVeranstalter().toString());
         textView_details.setText(selectedEvent.getDetails());
@@ -57,7 +59,7 @@ public class InfoMyEventsActivity extends ExposingActivity implements AsyncTaskH
             @Override
             public void onClick(View view) {
                 try {
-                    AsyncWebserviceTask task = new AsyncWebserviceTask(DELETE, "teilnahme", InfoMyEventsActivity.this);
+                    AsyncWebserviceTask task = new AsyncWebserviceTask(DELETE, "teilnahme", InfoMyEventsActivity.this, getApplicationContext());
                     task.execute("eventId=" + selectedEvent.getId(), null);
                     Toast.makeText(InfoMyEventsActivity.this, "You are no longer participating", Toast.LENGTH_LONG).show();
                     button_logout.setEnabled(false);

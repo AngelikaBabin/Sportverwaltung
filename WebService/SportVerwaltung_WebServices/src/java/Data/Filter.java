@@ -1,7 +1,7 @@
 package Data;
 
 /**
- * Created by nicok on 02.05.2018 ^-^.
+ * @author Kandut
  */
 public enum Filter {
     ALL,

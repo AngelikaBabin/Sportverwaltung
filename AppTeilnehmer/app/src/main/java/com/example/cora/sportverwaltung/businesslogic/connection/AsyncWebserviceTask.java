@@ -1,6 +1,10 @@
 package com.example.cora.sportverwaltung.businesslogic.connection;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 
 import com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod;
 
@@ -18,16 +22,17 @@ import java.net.URL;
  */
 
 public class AsyncWebserviceTask extends AsyncTask<String, Void, AsyncTaskResult> {
-    private static final String BASE_URL = "http://192.168.193.150:8080/sportverwaltung/webresources/";
+    private static final String BASE_URL = "http://{{ip}}:8080/sportverwaltung/webresources/";
     private AsyncTaskHandler handler;
     private HttpMethod method;
     private URL url;
     private static String accessToken = null;
 
-    public AsyncWebserviceTask(HttpMethod method, String route, AsyncTaskHandler handler) throws MalformedURLException {
+    public AsyncWebserviceTask(HttpMethod method, String route, AsyncTaskHandler handler, Context context) throws MalformedURLException {
         this.handler = handler;
         this.method = method;
-        this.url = new URL(BASE_URL + route);
+        String ip = PreferenceManager.getDefaultSharedPreferences(context).getString("ip", "192.168.193.150");
+        this.url = new URL(BASE_URL.replace("{{ip}}", ip) + route);
     }
 
     @Override

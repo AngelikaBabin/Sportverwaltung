@@ -166,6 +166,22 @@
     <string name="pref_title_change_name">Change Name</string>
     <string name="pref_title_change_email">Change Email</string>
     <string name="pref_default_change_email">monika.ashcraft@gmail.com</string>
-    <string name="pref_title_change_password" >Change Password</string>
-    <string name="pref_default_change_password" >monika</string>
+    <string name="pref_title_change_password">Change Password</string>
+    <string name="pref_default_change_password">monika</string>
+    <string name="default_ip">192.168.193.150</string>
+    <string name="pref_title_display_ip">IP</string>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
 </resources>

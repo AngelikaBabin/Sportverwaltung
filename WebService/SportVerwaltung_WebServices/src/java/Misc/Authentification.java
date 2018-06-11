@@ -10,7 +10,7 @@ import java.util.HashSet;
 
 /**
  *
- * @author chris
+ * @author Kraschl
  */
 public class Authentification {
     private static HashSet<String> collTokens = new HashSet<>();

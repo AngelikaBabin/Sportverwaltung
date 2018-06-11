@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMessage;
 
 /**
  *
- * @author chris
+ * @author Kraschl
  */
 public class MailHandler {
     private final Session session;
