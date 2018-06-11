@@ -18,6 +18,7 @@ import java.util.Date;
 
 /**
  * @rajic everything
+ * @kandut code cleanup
  */
 
 public class EventListAdapter extends BaseAdapter {
@@ -47,30 +48,35 @@ public class EventListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            Veranstaltung currentVeranstaltung = (Veranstaltung) getItem(position);
+
+            // get current veranstaltung
+            Veranstaltung currentEvent = (Veranstaltung) getItem(position);
 
             // get date and formatting according to my need
-            Date VerDate = currentVeranstaltung.getDatetime();
+            Date eventDate = currentEvent.getDatetime();
             SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
-            String date = dateFormatter.format(VerDate);
+            String strDate = dateFormatter.format(eventDate);
 
+            // UI references
             convertView = inflater.inflate(R.layout.row_layout, parent, false);
-            TextView headingText = convertView.findViewById(R.id.textView_heading);
-            TextView TextDate = convertView.findViewById(R.id.textView_date);
+            TextView textView_heading = convertView.findViewById(R.id.textView_heading);
+            TextView textView_date = convertView.findViewById(R.id.textView_date);
             TextView location = convertView.findViewById(R.id.textView_location);
             TextView countParticipants = convertView.findViewById(R.id.textView_CountParti);
             ImageView typeImage = convertView.findViewById(R.id.imageView_sport);
 
-            headingText.setText(String.valueOf(currentVeranstaltung.getName()));
-            TextDate.setText(date);
-            location.setText(currentVeranstaltung.getLocation());
-            if (currentVeranstaltung.getMaxTeilnehmer() == 0) {
-                countParticipants.setText(String.valueOf(currentVeranstaltung.getCountTeilnehmer()) + "/∞");
+            // set values
+            textView_heading.setText(String.valueOf(currentEvent.getName()));
+            textView_date.setText(strDate);
+            location.setText(currentEvent.getLocation());
+
+            if (currentEvent.getMaxTeilnehmer() == 0) {
+                countParticipants.setText(String.valueOf(currentEvent.getCountTeilnehmer()) + "/∞");
             } else {
-                countParticipants.setText(String.valueOf(currentVeranstaltung.getCountTeilnehmer()) + "/" + String.valueOf(currentVeranstaltung.getMaxTeilnehmer()));
+                countParticipants.setText(String.valueOf(currentEvent.getCountTeilnehmer()) + "/" + String.valueOf(currentEvent.getMaxTeilnehmer()));
             }
 
-            switch (Sportart.valueOf(currentVeranstaltung.getSportart().toUpperCase())) {
+            switch (Sportart.valueOf(currentEvent.getSportart().toUpperCase())) {
                 case BASKETBALL:
                     typeImage.setImageResource(R.drawable.sports_basketball);
                     break;

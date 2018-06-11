@@ -3,7 +3,8 @@ package com.example.cora.sportverwaltung.businesslogic.data;
 import android.support.annotation.NonNull;
 
 /**
- * Created by nicok on 18.04.2018 ^-^.
+ * @babin created
+ * @kandut small tweaks
  */
 
 public class Account extends Credentials{
@@ -18,6 +19,7 @@ public class Account extends Credentials{
     public Account(String email, String password) {
         super(email, password);
     }
+
     public Account(int id, String email, String password) {
         this(email, password);
         this.id = id;

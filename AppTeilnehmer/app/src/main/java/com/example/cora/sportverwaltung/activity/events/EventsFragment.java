@@ -40,38 +40,39 @@ import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.GET
  */
 
 public class EventsFragment extends Fragment implements AsyncTaskHandler {
+
+    // UI references
     private ProgressDialog progDialog;
-
-    private Filter filter;
-
-    private OnFragmentInteractionListener mListener;
-
     private ListView listView_events;
-
     private EditText editText_search;
-    private ArrayList<Veranstaltung> events;
-    private FragmentManager manager;
     private TextView textView_message;
-
     private View view;
 
-    public EventsFragment() {
+    private Filter filter;
+    private ArrayList<Veranstaltung> events;
 
-    }
+    private OnFragmentInteractionListener interactionListener;
+
+    // needed for android
+    public EventsFragment() { }
 
     public static EventsFragment newInstance(Filter filter) {
         EventsFragment fragment = new EventsFragment();
+
         Bundle args = new Bundle();
         args.putString("FILTER", filter.toString());
         fragment.setArguments(args);
+
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            filter = Filter.valueOf(getArguments().getString("FILTER"));
+
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            filter = Filter.valueOf(arguments.getString("FILTER"));
         }
     }
 
@@ -81,7 +82,6 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
             view = inflater.inflate(R.layout.fragment_events, container, false);
             getViewElements();
             registerEventhandlers();
-            manager = getFragmentManager();
 
             String queryString = "filter=" + filter;
 
@@ -164,15 +164,15 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        if (interactionListener != null) {
+            interactionListener.onFragmentInteraction(uri);
         }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        interactionListener = null;
     }
 
     @Override

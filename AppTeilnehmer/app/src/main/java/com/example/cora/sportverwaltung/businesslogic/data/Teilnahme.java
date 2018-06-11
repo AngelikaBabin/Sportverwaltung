@@ -1,7 +1,8 @@
 package com.example.cora.sportverwaltung.businesslogic.data;
 
 /**
- * Created by nicok on 18.04.2018 ^-^.
+ * @babin created
+ * @kandut small tweaks
  */
 
 public class Teilnahme {

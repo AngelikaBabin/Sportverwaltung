@@ -16,6 +16,12 @@ import android.app.ProgressDialog;
 
 import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.DELETE;
 
+/**
+ * @kandut async listener and code cleanup
+ * @kumnig activity code
+ * @rajic gui design
+ */
+
 public class InfoMyEventsActivity extends ExposingActivity implements AsyncTaskHandler {
     TextView textView_header, textView_date, textView_place, textView_organizer, textView_details, textView_sport;
     Button button_logout;
