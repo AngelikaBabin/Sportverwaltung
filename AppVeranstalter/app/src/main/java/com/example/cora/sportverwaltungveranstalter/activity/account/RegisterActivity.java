@@ -1,6 +1,5 @@
 package com.example.cora.sportverwaltungveranstalter.activity.account;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,7 +7,6 @@ import android.widget.EditText;
 
 import com.example.cora.sportverwaltungveranstalter.R;
 import com.example.cora.sportverwaltungveranstalter.activity.base.ConnectionToDatabase;
-import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.DatabaseConnection;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Account;
 
 import java.util.InputMismatchException;

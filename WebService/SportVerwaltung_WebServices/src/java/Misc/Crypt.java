@@ -12,7 +12,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 /**
  *
- * @author chris
+ * @author Kraschl
  */
 public class Crypt {
     private SecretKeySpec secretKeySpec = null;

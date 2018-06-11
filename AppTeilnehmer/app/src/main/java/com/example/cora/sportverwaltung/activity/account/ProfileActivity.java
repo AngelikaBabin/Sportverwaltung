@@ -32,6 +32,9 @@ public class ProfileActivity extends BaseActivity implements AsyncTaskHandler{
 
         initUIReferences();
         displayData();
+
+        Toast.makeText(this, preferences.getString("ip", ""), Toast.LENGTH_SHORT).show();
+
     }
 
     private void initUIReferences() {
@@ -44,7 +47,7 @@ public class ProfileActivity extends BaseActivity implements AsyncTaskHandler{
     private void displayData() {
         try {
             // get user from webservice
-            AsyncWebserviceTask task = new AsyncWebserviceTask(GET, "teilnehmer", this);
+            AsyncWebserviceTask task = new AsyncWebserviceTask(GET, "teilnehmer", this, getApplicationContext());
             task.execute();
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();

@@ -3,7 +3,7 @@
     package="com.example.cora.sportverwaltungveranstalter">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MenuActivity"></activity>
         <activity android:name=".activity.account.LoginActivity">
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
@@ -22,10 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.account.RegisterActivity"></activity>
+        <activity android:name=".activity.account.RegisterActivity" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyADHNVxUnHX8VWXhFRPcziGup9N8TkmNcg"/>
+            android:value="AIzaSyADHNVxUnHX8VWXhFRPcziGup9N8TkmNcg" />
+
+        <activity android:name=".activity.base.BaseActivity" />
+        <activity android:name=".activity.settings.AppCompatActivity"></activity>
     </application>
 
 </manifest>

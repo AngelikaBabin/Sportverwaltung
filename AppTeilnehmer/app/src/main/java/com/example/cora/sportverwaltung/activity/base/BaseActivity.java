@@ -121,7 +121,7 @@ public class BaseActivity extends ExposingActivity implements NavigationView.OnN
                     startActivity(new Intent(this, EventsSwipeActivity.class));
                     break;
                 case R.id.nav_logout:
-                    AsyncWebserviceTask task = new AsyncWebserviceTask(GET, "logout", this);
+                    AsyncWebserviceTask task = new AsyncWebserviceTask(GET, "logout", this, getApplicationContext());
                     task.execute();
                     break;
             }

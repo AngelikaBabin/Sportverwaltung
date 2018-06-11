@@ -40,7 +40,7 @@ public class RecoveryActivity extends ExposingActivity implements AsyncTaskHandl
                 jsonObject.addProperty("email", email);
 
                 // request recovery email
-                AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "recover", this);
+                AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "recover", this, getApplicationContext());
                 task.execute(null, jsonObject.toString());
             } catch (Exception e) {
                 e.printStackTrace();

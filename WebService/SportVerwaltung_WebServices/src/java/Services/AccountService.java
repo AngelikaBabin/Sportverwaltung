@@ -22,7 +22,7 @@ import javax.ws.rs.core.Response;
 /**
  * REST Web Service
  *
- * @author chris
+ * @author Kraschl
  */
 @Path("account")
 public class AccountService {

@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author chris
+ * @author Kraschl
  */
 @XmlRootElement
 public class Location {

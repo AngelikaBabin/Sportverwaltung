@@ -11,7 +11,7 @@ import Misc.Crypt;
 import Data.Database;
 import Data.Event;
 import Data.Filter;
-import Exceptions.FilterExcpetion;
+import Exceptions.FilterException;
 import com.google.gson.Gson;
 import java.util.List;
 import javax.ws.rs.core.Context;
@@ -30,7 +30,7 @@ import javax.ws.rs.core.Response;
 /**
  * REST Web Service
  *
- * @author chris
+ * @author Kraschl
  */
 @Path("events")
 public class EventService {
@@ -67,7 +67,7 @@ public class EventService {
                 System.out.println("Auth Failed");
             }
         }
-        catch(FilterExcpetion ex){
+        catch(FilterException ex){
             r = Response.status(Response.Status.BAD_REQUEST).build();
             System.out.println("Failed");
         }

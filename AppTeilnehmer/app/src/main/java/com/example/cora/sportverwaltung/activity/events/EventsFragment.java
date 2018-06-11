@@ -85,7 +85,7 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
 
             String queryString = "filter=" + filter;
 
-            AsyncWebserviceTask task = new AsyncWebserviceTask(GET, "events", this);
+            AsyncWebserviceTask task = new AsyncWebserviceTask(GET, "events", this, getActivity().getApplicationContext());
             task.execute(queryString);
         } catch (Exception e) {
             e.printStackTrace();

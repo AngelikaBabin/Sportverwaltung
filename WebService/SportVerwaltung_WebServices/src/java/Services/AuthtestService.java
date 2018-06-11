@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 /**
  * REST Web Service
  *
- * @author chris
+ * @author Kraschl
  */
 @Path("authtest")
 public class AuthtestService {

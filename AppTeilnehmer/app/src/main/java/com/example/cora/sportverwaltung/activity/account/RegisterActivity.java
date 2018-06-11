@@ -65,7 +65,7 @@ public class RegisterActivity extends ExposingActivity implements AsyncTaskHandl
                 String json = gson.toJson(account);
 
                 // register in database
-                AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "teilnehmer", RegisterActivity.this);
+                AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "teilnehmer", this, getApplicationContext());
                 task.execute(null, json);
 
             } catch (NullPointerException ex) {

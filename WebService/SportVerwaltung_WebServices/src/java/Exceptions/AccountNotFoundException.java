@@ -7,7 +7,7 @@ package Exceptions;
 
 /**
  *
- * @author chris
+ * @author Kraschl
  */
 public class AccountNotFoundException extends Exception{
     private String errMessage;
