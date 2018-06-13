@@ -74,7 +74,7 @@ public class LoginActivity extends ExposingActivity implements AsyncTaskHandler 
         progDialog.setMessage("Logging in...");
         progDialog.setIndeterminate(false);
         progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progDialog.setCancelable(false);
+        progDialog.setCancelable(true);
         progDialog.show();
     }
 

@@ -1,5 +1,9 @@
 package com.example.cora.sportverwaltungveranstalter.businesslogic.misc;
 
+
+/**
+ * @babin
+ */
 public class AsyncResult<T> {
     private T result;
     private Exception err;
