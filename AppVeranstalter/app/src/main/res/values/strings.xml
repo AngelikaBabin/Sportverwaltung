@@ -28,6 +28,7 @@
 
 
     <!-- GUI -->
+    <!--Login/Register-->
     <string name="text_abmelden">Logout</string>
     <string name="text_button_teilnehmen">Participate</string>
 
@@ -52,6 +53,8 @@
         <item>Chess</item>
         <item>Hockey</item>
     </string-array>
+    <!--Recovery Activity-->
+    <string name="text_recover">Recover</string>
 
     <!-- Example General settings -->
     <string name="pref_default_display_name">Maria Ashcroft</string>
