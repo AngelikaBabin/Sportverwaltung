@@ -55,6 +55,8 @@
     </string-array>
     <!--Recovery Activity-->
     <string name="text_recover">Recover</string>
+    <!--Verify Activity-->
+    <string name="register_success">Registered successfully. Check your inbox for the verification-email.</string>
 
     <!-- Example General settings -->
     <string name="pref_default_display_name">Maria Ashcroft</string>

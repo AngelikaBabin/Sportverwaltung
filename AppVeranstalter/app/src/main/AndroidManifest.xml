@@ -30,7 +30,8 @@
         <activity android:name=".activity.base.BaseActivity" />
         <activity android:name=".activity.settings.AppCompatActivity" />
         <activity android:name=".activity.account.ProfileActivity" />
-        <activity android:name=".activity.account.RecoveryActivity"></activity>
+        <activity android:name=".activity.account.RecoveryActivity" />
+        <activity android:name=".activity.account.VerifyActivity"></activity>
     </application>
 
 </manifest>
