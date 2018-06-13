@@ -50,7 +50,7 @@ public class LoginActivity extends ExposingActivity implements AsyncTaskHandler 
                 Credentials c = new Credentials(email, password);
                 String json = gson.toJson(c);
 
-                AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "login", LoginActivity.this);
+                AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "login", LoginActivity.this, getApplicationContext());
                 task.execute(null, json);
 
             } catch (Exception ex) {

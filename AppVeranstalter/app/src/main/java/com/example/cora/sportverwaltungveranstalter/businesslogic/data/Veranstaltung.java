@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Veranstaltung {
+    private int id;
     private String name;
     private String details;
     private Veranstalter veranstalter;
@@ -25,6 +26,14 @@ public class Veranstaltung {
     }
 
     public Veranstaltung(){}
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

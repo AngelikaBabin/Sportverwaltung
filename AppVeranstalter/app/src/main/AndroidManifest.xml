@@ -28,7 +28,9 @@
             android:value="AIzaSyADHNVxUnHX8VWXhFRPcziGup9N8TkmNcg" />
 
         <activity android:name=".activity.base.BaseActivity" />
-        <activity android:name=".activity.settings.AppCompatActivity"></activity>
+        <activity android:name=".activity.settings.AppCompatActivity" />
+        <activity android:name=".activity.account.ProfileActivity" />
+        <activity android:name=".activity.account.RecoveryActivity"></activity>
     </application>
 
 </manifest>

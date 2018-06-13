@@ -6,16 +6,20 @@
 
     <!-- Userdata -->
     <string name="hint_username">Username</string>
+    <string name="example_username">user</string>
 
     <string name="hint_email">Email</string>
+    <string name="example_email">user@gmail.com</string>
 
     <string name="hint_password">Password</string>
 
     <string name="hint_confirmPassword">Confirm password</string>
 
     <string name="label_rank">Rank:</string>
+    <string name="example_rank">0</string>
 
     <string name="label_points">Points:</string>
+    <string name="example_points">0</string>
 
 
     <!-- Images -->
@@ -34,7 +38,10 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="error_invalidEmail">email not valid</string>
+    <string name="error_invalidName">username must be at least 3 characters long</string>
+    <string name="error_invalidPassword">password must be at least 6 characters long</string>
+    <string name="error_invalidConfirmPassword">passwords do not match</string>
 
     <string-array name="test_array">
         <item>Shuttle Badminton</item>
@@ -56,9 +63,9 @@
     <!--pref_account-->
     <string name="pref_title_change_name">Change Name</string>
     <string name="pref_title_change_email">Change Email</string>
-    <string name="pref_title_change_password" >Change Password</string>
+    <string name="pref_title_change_password">Change Password</string>
     <string name="pref_default_change_email">monika.ashcraft@gmail.com</string>
-    <string name="pref_default_change_password" >monika</string>
+    <string name="pref_default_change_password">monika</string>
 
     <!--pref_data_sync-->
     <string name="pref_title_sync_frequency">Sync frequency</string>
