@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.account.LoginActivity">
+        <activity android:name=".activity.account.ProfileActivity">
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -28,8 +28,7 @@
             android:value="AIzaSyADHNVxUnHX8VWXhFRPcziGup9N8TkmNcg" />
 
         <activity android:name=".activity.base.BaseActivity" />
-        <activity android:name=".activity.settings.AppCompatActivity" />
-        <activity android:name=".activity.account.ProfileActivity" />
+        <activity android:name=".activity.account.LoginActivity" />
         <activity android:name=".activity.account.RecoveryActivity" />
         <activity android:name=".activity.account.VerifyActivity" />
         <activity

@@ -1,6 +1,9 @@
 package com.example.cora.sportverwaltungveranstalter.activity.account;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,6 +11,8 @@ import android.widget.Toast;
 
 import com.example.cora.sportverwaltungveranstalter.R;
 import com.example.cora.sportverwaltungveranstalter.activity.base.BaseActivity;
+import com.example.cora.sportverwaltungveranstalter.activity.base.ExposingActivity;
+import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncTaskHandler;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncWebserviceTask;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Account;
 
@@ -20,7 +25,7 @@ import static com.example.cora.sportverwaltungveranstalter.businesslogic.misc.Ht
 /**
  * @babin
  */
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends ExposingActivity implements AsyncTaskHandler {
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     Button button_register;
@@ -60,7 +65,7 @@ public class RegisterActivity extends BaseActivity {
                     String json = gson.toJson(account);
 
                     //register in database
-                    AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "veranstalter", this, getApplicationContext());
+                    AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "veranstalter", RegisterActivity.this, getApplicationContext());
                     task.execute(null, json);
                 } catch (NullPointerException ex) {
                     Toast.makeText(RegisterActivity.this, "account already exists", Toast.LENGTH_LONG).show();
@@ -89,5 +94,25 @@ public class RegisterActivity extends BaseActivity {
         if(!password.equals(passwordConfirm)) {
             throw new InputMismatchException(getString(R.string.error_invalidConfirmPassword));
         }
+    }
+
+    public void onPreExecute() {
+        progDialog = new ProgressDialog(this);
+        progDialog.setMessage("Logging in...");
+        progDialog.setIndeterminate(false);
+        progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progDialog.setCancelable(false);
+        progDialog.show();
+    }
+
+    @Override
+    public void onSuccess(int statusCode, String content) {
+        progDialog.dismiss();
+        startActivity(new Intent(RegisterActivity.this, VerifyActivity.class));
+    }
+
+    @Override
+    public void onError(Error err) {
+        Toast.makeText(RegisterActivity.this, err.getMessage() + " - could not create account", Toast.LENGTH_LONG).show();
     }
 }
