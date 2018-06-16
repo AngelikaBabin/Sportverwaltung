@@ -1,28 +1,36 @@
 package com.example.cora.sportverwaltungveranstalter.businesslogic.data;
 
-import java.time.LocalDate;
+
+import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Veranstalter;
+
+import java.util.Date;
 import java.util.Objects;
+
+/**
+ * @babin created
+ * @kandut small tweaks
+ */
 
 public class Veranstaltung {
     private int id;
     private String name;
     private String details;
     private Veranstalter veranstalter;
-    private Location location;
-    private Sportart sportart;
-    private LocalDate datetime;
-    private int minTeilnehmer;
+    private String location;
+    private String sportart;
+    private Date datetime;
     private int maxTeilnehmer;
+    private int countTeilnehmer;
 
-    public Veranstaltung(int id, String name, String details, Veranstalter veranstalter, Location location, Sportart sportart, LocalDate datetime, int minTeilnehmer, int maxTeilnehmer) {
+    public Veranstaltung(int id, String name, String details, Veranstalter veranstalter, String location, String sportart, Date datetime, int minTeilnehmer, int maxTeilnehmer, int countTeilnehmer) {
         setName(name);
         setDetails(details);
         setVeranstalter(veranstalter);
         setLocation(location);
         setSportart(sportart);
         setDatetime(datetime);
-        setMinTeilnehmer(minTeilnehmer);
         setMaxTeilnehmer(maxTeilnehmer);
+        setCountTeilnehmer(countTeilnehmer);
     }
 
     public Veranstaltung(){}
@@ -59,36 +67,28 @@ public class Veranstaltung {
         this.veranstalter = veranstalter;
     }
 
-    public Location getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
-    public Sportart getSportart() {
+    public String getSportart() {
         return sportart;
     }
 
-    public void setSportart(Sportart sportart) {
+    public void setSportart(String sportart) {
         this.sportart = sportart;
     }
 
-    public LocalDate getDatetime() {
+    public Date getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(LocalDate datetime) {
+    public void setDatetime(Date datetime) {
         this.datetime = datetime;
-    }
-
-    public int getMinTeilnehmer() {
-        return minTeilnehmer;
-    }
-
-    public void setMinTeilnehmer(int minTeilnehmer) {
-        this.minTeilnehmer = minTeilnehmer;
     }
 
     public int getMaxTeilnehmer() {
@@ -99,38 +99,24 @@ public class Veranstaltung {
         this.maxTeilnehmer = maxTeilnehmer;
     }
 
+    public int getCountTeilnehmer() {
+        return countTeilnehmer;
+    }
+
+    public void setCountTeilnehmer(int countTeilnehmer) {
+        this.countTeilnehmer = countTeilnehmer;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Veranstaltung)) return false;
         Veranstaltung that = (Veranstaltung) o;
-        return getMinTeilnehmer() == that.getMinTeilnehmer() &&
-                getMaxTeilnehmer() == that.getMaxTeilnehmer() &&
-                Objects.equals(getName(), that.getName()) &&
-                Objects.equals(getDetails(), that.getDetails()) &&
-                Objects.equals(getVeranstalter(), that.getVeranstalter()) &&
-                Objects.equals(getLocation(), that.getLocation()) &&
-                getSportart() == that.getSportart() &&
-                Objects.equals(getDatetime(), that.getDatetime());
+        return getId() == that.getId();
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(getName(), getDetails(), getVeranstalter(), getLocation(), getSportart(), getDatetime(), getMinTeilnehmer(), getMaxTeilnehmer());
-    }
-
-    @Override
-    public String toString() {
-        return "Veranstaltung{" +
-                "name='" + getName() + '\'' +
-                ", details='" + getDetails() + '\'' +
-                ", veranstalter=" + getVeranstalter() +
-                ", location=" + getLocation() +
-                ", sportart=" + getSportart() +
-                ", datetime=" + getDatetime() +
-                ", minTeilnehmer=" + getMinTeilnehmer() +
-                ", maxTeilnehmer=" + getMaxTeilnehmer() +
-                '}';
+        return Objects.hash(getId());
     }
 }

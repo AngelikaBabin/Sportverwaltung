@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.cora.sportverwaltungveranstalter.R;
 import com.example.cora.sportverwaltungveranstalter.activity.account.LoginActivity;
 import com.example.cora.sportverwaltungveranstalter.activity.account.ProfileActivity;
+import com.example.cora.sportverwaltungveranstalter.activity.events.MyEventsActivity;
 import com.example.cora.sportverwaltungveranstalter.activity.settings.SettingsActivity;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncTaskHandler;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncWebserviceTask;
@@ -114,7 +115,7 @@ public class BaseActivity extends ExposingActivity implements NavigationView.OnN
                     startActivity(new Intent(this, ProfileActivity.class));
                     break;
                 case R.id.nav_events:
-                    //startActivity(new Intent(this, EventsSwipeActivity.class));
+                    startActivity(new Intent(this, MyEventsActivity.class));
                     break;
                 case R.id.nav_logout:
                     AsyncWebserviceTask task = new AsyncWebserviceTask(GET, "logout", this, getApplicationContext());
