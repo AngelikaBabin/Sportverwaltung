@@ -4,21 +4,130 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_dark"
     tools:context=".activity.events.AddEventActivity">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="500dp" />
+    <LinearLayout
+        android:id="@+id/ll_container_fields"
+        android:layout_width="match_parent"
+        android:layout_height="457dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/show_rounded"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/button_save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <EditText
+            android:id="@+id/editText_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/text_editText_title"
+            android:inputType="textShortMessage"
+            android:textAlignment="textStart"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:visibility="visible" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/textView_text_sportart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_row="1"
+                android:drawableLeft="@drawable/sports_rugby"
+                android:text="@string/text_viewText_sportart"
+                android:textAlignment="textStart"
+                android:textSize="30sp" />
+
+            <Spinner
+                android:id="@+id/spinner_sportarten"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_column="2"
+                android:layout_marginBottom="0dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="0dp"
+                android:layout_row="1"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+        </GridLayout>
+
+        <EditText
+            android:id="@+id/editText_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_kalender"
+            android:ems="10"
+            android:hint="@string/text_editText_date"
+            android:inputType="date"
+            android:textAlignment="textStart"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/editText_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_location"
+            android:hint="@string/text_editText_location"
+            android:inputType="textShortMessage"
+            android:textAlignment="textStart"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/editText_maxParticipators"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_teilnehmer"
+            android:ems="10"
+            android:hint="@string/text_editText_participators"
+            android:inputType="number"
+            android:textAlignment="textStart" />
+
+        <EditText
+            android:id="@+id/editText_details"
+            android:layout_width="match_parent"
+            android:layout_height="171dp"
+            android:ems="10"
+            android:hint="@string/text_editText_details"
+            android:inputType="textMultiLine"
+            android:textAlignment="textStart"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="256dp"
-        tools:layout_editor_absoluteY="500dp" />
+        android:id="@+id/button_cancel"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/btn_rounded"
+        android:text="@string/text_button_cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/btn_rounded"
+        android:text="@string/text_button_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

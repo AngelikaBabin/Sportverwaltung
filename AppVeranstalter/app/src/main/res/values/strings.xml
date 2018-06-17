@@ -53,19 +53,29 @@
         <item>Chess</item>
         <item>Hockey</item>
     </string-array>
-    <!--Recovery Activity-->
+    <!--activity_recovery-->
     <string name="text_recover">Recover</string>
-    <!--Verify Activity-->
+    <!--activity_verify-->
     <string name="register_success">Registered successfully. Check your inbox for the verification-email.</string>
+    <!--activity_add_event-->
+    <string name="text_editText_title">Title</string>
+    <string name="text_viewText_sportart">Sport:</string>
+    <string name="text_editText_location">Location</string>
+    <string name="text_editText_date">Date</string>
+    <string name="text_editText_participators">maximal number of Participants</string>
+    <string name="text_editText_details">Details</string>
+    <string name="text_button_cancel">Cancel</string>
+    <string name="text_button_save">Save</string>
 
-    <!-- Example General settings -->
+
+    <!-- EXAMPLE GENERAL SETTINGS -->
     <string name="pref_default_display_name">Maria Ashcroft</string>
 
-    <!-- Example settings for Notifications -->
+    <!-- EXAMPLE SETTINGS FOR NOTIFICATION -->
     <string name="pref_ringtone_silent">Silent</string>
 
-    <!--Example settings for Data & Sync-->
-    <!--pref_account-->
+    <!--EXAMPLE SETTINGS FOR DATA & SYNC->
+    <!-pref_account-->
     <string name="pref_title_change_name">Change Name</string>
     <string name="pref_title_change_email">Change Email</string>
     <string name="pref_title_change_password">Change Password</string>
