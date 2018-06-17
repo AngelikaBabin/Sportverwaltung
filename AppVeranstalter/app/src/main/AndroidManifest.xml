@@ -35,8 +35,11 @@
             android:name=".activity.events.MyEventsActivity"
             android:label="@string/title_activity_my_events"
             android:theme="@style/AppTheme" />
-        <activity android:name=".activity.events.EventDetailsActivity" />
-        <activity android:name=".activity.events.AddEventActivity"></activity>
+        <activity android:name=".activity.events.AddEventActivity" />
+        <activity
+            android:name=".activity.events.EventDetailActivity"
+            android:label="@string/title_activity_event_detail"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

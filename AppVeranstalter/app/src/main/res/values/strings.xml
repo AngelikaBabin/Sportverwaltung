@@ -59,7 +59,7 @@
     <string name="register_success">Registered successfully. Check your inbox for the verification-email.</string>
     <!--activity_add_event-->
     <string name="text_editText_title">Title</string>
-    <string name="text_viewText_sportart">Sport:</string>
+    <string name="text_viewText_sportart">Sport</string>
     <string name="text_editText_location">Location</string>
     <string name="text_editText_date">Date</string>
     <string name="text_editText_participators">maximal number of Participants</string>
@@ -119,4 +119,5 @@
     <string name="title_other">Other</string>
     <string name="title_logout">Logout</string>
     <string name="title_activity_my_events">MyEventsActivity</string>
+    <string name="title_activity_event_detail">EventDetailActivity</string>
 </resources>
