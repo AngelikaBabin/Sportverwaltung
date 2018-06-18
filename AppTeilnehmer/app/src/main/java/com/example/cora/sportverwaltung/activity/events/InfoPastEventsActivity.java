@@ -13,6 +13,12 @@ import com.google.gson.Gson;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+/**
+ * @kandut async listener and code cleanup
+ * @kumnig activity code
+ * @rajic gui design
+ */
+
 public class InfoPastEventsActivity extends AppCompatActivity {
     TextView textView_header, textView_date, textView_place, textView_organizer, textView_rank, textView_points, textView_sport;
     ListView listView_topDrei;

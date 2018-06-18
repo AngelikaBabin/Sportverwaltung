@@ -3,8 +3,10 @@ package com.example.cora.sportverwaltung.businesslogic.data;
 import android.support.annotation.NonNull;
 
 /**
- * Created by nicok on 02.05.2018 ^-^.
+ * @babin created
+ * @kandut small tweaks
  */
+
 public class Credentials {
     private String email;
     private String password;

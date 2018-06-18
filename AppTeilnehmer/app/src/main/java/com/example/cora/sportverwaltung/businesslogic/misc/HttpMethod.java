@@ -1,8 +1,9 @@
 package com.example.cora.sportverwaltung.businesslogic.misc;
 
 /**
- * Created by nicok on 24.04.2018 ^-^.
+ * @kandut created
  */
+
 public enum HttpMethod {
     GET,
     HEAD,

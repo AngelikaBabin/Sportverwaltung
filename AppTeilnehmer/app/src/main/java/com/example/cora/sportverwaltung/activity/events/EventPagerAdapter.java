@@ -8,6 +8,7 @@ import com.example.cora.sportverwaltung.businesslogic.misc.Filter;
 
 /**
  * @rajic everything
+ * @kandut extracted from EventsSwipeActivity and code cleanup
  */
 
 public class EventPagerAdapter extends FragmentPagerAdapter {
@@ -33,14 +34,12 @@ public class EventPagerAdapter extends FragmentPagerAdapter {
                 result = EventsFragment.newInstance(Filter.PAST);
                 break;
         }
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
+
         return result;
     }
 
     @Override
     public int getCount() {
-        // Show 3 total pages.
         return Filter.values().length;
     }
 }

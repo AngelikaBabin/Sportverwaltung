@@ -79,20 +79,30 @@ public class LoginActivity extends ExposingActivity implements AsyncTaskHandler 
         progDialog.setMessage("Logging in...");
         progDialog.setIndeterminate(false);
         progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progDialog.setCancelable(false);
+        progDialog.setCancelable(true);
         progDialog.show();
     }
 
     @Override
     public void onSuccess(int statusCode, String content) {
-        progDialog.dismiss();
-        preferences.edit().putString("EMAIL", editText_email.getText().toString()).apply();
-        startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
+        try{
+            progDialog.dismiss();
+            preferences.edit().putString("EMAIL", editText_email.getText().toString()).apply();
+            startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
+        } catch(Exception ex){
+            ex.printStackTrace();
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void onError(Error err) {
-        progDialog.cancel();
-        Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_LONG).show();
+        try{
+            progDialog.cancel();
+            Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_LONG).show();
+        } catch(Exception ex){
+            ex.printStackTrace();
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

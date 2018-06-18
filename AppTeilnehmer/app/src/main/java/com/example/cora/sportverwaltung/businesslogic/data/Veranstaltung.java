@@ -5,7 +5,8 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * Created by nicok on 18.04.2018 ^-^.
+ * @babin created
+ * @kandut small tweaks
  */
 
 public class Veranstaltung {
@@ -114,7 +115,6 @@ public class Veranstaltung {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(getId());
     }
 }
