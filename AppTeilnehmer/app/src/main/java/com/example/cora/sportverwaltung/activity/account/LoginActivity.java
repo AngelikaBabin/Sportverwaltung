@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.cora.sportverwaltung.R;
 import com.example.cora.sportverwaltung.activity.base.ExposingActivity;
+import com.example.cora.sportverwaltung.activity.settings.SettingsActivity;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandler;
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebserviceTask;
 import com.example.cora.sportverwaltung.businesslogic.data.Credentials;
@@ -24,8 +25,8 @@ import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.POS
 public class LoginActivity extends ExposingActivity implements AsyncTaskHandler {
 
     // UI references
-    Button button_login, button_register, button_forgotPassword;
-    EditText editText_email, editText_password;
+    private Button button_login, button_register, button_forgotPassword, button_settings;
+    private EditText editText_email, editText_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class LoginActivity extends ExposingActivity implements AsyncTaskHandler 
     private void initUIReferences() {
         button_login = findViewById(R.id.button_login);
         button_register = findViewById(R.id.button_register);
+        button_settings = findViewById(R.id.button_settings);
         button_forgotPassword = findViewById(R.id.button_forgotPassword);
         editText_email = findViewById(R.id.editText_email);
         editText_email.setText(preferences.getString("EMAIL", ""));
@@ -66,6 +68,9 @@ public class LoginActivity extends ExposingActivity implements AsyncTaskHandler 
         button_register.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
 
         button_forgotPassword.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, RecoveryActivity.class)));
+
+        button_settings.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, SettingsActivity.class)));
+
     }
 
     @Override

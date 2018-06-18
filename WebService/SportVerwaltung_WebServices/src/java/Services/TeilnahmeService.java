@@ -95,7 +95,6 @@ public class TeilnahmeService {
     }
     
     @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
     public Response deleteTeilnahme(@HeaderParam("Token") String token, @QueryParam("eventId") int eventId) {
         Response r;
         Event e;

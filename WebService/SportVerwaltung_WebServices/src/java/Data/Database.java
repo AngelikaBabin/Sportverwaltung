@@ -24,19 +24,17 @@ import java.util.Collection;
  */
 public class Database {
 
-    private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
-    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
+    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
+    private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
     private static final String USER = "d4a07";
     private static final String PASSWD = "d4a";
     private Connection conn = null;
     private static final int NUM_SELECTED_TEILNEHMER = 3;
     private static final String EVENT_COLUMNS = "veranstaltung.id as veranstaltung_id, veranstaltung.name as veranstaltung_name, "
-            + "veranstaltung.sportart as veranstaltung_sportart,veranstaltung.location as veranstaltung_socation, "
+            + "veranstaltung.sportart as veranstaltung_sportart, veranstaltung.location as veranstaltung_location, "
             + "veranstaltung.datetime as veranstaltung_datetime, "
-            + "veranstaltung.details as veranstaltung_details, veranstaltung.max_teilnehmer as veranstaltung_max_teilnehmer, "
+            + "veranstaltung.details as veranstaltung_details, nvl(veranstaltung.max_teilnehmer,0) as veranstaltung_max_teilnehmer, "
             + "account.id as account_id, account.name as account_name, account.email as account_email, account.password as account_password";
-    private static final String LOCATION_COLUMNS = "ort.id as location_id, ort.name as location_name"
-            + ", latitude as location_latitude, LONGITUDE as loaction_longitude";
 
     /**
      * Singleton
@@ -208,10 +206,8 @@ public class Database {
         ArrayList<Event> collVeranstaltung = new ArrayList<>();
 
         conn = createConnection();
-        String select = "SELECT " + EVENT_COLUMNS + ", " + LOCATION_COLUMNS + " FROM veranstaltung inner join account"
-                + " on veranstaltung.id_veranstalter = account.id"
-                + " inner join ort"
-                + " on ort.id = veranstaltung.location";
+        String select = "SELECT " + EVENT_COLUMNS +  " FROM veranstaltung inner join account"
+                + " on veranstaltung.id_veranstalter = account.id";
         PreparedStatement stmt = conn.prepareStatement(select);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
@@ -225,10 +221,8 @@ public class Database {
         ArrayList<Event> collVeranstaltung = new ArrayList<>();
 
         conn = createConnection();
-        String select = "SELECT " + EVENT_COLUMNS + ", " + LOCATION_COLUMNS + " FROM veranstaltung inner join account "
+        String select = "SELECT " + EVENT_COLUMNS + " FROM veranstaltung inner join account "
                 + "on veranstaltung.id_veranstalter = account.id "
-                + "inner join ort "
-                + "on veranstaltung.location = ort.id"
                 + " inner join teilnahme"
                 + " on teilnahme.id_veranstaltung = veranstaltung.id"
                 + " where datetime {comp} ? and id_teilnehmer = ? order by veranstaltung_datetime";
@@ -252,10 +246,8 @@ public class Database {
         ArrayList<Event> collVeranstaltung = new ArrayList<>();
 
         conn = createConnection();
-        String select = "select " + EVENT_COLUMNS + ", " + LOCATION_COLUMNS + " from teilnahme inner join veranstaltung "
+        String select = "select " + EVENT_COLUMNS + " from teilnahme inner join veranstaltung "
                 + "on teilnahme.id_veranstaltung = veranstaltung.id "
-                + "inner join ort "
-                + "on ort.id = veranstaltung.location "
                 + "where teilnahme.id_teilnehmer = ? order by veranstaltung_datetime";
         PreparedStatement stmt = conn.prepareStatement(select);
         stmt.setInt(1, a.getId());
@@ -284,6 +276,21 @@ public class Database {
         }
         return collEvents;
     }
+    
+    /**
+     * @Kumnig
+     * @Rajic
+     */
+    public Event getEventById (int id) throws Exception{        
+        conn = createConnection();
+        String select = "select * from veranstaltung where id = ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+        Event e = createEventFromResultSet(rs);
+        conn.close();
+        return e;
+    }
 
     public void updateEvent(Event e) throws Exception {
         conn = createConnection();
@@ -300,6 +307,10 @@ public class Database {
         stmt.executeUpdate();
     }
 
+    /**
+     * @Kumnig
+     * @Rajic
+     */
     public void deleteEvent(Event e) throws Exception { //löschen von teilnahmen?
         conn = createConnection();
         String select = "delete from veranstaltung where id = ?";
@@ -307,6 +318,15 @@ public class Database {
         stmt.setInt(1, e.getId());
         stmt.executeUpdate();
         conn.close();
+    }
+    
+    /**
+     * @Kumnig
+     * @Rajic
+     */
+    public void deleteCompleteEvent(Event e) throws Exception{
+        deleteTeilnahmenFromEvent(e);
+        deleteEvent(e);
     }
 
     public void insertEvent(Event e) throws Exception {
@@ -362,7 +382,7 @@ public class Database {
 
     public void deleteTeilnahme(int eventId, Account a) throws Exception, SQLException {
         conn = createConnection();
-        String select = "delete from teilnehme where id_veranstaltung = ? and id_teilnehmer = ?";
+        String select = "delete from teilnahme where id_veranstaltung = ? and id_teilnehmer = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
         stmt.setInt(1, eventId);
         stmt.setInt(2, a.getId());
@@ -406,10 +426,8 @@ order by teilnahme.score
         ArrayList<Event> collVeranstaltung = new ArrayList<>();
 
         conn = createConnection();
-        String select = "SELECT " + EVENT_COLUMNS + ", " + LOCATION_COLUMNS + " FROM veranstaltung inner join account "
+        String select = "SELECT " + EVENT_COLUMNS + " FROM veranstaltung inner join account "
                 + "on veranstaltung.id_veranstalter = account.id "
-                + "inner join ort "
-                + "on veranstaltung.location = ort.id"
                 + " where datetime > ? order by veranstaltung_datetime";
         PreparedStatement stmt = conn.prepareStatement(select);
         stmt.setDate(1, Date.valueOf(LocalDate.now()));
@@ -459,8 +477,23 @@ order by teilnahme.score
                 new Account(rs.getInt("account_id"), rs.getString("account_name"),
                         rs.getString("account_email"), rs.getString("account_password")), rs.getString("veranstaltung_name"),
                 rs.getDate("veranstaltung_datetime").toLocalDate(), rs.getString("veranstaltung_details"),
-                rs.getString("location_name"), rs.getInt("veranstaltung_max_teilnehmer"), rs.getString("veranstaltung_sportart"));
+                rs.getString("veranstaltung_location"), 
+                rs.getInt("veranstaltung_max_teilnehmer"), 
+                rs.getString("veranstaltung_sportart"));
         e.setCountTeilnehmer(getNumberOfTeilnehmer(e.getId()));
         return e;
+    }
+
+    /**
+     * @Kumnig
+     * @Rajic
+     */
+    private void deleteTeilnahmenFromEvent(Event e) throws Exception{
+        conn = createConnection();
+        String select = "delete from teilnahme where id_veranstaltung = ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setInt(1, e.getId());
+        stmt.executeUpdate();
+        conn.close();
     }
 }
