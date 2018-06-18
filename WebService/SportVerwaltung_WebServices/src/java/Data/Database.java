@@ -24,16 +24,16 @@ import java.util.Collection;
  */
 public class Database {
 
-    private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
-    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
+    //private static final String CONNECTSTRING = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
+    private static final String CONNECTSTRING = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
     private static final String USER = "d4a07";
     private static final String PASSWD = "d4a";
     private Connection conn = null;
     private static final int NUM_SELECTED_TEILNEHMER = 3;
     private static final String EVENT_COLUMNS = "veranstaltung.id as veranstaltung_id, veranstaltung.name as veranstaltung_name, "
-            + "veranstaltung.sportart as veranstaltung_sportart,veranstaltung.location as veranstaltung_location, "
+            + "veranstaltung.sportart as veranstaltung_sportart, veranstaltung.location as veranstaltung_location, "
             + "veranstaltung.datetime as veranstaltung_datetime, "
-            + "veranstaltung.details as veranstaltung_details, veranstaltung.max_teilnehmer as veranstaltung_max_teilnehmer, "
+            + "veranstaltung.details as veranstaltung_details, nvl(veranstaltung.max_teilnehmer,0) as veranstaltung_max_teilnehmer, "
             + "account.id as account_id, account.name as account_name, account.email as account_email, account.password as account_password";
 
     /**
@@ -382,7 +382,7 @@ public class Database {
 
     public void deleteTeilnahme(int eventId, Account a) throws Exception, SQLException {
         conn = createConnection();
-        String select = "delete from teilnehme where id_veranstaltung = ? and id_teilnehmer = ?";
+        String select = "delete from teilnahme where id_veranstaltung = ? and id_teilnehmer = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
         stmt.setInt(1, eventId);
         stmt.setInt(2, a.getId());
@@ -477,7 +477,9 @@ order by teilnahme.score
                 new Account(rs.getInt("account_id"), rs.getString("account_name"),
                         rs.getString("account_email"), rs.getString("account_password")), rs.getString("veranstaltung_name"),
                 rs.getDate("veranstaltung_datetime").toLocalDate(), rs.getString("veranstaltung_details"),
-                rs.getString("location_name"), rs.getInt("veranstaltung_max_teilnehmer"), rs.getString("veranstaltung_sportart"));
+                rs.getString("veranstaltung_location"), 
+                rs.getInt("veranstaltung_max_teilnehmer"), 
+                rs.getString("veranstaltung_sportart"));
         e.setCountTeilnehmer(getNumberOfTeilnehmer(e.getId()));
         return e;
     }
@@ -488,7 +490,7 @@ order by teilnahme.score
      */
     private void deleteTeilnahmenFromEvent(Event e) throws Exception{
         conn = createConnection();
-        String select = "delete from teilnehme where id_veranstaltung = ?";
+        String select = "delete from teilnahme where id_veranstaltung = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
         stmt.setInt(1, e.getId());
         stmt.executeUpdate();
