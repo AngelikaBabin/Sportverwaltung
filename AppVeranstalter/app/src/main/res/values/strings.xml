@@ -62,7 +62,7 @@
     <string name="text_viewText_sportart">Sport</string>
     <string name="text_editText_location">Location</string>
     <string name="text_editText_date">Date</string>
-    <string name="text_editText_participators">maximal number of Participants</string>
+    <string name="text_editText_participators">max. number participants</string>
     <string name="text_editText_details">Details</string>
     <string name="text_button_cancel">Cancel</string>
     <string name="text_button_save">Save</string>

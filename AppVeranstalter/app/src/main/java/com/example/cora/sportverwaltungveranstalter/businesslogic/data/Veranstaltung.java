@@ -22,7 +22,7 @@ public class Veranstaltung {
     private int maxTeilnehmer;
     private int countTeilnehmer;
 
-    public Veranstaltung(int id, String name, String details, Veranstalter veranstalter, String location, String sportart, Date datetime, int minTeilnehmer, int maxTeilnehmer, int countTeilnehmer) {
+    public Veranstaltung(int id, String name, String details, Veranstalter veranstalter, String location, String sportart, Date datetime, int maxTeilnehmer, int countTeilnehmer) {
         setName(name);
         setDetails(details);
         setVeranstalter(veranstalter);

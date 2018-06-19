@@ -31,6 +31,7 @@
         <activity android:name=".activity.account.LoginActivity" />
         <activity android:name=".activity.account.RecoveryActivity" />
         <activity android:name=".activity.account.VerifyActivity" />
+        <activity android:name=".activity.settings.SettingsActivity" />
         <activity
             android:name=".activity.events.MyEventsActivity"
             android:label="@string/title_activity_my_events"
