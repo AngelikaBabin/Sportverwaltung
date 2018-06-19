@@ -91,8 +91,19 @@ public class InfoMyEventsActivity extends ExposingActivity implements AsyncTaskH
     @Override
     public void onSuccess(int statusCode, String content) {
         progDialog.dismiss();
-        button_logout.setEnabled(false);
-        Toast.makeText(this, "You are now participating", Toast.LENGTH_LONG).show();
+        switch (statusCode) {
+            case 200:
+                button_logout.setEnabled(false);
+                Toast.makeText(this, "You are no longer participating", Toast.LENGTH_LONG).show();
+                break;
+
+            case 403:
+                Toast.makeText(this, "Not logged in", Toast.LENGTH_SHORT).show();
+                break;
+
+            default:
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

@@ -62,8 +62,19 @@ public class RecoveryActivity extends ExposingActivity implements AsyncTaskHandl
     @Override
     public void onSuccess(int statusCode, String content) {
         progDialog.dismiss();
-        Toast.makeText(getApplicationContext(), "Recovery email sent", Toast.LENGTH_LONG).show();
-        startActivity(new Intent(RecoveryActivity.this, LoginActivity.class));
+        switch (statusCode) {
+            case 200:
+                Toast.makeText(this, "Recovery email sent", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(RecoveryActivity.this, LoginActivity.class));
+                finish();
+                break;
+
+            case 403:
+                Toast.makeText(this, "Acount doesn't exist", Toast.LENGTH_SHORT).show();
+
+            default:
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

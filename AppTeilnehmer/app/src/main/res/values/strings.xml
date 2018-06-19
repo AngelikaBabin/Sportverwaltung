@@ -7,10 +7,10 @@
     <string name="example_header">HEADER</string>
 
     <!-- Userdata -->
-    <string name="example_username">Nico Kandut</string>
+    <string name="example_username">user</string>
     <string name="hint_username">Username</string>
 
-    <string name="example_email">nico.kandut@gmail.com</string>
+    <string name="example_email">user@gmail.com</string>
     <string name="hint_email">Email</string>
 
     <string name="hint_password">Password</string>
@@ -18,10 +18,10 @@
     <string name="hint_confirmPassword">Confirm password</string>
 
     <string name="label_rank">Rank:</string>
-    <string name="example_rank">3</string>
+    <string name="example_rank">0</string>
 
     <string name="label_points">Points:</string>
-    <string name="example_points">300</string>
+    <string name="example_points">0</string>
 
     <!-- Veranstaltung -->
     <string name="example_eventname">Running with the wolves</string>

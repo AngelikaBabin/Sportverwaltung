@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.cora.sportverwaltungveranstalter.R;
 import com.example.cora.sportverwaltungveranstalter.activity.base.ExposingActivity;
+import com.example.cora.sportverwaltungveranstalter.activity.settings.SettingsActivity;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncTaskHandler;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncWebserviceTask;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Credentials;
@@ -20,7 +21,7 @@ import static com.example.cora.sportverwaltungveranstalter.businesslogic.misc.Ht
  * @babin
  */
 public class LoginActivity extends ExposingActivity implements AsyncTaskHandler {
-    Button button_login, button_register, button_forgotPassword;
+    Button button_login, button_register, button_forgotPassword, button_settings;
     EditText editText_email, editText_password;
 
     @Override
@@ -39,6 +40,7 @@ public class LoginActivity extends ExposingActivity implements AsyncTaskHandler 
         button_login = (Button) findViewById(R.id.button_login);
         button_register = (Button) findViewById(R.id.button_register);
         button_forgotPassword = (Button) findViewById(R.id.button_forgotPassword);
+        button_settings = (Button) findViewById(R.id.button_settings);
     }
 
     private void registerEventhandlers(){
@@ -50,7 +52,7 @@ public class LoginActivity extends ExposingActivity implements AsyncTaskHandler 
                 Credentials c = new Credentials(email, password);
                 String json = gson.toJson(c);
 
-                AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "login", LoginActivity.this);
+                AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "login", LoginActivity.this, getApplicationContext());
                 task.execute(null, json);
 
             } catch (Exception ex) {
@@ -62,6 +64,8 @@ public class LoginActivity extends ExposingActivity implements AsyncTaskHandler 
         button_register.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
 
         button_forgotPassword.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, RecoveryActivity.class)));
+
+        button_settings.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, SettingsActivity.class)));
     }
 
     @Override

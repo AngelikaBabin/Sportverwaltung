@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark"
+    tools:context=".activity.events.EventDetailActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_container_fieldDetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/show_rounded"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/editText_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/text_editText_title"
+            android:inputType="textShortMessage"
+            android:textAlignment="textStart"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:visibility="visible" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <EditText
+                android:id="@+id/editText_sports"
+                android:layout_width="157dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_row="0"
+                android:drawableStart="@drawable/sports_rugby"
+                android:text="@string/text_viewText_sportart"
+                android:textAlignment="textStart"
+                android:textSize="30sp"
+                android:visibility="visible" />
+
+            <Spinner
+                android:id="@+id/spinner_sports"
+                android:layout_width="200dp"
+                android:layout_height="56dp"
+                android:layout_column="1"
+                android:layout_marginBottom="0dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="0dp"
+                android:layout_row="0"
+                android:spinnerMode="dropdown"
+                android:textAlignment="center"
+                android:textSize="30sp" />
+        </GridLayout>
+
+
+        <EditText
+            android:id="@+id/editText_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_kalender"
+            android:ems="10"
+            android:hint="@string/text_editText_date"
+            android:inputType="date"
+            android:textAlignment="textStart"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/editText_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_location"
+            android:hint="@string/text_editText_location"
+            android:inputType="textShortMessage"
+            android:textAlignment="textStart"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/editText_maxParticipators"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_teilnehmer"
+            android:ems="10"
+            android:hint="@string/text_editText_participators"
+            android:inputType="number"
+            android:textAlignment="textStart"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/editText_details"
+            android:layout_width="match_parent"
+            android:layout_height="171dp"
+            android:ems="10"
+            android:hint="@string/text_editText_details"
+            android:inputType="textMultiLine"
+            android:textAlignment="textStart"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_menu_save" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
+</android.support.design.widget.CoordinatorLayout>

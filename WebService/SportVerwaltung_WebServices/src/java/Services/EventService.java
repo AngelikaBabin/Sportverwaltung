@@ -17,6 +17,7 @@ import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -101,4 +102,32 @@ public class EventService {
         }
         return r;
     }
+    
+    /**
+     * @Kumnig
+     * @Rajic
+     */
+    @DELETE
+    public Response deleteEvent(@HeaderParam("Token") String token, @QueryParam("eventId") int eventId) {
+        Response r;
+        Event e;
+        try{
+                if(Authentification.isUserAuthenticated(token)){
+                    e = db.getEventById(eventId);
+                    db.deleteCompleteEvent(e);
+                    System.out.print("Delete Event: " + e + "...");
+                    r = Response.status(Response.Status.OK).build();
+                    System.out.println("Sucess");
+                }
+                else{
+                    r = Response.status(Response.Status.FORBIDDEN).build();
+                }
+            }
+            catch(Exception ex){
+                r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+                System.out.println("Failed");
+            }
+        return r;
+    }
+    
 }
