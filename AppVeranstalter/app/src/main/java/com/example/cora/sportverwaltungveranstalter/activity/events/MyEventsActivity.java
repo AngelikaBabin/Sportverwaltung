@@ -1,5 +1,6 @@
 package com.example.cora.sportverwaltungveranstalter.activity.events;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -70,5 +71,39 @@ public class MyEventsActivity extends BaseActivity implements AsyncTaskHandler{
         test.add(vertest);
         setAdapterData(test);
     }
+
+    @Override
+    public void onPreExecute() {
+        progDialog = new ProgressDialog(this);
+        progDialog.setMessage("Loading Events...");
+        progDialog.setIndeterminate(false);
+        progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progDialog.setCancelable(false);
+        progDialog.show();
+    }
+
+    @Override
+    public void onSuccess(int statusCode, String content) {
+        progDialog.dismiss();
+        switch (statusCode) {
+            case 201:
+                Toast.makeText(MyEventsActivity.this, "Show all Events", Toast.LENGTH_LONG).show();
+                break;
+
+            case 403:
+                Toast.makeText(this, "Not logged in", Toast.LENGTH_SHORT).show();
+                break;
+
+            default:
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onError(Error err) {
+        progDialog.cancel();
+        Toast.makeText(this, err.getMessage(), Toast.LENGTH_SHORT).show();
+    }
+
 
 }
