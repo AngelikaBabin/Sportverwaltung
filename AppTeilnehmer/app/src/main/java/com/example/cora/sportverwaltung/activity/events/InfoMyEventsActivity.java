@@ -67,11 +67,9 @@ public class InfoMyEventsActivity extends ExposingActivity implements AsyncTaskH
                 try {
                     AsyncWebserviceTask task = new AsyncWebserviceTask(DELETE, "teilnahme", InfoMyEventsActivity.this, getApplicationContext());
                     task.execute("eventId=" + selectedEvent.getId(), null);
-                    Toast.makeText(InfoMyEventsActivity.this, "You are no longer participating", Toast.LENGTH_LONG).show();
                     button_logout.setEnabled(false);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(InfoMyEventsActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -81,7 +79,7 @@ public class InfoMyEventsActivity extends ExposingActivity implements AsyncTaskH
     @Override
     public void onPreExecute() {
         progDialog = new ProgressDialog(this);
-        progDialog.setMessage("Getting events...");
+        progDialog.setMessage("Logout from event...");
         progDialog.setIndeterminate(false);
         progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progDialog.setCancelable(false);
@@ -92,12 +90,13 @@ public class InfoMyEventsActivity extends ExposingActivity implements AsyncTaskH
     public void onSuccess(int statusCode, String content) {
         progDialog.dismiss();
         button_logout.setEnabled(false);
-        Toast.makeText(this, "You are now participating", Toast.LENGTH_LONG).show();
+        Toast.makeText(InfoMyEventsActivity.this, "You are no longer participating", Toast.LENGTH_LONG).show();
+
     }
 
     @Override
     public void onError(Error err) {
         progDialog.cancel();
-        Toast.makeText(this, err.getMessage(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(InfoMyEventsActivity.this, err.getMessage(), Toast.LENGTH_LONG).show();
     }
 }
