@@ -14,6 +14,10 @@ import com.example.cora.sportverwaltung.businesslogic.connection.AsyncTaskHandle
 import com.example.cora.sportverwaltung.businesslogic.connection.AsyncWebserviceTask;
 import com.example.cora.sportverwaltung.businesslogic.data.Credentials;
 
+import java.util.InputMismatchException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.POST;
 
 /**
@@ -53,6 +57,8 @@ public class LoginActivity extends ExposingActivity implements AsyncTaskHandler 
                 String email = editText_email.getText().toString();
                 String password = editText_password.getText().toString();
 
+                checkInput(email, password);
+
                 Credentials c = new Credentials(email, password);
                 String json = gson.toJson(c);
 
@@ -73,6 +79,19 @@ public class LoginActivity extends ExposingActivity implements AsyncTaskHandler 
 
     }
 
+    private void checkInput(String email, String password) throws Exception {
+        Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
+        if (!matcher.find()) {
+            throw new InputMismatchException(getString(R.string.error_invalidEmail));
+        }
+
+        if (password == null || password.equals("")) {
+            throw new InputMismatchException("Enter a password");
+        }
+    }
+
     @Override
     public void onPreExecute() {
         progDialog = new ProgressDialog(LoginActivity.this);
@@ -85,24 +104,32 @@ public class LoginActivity extends ExposingActivity implements AsyncTaskHandler 
 
     @Override
     public void onSuccess(int statusCode, String content) {
-        try{
-            progDialog.dismiss();
-            preferences.edit().putString("EMAIL", editText_email.getText().toString()).apply();
-            startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
-        } catch(Exception ex){
-            ex.printStackTrace();
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+        switch (statusCode) {
+            case 202:
+                preferences.edit().putString("EMAIL", editText_email.getText().toString()).apply();
+                startActivity(new Intent(this, ProfileActivity.class));
+                finish();
+                break;
+
+            case 403:
+                Toast.makeText(this, "Wrong Username or password", Toast.LENGTH_SHORT).show();
+                break;
+                
+            case 404:
+                Toast.makeText(this, "Could't connect", Toast.LENGTH_SHORT).show();
+                break;
+
+            default:
+                Toast.makeText(this, "Server error", Toast.LENGTH_SHORT).show();
         }
+
+        progDialog.dismiss();
     }
 
     @Override
     public void onError(Error err) {
-        try{
-            progDialog.cancel();
-            Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_LONG).show();
-        } catch(Exception ex){
-            ex.printStackTrace();
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-        }
+        progDialog.cancel();
+        Toast.makeText(LoginActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+        err.printStackTrace();
     }
 }

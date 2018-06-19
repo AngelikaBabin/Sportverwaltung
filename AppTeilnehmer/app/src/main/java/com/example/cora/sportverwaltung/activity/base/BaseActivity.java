@@ -72,9 +72,9 @@ public class BaseActivity extends ExposingActivity implements NavigationView.OnN
     }
 
     protected void setContent(@LayoutRes int layout) {
-        LayoutInflater layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (layoutInflater != null) {
-            layoutInflater.inflate(layout, contentContainer );
+            layoutInflater.inflate(layout, contentContainer);
         } else {
             System.out.println("layoutInflater was null in setContent of BaseActivity");
         }
@@ -121,7 +121,7 @@ public class BaseActivity extends ExposingActivity implements NavigationView.OnN
                     startActivity(new Intent(this, EventsSwipeActivity.class));
                     break;
                 case R.id.nav_logout:
-                    AsyncWebserviceTask task = new AsyncWebserviceTask(GET, "logout", this, getApplicationContext());
+                    AsyncWebserviceTask task = new AsyncWebserviceTask(GET, "logout", BaseActivity.this, getApplicationContext());
                     task.execute();
                     break;
             }
@@ -146,12 +146,16 @@ public class BaseActivity extends ExposingActivity implements NavigationView.OnN
     @Override
     public void onSuccess(int statusCode, String content) {
         progDialog.dismiss();
-        startActivity(new Intent(this, LoginActivity.class));
+        if (statusCode == 200) {
+            startActivity(new Intent(this, LoginActivity.class));
+        } else {
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void onError(Error err) {
-    progDialog.cancel();
+        progDialog.cancel();
         Toast.makeText(this, err.getMessage(), Toast.LENGTH_SHORT).show();
     }
 }

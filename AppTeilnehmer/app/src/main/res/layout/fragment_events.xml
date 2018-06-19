@@ -4,8 +4,9 @@
     android:layout_height="match_parent"
     android:background="@color/background_main"
     android:orientation="vertical"
-
-    tools:context="com.example.cora.sportverwaltung.activity.events.EventsFragment">
+    tools:context="com.example.cora.sportverwaltung.activity.events.EventsFragment"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
 
     <EditText
         android:id="@+id/editText_search"
@@ -22,7 +23,7 @@
     <ListView
         android:id="@+id/listView_events"
         android:layout_width="match_parent"
-        android:layout_height="457dp"
+        android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true" />
 
@@ -30,7 +31,9 @@
         android:id="@+id/textView_message"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="no events found"
+        android:text="You dont have any event here yet..."
+        android:textColor="@color/text_light"
+        android:textSize="16dp"
         android:textAlignment="center" />
 
 </LinearLayout>

@@ -24,7 +24,7 @@ import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.POS
  * @rajic gui design
  */
 
-public class InfoAllEventsActivity extends ExposingActivity implements AsyncTaskHandler{
+public class InfoAllEventsActivity extends ExposingActivity implements AsyncTaskHandler {
 
     TextView textView_header, textView_Details;
     TextView textView_date, textView_place, textView_participator, textView_organizer, textView_sport;
@@ -95,8 +95,19 @@ public class InfoAllEventsActivity extends ExposingActivity implements AsyncTask
     @Override
     public void onSuccess(int statusCode, String content) {
         progDialog.dismiss();
-        button_participate.setEnabled(false);
-        Toast.makeText(InfoAllEventsActivity.this, "You are now participating", Toast.LENGTH_LONG).show();
+        switch (statusCode) {
+            case 201:
+                button_participate.setEnabled(false);
+                Toast.makeText(InfoAllEventsActivity.this, "You are now participating", Toast.LENGTH_LONG).show();
+                break;
+
+            case 403:
+                Toast.makeText(this, "Not logged in", Toast.LENGTH_SHORT).show();
+                break;
+
+            default:
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
