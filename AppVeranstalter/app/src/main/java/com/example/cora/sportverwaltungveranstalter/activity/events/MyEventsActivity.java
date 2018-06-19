@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.cora.sportverwaltungveranstalter.R;
 import com.example.cora.sportverwaltungveranstalter.activity.base.BaseActivity;
+import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncTaskHandler;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Sportart;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Veranstaltung;
 import com.google.gson.Gson;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 
-public class MyEventsActivity extends BaseActivity {
+public class MyEventsActivity extends BaseActivity implements AsyncTaskHandler{
     FloatingActionButton faButton_addEvent;
     ListView listView_events;
 
