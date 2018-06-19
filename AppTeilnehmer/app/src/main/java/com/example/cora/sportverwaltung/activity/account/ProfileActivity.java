@@ -58,7 +58,7 @@ public class ProfileActivity extends BaseActivity implements AsyncTaskHandler{
     @Override
     public void onPreExecute() {
         progDialog = new ProgressDialog(ProfileActivity.this);
-        progDialog.setMessage("Logging in...");
+        progDialog.setMessage("Load data...");
         progDialog.setIndeterminate(false);
         progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progDialog.setCancelable(false);

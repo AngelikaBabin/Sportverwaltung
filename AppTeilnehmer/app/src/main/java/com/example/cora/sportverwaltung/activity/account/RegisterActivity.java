@@ -100,7 +100,7 @@ public class RegisterActivity extends ExposingActivity implements AsyncTaskHandl
     @Override
     public void onPreExecute() {
         progDialog = new ProgressDialog(this);
-        progDialog.setMessage("Logging in...");
+        progDialog.setMessage("Register...");
         progDialog.setIndeterminate(false);
         progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progDialog.setCancelable(false);
