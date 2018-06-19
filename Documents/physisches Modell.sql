@@ -104,14 +104,13 @@ INSERT INTO Account VALUES(seq_account_id.NEXTVAL, 'ChristofKraschl', 'kraschlc@
 INSERT INTO Account VALUES(seq_account_id.NEXTVAL, 'CoraKumnig', 'corakumnig@gmail.com', 'ck', 0, sysdate);
 INSERT INTO Account VALUES(seq_account_id.NEXTVAL, 'KristianRajic', 'rajic-kristion59560@gmx.at', 'kr', 0, sysdate);
 
-INSERT INTO Sportart VALUES('Fussball');
-INSERT INTO Sportart VALUES('Basketball');
-INSERT INTO Sportart VALUES('Baseball');
-INSERT INTO Sportart VALUES('Football');
-INSERT INTO Sportart VALUES('Laufen');
-INSERT INTO Sportart VALUES('Wandern');
-INSERT INTO Sportart VALUES('Klettern');
-INSERT INTO Sportart VALUES('Schwimmen');
+INSERT INTO Sportart VALUES('BALLSPORT');
+INSERT INTO Sportart VALUES('RENNSPORT');
+INSERT INTO Sportart VALUES('KAMPFSPORT');
+INSERT INTO Sportart VALUES('KLETTERSPORT');
+INSERT INTO Sportart VALUES('SCHWIMMSPORT');
+INSERT INTO Sportart VALUES('BASKETBALL');
+INSERT INTO Sportart VALUES('EXTREMSPORT');
 
 INSERT INTO Ort VALUES(seq_ort_id.NEXTVAL, 'HTL Villach', 46.601109,13.8489569);
 INSERT INTO Ort VALUES(seq_ort_id.NEXTVAL, 'Hauptplatz Feldkirchen', 46.7235859,14.0923111);
@@ -123,10 +122,10 @@ INSERT INTO Teilnehmer VALUES(2, 117);
 INSERT INTO Teilnehmer VALUES(3, 17503);
 INSERT INTO Teilnehmer VALUES(4, 1000000);
 
-INSERT INTO Veranstaltung VALUES(seq_veranstaltung_id.NEXTVAL, 'Rote Nasen Lauf', 'Laufen', 5, 1, DATE '2018-03-20', 'Ein Lauf.', null, null);
-INSERT INTO Veranstaltung VALUES(seq_veranstaltung_id.NEXTVAL, 'Basketballspiel', 'Basketball', 5, 2, DATE '2018-11-14', 'Ein spannedes Spiel!', 6, 20);
-INSERT INTO Veranstaltung VALUES(seq_veranstaltung_id.NEXTVAL, 'Rote Nasen Lauf 2', 'Laufen', 5, 1, DATE '2018-07-20', 'Ein Lauf.', null, null);
-INSERT INTO Veranstaltung VALUES(seq_veranstaltung_id.NEXTVAL, 'Basketballspiel 2', 'Basketball', 5, 2, DATE '2018-08-08', 'Ein spannedes Spiel!', 6, 20);
+INSERT INTO Veranstaltung VALUES(seq_veranstaltung_id.NEXTVAL, 'Rote Nasen Lauf', 'RENNSPORT', 5, 1, DATE '2018-03-20', 'Ein Lauf.', null, null);
+INSERT INTO Veranstaltung VALUES(seq_veranstaltung_id.NEXTVAL, 'Basketballspiel', 'BASKETBALL', 5, 2, DATE '2018-11-14', 'Ein spannedes Spiel!', 6, 20);
+INSERT INTO Veranstaltung VALUES(seq_veranstaltung_id.NEXTVAL, 'Tauchen', 'EXTREMSPORT', 5, 1, DATE '2018-07-20', 'Ein Lauf.', null, null);
+INSERT INTO Veranstaltung VALUES(seq_veranstaltung_id.NEXTVAL, 'Ballspiel', 'BALLSPORT', 5, 2, DATE '2018-08-08', 'Ein spannedes Spiel!', 6, 20);
 
 INSERT INTO Teilnahme VALUES(1, 1, 1, 100);
 INSERT INTO Teilnahme VALUES(1, 2, 2, 150);
