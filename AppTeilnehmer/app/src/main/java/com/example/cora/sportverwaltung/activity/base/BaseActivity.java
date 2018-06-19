@@ -147,6 +147,7 @@ public class BaseActivity extends ExposingActivity implements NavigationView.OnN
     public void onSuccess(int statusCode, String content) {
         progDialog.dismiss();
         if (statusCode == 200) {
+            AsyncWebserviceTask.setAccessToken(null);
             startActivity(new Intent(this, LoginActivity.class));
         } else {
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();

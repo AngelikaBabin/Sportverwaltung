@@ -24,7 +24,7 @@ import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.GET
 public class ProfileActivity extends BaseActivity implements AsyncTaskHandler {
 
     // UI references
-    private TextView textView_name, textView_email, textView_level;
+    private TextView textView_name, textView_email, textView_level, textView_score;
     private ProgressBar progressBar_level;
 
     @Override
@@ -41,6 +41,7 @@ public class ProfileActivity extends BaseActivity implements AsyncTaskHandler {
         textView_name = findViewById(R.id.textView_name);
         textView_email = findViewById(R.id.textView_email);
         textView_level = findViewById(R.id.textView_level);
+        textView_score = findViewById(R.id.textView_score);
         progressBar_level = findViewById(R.id.progressBar_level);
     }
 
@@ -73,7 +74,8 @@ public class ProfileActivity extends BaseActivity implements AsyncTaskHandler {
                 Teilnehmer t = gson.fromJson(content, Teilnehmer.class);
                 textView_name.setText(t.getName());
                 textView_email.setText(t.getEmail());
-                textView_level.setText("Level " + t.getScore() / 100);
+                textView_level.setText("Level " + getLevel(t.getScore()));
+                textView_score.setText(t.getScore() + "pp");
                 progressBar_level.setProgress(t.getScore() % 100);
             } else {
                 super.onSuccess(statusCode, content);
@@ -82,6 +84,17 @@ public class ProfileActivity extends BaseActivity implements AsyncTaskHandler {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
+    }
+
+    private int getLevel(int score) {
+        int level = 1;
+        double threshold = 10;
+        while(score >= threshold){
+            level++;
+            score -= threshold;
+            threshold *= (double)1 + (double)level/(double)100;
+        }
+        return level;
     }
 
     @Override
