@@ -26,6 +26,7 @@ public class AsyncWebserviceTask extends AsyncTask<String, Void, AsyncTaskResult
     private AsyncTaskHandler handler;
     private HttpMethod method;
     private URL url;
+
     private static String accessToken = null;
 
     public AsyncWebserviceTask(HttpMethod method, String route, AsyncTaskHandler handler, Context context) throws MalformedURLException {
@@ -33,6 +34,10 @@ public class AsyncWebserviceTask extends AsyncTask<String, Void, AsyncTaskResult
         this.method = method;
         String ip = PreferenceManager.getDefaultSharedPreferences(context).getString("ip", "192.168.193.150");
         this.url = new URL(BASE_URL.replace("{{ip}}", ip) + route);
+    }
+
+    public static void setAccessToken(String accessToken) {
+        AsyncWebserviceTask.accessToken = accessToken;
     }
 
     @Override

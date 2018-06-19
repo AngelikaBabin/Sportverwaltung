@@ -98,7 +98,7 @@ public class RegisterActivity extends ExposingActivity implements AsyncTaskHandl
 
     public void onPreExecute() {
         progDialog = new ProgressDialog(this);
-        progDialog.setMessage("Logging in...");
+        progDialog.setMessage("Register...");
         progDialog.setIndeterminate(false);
         progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progDialog.setCancelable(false);
@@ -107,8 +107,19 @@ public class RegisterActivity extends ExposingActivity implements AsyncTaskHandl
 
     @Override
     public void onSuccess(int statusCode, String content) {
-        progDialog.dismiss();
-        startActivity(new Intent(RegisterActivity.this, VerifyActivity.class));
+        switch (statusCode) {
+            case 201:
+                progDialog.dismiss();
+                startActivity(new Intent(RegisterActivity.this, VerifyActivity.class));
+                finish();
+                break;
+
+            case 409:
+                Toast.makeText(this, "Account already exists", Toast.LENGTH_SHORT).show();
+
+            default:
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

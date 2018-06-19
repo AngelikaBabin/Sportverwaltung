@@ -9,6 +9,13 @@
     tools:context="com.example.cora.sportverwaltungveranstalter.activity.account.LoginActivity">
 
 
+    <Button
+        android:id="@+id/button_settings"
+        android:layout_width="52dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="@drawable/ic_settings" />
+
     <ImageView
         android:id="@+id/imageView_logo"
         android:layout_width="match_parent"
@@ -66,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/btn_rounded"
         android:text="@string/text_button_login" />
 
@@ -77,6 +84,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="10dp"
+        android:background="@drawable/btn_rounded"
         android:text="@string/text_not_registered_yet" />
 
 

@@ -29,7 +29,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.GET;
 
@@ -54,7 +57,8 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
     private OnFragmentInteractionListener interactionListener;
 
     // needed for android
-    public EventsFragment() { }
+    public EventsFragment() {
+    }
 
     public static EventsFragment newInstance(Filter filter) {
         EventsFragment fragment = new EventsFragment();
@@ -126,27 +130,26 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
         });
 
         editText_search.addTextChangedListener(new TextWatcher() {
-
             public void afterTextChanged(Editable s) {
             }
 
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.O)
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 ArrayList<Veranstaltung> filteredEvents = new ArrayList<>();
 
-                if(editText_search.getText().equals("") || editText_search.getText() == null)
-                {
+                if (editText_search.getText() == null || editText_search.getText().toString().equals("")) {
                     setAdapterData(events);
-                }
-                else
-                {
-                    for(Veranstaltung v : events)
-                    {
-                        if(v.getName().contains(editText_search.getText()))
-                        {
+                } else {
+                    for (Veranstaltung v : events) {
+                        Date eventDate = v.getDatetime();
+                        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+                        String strDate = dateFormatter.format(eventDate);
+                        if (v.getName().toLowerCase().contains(editText_search.getText().toString().toLowerCase())
+                                || v.getLocation().toLowerCase().contains(editText_search.getText().toString().toLowerCase())
+                                || strDate.toLowerCase().contains(editText_search.getText().toString().toLowerCase())) {
                             filteredEvents.add(v);
                         }
                     }
@@ -162,13 +165,6 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
         listView_events.setAdapter(adapter);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (interactionListener != null) {
-            interactionListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onDetach() {
         super.onDetach();
@@ -178,7 +174,7 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
     @Override
     public void onPreExecute() {
         progDialog = new ProgressDialog(this.getActivity());
-        progDialog.setMessage("Logging in...");
+        progDialog.setMessage("Loading events...");
         progDialog.setIndeterminate(false);
         progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progDialog.setCancelable(false);
@@ -188,16 +184,30 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
     @Override
     public void onSuccess(int statusCode, String content) {
         progDialog.dismiss();
-        Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
-        }.getType();
+        switch (statusCode) {
+            case 200:
+                Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
+                }.getType();
 
-        events = new Gson().fromJson(content, collectionType);
-        setAdapterData(events);
+                events = new Gson().fromJson(content, collectionType);
+                setAdapterData(events);
 
-        if (events.size() > 0) {
-            textView_message.setVisibility(View.INVISIBLE);
-        } else {
-            textView_message.setVisibility(View.VISIBLE);
+                if (events.size() > 0) {
+                    textView_message.setVisibility(View.GONE);
+                } else {
+                    listView_events.setVisibility(View.GONE);
+                }
+                break;
+
+            case 400:
+                Toast.makeText(getContext(), "Unknown filter", Toast.LENGTH_SHORT).show();
+
+            case 403:
+                Toast.makeText(getContext(), "Not logged in", Toast.LENGTH_SHORT).show();
+                break;
+
+            default:
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -207,37 +217,7 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
         Toast.makeText(this.getActivity(), err.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
-    //Testing without DatabaseConnection (uncomment)
-
-//    private ArrayList<Veranstaltung> createTestData()
-//    {
-//        ArrayList<Veranstaltung> testlist = new ArrayList<Veranstaltung>();
-//        Veranstaltung v;
-//
-//        v = new Veranstaltung(1,"Kristian", "1", null, new Location("Oslo", 10,10), Sportart.BALLSPORT, null, 30,40);
-//        testlist.add(v);
-//
-//        v = new Veranstaltung(2,"Cora", "Test2", null, new Location("Moskau", 10,10), Sportart.RENNSPORT, null, 30,40);
-//        testlist.add(v);
-//
-//        v = new Veranstaltung(3,"Nico", "Test3", null, new Location("Klagenfurt", 10,10), Sportart.RENNSPORT, null, 30,40);
-//        testlist.add(v);
-//
-//        return testlist;
-//    }
 }
