@@ -92,7 +92,6 @@ public class MyEventsActivity extends BaseActivity implements AsyncTaskHandler {
 
                 events = new Gson().fromJson(content, collectionType);
                 setAdapterData(events);
-                Toast.makeText(MyEventsActivity.this, "Show all Events", Toast.LENGTH_LONG).show();
                 break;
 
             case 403:
