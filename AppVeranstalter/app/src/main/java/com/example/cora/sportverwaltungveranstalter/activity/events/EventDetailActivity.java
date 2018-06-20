@@ -15,9 +15,14 @@ import android.widget.Toast;
 import com.example.cora.sportverwaltungveranstalter.R;
 import com.example.cora.sportverwaltungveranstalter.activity.base.ExposingActivity;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncTaskHandler;
+import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncWebserviceTask;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Sportart;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Veranstaltung;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import java.text.SimpleDateFormat;
+import static com.example.cora.sportverwaltungveranstalter.businesslogic.misc.HttpMethod.PUT;
 
 public class EventDetailActivity extends ExposingActivity implements AdapterView.OnItemSelectedListener, AsyncTaskHandler {
     EditText editText_title, editText_sports, editText_date, editText_location, editText_maxParticipators, editText_details;
@@ -34,8 +39,8 @@ public class EventDetailActivity extends ExposingActivity implements AdapterView
 
         initComponents();
         setComponents();
-        setNotEditable();
         registerEventhandlers();
+        setNotEditable();
     }
 
     private void initComponents() {
@@ -53,7 +58,8 @@ public class EventDetailActivity extends ExposingActivity implements AdapterView
     private void setComponents(){
         editText_title.setText(currentEvent.getName());
         editText_sports.setText(currentEvent.getSportart());
-        editText_date.setText(currentEvent.getDatetime().toString());
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+        editText_date.setText(dateFormatter.format(currentEvent.getDatetime()));
         editText_location.setText(currentEvent.getLocation());
         editText_maxParticipators.setText(String.valueOf(currentEvent.getMaxTeilnehmer()));
         editText_details.setText(currentEvent.getDetails());
@@ -114,8 +120,29 @@ public class EventDetailActivity extends ExposingActivity implements AdapterView
         fabuttonEdit.setOnClickListener(view -> setEditable());
 
         fabuttonSave.setOnClickListener(view -> {
-            setNotEditable();
-            //TODO: KRASCHL SAVE CHANGES TO DATABASE [EVENTUELL INFORM TEILNEHMER]
+            try {
+                setNotEditable();
+                SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+                currentEvent.setDatetime(dateFormatter.parse(editText_date.getText().toString()));
+                currentEvent.setDetails(editText_details.getText().toString());
+                currentEvent.setLocation(editText_location.getText().toString());
+                currentEvent.setName(editText_title.getText().toString());
+                currentEvent.setMaxTeilnehmer(Integer.parseInt(editText_maxParticipators.getText().toString()));
+
+                JsonObject json = new JsonObject();
+                json.addProperty("name", currentEvent.getName());
+                json.addProperty("details", currentEvent.getDetails());
+                json.addProperty("location", currentEvent.getLocation());
+                json.addProperty("maxTeilnehmer", currentEvent.getMaxTeilnehmer());
+                json.addProperty("datetime", dateFormatter.format(currentEvent.getDatetime()));
+                json.addProperty("sportart", spinner_sports.getSelectedItem().toString());
+
+                AsyncWebserviceTask task = new AsyncWebserviceTask(PUT, "events", this, getApplicationContext());
+                task.execute(null, json.toString());
+            }
+            catch (Exception ex){
+                ex.printStackTrace();
+            }
         });
     }
 

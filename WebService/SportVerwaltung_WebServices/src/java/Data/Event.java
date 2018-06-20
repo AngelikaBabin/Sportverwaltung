@@ -5,7 +5,10 @@
  */
 package Data;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -76,6 +79,11 @@ public class Event {
 
     public void setDatetime(LocalDate datetime) {
         this.datetime = datetime;
+    }
+    
+    public void setDatetime(String datetime) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        this.datetime = LocalDate.parse(datetime, dtf);
     }
 
     public String getDetails() {

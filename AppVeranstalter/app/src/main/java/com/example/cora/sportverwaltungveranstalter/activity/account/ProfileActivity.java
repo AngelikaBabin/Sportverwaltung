@@ -31,7 +31,7 @@ public class ProfileActivity extends BaseActivity implements AsyncTaskHandler {
         setContent(R.layout.activity_profile);
 
         initUIReferences();
-        //displayData();
+        displayData();
 
         Toast.makeText(this, preferences.getString("ip", ""), Toast.LENGTH_SHORT).show();
 

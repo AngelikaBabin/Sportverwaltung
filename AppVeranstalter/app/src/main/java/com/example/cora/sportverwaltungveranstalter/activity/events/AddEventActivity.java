@@ -14,7 +14,14 @@ import android.widget.Toast;
 import com.example.cora.sportverwaltungveranstalter.R;
 import com.example.cora.sportverwaltungveranstalter.activity.base.ExposingActivity;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncTaskHandler;
+import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncWebserviceTask;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Sportart;
+import com.google.gson.JsonObject;
+
+import java.text.SimpleDateFormat;
+
+import static com.example.cora.sportverwaltungveranstalter.businesslogic.misc.HttpMethod.POST;
+import static com.example.cora.sportverwaltungveranstalter.businesslogic.misc.HttpMethod.PUT;
 
 /**
  * @babin GUI
@@ -50,7 +57,22 @@ public class AddEventActivity extends ExposingActivity implements AdapterView.On
         button_cancel.setOnClickListener(view -> startActivity(new Intent(AddEventActivity.this, MyEventsActivity.class)));
 
         button_save.setOnClickListener(view -> {
-            //KRASCHL Speichern der eingegebenen Daten in die DB
+            try {
+                SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+                JsonObject json = new JsonObject();
+                json.addProperty("name", editText_title.getText().toString());
+                json.addProperty("details", editText_details.getText().toString());
+                json.addProperty("location", editText_location.getText().toString());
+                json.addProperty("maxTeilnehmer", editText_participators.getText().toString());
+                json.addProperty("datetime", editText_date.getText().toString());
+                json.addProperty("sportart", spinner_sports.getSelectedItem().toString());
+
+                AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "events", this, getApplicationContext());
+                task.execute(null, json.toString());
+            }
+            catch (Exception ex){
+                ex.printStackTrace();
+            }
         });
     }
 
@@ -85,7 +107,7 @@ public class AddEventActivity extends ExposingActivity implements AdapterView.On
         switch (statusCode) {
             case 201:
                 button_save.setEnabled(false);
-                Toast.makeText(AddEventActivity.this, "You are added a Event", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddEventActivity.this, "You have added a Event", Toast.LENGTH_LONG).show();
                 break;
 
             case 403:

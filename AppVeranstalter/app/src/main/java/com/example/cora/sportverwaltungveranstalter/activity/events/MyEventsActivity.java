@@ -10,28 +10,38 @@ import android.widget.Toast;
 import com.example.cora.sportverwaltungveranstalter.R;
 import com.example.cora.sportverwaltungveranstalter.activity.base.BaseActivity;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncTaskHandler;
+import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncWebserviceTask;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Sportart;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Veranstaltung;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Collection;
 
+import static com.example.cora.sportverwaltungveranstalter.businesslogic.misc.HttpMethod.GET;
 
-public class MyEventsActivity extends BaseActivity implements AsyncTaskHandler{
+public class MyEventsActivity extends BaseActivity implements AsyncTaskHandler {
     FloatingActionButton faButton_addEvent;
     ListView listView_events;
+    private ArrayList<Veranstaltung> events;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContent(R.layout.activity_my_events);
+        try {
+            super.onCreate(savedInstanceState);
+            setContent(R.layout.activity_my_events);
 
-        initComponents();
-        registerEventhandlers();
-        getDataFromDB(); //TODO: Kraschl
+            initComponents();
+            registerEventhandlers();
+
+            AsyncWebserviceTask task = new AsyncWebserviceTask(GET, "events", this, this.getApplicationContext());
+            task.execute("filter=VERANSTALTER");
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     public void initComponents(){
@@ -49,7 +59,6 @@ public class MyEventsActivity extends BaseActivity implements AsyncTaskHandler{
             Veranstaltung event = (Veranstaltung) listView_events.getItemAtPosition(i);
             Gson gson = new Gson();
             String json = gson.toJson(event, Veranstaltung.class);
-            Toast.makeText(MyEventsActivity.this, json.toString(), Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(MyEventsActivity.this, EventDetailActivity.class);
             intent.putExtra("event", json);
@@ -62,15 +71,6 @@ public class MyEventsActivity extends BaseActivity implements AsyncTaskHandler{
         listView_events.setAdapter(adapter);
     }
 
-
-    private void getDataFromDB() {
-        //TODO: mit der Mehtode setAdapterData die Daten in die Listview spielen
-        //TODO: Testdaten löschen
-        Veranstaltung vertest = new Veranstaltung(1, "test", "hoffe es geht", null, "London", Sportart.BASKETBALL.toString(), Calendar.getInstance().getTime(), 2, 1);
-        ArrayList<Veranstaltung> test = new ArrayList<Veranstaltung>();
-        test.add(vertest);
-        setAdapterData(test);
-    }
 
     @Override
     public void onPreExecute() {
@@ -86,7 +86,12 @@ public class MyEventsActivity extends BaseActivity implements AsyncTaskHandler{
     public void onSuccess(int statusCode, String content) {
         progDialog.dismiss();
         switch (statusCode) {
-            case 201:
+            case 200:
+                Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
+                }.getType();
+
+                events = new Gson().fromJson(content, collectionType);
+                setAdapterData(events);
                 Toast.makeText(MyEventsActivity.this, "Show all Events", Toast.LENGTH_LONG).show();
                 break;
 
@@ -104,6 +109,4 @@ public class MyEventsActivity extends BaseActivity implements AsyncTaskHandler{
         progDialog.cancel();
         Toast.makeText(this, err.getMessage(), Toast.LENGTH_SHORT).show();
     }
-
-
 }

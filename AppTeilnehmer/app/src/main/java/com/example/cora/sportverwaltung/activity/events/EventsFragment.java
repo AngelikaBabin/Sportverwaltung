@@ -48,7 +48,7 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
     private ProgressDialog progDialog;
     private ListView listView_events;
     private EditText editText_search;
-    private TextView textView_message;
+    private TextView textView_message, textView_title;
     private View view;
 
     private Filter filter;
@@ -102,6 +102,7 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
         listView_events = view.findViewById(R.id.listView_events);
         editText_search = view.findViewById(R.id.editText_search);
         textView_message = view.findViewById(R.id.textView_message);
+        textView_title = view.findViewById(R.id.textView_title);
     }
 
     private void registerEventhandlers() {
@@ -113,12 +114,15 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
                 switch (filter) {
                     case ALL:
                         intent = new Intent(getActivity(), InfoAllEventsActivity.class);
+                        //getActivity().setTitle("All Events");
                         break;
                     case CURRENT:
                         intent = new Intent(getActivity(), InfoMyEventsActivity.class);
+                        //getActivity().setTitle("Current Events");
                         break;
                     case PAST:
                         intent = new Intent(getActivity(), InfoPastEventsActivity.class);
+                        //getActivity().setTitle("Past Events");
                         break;
                 }
                 Veranstaltung v = (Veranstaltung) listView_events.getItemAtPosition(position);

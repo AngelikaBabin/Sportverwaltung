@@ -7,5 +7,6 @@ public enum Sportart {
     KLETTERSPORT,
     SCHWIMMSPORT,
     EXTREMSPORT,
-    BASKETBALL
+    BASKETBALL,
+    LAUFEN
 }

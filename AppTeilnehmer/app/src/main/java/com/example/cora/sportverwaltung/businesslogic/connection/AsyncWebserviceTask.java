@@ -60,8 +60,12 @@ public class AsyncWebserviceTask extends AsyncTask<String, Void, AsyncTaskResult
             }
 
             // post json
-            if (jsonString != null && method == HttpMethod.POST) {
+            if (jsonString != null && method == HttpMethod.POST){
                 write(connection, method, jsonString);
+            }
+
+            if (jsonString == null && method == HttpMethod.DELETE) {
+                write(connection, method, "");
             }
 
             int statusCode = connection.getResponseCode();
