@@ -89,10 +89,8 @@ public class InfoMyEventsActivity extends ExposingActivity implements AsyncTaskH
     @Override
     public void onSuccess(int statusCode, String content) {
         progDialog.dismiss();
-
         button_logout.setEnabled(false);
         Toast.makeText(InfoMyEventsActivity.this, "You are no longer participating", Toast.LENGTH_LONG).show();
-
         switch (statusCode) {
             case 200:
                 button_logout.setEnabled(false);
