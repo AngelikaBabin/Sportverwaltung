@@ -39,6 +39,23 @@ public class EventPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    public CharSequence getPageTitle(int position) {
+        String title = "";
+        switch (position) {
+            case 0:
+                title = "All Events";
+                break;
+            case 1:
+                title = "Current Events";
+                break;
+            case 2:
+                title = "Past Events";
+                break;
+        }
+        return title;
+    }
+
+    @Override
     public int getCount() {
         return Filter.values().length;
     }

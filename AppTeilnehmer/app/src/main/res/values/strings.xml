@@ -44,7 +44,7 @@
 
     <!-- GUI -->
 
-    <string name="text_abmelden">Abandon</string>
+    <string name="text_abmelden">Abmelden</string>
     <string name="text_button_teilnehmen">Participate</string>
 
     <string name="text_button_register">Register</string>

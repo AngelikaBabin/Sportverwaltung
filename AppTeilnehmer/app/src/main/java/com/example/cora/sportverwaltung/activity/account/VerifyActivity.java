@@ -23,6 +23,7 @@ public class VerifyActivity extends AppCompatActivity {
     private void initEventhandlers() {
         findViewById(R.id.button_login).setOnClickListener(view -> {
             startActivity(new Intent(VerifyActivity.this, LoginActivity.class));
+            finish();
         });
     }
 }

@@ -36,7 +36,7 @@
             android:name=".activity.events.EventsSwipeActivity"
             android:label="@string/title_activity_events"
             android:theme="@style/AppTheme" />
-        <activity android:name=".activity.events.InfoAllEventsActivity" />
+        <activity android:name=".activity.events.InfoAllEventsActivity"/>
         <activity android:name=".activity.events.InfoMyEventsActivity" />
         <activity android:name=".activity.events.InfoPastEventsActivity" />
 

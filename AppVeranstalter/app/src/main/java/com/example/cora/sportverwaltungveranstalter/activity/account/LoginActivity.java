@@ -80,9 +80,26 @@ public class LoginActivity extends ExposingActivity implements AsyncTaskHandler 
 
     @Override
     public void onSuccess(int statusCode, String content) {
+        switch (statusCode) {
+            case 202:
+                preferences.edit().putString("EMAIL", editText_email.getText().toString()).apply();
+                startActivity(new Intent(this, ProfileActivity.class));
+                finish();
+                break;
+
+            case 403:
+                Toast.makeText(this, "Wrong Username or password", Toast.LENGTH_SHORT).show();
+                break;
+
+            case 404:
+                Toast.makeText(this, "Could't connect", Toast.LENGTH_SHORT).show();
+                break;
+
+            default:
+                Toast.makeText(this, "Server error", Toast.LENGTH_SHORT).show();
+        }
+
         progDialog.dismiss();
-        preferences.edit().putString("EMAIL", editText_email.getText().toString()).apply();
-        startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
     }
 
     @Override

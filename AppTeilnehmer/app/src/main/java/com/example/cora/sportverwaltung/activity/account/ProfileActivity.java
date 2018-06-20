@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,10 +21,11 @@ import static com.example.cora.sportverwaltung.businesslogic.misc.HttpMethod.GET
  * @kumnig gui design
  */
 
-public class ProfileActivity extends BaseActivity implements AsyncTaskHandler{
+public class ProfileActivity extends BaseActivity implements AsyncTaskHandler {
 
     // UI references
-    private TextView textView_name, textView_email, textView_score;
+    private TextView textView_name, textView_email, textView_level, textView_score;
+    private ProgressBar progressBar_level;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +34,15 @@ public class ProfileActivity extends BaseActivity implements AsyncTaskHandler{
 
         initUIReferences();
         displayData();
-
-        Toast.makeText(this, preferences.getString("ip", ""), Toast.LENGTH_SHORT).show();
-
     }
 
     private void initUIReferences() {
         // view references
         textView_name = findViewById(R.id.textView_name);
         textView_email = findViewById(R.id.textView_email);
+        textView_level = findViewById(R.id.textView_level);
         textView_score = findViewById(R.id.textView_score);
+        progressBar_level = findViewById(R.id.progressBar_level);
     }
 
     private void displayData() {
@@ -65,14 +66,35 @@ public class ProfileActivity extends BaseActivity implements AsyncTaskHandler{
         progDialog.show();
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onSuccess(int statusCode, String content) {
         progDialog.dismiss();
-        Teilnehmer t = gson.fromJson(content, Teilnehmer.class);
-        textView_name.setText(t.getName());
-        textView_email.setText(t.getEmail());
-        textView_score.setText(t.getScore()+ " points");
+        if (statusCode == 200) {
+            if (content != null && content != "") {
+                Teilnehmer t = gson.fromJson(content, Teilnehmer.class);
+                textView_name.setText(t.getName());
+                textView_email.setText(t.getEmail());
+                textView_level.setText("Level " + getLevel(t.getScore()));
+                textView_score.setText(t.getScore() + "pp");
+                progressBar_level.setProgress(t.getScore() % 100);
+            } else {
+                super.onSuccess(statusCode, content);
+            }
+        } else {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
+    }
+
+    private int getLevel(int score) {
+        int level = 1;
+        double threshold = 10;
+        while(score >= threshold){
+            level++;
+            score -= threshold;
+            threshold *= (double)1 + (double)level/(double)100;
+        }
+        return level;
     }
 
     @Override

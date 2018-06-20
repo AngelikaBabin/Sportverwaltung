@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_dark"
+    android:background="@color/background_main"
     tools:context=".activity.events.EventDetailActivity"
     android:orientation="vertical">
 
@@ -15,7 +15,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/show_rounded"
+        android:background="@color/background_main"
         android:orientation="vertical">
 
 
@@ -29,17 +29,25 @@
             android:textAlignment="textStart"
             android:textColor="#000000"
             android:textSize="30sp"
-            android:visibility="visible" />
+            android:visibility="visible"
+            android:background="@drawable/input_rounded"
+            android:drawableStart="@drawable/ic_title"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
 
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="visible"
+            android:background="@drawable/input_rounded"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp">
 
             <EditText
                 android:id="@+id/editText_sports"
-                android:layout_width="157dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="0"
                 android:layout_row="0"
@@ -74,7 +82,11 @@
             android:hint="@string/text_editText_date"
             android:inputType="date"
             android:textAlignment="textStart"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:background="@drawable/input_rounded"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
 
         <EditText
             android:id="@+id/editText_location"
@@ -84,7 +96,11 @@
             android:hint="@string/text_editText_location"
             android:inputType="textShortMessage"
             android:textAlignment="textStart"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:background="@drawable/input_rounded"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
 
         <EditText
             android:id="@+id/editText_maxParticipators"
@@ -95,7 +111,12 @@
             android:hint="@string/text_editText_participators"
             android:inputType="number"
             android:textAlignment="textStart"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:background="@drawable/input_rounded"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            />
 
         <EditText
             android:id="@+id/editText_details"
@@ -105,7 +126,11 @@
             android:hint="@string/text_editText_details"
             android:inputType="textMultiLine"
             android:textAlignment="textStart"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:background="@drawable/show_rounded"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
