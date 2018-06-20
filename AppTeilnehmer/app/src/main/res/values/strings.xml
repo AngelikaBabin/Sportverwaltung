@@ -1,6 +1,6 @@
 <resources>
     <!-- General -->
-    <string name="app_name">SportVerwaltung</string>
+    <string name="app_name">SportConnect</string>
 
     <string name="action_settings">Settings</string>
 
@@ -91,7 +91,7 @@
         <item>Kristian</item>
     </string-array>
 
-    <string name="title_activity_events">EventsActivity</string>
+    <string name="title_activity_events">Events</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_sport_event_manager_base">SportEventManagerBaseActivity</string>

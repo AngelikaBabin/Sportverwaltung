@@ -28,4 +28,9 @@ public class EventsSwipeActivity extends BaseActivity {
         ViewPager viewPager = findViewById(container);
         viewPager.setAdapter(eventPagerAdapter);
     }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        super.setTitle(title);
+    }
 }

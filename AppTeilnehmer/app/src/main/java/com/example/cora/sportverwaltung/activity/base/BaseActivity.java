@@ -36,7 +36,7 @@ public class BaseActivity extends ExposingActivity implements NavigationView.OnN
     // UI references
     private FrameLayout contentContainer;
     private DrawerLayout drawer;
-    private Toolbar toolbar;
+    protected Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
