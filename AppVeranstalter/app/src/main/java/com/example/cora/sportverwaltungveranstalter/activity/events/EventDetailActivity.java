@@ -1,10 +1,6 @@
 package com.example.cora.sportverwaltungveranstalter.activity.events;
 
 import android.app.ProgressDialog;
-<<<<<<< HEAD
-import android.content.Intent;
-=======
->>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.text.method.KeyListener;
@@ -19,25 +15,15 @@ import android.widget.Toast;
 import com.example.cora.sportverwaltungveranstalter.R;
 import com.example.cora.sportverwaltungveranstalter.activity.base.ExposingActivity;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncTaskHandler;
-<<<<<<< HEAD
 import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncWebserviceTask;
-=======
->>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Sportart;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Veranstaltung;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-<<<<<<< HEAD
-import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
-
-import static com.example.cora.sportverwaltungveranstalter.businesslogic.misc.HttpMethod.GET;
 import static com.example.cora.sportverwaltungveranstalter.businesslogic.misc.HttpMethod.PUT;
 
-=======
->>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
 public class EventDetailActivity extends ExposingActivity implements AdapterView.OnItemSelectedListener, AsyncTaskHandler {
     EditText editText_title, editText_sports, editText_date, editText_location, editText_maxParticipators, editText_details;
     FloatingActionButton fabuttonEdit;
@@ -190,32 +176,16 @@ public class EventDetailActivity extends ExposingActivity implements AdapterView
 
     @Override
     public void onPreExecute() {
-<<<<<<< HEAD
-        progDialog = new ProgressDialog(EventDetailActivity.this);
-        progDialog.setMessage("Logging in...");
-        progDialog.setIndeterminate(false);
-        progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progDialog.setCancelable(true);
-=======
         progDialog = new ProgressDialog(this);
         progDialog.setMessage("Loading Event details");
         progDialog.setIndeterminate(false);
         progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progDialog.setCancelable(false);
->>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
         progDialog.show();
     }
 
     @Override
     public void onSuccess(int statusCode, String content) {
-<<<<<<< HEAD
-        try{
-            progDialog.dismiss();
-            Toast.makeText(this, "Data changed!", Toast.LENGTH_LONG).show();
-        } catch(Exception ex){
-            ex.printStackTrace();
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-=======
         progDialog.dismiss();
         switch (statusCode) {
             case 201:
@@ -229,23 +199,12 @@ public class EventDetailActivity extends ExposingActivity implements AdapterView
 
             default:
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
->>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
         }
     }
 
     @Override
     public void onError(Error err) {
-<<<<<<< HEAD
-        try{
-            progDialog.cancel();
-            Toast.makeText(this, "Something went wrong!", Toast.LENGTH_LONG).show();
-        } catch(Exception ex){
-            ex.printStackTrace();
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-=======
         progDialog.cancel();
         Toast.makeText(this, err.getMessage(), Toast.LENGTH_SHORT).show();
->>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
     }
 }
