@@ -15,6 +15,7 @@ import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.Asy
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Veranstalter;
 
 import static com.example.cora.sportverwaltungveranstalter.businesslogic.misc.HttpMethod.GET;
+import static java.lang.Enum.valueOf;
 
 /**
  * @babin
@@ -63,13 +64,27 @@ public class ProfileActivity extends BaseActivity implements AsyncTaskHandler {
         progDialog.show();
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onSuccess(int statusCode, String content) {
         progDialog.dismiss();
+<<<<<<< HEAD
         Veranstalter t = gson.fromJson(content, Veranstalter.class);
         textView_name.setText(t.getName());
         textView_email.setText(t.getEmail());
+=======
+        if (statusCode == 200) {
+            if (content != null && content != "") {
+                Veranstalter v = gson.fromJson(content, Veranstalter.class);
+                textView_name.setText(v.getName());
+                textView_email.setText(v.getEmail());
+            } else {
+                super.onSuccess(statusCode, content);
+            }
+        } else {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
+>>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
     }
 
     @Override
