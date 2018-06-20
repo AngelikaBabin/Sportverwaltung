@@ -67,11 +67,6 @@ public class ProfileActivity extends BaseActivity implements AsyncTaskHandler {
     @Override
     public void onSuccess(int statusCode, String content) {
         progDialog.dismiss();
-<<<<<<< HEAD
-        Veranstalter t = gson.fromJson(content, Veranstalter.class);
-        textView_name.setText(t.getName());
-        textView_email.setText(t.getEmail());
-=======
         if (statusCode == 200) {
             if (content != null && content != "") {
                 Veranstalter v = gson.fromJson(content, Veranstalter.class);
@@ -84,7 +79,6 @@ public class ProfileActivity extends BaseActivity implements AsyncTaskHandler {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
->>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
     }
 
     @Override

@@ -14,10 +14,7 @@ import android.widget.Toast;
 import com.example.cora.sportverwaltungveranstalter.R;
 import com.example.cora.sportverwaltungveranstalter.activity.base.ExposingActivity;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncTaskHandler;
-<<<<<<< HEAD
 import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncWebserviceTask;
-=======
->>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Sportart;
 import com.google.gson.JsonObject;
 
@@ -96,37 +93,21 @@ public class AddEventActivity extends ExposingActivity implements AdapterView.On
 
     @Override
     public void onPreExecute() {
-<<<<<<< HEAD
-        progDialog = new ProgressDialog(AddEventActivity.this);
-        progDialog.setMessage("Logging in...");
-        progDialog.setIndeterminate(false);
-        progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progDialog.setCancelable(true);
-=======
         progDialog = new ProgressDialog(this);
         progDialog.setMessage("Adding new Event....");
         progDialog.setIndeterminate(false);
         progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progDialog.setCancelable(false);
->>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
         progDialog.show();
     }
 
     @Override
     public void onSuccess(int statusCode, String content) {
-<<<<<<< HEAD
-        try{
-            progDialog.dismiss();
-            Toast.makeText(this, "Data changed!", Toast.LENGTH_LONG).show();
-        } catch(Exception ex){
-            ex.printStackTrace();
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-=======
         progDialog.dismiss();
         switch (statusCode) {
             case 201:
                 button_save.setEnabled(false);
-                Toast.makeText(AddEventActivity.this, "You are added a Event", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddEventActivity.this, "You have added a Event", Toast.LENGTH_LONG).show();
                 break;
 
             case 403:
@@ -135,23 +116,12 @@ public class AddEventActivity extends ExposingActivity implements AdapterView.On
 
             default:
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
->>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
         }
     }
 
     @Override
     public void onError(Error err) {
-<<<<<<< HEAD
-        try{
-            progDialog.cancel();
-            Toast.makeText(this, "Something went wrong!", Toast.LENGTH_LONG).show();
-        } catch(Exception ex){
-            ex.printStackTrace();
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-=======
         progDialog.cancel();
         Toast.makeText(this, err.getMessage(), Toast.LENGTH_SHORT).show();
->>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
     }
 }
