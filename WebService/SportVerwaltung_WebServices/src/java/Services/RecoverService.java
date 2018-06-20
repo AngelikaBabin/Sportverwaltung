@@ -62,7 +62,7 @@ public class RecoverService {
             a = db.getAccountByEmail(a);
             mail.sendMail(a.getEmail(), "Recovery Email!", 
                     "Passwort: " + a.getPassword());
-            r = Response.status(Response.Status.CREATED).header("Token", token).build();
+            r = Response.ok().header("Token", token).build();
             System.out.println("Sucess");
         }
         catch(AccountNotFoundException ex){

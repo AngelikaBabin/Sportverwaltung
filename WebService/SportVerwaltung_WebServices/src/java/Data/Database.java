@@ -139,8 +139,8 @@ public class Database {
         ResultSet rs;
         Teilnehmer t = null;
         conn = createConnection();
-        String select = "SELECT * FROM account join teilnehmer \n"
-                + "on teilnehmer.id_account = account.id\n"
+        String select = "SELECT * FROM account join teilnehmer "
+                + "on teilnehmer.id_account = account.id "
                 + "WHERE account.email = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
         stmt.setString(1, a.getEmail());
@@ -150,6 +150,23 @@ public class Database {
         }
         conn.close();
         return t;
+    }
+    
+    public Account getVeranstalter(Account a) throws Exception {
+        ResultSet rs;
+        Account res = null;
+        conn = createConnection();
+        String select = "SELECT * FROM account join veranstalter "
+                + "on veranstalter.id_account = account.id "
+                + "WHERE account.email = ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setString(1, a.getEmail());
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            res = new Account(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password"));
+        }
+        conn.close();
+        return res;
     }
 
     public void updateAccount(Account a) throws Exception {
@@ -271,6 +288,9 @@ public class Database {
             case ALL:
                 collEvents = getFutureEvents();
                 break;
+            case VERANSTALTER:
+                collEvents = getEventsOfVeranstalter(a);
+                break;
             default:
                 throw new FilterException("Unknown filter");
         }
@@ -305,6 +325,7 @@ public class Database {
         stmt.setString(6, e.getSportart());
         stmt.setInt(7, e.getId());
         stmt.executeUpdate();
+        conn.close();
     }
 
     /**
@@ -336,12 +357,12 @@ public class Database {
         stmt.setString(1, e.getName());
         stmt.setString(2, e.getSportart());
         stmt.setInt(3, e.getVeranstalter().getId());
-        stmt.setInt(4, 0); //location
+        stmt.setString(4, e.getLocation());
         stmt.setDate(5, Date.valueOf(e.getDatetime()));
         stmt.setString(6, e.getDetails());
         stmt.setInt(7, 0);
         stmt.setInt(8, e.getMaxTeilnehmer());
-        stmt.executeUpdate();
+        stmt.execute();
         conn.close();
     }
 
@@ -495,5 +516,24 @@ order by teilnahme.score
         stmt.setInt(1, e.getId());
         stmt.executeUpdate();
         conn.close();
+    }
+    
+    private ArrayList<Event> getEventsOfVeranstalter(Account a) throws Exception{
+        ArrayList<Event> collVeranstaltung = new ArrayList<>();
+
+        conn = createConnection();
+        String select = "SELECT " + EVENT_COLUMNS + " FROM veranstaltung inner join account " +
+                " on veranstaltung.id_veranstalter = account.id " +
+                " inner join veranstalter " +
+                " on veranstalter.id_account = account.id"
+                + " where account.id = ?";
+        PreparedStatement stmt = conn.prepareStatement(select);
+        stmt.setInt(1, a.getId());
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            collVeranstaltung.add(createEventFromResultSet(rs));
+        }
+        conn.close();
+        return collVeranstaltung;
     }
 }

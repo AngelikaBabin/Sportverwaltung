@@ -10,28 +10,48 @@ import android.widget.Toast;
 import com.example.cora.sportverwaltungveranstalter.R;
 import com.example.cora.sportverwaltungveranstalter.activity.base.BaseActivity;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncTaskHandler;
+<<<<<<< HEAD
+import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncWebserviceTask;
+=======
+>>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Sportart;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Veranstaltung;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static com.example.cora.sportverwaltungveranstalter.businesslogic.misc.HttpMethod.GET;
 
+<<<<<<< HEAD
+
+public class MyEventsActivity extends BaseActivity implements AsyncTaskHandler {
+=======
 public class MyEventsActivity extends BaseActivity implements AsyncTaskHandler{
+>>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
     FloatingActionButton faButton_addEvent;
     ListView listView_events;
+    private ArrayList<Veranstaltung> events;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContent(R.layout.activity_my_events);
+        try {
+            super.onCreate(savedInstanceState);
+            setContent(R.layout.activity_my_events);
 
-        initComponents();
-        registerEventhandlers();
-        getDataFromDB(); //TODO: Kraschl
+            initComponents();
+            registerEventhandlers();
+
+            AsyncWebserviceTask task = new AsyncWebserviceTask(GET, "events", this, this.getApplicationContext());
+            task.execute("filter=VERANSTALTER");
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     public void initComponents(){
@@ -49,7 +69,6 @@ public class MyEventsActivity extends BaseActivity implements AsyncTaskHandler{
             Veranstaltung event = (Veranstaltung) listView_events.getItemAtPosition(i);
             Gson gson = new Gson();
             String json = gson.toJson(event, Veranstaltung.class);
-            Toast.makeText(MyEventsActivity.this, json.toString(), Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(MyEventsActivity.this, EventDetailActivity.class);
             intent.putExtra("event", json);
@@ -62,17 +81,34 @@ public class MyEventsActivity extends BaseActivity implements AsyncTaskHandler{
         listView_events.setAdapter(adapter);
     }
 
-
-    private void getDataFromDB() {
-        //TODO: mit der Mehtode setAdapterData die Daten in die Listview spielen
-        //TODO: Testdaten löschen
-        Veranstaltung vertest = new Veranstaltung(1, "test", "hoffe es geht", null, "London", Sportart.BASKETBALL.toString(), Calendar.getInstance().getTime(), 2, 1);
-        ArrayList<Veranstaltung> test = new ArrayList<Veranstaltung>();
-        test.add(vertest);
-        setAdapterData(test);
+    @Override
+    public void onPreExecute() {
+        progDialog = new ProgressDialog(this);
+        progDialog.setMessage("Getting events...");
+        progDialog.setIndeterminate(false);
+        progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progDialog.setCancelable(false);
+        progDialog.show();
     }
 
     @Override
+    public void onSuccess(int statusCode, String content) {
+        progDialog.dismiss();
+
+        Type collectionType = new TypeToken<ArrayList<Veranstaltung>>() {
+        }.getType();
+
+        events = new Gson().fromJson(content, collectionType);
+        setAdapterData(events);
+        /*
+        button_participate.setEnabled(false);
+        Toast.makeText(InfoAllEventsActivity.this, "You are now participating", Toast.LENGTH_LONG).show();
+        */
+    }
+
+    @Override
+<<<<<<< HEAD
+=======
     public void onPreExecute() {
         progDialog = new ProgressDialog(this);
         progDialog.setMessage("Loading Events...");
@@ -100,10 +136,14 @@ public class MyEventsActivity extends BaseActivity implements AsyncTaskHandler{
     }
 
     @Override
+>>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
     public void onError(Error err) {
         progDialog.cancel();
         Toast.makeText(this, err.getMessage(), Toast.LENGTH_SHORT).show();
     }
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
 }

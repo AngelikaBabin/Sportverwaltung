@@ -14,7 +14,17 @@ import android.widget.Toast;
 import com.example.cora.sportverwaltungveranstalter.R;
 import com.example.cora.sportverwaltungveranstalter.activity.base.ExposingActivity;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncTaskHandler;
+<<<<<<< HEAD
+import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncWebserviceTask;
+=======
+>>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Sportart;
+import com.google.gson.JsonObject;
+
+import java.text.SimpleDateFormat;
+
+import static com.example.cora.sportverwaltungveranstalter.businesslogic.misc.HttpMethod.POST;
+import static com.example.cora.sportverwaltungveranstalter.businesslogic.misc.HttpMethod.PUT;
 
 /**
  * @babin GUI
@@ -50,7 +60,22 @@ public class AddEventActivity extends ExposingActivity implements AdapterView.On
         button_cancel.setOnClickListener(view -> startActivity(new Intent(AddEventActivity.this, MyEventsActivity.class)));
 
         button_save.setOnClickListener(view -> {
-            //KRASCHL Speichern der eingegebenen Daten in die DB
+            try {
+                SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+                JsonObject json = new JsonObject();
+                json.addProperty("name", editText_title.getText().toString());
+                json.addProperty("details", editText_details.getText().toString());
+                json.addProperty("location", editText_location.getText().toString());
+                json.addProperty("maxTeilnehmer", editText_participators.getText().toString());
+                json.addProperty("datetime", editText_date.getText().toString());
+                json.addProperty("sportart", spinner_sports.getSelectedItem().toString());
+
+                AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "events", this, getApplicationContext());
+                task.execute(null, json.toString());
+            }
+            catch (Exception ex){
+                ex.printStackTrace();
+            }
         });
     }
 
@@ -71,16 +96,32 @@ public class AddEventActivity extends ExposingActivity implements AdapterView.On
 
     @Override
     public void onPreExecute() {
+<<<<<<< HEAD
+        progDialog = new ProgressDialog(AddEventActivity.this);
+        progDialog.setMessage("Logging in...");
+        progDialog.setIndeterminate(false);
+        progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progDialog.setCancelable(true);
+=======
         progDialog = new ProgressDialog(this);
         progDialog.setMessage("Adding new Event....");
         progDialog.setIndeterminate(false);
         progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progDialog.setCancelable(false);
+>>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
         progDialog.show();
     }
 
     @Override
     public void onSuccess(int statusCode, String content) {
+<<<<<<< HEAD
+        try{
+            progDialog.dismiss();
+            Toast.makeText(this, "Data changed!", Toast.LENGTH_LONG).show();
+        } catch(Exception ex){
+            ex.printStackTrace();
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+=======
         progDialog.dismiss();
         switch (statusCode) {
             case 201:
@@ -94,12 +135,23 @@ public class AddEventActivity extends ExposingActivity implements AdapterView.On
 
             default:
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+>>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
         }
     }
 
     @Override
     public void onError(Error err) {
+<<<<<<< HEAD
+        try{
+            progDialog.cancel();
+            Toast.makeText(this, "Something went wrong!", Toast.LENGTH_LONG).show();
+        } catch(Exception ex){
+            ex.printStackTrace();
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+=======
         progDialog.cancel();
         Toast.makeText(this, err.getMessage(), Toast.LENGTH_SHORT).show();
+>>>>>>> 7ff8864f16ef6f4da62b29cbcb3e09ffadf5c3f7
     }
 }
