@@ -102,7 +102,7 @@ public class EventsFragment extends Fragment implements AsyncTaskHandler {
         listView_events = view.findViewById(R.id.listView_events);
         editText_search = view.findViewById(R.id.editText_search);
         textView_message = view.findViewById(R.id.textView_message);
-        textView_title = view.findViewById(R.id.textView_title);
+        //textView_title = view.findViewById(R.id.textView_title);
     }
 
     private void registerEventhandlers() {
