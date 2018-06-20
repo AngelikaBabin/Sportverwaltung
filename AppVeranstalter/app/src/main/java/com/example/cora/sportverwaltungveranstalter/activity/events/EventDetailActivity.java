@@ -26,6 +26,7 @@ import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.Asy
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Sportart;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Veranstaltung;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 <<<<<<< HEAD
 import org.json.JSONObject;
