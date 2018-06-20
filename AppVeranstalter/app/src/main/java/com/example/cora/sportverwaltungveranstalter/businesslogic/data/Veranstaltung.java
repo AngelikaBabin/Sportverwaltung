@@ -20,7 +20,7 @@ public class Veranstaltung {
     private String sportart;
     private Date datetime;
     private int maxTeilnehmer;
-    private int countTeilnehmer;
+    private transient int countTeilnehmer;
 
     public Veranstaltung(int id, String name, String details, Veranstalter veranstalter, String location, String sportart, Date datetime, int maxTeilnehmer, int countTeilnehmer) {
         setName(name);

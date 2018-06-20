@@ -1,5 +1,6 @@
 package com.example.cora.sportverwaltungveranstalter.activity.events;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,12 +13,20 @@ import android.widget.Toast;
 
 import com.example.cora.sportverwaltungveranstalter.R;
 import com.example.cora.sportverwaltungveranstalter.activity.base.ExposingActivity;
+import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncTaskHandler;
+import com.example.cora.sportverwaltungveranstalter.businesslogic.connection.AsyncWebserviceTask;
 import com.example.cora.sportverwaltungveranstalter.businesslogic.data.Sportart;
+import com.google.gson.JsonObject;
+
+import java.text.SimpleDateFormat;
+
+import static com.example.cora.sportverwaltungveranstalter.businesslogic.misc.HttpMethod.POST;
+import static com.example.cora.sportverwaltungveranstalter.businesslogic.misc.HttpMethod.PUT;
 
 /**
  * @babin GUI
  */
-public class AddEventActivity extends ExposingActivity implements AdapterView.OnItemSelectedListener {
+public class AddEventActivity extends ExposingActivity implements AdapterView.OnItemSelectedListener, AsyncTaskHandler{
     EditText editText_title, editText_date, editText_location, editText_participators, editText_details;
     Spinner spinner_sports;
     Button button_save;
@@ -48,7 +57,22 @@ public class AddEventActivity extends ExposingActivity implements AdapterView.On
         button_cancel.setOnClickListener(view -> startActivity(new Intent(AddEventActivity.this, MyEventsActivity.class)));
 
         button_save.setOnClickListener(view -> {
-            //KRASCHL Speichern der eingegebenen Daten in die DB
+            try {
+                SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+                JsonObject json = new JsonObject();
+                json.addProperty("name", editText_title.getText().toString());
+                json.addProperty("details", editText_details.getText().toString());
+                json.addProperty("location", editText_location.getText().toString());
+                json.addProperty("maxTeilnehmer", editText_participators.getText().toString());
+                json.addProperty("datetime", editText_date.getText().toString());
+                json.addProperty("sportart", spinner_sports.getSelectedItem().toString());
+
+                AsyncWebserviceTask task = new AsyncWebserviceTask(POST, "events", this, getApplicationContext());
+                task.execute(null, json.toString());
+            }
+            catch (Exception ex){
+                ex.printStackTrace();
+            }
         });
     }
 
@@ -65,5 +89,37 @@ public class AddEventActivity extends ExposingActivity implements AdapterView.On
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public void onPreExecute() {
+        progDialog = new ProgressDialog(AddEventActivity.this);
+        progDialog.setMessage("Logging in...");
+        progDialog.setIndeterminate(false);
+        progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progDialog.setCancelable(true);
+        progDialog.show();
+    }
+
+    @Override
+    public void onSuccess(int statusCode, String content) {
+        try{
+            progDialog.dismiss();
+            Toast.makeText(this, "Data changed!", Toast.LENGTH_LONG).show();
+        } catch(Exception ex){
+            ex.printStackTrace();
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onError(Error err) {
+        try{
+            progDialog.cancel();
+            Toast.makeText(this, "Something went wrong!", Toast.LENGTH_LONG).show();
+        } catch(Exception ex){
+            ex.printStackTrace();
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

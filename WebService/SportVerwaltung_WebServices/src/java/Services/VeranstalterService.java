@@ -8,12 +8,16 @@ package Services;
 import Data.Account;
 import Data.Database;
 import Exceptions.RegisterExcpetion;
+import Misc.Authentification;
 import com.google.gson.Gson;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -40,6 +44,24 @@ public class VeranstalterService {
         }
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getVeranstalter(@HeaderParam("Token") String token) {
+       Response r;
+        try{
+            if(Authentification.isUserAuthenticated(token)){
+                Account a = db.getVeranstalter(Account.parseToken(token));
+                r = Response.ok().entity(a).build();
+            }
+            else{
+                r = Response.status(Response.Status.FORBIDDEN).build();
+            }
+        }
+        catch(Exception ex){
+            r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+        return r;
+    }
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

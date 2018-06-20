@@ -24,20 +24,6 @@
                 android:contentDescription="@string/desc_profilePicture"
                 android:src="@drawable/ic_account" />
 
-            <TextView
-                android:id="@+id/textView_score"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/imageView2"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/example_points"
-                android:textAlignment="center"
-                android:textColor="@color/text_light"
-                android:textSize="30sp"
-                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout

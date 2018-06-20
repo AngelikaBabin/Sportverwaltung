@@ -6,5 +6,6 @@ package Data;
 public enum Filter {
     ALL,
     CURRENT,
-    PAST
+    PAST,
+    VERANSTALTER
 }
