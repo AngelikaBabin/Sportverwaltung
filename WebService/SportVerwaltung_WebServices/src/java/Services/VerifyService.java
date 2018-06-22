@@ -46,7 +46,7 @@ public class VerifyService {
             System.out.println("Verify...");
             db.verifyAccount(Account.parseURLToken(accountToken));
             r = Response.temporaryRedirect(new URI("http://192.168.193.150" +//+ Inet4Address.getLocalHost().getHostAddress() + 
-                    ":8080/SportVerwaltung_WebServices/verified.html")).build();
+                    ":8080/sportverwaltung/verified.html")).build();
             System.out.println("Success");
         } catch (MessagingException e) {
             r = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

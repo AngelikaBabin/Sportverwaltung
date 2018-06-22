@@ -65,7 +65,7 @@ public class VeranstalterService {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response registerTeilnehmer(String content){
+    public Response registerVeranstalter(String content){
         Response r;
         try{
             Account t = gson.fromJson(content, Account.class);

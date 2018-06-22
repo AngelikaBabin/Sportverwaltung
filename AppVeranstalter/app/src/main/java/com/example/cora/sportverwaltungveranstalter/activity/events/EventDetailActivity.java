@@ -130,6 +130,7 @@ public class EventDetailActivity extends ExposingActivity implements AdapterView
                 currentEvent.setMaxTeilnehmer(Integer.parseInt(editText_maxParticipators.getText().toString()));
 
                 JsonObject json = new JsonObject();
+                json.addProperty("id", currentEvent.getId());
                 json.addProperty("name", currentEvent.getName());
                 json.addProperty("details", currentEvent.getDetails());
                 json.addProperty("location", currentEvent.getLocation());
@@ -177,7 +178,7 @@ public class EventDetailActivity extends ExposingActivity implements AdapterView
     @Override
     public void onPreExecute() {
         progDialog = new ProgressDialog(this);
-        progDialog.setMessage("Loading Event details");
+        progDialog.setMessage("Loading Event details...");
         progDialog.setIndeterminate(false);
         progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progDialog.setCancelable(false);
@@ -190,7 +191,7 @@ public class EventDetailActivity extends ExposingActivity implements AdapterView
         switch (statusCode) {
             case 201:
                 fabuttonSave.setEnabled(false);
-                Toast.makeText(EventDetailActivity.this, "Changed Event successful", Toast.LENGTH_LONG).show();
+                Toast.makeText(EventDetailActivity.this, "Event changed!", Toast.LENGTH_LONG).show();
                 break;
 
             case 403:

@@ -163,6 +163,7 @@ public class EventService {
             if(Authentification.isUserAuthenticated(token)){
                 JsonParser parser = new JsonParser();
                 JsonObject json = parser.parse(content).getAsJsonObject();
+                e.setId(json.get("id").getAsInt());
                 e.setName(json.get("name").getAsString());
                 e.setDetails(json.get("details").getAsString());
                 e.setLocation(json.get("location").getAsString());

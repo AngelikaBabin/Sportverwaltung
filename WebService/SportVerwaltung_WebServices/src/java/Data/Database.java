@@ -314,8 +314,8 @@ public class Database {
 
     public void updateEvent(Event e) throws Exception {
         conn = createConnection();
-        String select = "UPDATE veranstatlung SET name = ?, datetime = ?, "
-                + "details = ? max_teilnehmer = ?, min_teilnehmer = ?, sportart = ? where id = ?";
+        String select = "UPDATE veranstaltung SET name = ?, datetime = ?, "
+                + "details = ?, max_teilnehmer = ?, min_teilnehmer = ?, sportart = ? where id = ?";
         PreparedStatement stmt = conn.prepareStatement(select);
         stmt.setString(1, e.getName());
         stmt.setDate(2, Date.valueOf(e.getDatetime()));

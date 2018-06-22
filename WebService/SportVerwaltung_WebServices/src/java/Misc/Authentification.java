@@ -19,12 +19,12 @@ public class Authentification {
         return collTokens.contains(token);
     }
     
-    public static void loginToken(String token) { //Excption if already loggede in
+    public static void loginToken(String token) {
         if(!collTokens.contains(token))
             collTokens.add(token);
     }
     
-    public static void logoutToken(String token){ //Excpetion if not logged in
+    public static void logoutToken(String token){
         if(collTokens.contains(token))
             collTokens.remove(token);
     }

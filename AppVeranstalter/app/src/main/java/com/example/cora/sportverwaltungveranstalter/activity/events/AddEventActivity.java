@@ -107,7 +107,7 @@ public class AddEventActivity extends ExposingActivity implements AdapterView.On
         switch (statusCode) {
             case 201:
                 button_save.setEnabled(false);
-                Toast.makeText(AddEventActivity.this, "You have added a Event", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddEventActivity.this, "Event added!", Toast.LENGTH_LONG).show();
                 break;
 
             case 403:
